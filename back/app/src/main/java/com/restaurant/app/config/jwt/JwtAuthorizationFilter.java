@@ -2,6 +2,7 @@ package com.restaurant.app.config.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.restaurant.app.config.auth.PrincipalDetails;
 import com.restaurant.app.model.User;
 import com.restaurant.app.repository.UserRepository;
@@ -39,20 +40,27 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         }
 
         String jwtToken = request.getHeader("Authorization").replace("Bearer ","");
-
+        try{
         String username = JWT.require(Algorithm.HMAC512("gun_secret")).build().verify(jwtToken).getClaim("username").asString();
+        System.out.println(username);
 
         if (username!=null) {
-            System.out.println("username : "+ username);
-            User userEntity = userRepository.findByUsername(username);
 
-            PrincipalDetails principalDetails = new PrincipalDetails(userEntity);
+                User userEntity = userRepository.findByUsername(username);
 
-            Authentication authentication = new UsernamePasswordAuthenticationToken(principalDetails,null,principalDetails.getAuthorities());
+                PrincipalDetails principalDetails = new PrincipalDetails(userEntity);
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            response.setHeader("username",userEntity.getUsername());
+                Authentication authentication = new UsernamePasswordAuthenticationToken(principalDetails,null,principalDetails.getAuthorities());
+
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                chain.doFilter(request,response);
+            }
+        }
+        catch (TokenExpiredException e) {
+            System.out.println(e.getMessage());
             chain.doFilter(request,response);
         }
+
+
     }
 }
