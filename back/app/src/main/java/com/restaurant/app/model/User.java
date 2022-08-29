@@ -4,9 +4,7 @@ package com.restaurant.app.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Builder
@@ -33,6 +31,10 @@ public class User {
     @Column
     private String password;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="user")
+    private Set<Review> reviewList = new HashSet<>();
+
+
     public List<String> getRoleList() {
         if(this.roles.length() > 0) {
             return Arrays.asList(this.roles.split(","));
@@ -42,5 +44,7 @@ public class User {
     }
 
 
-
+    public String reviewListToString() {
+        return "reviewList = " + reviewList.toString();
+    }
 }

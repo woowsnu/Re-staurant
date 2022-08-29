@@ -1,0 +1,28 @@
+package com.restaurant.app.model;
+
+import lombok.*;
+
+import javax.persistence.*;
+
+@Entity
+@Getter @Setter
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Review {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long reviewIndex;
+
+    @Column(name="review_title")
+    private String reviewTitle;
+
+    @Column(name="review_content")
+    private String reviewContent;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+    @JoinColumn(name = "user_index")
+    private User user;
+}
