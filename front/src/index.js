@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthPage from "./routes/AuthPage";
 import LogIn from "./component/Auth/LogIn";
 import MyPage from "./routes/MyPage";
+import RestaurantDetailPage from "./routes/RestaurantDetailPage";
+import ReviewWrite from "./component/Review/ReviewWrite";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,6 +18,8 @@ root.render(
         <Route path="/members" element={<AuthPage />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/detail/:id" element={<RestaurantDetailPage />} />
+        <Route path="/review/write/:id" element={<ReviewWrite />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
