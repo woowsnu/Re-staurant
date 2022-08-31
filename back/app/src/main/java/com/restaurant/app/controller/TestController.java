@@ -5,7 +5,6 @@ import com.restaurant.app.DTO.UserDTO;
 import com.restaurant.app.model.User;
 import com.restaurant.app.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +19,6 @@ public class TestController {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
     private final UserService userService;
 
     @PostMapping("/join")
@@ -34,16 +32,21 @@ public class TestController {
                 .roles("ROLE_USER").build();
 
         try{
-            if(userService.findUserByEmail(userDTO.getEmail()) != null) {
-                System.out.println("존재하는 이메일 입니다.");
-                ResponseDTO responseDTO = ResponseDTO.builder().error("존재하는 이메일 입니다.").build();
-                return ResponseEntity.badRequest().body(responseDTO);
+            User savedUser = userService.save(user);
+
+            UserDTO userResponseDTO = UserDTO.builder()
+                    .userIndex(savedUser.getUserIndex())
+                    .email(savedUser.getEmail())
+                    .username(savedUser.getUsername())
+                    .roles(savedUser.getRoles())
+                    .build();
+            return ResponseEntity.ok().body(userResponseDTO);
             }
-        }
+
         catch(Exception e) {
 
-            return ResponseEntity.ok().body(userService.save(user));
+        ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
         }
-        return null;
     }
 }

@@ -10,6 +10,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    // Create User
+    public User save(User user) {
+
+        if(userRepository.findUserByEmail(user.getEmail()) != null) {
+            throw new RuntimeException("등록된 이메일입니다.");
+        }
+
+        System.out.println("회원가입 완료.");
+        return userRepository.save(user);
+    }
+
     public User findByUsername(String username) {
         if(userRepository.findByUsername(username) == null) {
             throw new RuntimeException("invalid username");
@@ -22,9 +33,5 @@ public class UserService {
             throw new RuntimeException("invalid userEmail");
         }
         return userRepository.findUserByEmail(userEmail);
-    }
-
-    public User save(User user) {
-        return userRepository.save(user);
     }
 }
