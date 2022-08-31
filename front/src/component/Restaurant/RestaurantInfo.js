@@ -3,32 +3,32 @@ import styles from "./RestaurantInfo.module.css";
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from "react-naver-maps";
 
 const RestaurantInfo = (props) => {
-  const position = { lat: props.data.latitude, lng: props.data.longitude };
+  const position = { lat: props.restaurant.latitude, lng: props.restaurant.longitude };
   return (
     <div id="res-info" className={styles.container}>
       <div>
         <h3>영업시간</h3>
-        <p>{props.data.bizhourInfo}</p>
+        <p>{props.restaurant.bizhourInfo}</p>
       </div>
       <div>
         <h3>편의시설</h3>
-        <div>
-          {props.data.options.map((option) => {
+        {/* <div>
+          {props.restaurant.options.map((option) => {
             return <img key={option.id} src={option.iconURL} alt={option.name} />;
           })}
-        </div>
+        </div> */}
       </div>
       <div>
         <h3>전화번호</h3>
-        <p>{props.data.phone}</p>
+        <p>{props.restaurant.phone}</p>
       </div>
       <div>
         <h3>SNS</h3>
-        <p>{props.data.sns}</p>
+        <p>{props.restaurant.sns}</p>
       </div>
       <div>
         <h3>위치정보</h3>
-        <p>{props.data.fullRoadAddress}</p>
+        <p>{props.restaurant.fullRoadAddress}</p>
         <RenderAfterNavermapsLoaded ncpClientId={"2ebca41zbe"}>
           <NaverMap
             mapDivId={"maps-getting-started-uncontrolled"} // default: react-naver-map

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./RestaurantMenu.module.css";
 
 const RestaurantMenu = (props) => {
