@@ -45,6 +45,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             return authentication;
 
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,11 +63,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String jwtToken = JWT.create()
                 .withSubject(principalDetails.getUser().getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + (60000 * 10)))
-                .withClaim("id",principalDetails.getUser().getEmail())
+                .withClaim("email",principalDetails.getUser().getEmail())
                 .withClaim("username",principalDetails.getUser().getUsername())
                 .sign(Algorithm.HMAC512("gun_secret"));
 
-        response.setHeader("Authorization","Bearer "+jwtToken);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"jwtToken\"" +":" + "\"Bearer " + jwtToken + "\"" +"}");
 
     }
 }

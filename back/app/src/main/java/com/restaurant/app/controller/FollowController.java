@@ -18,7 +18,7 @@ public class FollowController {
 
     private final UserService userService;
 
-    private final FollowService followService;
+//    private final FollowService followService;
 
     @PostMapping("/following")
     public ResponseEntity<?> following(@RequestBody UserDTO userDTO) {

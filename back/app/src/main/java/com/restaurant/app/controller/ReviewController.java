@@ -2,6 +2,7 @@ package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.ReviewDTO;
+import com.restaurant.app.config.auth.PrincipalDetails;
 import com.restaurant.app.model.Review;
 import com.restaurant.app.model.User;
 import com.restaurant.app.repository.ReviewRepository;
@@ -9,6 +10,7 @@ import com.restaurant.app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,20 +31,23 @@ public class ReviewController {
 
     // Create Review
     @PostMapping("/user/createReview")
-    public ResponseEntity<?> createPost(@RequestBody ReviewDTO reviewDTO) {
+    public ResponseEntity<?> createReview(@AuthenticationPrincipal PrincipalDetails principalDetails
+                                          ,@RequestBody ReviewDTO reviewDTO) {
+
+        User user = principalDetails.getUser();
+
         try {
-            User userEntity = userService.findUserByEmail(reviewDTO.getEmail());
 
             Review review = Review.builder()
                     .reviewTitle(reviewDTO.getReviewTitle())
                     .reviewContent(reviewDTO.getReviewContent())
                     .build();
 
-            review.setUser(userEntity);
+            review.setUser(user);
 
-            reviewRepository.save(review);
+            Review savedReview = reviewRepository.save(review);
 
-            List<Review> reviewList = reviewRepository.findReviewByUser(userEntity);
+            List<Review> reviewList = reviewRepository.findReviewByUser(user);
 
             List<ReviewDTO> reviews = reviewList.stream().map(ReviewDTO::new).collect(Collectors.toList());
 
@@ -56,6 +61,31 @@ public class ReviewController {
         }
     }
 
-//    // Read Review
-//    @PostMapping("/info")
+//    // Update Review
+//    @PostMapping("/user/updateReview")
+//    public ResponseEntity<?> updateReview(@RequestBody ReviewDTO reviewDTO) {
+//        try {
+//            reviewService.findByreviewIndex()
+//            Review review = Review.builder()
+//                    .reviewTitle(reviewDTO.getReviewTitle())
+//                    .reviewContent(reviewDTO.getReviewContent())
+//                    .build();
+//
+//            review.setUser(userEntity);
+//
+//            reviewRepository.save(review);
+//
+//            List<Review> reviewList = reviewRepository.findReviewByUser(userEntity);
+//
+//            List<ReviewDTO> reviews = reviewList.stream().map(ReviewDTO::new).collect(Collectors.toList());
+//
+//            return ResponseEntity.ok().body(reviews);
+//
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+//            return ResponseEntity.badRequest().body(responseDTO);
+//        }
+//    }
 }

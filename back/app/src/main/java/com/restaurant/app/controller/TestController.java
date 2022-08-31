@@ -21,6 +21,7 @@ public class TestController {
 
     private final UserService userService;
 
+    // 회원가입
     @PostMapping("/join")
     public ResponseEntity<?> join(@RequestBody UserDTO userDTO) {
         System.out.println("POST요청[/join]: 회원가입 메서드" + userDTO.toString());
@@ -28,6 +29,7 @@ public class TestController {
         User user = User.builder()
                 .email(userDTO.getEmail())
                 .username(userDTO.getUsername())
+                .nickname(userDTO.getNickname())
                 .password(bCryptPasswordEncoder.encode(userDTO.getPassword()))
                 .roles("ROLE_USER").build();
 
@@ -38,6 +40,7 @@ public class TestController {
                     .userIndex(savedUser.getUserIndex())
                     .email(savedUser.getEmail())
                     .username(savedUser.getUsername())
+                    .nickname(savedUser.getNickname())
                     .roles(savedUser.getRoles())
                     .build();
             return ResponseEntity.ok().body(userResponseDTO);

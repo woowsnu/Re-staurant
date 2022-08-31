@@ -57,7 +57,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             }
         }
         catch (TokenExpiredException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
+
             chain.doFilter(request,response);
         }
 

@@ -26,6 +26,8 @@ public class User {
     private String username;
 
     @Column
+    private String nickname;
+    @Column
     private String roles;
 
     @Column

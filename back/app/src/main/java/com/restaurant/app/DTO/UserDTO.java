@@ -14,6 +14,7 @@ public class UserDTO {
     private Long userIndex;
     private String email;
     private String followingEmail;
+    private String nickname;
     private String username;
     private String roles;
     private String reviewList;
