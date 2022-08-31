@@ -34,6 +34,11 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, mappedBy="user")
     private Set<Review> reviewList = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="followingUser")
+    private Set<Follow> followingList = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="followerUser")
+    private Set<Follow> followerList = new HashSet<>();
 
     public List<String> getRoleList() {
         if(this.roles.length() > 0) {
@@ -43,8 +48,7 @@ public class User {
         return new ArrayList<>();
     }
 
-
     public String reviewListToString() {
-        return "reviewList = " + reviewList.toString();
+        return reviewList.toString();
     }
 }

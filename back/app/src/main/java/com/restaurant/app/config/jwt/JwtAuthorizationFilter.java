@@ -29,10 +29,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("인증이 필요함.");
+//        System.out.println("인증이 필요함.");
 
         String jwtHeader = request.getHeader("Authorization");
-        System.out.println("jwtHeader" + jwtHeader);
+        System.out.println("jwtHeader : " + jwtHeader);
 
         if(jwtHeader == null || !jwtHeader.startsWith("Bearer")) {
             chain.doFilter(request,response);

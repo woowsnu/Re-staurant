@@ -46,7 +46,6 @@ public class UserController {
                                         .reviewList(user.reviewListToString())
                                         .build();
 
-
             return ResponseEntity.ok().body(userEntity);
         }
         catch (Exception e) {
@@ -66,6 +65,7 @@ public class UserController {
                     .reviewTitle(reviewDTO.getReviewTitle())
                     .reviewContent(reviewDTO.getReviewContent())
                     .build();
+
             review.setUser(userEntity);
 
             reviewRepository.save(review);
@@ -74,7 +74,7 @@ public class UserController {
 
             List<ReviewDTO> reviews = reviewList.stream().map(ReviewDTO::new).collect(Collectors.toList());
 
-            return ResponseEntity.ok(reviews);
+            return ResponseEntity.ok().body(reviews);
 
         }
         catch (Exception e) {
@@ -85,4 +85,14 @@ public class UserController {
 
 
     }
+
+//    @PostMapping("/following")
+//    public ResponseEntity<?> following(@RequestBody UserDTO userDTO) {
+//        try{
+//            userService.findU
+//        }
+//        catch(Exception e) {
+//
+//        }
+//    }
 }

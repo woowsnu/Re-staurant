@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,4 +24,9 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "user_index")
     private User user;
+
+    @Override
+    public String toString() {
+        return "{reviewTitle : " + reviewTitle  + ", reviewContent : "+ reviewContent +"}";
+    }
 }
