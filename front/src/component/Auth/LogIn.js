@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 
 const URL = "http://localhost:8080/login";
@@ -8,18 +8,11 @@ const LogIn = () => {
   let navigate = useNavigate();
 
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginSuccess, setLoginSuccess] = useState(false);
-
+  
   const usernameInputHandler = (e) => {
     e.preventDefault();
     setUsername(e.target.value);
-  };
-
-  const emailInputHandler = (e) => {
-    e.preventDefault();
-    setEmail(e.target.value);
   };
 
   const passwordInputHandler = (e) => {
@@ -32,42 +25,33 @@ const LogIn = () => {
     try {
       const response = await axios.post(
         URL,
-        JSON.stringify({ email, username, password }),
+        JSON.stringify({ username, password }),
         {
           headers: { "Content-Type": "application/json" },
         }
       );
 
-      setEmail("");
-      setPassword("");
-      setLoginSuccess(true);
-
       console.log(response.headers.authorization);
       const token = response.headers.authorization;
       localStorage.setItem("token", token);
+      navigate('/')
     } catch (err) {
       console.log(err);
     }
   };
 
-  return ( loginSuccess ? navigate("/") : 
+  const token = localStorage.getItem("token")
+
+  return (
     <div>
       <h2>로그인</h2>
       <form onSubmit={submitHandler}>
-        <label htmlFor="username">닉네임</label>
+        <label htmlFor="username">아이디</label>
         <input
           type="text"
           id="username"
           value={username}
           onChange={usernameInputHandler}
-        />
-        <br />
-        <label htmlFor="email">이메일</label>
-        <input
-          type="text"
-          id="email"
-          value={email}
-          onChange={emailInputHandler}
         />
         <br />
         <label htmlFor="password">비밀번호</label>
@@ -87,7 +71,7 @@ const LogIn = () => {
         <a href="/find">계정정보 찾기</a>
       </div>
     </div>
-  );
+  )
 };
 
 export default LogIn;

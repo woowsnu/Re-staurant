@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import styles from "./SignUp.module.css";
 
+const USERNAME_REGEX = /^[A-z0-9].{5,23}$/;
 const EMAIL_REGEX = /^[A-z0-9-_]+@[A-z0-9-_.].{1,23}$/;
 const PASSWORD_REGEX = /^.{8,}$/;
 const URL = "http://localhost:8080/join";
 
 const SignUp = () => {
+  let navigate = useNavigate();
+
   const [username, setUsername] = useState("");
+  const [validUsername, setValidUsername] = useState(false);
+  const [usernameFocus, setUsernameFocus] = useState(false);
 
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
@@ -20,6 +26,12 @@ const SignUp = () => {
   const [passwordCheck, setPasswordCheck] = useState("");
   const [validPasswordCheck, setValidPasswordCheck] = useState(false);
   const [passwordCheckFocus, setPasswordCheckFocus] = useState(false);
+
+  const [signupsuccess, setSignupsuccess] = useState(false);
+
+  useEffect(() => {
+    setValidUsername(USERNAME_REGEX.test(username));
+  }, [username]);
 
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
@@ -63,6 +75,7 @@ const SignUp = () => {
       }
         );
     console.log(response)
+    navigate("/login")
      } catch(err) {
       console.log(err)
      }
@@ -71,19 +84,29 @@ const SignUp = () => {
     setEmail("");
     setPassword("");
     setPasswordCheck("");
+    setSignupsuccess(true);
   };
 
   return (
     <div>
       <h2>회원가입</h2>
       <form>
-        <label htmlFor="username">닉네임</label>
+        <label htmlFor="username">아이디</label>
         <input
           type="text"
           id="username"
           value={username}
+          onFocus={() => setUsernameFocus(true)}
           onChange={usernameInputHandler}
         />
+        <p
+          className={
+            !validUsername && usernameFocus ? styles.warning : styles.offscreen
+          }
+        >
+          아이디는 영문, 숫자 혼합하여 생성이 가능합니다. <br/>
+          아이디는 최소 5글자 이상이 되어야합니다.
+        </p>
         <br />
         <label htmlFor="email">이메일</label>
         <input
