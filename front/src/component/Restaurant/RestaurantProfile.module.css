@@ -1,0 +1,21 @@
+.container {
+    max-width: 1080px;
+    background: #d9d9db;
+    margin: 0 auto;
+    display: flex;
+    padding: 1rem;
+  }
+  
+  .resImage {
+    width: 20rem;
+    height: 20rem;
+  }
+  
+  .wrap {
+    margin: 0 2rem;
+  }
+  
+  .profileWrap {
+    display: flex;
+    justify-content: space-between;
+  }
