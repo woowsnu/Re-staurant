@@ -3,8 +3,8 @@ package com.restaurant.app.config.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.restaurant.app.DTO.UserDTO;
 import com.restaurant.app.config.auth.PrincipalDetails;
-import com.restaurant.app.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,29 +25,32 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException{
         System.out.println("JwtAuthenticationFilter");
 
         try {
             ObjectMapper om = new ObjectMapper();
-            User user = om.readValue(request.getInputStream(), User.class);
-            System.out.println(user.toString());
+            UserDTO userDTO = om.readValue(request.getInputStream(), UserDTO.class);
+            System.out.println(userDTO.toString());
 
             UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword());
+                    new UsernamePasswordAuthenticationToken(userDTO.getEmail(),userDTO.getPassword());
 
             Authentication authentication =
                     authenticationManager.authenticate(authenticationToken);
 
             PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-
             System.out.println("로그인 완료: " + principalDetails.getUser());
 
             return authentication;
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        catch (IOException failed) {
+            
+        }
+        catch(NullPointerException e) {
+            System.out.println("Email or password is invalid");
         }
         System.out.println("로그인 실패");
         return null;
@@ -61,10 +64,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
 
         String jwtToken = JWT.create()
-                .withSubject(principalDetails.getUser().getUsername())
+                .withSubject(principalDetails.getUser().getEmail())
                 .withExpiresAt(new Date(System.currentTimeMillis() + (60000 * 10)))
+                .withClaim("userIndex",principalDetails.getUser().getUserIndex())
                 .withClaim("email",principalDetails.getUser().getEmail())
-                .withClaim("username",principalDetails.getUser().getUsername())
                 .sign(Algorithm.HMAC512("gun_secret"));
 
         response.setContentType("application/json");
@@ -72,4 +75,16 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.getWriter().write("{\"jwtToken\"" +":" + "\"Bearer " + jwtToken + "\"" +"}");
 
     }
+
+//    @Override
+//    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed)
+//            throws IOException, ServletException {
+////        log.error("un")/
+////
+//        if (logger.isDebugEnabled()) {
+//            logger.debug("Authentication request failed: " + failed.toString(), failed);
+//            logger.debug("Updated SecurityContextHolder to contain null Authentication");
+////            logger.debug("Delegating to authentication failure handler" + failureHadnler);
+//        }
+//    }
 }

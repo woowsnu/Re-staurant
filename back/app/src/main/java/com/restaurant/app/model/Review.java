@@ -15,6 +15,9 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewIndex;
 
+    @Column(name="business_id")
+    private String busId;
+
     @Column(name="review_title")
     private String reviewTitle;
 
@@ -27,6 +30,6 @@ public class Review {
 
     @Override
     public String toString() {
-        return "{reviewTitle : " + reviewTitle  + ", reviewContent : "+ reviewContent +"}";
+        return "{ reviewIndex :" + reviewIndex + ", busId : " + busId + ", reviewTitle : " + reviewTitle  + ", reviewContent : "+ reviewContent +"}";
     }
 }

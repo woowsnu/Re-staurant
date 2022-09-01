@@ -1,8 +1,10 @@
 package com.restaurant.app.service;
 
+import com.restaurant.app.DTO.UserDTO;
 import com.restaurant.app.model.User;
 import com.restaurant.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,7 +12,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    // Create User
+    // Create UserInfo
     public User save(User user) {
 
         if(userRepository.findUserByEmail(user.getEmail()) != null) {
@@ -21,11 +23,21 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findByUsername(String username) {
-        if(userRepository.findByUsername(username) == null) {
-            throw new RuntimeException("invalid username");
-        }
-        return userRepository.findByUsername(username);
+    // Update UserInfo
+    public User update(User authedUser, UserDTO updateUserDTO,BCryptPasswordEncoder bCryptPasswordEncoder) {
+
+         User updatedUser = userRepository.save(User.builder()
+                .userIndex(authedUser.getUserIndex()) // userIndex는 변경불가.
+                .email(authedUser.getEmail()) // email도 변경불가.
+                .nickname(updateUserDTO.getNickname()) // 닉네임 변경
+                .password(bCryptPasswordEncoder.encode(updateUserDTO.getPassword())) // 패스워드 변경
+                .roles("ROLE_USER")
+                .reviewList(authedUser.getReviewList())
+                .followerList(authedUser.getFollowerList())
+                .followingList(authedUser.getFollowingList())
+                .build());
+
+        return updatedUser;
     }
 
     public User findUserByEmail(String userEmail) {

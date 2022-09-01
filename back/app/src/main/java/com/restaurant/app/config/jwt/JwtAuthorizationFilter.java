@@ -2,7 +2,6 @@ package com.restaurant.app.config.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.restaurant.app.config.auth.PrincipalDetails;
 import com.restaurant.app.model.User;
 import com.restaurant.app.repository.UserRepository;
@@ -29,7 +28,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-//        System.out.println("인증이 필요함.");
+        System.out.println("JwtAuthorizationFilter.");
 
         String jwtHeader = request.getHeader("Authorization");
         System.out.println("jwtHeader : " + jwtHeader);
@@ -40,28 +39,26 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         }
 
         String jwtToken = request.getHeader("Authorization").replace("Bearer ","");
+
         try{
-        String username = JWT.require(Algorithm.HMAC512("gun_secret")).build().verify(jwtToken).getClaim("username").asString();
-        System.out.println(username);
+        String userEmail = JWT.require(Algorithm.HMAC512("gun_secret")).build().verify(jwtToken).getClaim("email").asString();
+        System.out.println(userEmail);
 
-        if (username!=null) {
+        if (userEmail!=null) {
 
-                User userEntity = userRepository.findByUsername(username);
+                User userEntity = userRepository.findUserByEmail(userEmail);
 
                 PrincipalDetails principalDetails = new PrincipalDetails(userEntity);
 
-                Authentication authentication = new UsernamePasswordAuthenticationToken(principalDetails,null,principalDetails.getAuthorities());
+                Authentication authentication = new UsernamePasswordAuthenticationToken(principalDetails.getUser(),null,principalDetails.getAuthorities());
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
                 chain.doFilter(request,response);
             }
-        }
-        catch (TokenExpiredException e) {
-            logger.error(e.getMessage());
 
+        } catch (Exception e) {
+            logger.error(e.getMessage());
             chain.doFilter(request,response);
         }
-
-
-    }
+        }
 }

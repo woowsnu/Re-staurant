@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/")
-public class TestController {
+public class IndexController {
+
+    /*
+        인증을 거치지 않는 컨트롤러[로그인을 하지 않아도 접근이 가능함]
+    */
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -28,7 +32,6 @@ public class TestController {
 
         User user = User.builder()
                 .email(userDTO.getEmail())
-                .username(userDTO.getUsername())
                 .nickname(userDTO.getNickname())
                 .password(bCryptPasswordEncoder.encode(userDTO.getPassword()))
                 .roles("ROLE_USER").build();
@@ -39,7 +42,6 @@ public class TestController {
             UserDTO userResponseDTO = UserDTO.builder()
                     .userIndex(savedUser.getUserIndex())
                     .email(savedUser.getEmail())
-                    .username(savedUser.getUsername())
                     .nickname(savedUser.getNickname())
                     .roles(savedUser.getRoles())
                     .build();

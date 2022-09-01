@@ -32,12 +32,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilter(corsConfig.corsFilter())
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .formLogin().disable()
+                .formLogin()
+                .usernameParameter("email").disable()
                 .httpBasic().disable()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager())) // JwtFilter를 직접 등록해줌.
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository)) // JwtFilter를 직접 등록해줌.
                 .authorizeRequests()
-                .antMatchers("/user/**").authenticated()
+                .antMatchers("/auth/**").authenticated()
+                .antMatchers("/review/{\\d+}/auth/**").authenticated()
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().permitAll();
 

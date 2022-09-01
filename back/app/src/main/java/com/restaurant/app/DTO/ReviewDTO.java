@@ -16,6 +16,7 @@ public class ReviewDTO {
     private String reviewTitle;
     private String reviewContent;
 
+    private String busId;
     public ReviewDTO(Review review) {
         this.reviewIndex = review.getReviewIndex();
         this.email = review.getUser().getEmail();

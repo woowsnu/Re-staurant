@@ -6,6 +6,7 @@ import com.restaurant.app.model.User;
 import com.restaurant.app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +22,10 @@ public class FollowController {
 //    private final FollowService followService;
 
     @PostMapping("/following")
-    public ResponseEntity<?> following(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> following(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO userDTO) {
 
 
         try{
-            User currUser = userService.findUserByEmail(userDTO.getEmail());
-            User followingUser = userService.findUserByEmail(userDTO.getFollowingEmail());
 
 
         }
