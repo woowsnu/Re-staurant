@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./EditProfile.module.css";
+import Button from "../UI/Button";
 import Uploader from "./Uploader";
 import axios from "../../api/axios";
 import Modal from "../UI/Modal";
@@ -57,8 +58,8 @@ const EditProfile = (props) => {
         onChange={nicknameChangeHandler}
       />
       <br/><br/><br/>
-      <button type="submit" onClick={saveNewProfileHandler}>저장하기</button>
-      <button onClick={closeModal}>닫기</button>
+      <Button type="submit" onClick={saveNewProfileHandler}>저장하기</Button>
+      <Button onClick={closeModal}>닫기</Button>
     </Modal>
   );
 };
