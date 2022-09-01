@@ -1,0 +1,12 @@
+.wrap {
+    max-width: 1080px;
+    height: 60px;
+    margin: 0 auto;
+    padding: 1rem;
+    background: rgb(107, 107, 107);
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+}
