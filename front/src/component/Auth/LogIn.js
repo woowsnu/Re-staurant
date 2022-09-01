@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "../../api/axios";
 
 const URL = "http://localhost:8080/login";
@@ -34,7 +34,7 @@ const LogIn = () => {
       console.log(response.headers.authorization);
       const token = response.headers.authorization;
       localStorage.setItem("token", token);
-      navigate('/')
+      navigate(-1)
     } catch (err) {
       console.log(err);
     }
