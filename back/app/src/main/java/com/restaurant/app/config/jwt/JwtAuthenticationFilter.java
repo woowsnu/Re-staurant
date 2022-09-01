@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -25,13 +26,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException{
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException{
         System.out.println("JwtAuthenticationFilter");
 
         try {
             ObjectMapper om = new ObjectMapper();
             UserDTO userDTO = om.readValue(request.getInputStream(), UserDTO.class);
-            System.out.println(userDTO.toString());
+//            System.out.println(userDTO.toString());
 
             UsernamePasswordAuthenticationToken authenticationToken =
                     new UsernamePasswordAuthenticationToken(userDTO.getEmail(),userDTO.getPassword());
@@ -46,20 +48,21 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 
         }
-        catch (IOException failed) {
-            
+        catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("로그인 실패");
         }
-        catch(NullPointerException e) {
-            System.out.println("Email or password is invalid");
+        catch (UsernameNotFoundException e) {
+            e.printStackTrace();
         }
-        System.out.println("로그인 실패");
+
         return null;
     }
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain
                         , Authentication authResult) throws IOException, ServletException {
-        System.out.println("SuccessfulAuthentication");
+        System.out.println("SuccessfulAuthentication -> login_authorized");
 
         PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
 
@@ -72,19 +75,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("{\"jwtToken\"" +":" + "\"Bearer " + jwtToken + "\"" +"}");
+        response.getWriter().write("{\"jwtToken\"" + ":" + "\"Bearer " + jwtToken + "\"" +"}");
 
     }
 
-//    @Override
-//    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed)
-//            throws IOException, ServletException {
-////        log.error("un")/
-////
-//        if (logger.isDebugEnabled()) {
-//            logger.debug("Authentication request failed: " + failed.toString(), failed);
-//            logger.debug("Updated SecurityContextHolder to contain null Authentication");
-////            logger.debug("Delegating to authentication failure handler" + failureHadnler);
-//        }
-//    }
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+                                              AuthenticationException failed) throws IOException, ServletException {
+        System.out.println("unsuccessfullAuthentication -> login_unauthorized");
+
+        logger.debug("failed authentication while attempting to access");
+
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                "Authentication Failed");
+    }
 }

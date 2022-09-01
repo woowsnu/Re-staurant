@@ -4,7 +4,7 @@ import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.ReviewDTO;
 import com.restaurant.app.model.Review;
 import com.restaurant.app.model.User;
-import com.restaurant.app.repository.ReviewRepository;
+import com.restaurant.app.service.ReviewService;
 import com.restaurant.app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class ReviewController {
     private final UserService userService;
 
     @Autowired
-    private final ReviewRepository reviewRepository;
+    private final ReviewService reviewService;
 
     // Create Review
     @PostMapping("/{busId}/auth/createReview")
@@ -32,23 +32,12 @@ public class ReviewController {
 
         try {
 
-            Review review = Review.builder()
-                    .busId(busId)
-                    .reviewTitle(reviewDTO.getReviewTitle())
-                    .reviewContent(reviewDTO.getReviewContent())
-                    .build();
+            List<Review> reviewList = reviewService.save(authedUser,reviewDTO,busId);
+            List<ReviewDTO> reviewsDTO = reviewList.stream().map(ReviewDTO::new).collect(Collectors.toList());
 
-            review.setUser(authedUser);
-
-            Review savedReview = reviewRepository.save(review);
-            System.out.println("savedReview" + savedReview);
-
-            List<Review> reviewList = reviewRepository.findReviewByUser(authedUser);
             System.out.println("reviewList : " + reviewList);
 
-            List<ReviewDTO> reviews = reviewList.stream().map(ReviewDTO::new).collect(Collectors.toList());
-
-            return ResponseEntity.ok().body(reviews);
+            return ResponseEntity.ok().body(reviewsDTO);
 
         }
         catch (Exception e) {
@@ -58,31 +47,30 @@ public class ReviewController {
         }
     }
 
-//    // Update Review
-//    @PostMapping("/{bus_id}/{review_index}/auth/updateReview")
-//    public ResponseEntity<?> updateReview(@RequestBody ReviewDTO reviewDTO) {
-//        try {
-//            reviewService.findByreviewIndex()
-//            Review review = Review.builder()
-//                    .reviewTitle(reviewDTO.getReviewTitle())
-//                    .reviewContent(reviewDTO.getReviewContent())
-//                    .build();
-//
-//            review.setUser(userEntity);
-//
-//            reviewRepository.save(review);
-//
-//            List<Review> reviewList = reviewRepository.findReviewByUser(userEntity);
-//
-//            List<ReviewDTO> reviews = reviewList.stream().map(ReviewDTO::new).collect(Collectors.toList());
-//
-//            return ResponseEntity.ok().body(reviews);
-//
-//        }
-//        catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-//            return ResponseEntity.badRequest().body(responseDTO);
-//        }
-//    }
+
+    // Update Review
+    @PostMapping("{reviewIndex}/auth/updateReview")
+    public ResponseEntity<?> updateReview(@AuthenticationPrincipal User authedUser,
+                                          @RequestBody ReviewDTO updateReviewDTO,
+                                          @PathVariable Long reviewIndex) {
+        try{
+
+        Review updatedReview = reviewService.update(authedUser, updateReviewDTO,reviewIndex);
+
+        ReviewDTO responseReviewDTO = ReviewDTO.builder()
+                .reviewIndex(updatedReview.getReviewIndex())
+                .reviewTitle(updatedReview.getReviewTitle())
+                .reviewContent(updatedReview.getReviewContent())
+                .email(updatedReview.getUser().getEmail())
+                .busId(updatedReview.getBusId())
+                .build();
+
+            return ResponseEntity.ok().body(responseReviewDTO);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
 }
