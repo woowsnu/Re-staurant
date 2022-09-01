@@ -4,9 +4,7 @@ package com.restaurant.app.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Builder
@@ -25,13 +23,21 @@ public class User {
     private String email;
 
     @Column
-    private String username;
-
+    private String nickname;
     @Column
     private String roles;
 
     @Column
     private String password;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="user")
+    private Set<Review> reviewList = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="followingUser")
+    private Set<Follow> followingList = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="followerUser")
+    private Set<Follow> followerList = new HashSet<>();
 
     public List<String> getRoleList() {
         if(this.roles.length() > 0) {
@@ -41,6 +47,7 @@ public class User {
         return new ArrayList<>();
     }
 
-
-
+    public String reviewListToString() {
+        return reviewList.toString();
+    }
 }
