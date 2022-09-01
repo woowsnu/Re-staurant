@@ -17,10 +17,10 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="*" element={<App />} />
-          <Route element={<ProtectedRoutesAuth />}>
             <Route path="/members" element={<AuthPage />} />
-            <Route path="/login" element={<LogIn />} />
             <Route path="/detail/:id" element={<RestaurantDetailPage />} />
+          <Route element={<ProtectedRoutesAuth />}>
+            <Route path="/login" element={<LogIn />} />
           </Route>
           <Route element={<ProtectedRoutes />}>
             <Route path="/mypage" element={<MyPage />} />
