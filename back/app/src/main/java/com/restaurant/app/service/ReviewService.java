@@ -38,7 +38,7 @@ public class ReviewService {
         System.out.println(authedUser.getEmail());
         // 기존 review작성자와 현재 로그인한 자의 email이 동일한지 확인.
         if (authedUser.getUserIndex() != currReview.getUser().getUserIndex()) {
-            throw new RuntimeException("updateReview denied.");
+            throw new RuntimeException("updateReview denied. invalid userIndex");
         }
 
         Review review = Review.builder()
@@ -50,5 +50,16 @@ public class ReviewService {
                 .build();
 
         return reviewRepository.save(review);
+    }
+
+    public Long delete(User authedUser, Long reviewIndex) {
+        Review currReview = reviewRepository.findReviewByReviewIndex(reviewIndex);
+
+        if (authedUser.getUserIndex() != currReview.getUser().getUserIndex()) {
+            throw new RuntimeException("deleteReview denied. invalid userIndex");
+        }
+
+        return reviewRepository.deleteByReviewIndex(currReview.getReviewIndex());
+
     }
 }

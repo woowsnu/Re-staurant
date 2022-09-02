@@ -49,7 +49,7 @@ public class ReviewController {
 
 
     // Update Review
-    @PostMapping("{reviewIndex}/auth/updateReview")
+    @PutMapping("{reviewIndex}/auth/updateReview")
     public ResponseEntity<?> updateReview(@AuthenticationPrincipal User authedUser,
                                           @RequestBody ReviewDTO updateReviewDTO,
                                           @PathVariable Long reviewIndex) {
@@ -71,6 +71,22 @@ public class ReviewController {
             System.out.println(e.getMessage());
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
             return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
+    // Delete Review
+    @DeleteMapping("{reviewIndex}/auth/deleteReview")
+    public ResponseEntity<?> deleteReview(@AuthenticationPrincipal User authedUser,
+                                          @PathVariable Long reviewIndex) {
+
+        try{
+            Long deletedReviewIndex = reviewService.delete(authedUser,reviewIndex);
+
+            return ResponseEntity.ok().body("reviewIndex : " + deletedReviewIndex + "has deleted");
+        }
+        catch(Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.ok().body(responseDTO);
         }
     }
 }
