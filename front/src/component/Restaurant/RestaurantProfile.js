@@ -1,4 +1,5 @@
 import React from "react";
+import ChartBar from "./Chart/ChartBar";
 import styles from "./RestaurantProfile.module.css";
 
 const RestaurantProfile = (props) => {
@@ -19,9 +20,8 @@ const RestaurantProfile = (props) => {
           </div>
         </div>
         <div>
-          <p>재방문하고 싶어요 (100명의 평가)</p>
-          {/* 임시로 range 사용, 그래프 표현 바꾸기 */}
-          <input type="range" />
+          <p>재방문하고 싶어요 ({props.reviews.length}명의 리뷰)</p>
+          <ChartBar reviews={props.reviews}/>
         </div>
         <div className="restaurant_introduce">
           <h4>매장소개</h4>
