@@ -52,10 +52,12 @@ public class UserService {
         return userRepository.deleteUserByUserIndex(deleteUser.getUserIndex());
     }
 
-    public User findUserByEmail(String userEmail) {
-        if(userRepository.findUserByEmail(userEmail) == null) {
-            throw new RuntimeException("invalid userEmail");
+    public User findUserByEmail(String email) {
+
+        if (userRepository.findUserByEmail(email) == null) {
+            throw new RuntimeException("invalid email");
         }
-        return userRepository.findUserByEmail(userEmail);
+
+        return userRepository.findUserByEmail(email);
     }
 }

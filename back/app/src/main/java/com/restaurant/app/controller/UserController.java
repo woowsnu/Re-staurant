@@ -124,6 +124,7 @@ public class UserController {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
             return ResponseEntity.badRequest().body(responseDTO);
         }
-
     }
+
+
 }
