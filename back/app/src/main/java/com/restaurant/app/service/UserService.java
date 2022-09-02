@@ -40,10 +40,24 @@ public class UserService {
         return updatedUser;
     }
 
-    public User findUserByEmail(String userEmail) {
-        if(userRepository.findUserByEmail(userEmail) == null) {
-            throw new RuntimeException("invalid userEmail");
+    // Delete UserInfo
+    public Long delete(User authedUser, UserDTO deleteUserDTO) {
+
+        User deleteUser = userRepository.findUserByEmail(deleteUserDTO.getEmail());
+
+        if (authedUser.getUserIndex() != deleteUser.getUserIndex()) {
+            throw new RuntimeException("deleteUser denied. invalid user_index");
         }
-        return userRepository.findUserByEmail(userEmail);
+
+        return userRepository.deleteUserByUserIndex(deleteUser.getUserIndex());
+    }
+
+    public User findUserByEmail(String email) {
+
+        if (userRepository.findUserByEmail(email) == null) {
+            throw new RuntimeException("invalid email");
+        }
+
+        return userRepository.findUserByEmail(email);
     }
 }

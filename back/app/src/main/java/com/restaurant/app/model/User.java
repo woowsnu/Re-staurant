@@ -30,7 +30,7 @@ public class User {
     @Column
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="user", cascade = CascadeType.ALL)
     private Set<Review> reviewList = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy="followingUser")

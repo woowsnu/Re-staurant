@@ -16,3 +16,10 @@
 .input:focus {
     border: 1px solid #51B059;
 }
+
+p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #EC695B;
+    padding: 5px 0px 0px 5px
+}

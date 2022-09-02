@@ -8,9 +8,9 @@ const Input = (props) => {
       onChange={props.onChange}
       style={props.style}
       className={styles.input}
-    >
-      {props.children}
-    </input>
+      value={props.value}
+      placeholder={props.placeholder}
+      onFocus={props.onFocus}  />
   );
 };
 
