@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth/user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -21,8 +21,43 @@ public class UserController {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @GetMapping("/")
+    public ResponseEntity test() {
+        return ResponseEntity.ok().body("logout 되었습니다.");
+    }
+
+    // Create User : [회원가입 -> 로그인 필요없는 메서드]
+    @PostMapping("/join")
+    public ResponseEntity<?> join(@RequestBody UserDTO userDTO) {
+        System.out.println("POST요청[/join]: 회원가입 메서드" + userDTO.toString());
+
+        User user = User.builder()
+                .email(userDTO.getEmail())
+                .nickname(userDTO.getNickname())
+                .password(bCryptPasswordEncoder.encode(userDTO.getPassword()))
+                .roles("ROLE_USER").build();
+
+        try{
+            User savedUser = userService.save(user);
+
+            UserDTO userResponseDTO = UserDTO.builder()
+                    .userIndex(savedUser.getUserIndex())
+                    .email(savedUser.getEmail())
+                    .nickname(savedUser.getNickname())
+                    .roles(savedUser.getRoles())
+                    .build();
+            return ResponseEntity.ok().body(userResponseDTO);
+        }
+
+        catch(Exception e) {
+
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
     // Read_User_Info : 유저 상세정보 [개인정보 + 팔로우/팔로워 + 리뷰게시글 등]
-    @GetMapping("/userInfo")
+    @GetMapping("/auth/userInfo")
     public ResponseEntity<?> ReadUserInfo(@AuthenticationPrincipal User authedUser) {
 //        String email = userDTO.getEmail();
 
@@ -49,13 +84,13 @@ public class UserController {
     }
 
 //     Update User_Info : 유저 상세정보 수정 [개인정보 수정]
-    @PostMapping("/updateUserInfo")
+    @PutMapping("/auth/updateUserInfo")
     public ResponseEntity<?> updateUserInfo(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO updateUserDTO) {
 
         System.out.println("userController.UpdateUserInfo() -> 로그인 중인 사용자: " + authedUser.getEmail());
 
         try {
-            // 로그인된 사용자의 email과 post로 전송된 email과 동일할 경우에만 개인정보 변경 진행.
+            // 로그인된 사용자의 userIndex와 post로 전송된 userIndex가 동일할 경우에만 개인정보 변경 진행.
             User updatedUser = userService.update(authedUser,updateUserDTO, bCryptPasswordEncoder);
 
             UserDTO userResponseDTO = UserDTO.builder()
@@ -71,5 +106,24 @@ public class UserController {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
             return ResponseEntity.badRequest().body(responseDTO);
         }
+    }
+
+//     Delete User_Info : 유저 삭제 [탈퇴기능]
+    @DeleteMapping("/auth/deleteUserInfo")
+    public ResponseEntity<?> deleteUserInfo(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO deleteUserDTO) {
+
+        System.out.println("userController.DeleteUserInfo() -> 로그인 중인 사용자: " + authedUser.getEmail());
+
+        try{
+
+            Long deletedUserIndex = userService.delete(authedUser,deleteUserDTO);
+
+            return ResponseEntity.ok().body("reviewIndex : " + deletedUserIndex + "has deleted");
+        }
+        catch(Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+
     }
 }
