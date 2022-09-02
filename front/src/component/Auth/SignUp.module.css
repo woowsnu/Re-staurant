@@ -3,3 +3,28 @@
     display: none;
     visibility: hidden;
 }
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    height: 100%
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.pagetitle {
+    font-size: 24px;
+    font-weight: 700;
+    padding: 20px 20px 30px 20px;
+}
+
+.buttoncontents {
+    display: flex;
+    justify-content: center;
+}
