@@ -2,8 +2,10 @@ package com.restaurant.app.model;
 
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -19,6 +21,7 @@ public class User {
     @Column(name="user_index")
     private Long userIndex;
 
+
     @Column
     private String email;
 
@@ -33,11 +36,14 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, mappedBy="user", cascade = CascadeType.ALL)
     private Set<Review> reviewList = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="followingUser")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="followingUser",cascade = CascadeType.ALL)
     private Set<Follow> followingList = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="followerUser")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="followedUser",cascade = CascadeType.ALL)
     private Set<Follow> followerList = new HashSet<>();
+
+    @CreatedDate
+    private LocalDateTime createDate;
 
     public List<String> getRoleList() {
         if(this.roles.length() > 0) {

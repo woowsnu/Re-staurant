@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,6 +22,7 @@ public class ReviewService {
                 .busId(busId)
                 .reviewTitle(reviewDTO.getReviewTitle())
                 .reviewContent(reviewDTO.getReviewContent())
+                .createDate(LocalDateTime.now())
                 .build();
 
         review.setUser(authedUser);

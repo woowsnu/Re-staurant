@@ -1,8 +1,10 @@
 package com.restaurant.app.model;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -27,6 +29,9 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "user_index")
     private User user;
+
+    @CreatedDate
+    private LocalDateTime createDate;
 
     @Override
     public String toString() {

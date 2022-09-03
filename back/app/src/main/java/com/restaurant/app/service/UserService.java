@@ -7,13 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
     // Create UserInfo
-    public User save(User user) {
+    public User save(UserDTO userDTO, BCryptPasswordEncoder bCryptPasswordEncoder) {
+
+        User user = User.builder()
+                .email(userDTO.getEmail())
+                .nickname(userDTO.getNickname())
+                .password(bCryptPasswordEncoder.encode(userDTO.getPassword()))
+                .createDate(LocalDateTime.now())
+                .roles("ROLE_USER").build();
 
         if(userRepository.findUserByEmail(user.getEmail()) != null) {
             throw new RuntimeException("등록된 이메일입니다.");

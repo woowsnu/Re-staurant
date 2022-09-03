@@ -1,6 +1,7 @@
 package com.restaurant.app.service;
 
 import com.restaurant.app.DTO.FollowDTO;
+import com.restaurant.app.model.Follow;
 import com.restaurant.app.model.User;
 import com.restaurant.app.repository.FollowRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,23 +20,56 @@ public class FollowService {
 
     public User following(User authedUser, FollowDTO followDTO) {
 
-        String authedEmail = authedUser.getEmail();
-
         // 팔로우 되는 사람[상대방]
-        User counterUser = userService.findUserByEmail(followDTO.getEmail());
+        User followedUser = userService.findUserByEmail(followDTO.getEmail());
 
-        // 팔로우 하는 본인[로그인 하는 유저]
-//        Follow following = followRepository.findFollowByEmail(authedEmail);
+        // 현재 로그인 중인 authedUser가 상대방을 이미 follow하고 있는지 확인.
+        if(followRepository.findFollowByFollowingUserAndFollowedUser(authedUser,followedUser) != null) {
+            throw new RuntimeException("This following is already exist.");
+        }
 
-        // 팔로우 당하는 상대방[followDTO에 담긴 유저]
-//        Follow follower = followRepository.findFollowByEmail(followDTO.getEmail());
+        // 본인[authedUser]이 본인[authedUser]을 follow하려고하는지 확인.
+        if(authedUser.getUserIndex() == followedUser.getUserIndex()) {
+            throw new RuntimeException("You can't follow yourself.");
+        }
 
-//        following.setFollowingUser(counterUser);
+        // followerList:authedUser / followingUser:followedUser에 각각 User 객체 저장.
+        Follow follow = new Follow(authedUser,followedUser);
 
-//        follower.setFollowerUser(authedUser);
+        // 저장한 follow 인스턴스 Repository에 저장.
+        Follow savedFollow = followRepository.save(follow);
 
-//        followRepository.save(following);
-//        followRepository.save(follower);
-        return userService.findUserByEmail(authedEmail);
+        System.out.println("savedFollow" + savedFollow);
+
+        return null;
+    }
+
+    public User unFollowing(User authedUser, FollowDTO unFollowDTO) {
+
+        // 언팔로우 되는 사람[상대방]
+        User unFollowedUser = userService.findUserByEmail(unFollowDTO.getEmail());
+
+        // 본인[authedUser]이 본인[authedUser]을 unFollow하려고하는지 확인.
+        if(authedUser.getUserIndex() == unFollowedUser.getUserIndex()) {
+            throw new RuntimeException("You can't unFollow yourself.");
+        }
+
+        // authedUser와 unFollowedUser의 Follow 객체 조회.
+        Follow currFollow = followRepository.findFollowByFollowingUserAndFollowedUser(authedUser,unFollowedUser);
+
+        // 현재 로그인 중인 authedUser가 상대방을 follow하고 있는 상태인지 확인.
+        if(currFollow == null) {
+            throw new RuntimeException("언팔로우할 상대가 없습니다.");
+        }
+
+        System.out.println("====== delete되는지 확인.");
+        System.out.println("currFollow Idx: " + currFollow.toString());
+
+        // 현재 follow상태인 currFollow의 followIndex를 통해 currFollow객체 삭제. [언팔로우 기능]
+        followRepository.deleteByFollowIndex(currFollow.getFollowIndex());
+
+        System.out.println("deletedFollow");
+
+        return null;
     }
 }
