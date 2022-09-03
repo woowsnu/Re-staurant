@@ -5,6 +5,9 @@ import lombok.*;
 import org.hibernate.annotations.Columns;
 
 import javax.persistence.*;
+import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 @Entity
 @Builder
@@ -48,12 +51,16 @@ public class RestaurantProfile {
     @Column(name="options")
     private String options;
 
-    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "restaurant_index")
     private Restaurant restaurant;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurantProfile")
+    private List<Menus> menuList = new ArrayList<>();
 
 
+    public String arrayToString() {
+        return menuList.toString();
+    }
 
 }

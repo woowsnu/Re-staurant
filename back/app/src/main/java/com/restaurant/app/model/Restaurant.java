@@ -27,6 +27,6 @@ public class Restaurant {
 //    private int restaurant_profile_restaurant_profile_index;
 
     @JsonManagedReference
-    @OneToOne(mappedBy = "restaurant")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private RestaurantProfile restaurantProfile;
 }

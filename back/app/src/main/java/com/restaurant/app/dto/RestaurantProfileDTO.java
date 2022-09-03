@@ -21,9 +21,11 @@ public class RestaurantProfileDTO {
     private String tellNumber;
     private String businessHourInfo;
     private String snsUrl;
-
     private String options;
 
+    private String menuList;
+
+    //관리자 또는 가게 운영자가 자신의 가게 프로필을 프론트엔드에서 등록하려는 경우 필요
     public RestaurantProfileDTO(RestaurantProfile restaurantProfile){
         this.restaurantProfileIndex = getRestaurantProfileIndex();
         this.restaurantProfileName = getRestaurantProfileName();
@@ -35,8 +37,6 @@ public class RestaurantProfileDTO {
         this.businessHourInfo = getBusinessHourInfo();
         this.snsUrl = getSnsUrl();
         this.options = getOptions();
-
-
     }
 
 

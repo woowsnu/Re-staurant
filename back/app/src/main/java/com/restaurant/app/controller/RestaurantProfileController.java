@@ -5,22 +5,27 @@ import com.restaurant.app.dto.RestaurantProfileDTO;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.model.RestaurantProfile;
 import com.restaurant.app.repository.RestaurantProfileRepository;
+import com.restaurant.app.service.RestaurantProfileService;
 import com.restaurant.app.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/restaurantprofile")
 @CrossOrigin("*")
+@Slf4j
 public class RestaurantProfileController {
 
-    private Object restaurantprofileDTO;
-    private RestaurantProfileController restaurantProfileService;
-    private RestaurantService restaurantService;
+    @Autowired
+    RestaurantProfileService restaurantProfileService;
+
 
 //    @GetMapping("/")
 //    public ResponseEntity<?> findAll(){
@@ -29,8 +34,15 @@ public class RestaurantProfileController {
 //        //return ResponseEntity.ok(dtos);
 //    }
 
-    @GetMapping("/profile")
-    public ResponseEntity<?> findAllByProfile(@RequestParam Long restaurantIndex){
-        return restaurantService.findAllByProfile(restaurantIndex);
+    //프로필 번호로 정보 조회
+    @GetMapping()
+    public ResponseEntity<?> findAll() {
+//        log.debug();
+//        log.warn();
+        log.info("hello");
+        log.error("error");
+        List<RestaurantProfile> restaurantProfiles = restaurantProfileService.findAll();
+        List<RestaurantProfileDTO> dtos = restaurantProfiles.stream().map(RestaurantProfileDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
     }
 }
