@@ -19,6 +19,7 @@ public class User {
     @Column(name="user_index")
     private Long userIndex;
 
+
     @Column
     private String email;
 
@@ -33,10 +34,10 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, mappedBy="user", cascade = CascadeType.ALL)
     private Set<Review> reviewList = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="followingUser")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="followingUser",cascade = CascadeType.ALL)
     private Set<Follow> followingList = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="followerUser")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="followedUser",cascade = CascadeType.ALL)
     private Set<Follow> followerList = new HashSet<>();
 
     public List<String> getRoleList() {

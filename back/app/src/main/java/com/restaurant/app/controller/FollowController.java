@@ -21,13 +21,14 @@ public class FollowController {
     @Autowired
     private final FollowService followService;
     @PostMapping("/auth/following")
-    public ResponseEntity<?> following(@AuthenticationPrincipal User authedUser, @RequestBody FollowDTO followDTO) {
+    public ResponseEntity<?> following(@AuthenticationPrincipal User authedUser,
+                                       @RequestBody FollowDTO followDTO) {
 
         try{
             User follower = followService.following(authedUser, followDTO);
 
             FollowDTO followResponseDTO = FollowDTO.builder()
-                    .followingList(follower.getFollowingList())
+//                    .followingList(follower.getFollowingList())
                     .build();
 
             return ResponseEntity.ok().body(followResponseDTO);
@@ -37,5 +38,11 @@ public class FollowController {
 
             return ResponseEntity.badRequest().body(responseDTO);
         }
+    }
+
+    @PostMapping("/auth/unFollowing")
+    public ResponseEntity<?> unFollowing(@AuthenticationPrincipal User authedUser,
+             @RequestBody FollowDTO unFollowDTO) {
+        return null;
     }
 }

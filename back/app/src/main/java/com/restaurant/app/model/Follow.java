@@ -17,11 +17,17 @@ public class Follow {
     @Column(name="follow_index")
     private Long followIndex;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn
     private User followingUser;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn
-    private User followerUser;
+    private User followedUser;
+
+
+    public Follow(User followingUser, User followedUser) {
+        this.followingUser = followingUser;
+        this.followedUser = followedUser;
+    }
 }
