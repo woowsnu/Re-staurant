@@ -24,9 +24,6 @@ public class RestaurantProfile {
     private Long restaurantProfileIndex; //레스토랑 프로필 id
 
 
-    @Column(name="restaurant_name")
-    private String restaurantName;
-
     @Column(name="xFLOAT")
     private float xFloat;
 
@@ -48,9 +45,6 @@ public class RestaurantProfile {
     @Column(name="sns_url")
     private String snsUrl;
 
-    @Column(name="options")
-    private String options;
-
     @OneToOne
     @JoinColumn(name = "restaurant_index")
     private Restaurant restaurant;
@@ -58,9 +52,11 @@ public class RestaurantProfile {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurantProfile")
     private List<Menus> menuList = new ArrayList<>();
 
+//arrayToString?
+@Override
+public String toString() {
+    return "{"+menuList.toString()+"}";
 
-    public String arrayToString() {
-        return menuList.toString();
-    }
+}
 
 }

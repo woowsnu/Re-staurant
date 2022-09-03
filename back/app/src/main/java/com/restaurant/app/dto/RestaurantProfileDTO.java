@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class RestaurantProfileDTO {
 
     private Long restaurantProfileIndex;
-    private String restaurantProfileName;
     private Float restaurantProfileXFloat;
     private Float restaurantProfileYFloat;
     private String fullAddress;
@@ -21,14 +20,12 @@ public class RestaurantProfileDTO {
     private String tellNumber;
     private String businessHourInfo;
     private String snsUrl;
-    private String options;
 
     private String menuList;
 
     //관리자 또는 가게 운영자가 자신의 가게 프로필을 프론트엔드에서 등록하려는 경우 필요
     public RestaurantProfileDTO(RestaurantProfile restaurantProfile){
         this.restaurantProfileIndex = getRestaurantProfileIndex();
-        this.restaurantProfileName = getRestaurantProfileName();
         this.restaurantProfileXFloat = getRestaurantProfileXFloat();
         this.restaurantProfileYFloat = getRestaurantProfileYFloat();
         this.fullAddress = getFullAddress();
@@ -36,8 +33,6 @@ public class RestaurantProfileDTO {
         this.tellNumber = getTellNumber();
         this.businessHourInfo = getBusinessHourInfo();
         this.snsUrl = getSnsUrl();
-        this.options = getOptions();
     }
-
 
 }

@@ -5,7 +5,6 @@ import com.restaurant.app.model.RestaurantProfile;
 import com.restaurant.app.repository.RestaurantProfileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +20,8 @@ public class RestaurantProfileService {
     //오브젝트 생성
 
     public List<RestaurantProfile> findAll() {
-        return restaurantProfileRepository.findAll();}
+        return restaurantProfileRepository.findAll();
+    }
 
     public RestaurantProfile findByIndex(Long index){
         RestaurantProfile restaurantProfile;

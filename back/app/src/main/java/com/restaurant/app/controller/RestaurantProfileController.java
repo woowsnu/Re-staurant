@@ -1,12 +1,8 @@
 package com.restaurant.app.controller;
 
-import com.restaurant.app.dto.RestaurantDTO;
 import com.restaurant.app.dto.RestaurantProfileDTO;
-import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.model.RestaurantProfile;
-import com.restaurant.app.repository.RestaurantProfileRepository;
 import com.restaurant.app.service.RestaurantProfileService;
-import com.restaurant.app.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +36,7 @@ public class RestaurantProfileController {
 //        log.debug();
 //        log.warn();
         log.info("hello");
-        log.error("error");
+//        log.error("error");
         List<RestaurantProfile> restaurantProfiles = restaurantProfileService.findAll();
         List<RestaurantProfileDTO> dtos = restaurantProfiles.stream().map(RestaurantProfileDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok(dtos);
