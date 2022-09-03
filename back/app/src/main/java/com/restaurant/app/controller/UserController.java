@@ -31,14 +31,10 @@ public class UserController {
     public ResponseEntity<?> join(@RequestBody UserDTO userDTO) {
         System.out.println("POST요청[/join]: 회원가입 메서드" + userDTO.toString());
 
-        User user = User.builder()
-                .email(userDTO.getEmail())
-                .nickname(userDTO.getNickname())
-                .password(bCryptPasswordEncoder.encode(userDTO.getPassword()))
-                .roles("ROLE_USER").build();
+
 
         try{
-            User savedUser = userService.save(user);
+            User savedUser = userService.save(userDTO, bCryptPasswordEncoder);
 
             UserDTO userResponseDTO = UserDTO.builder()
                     .userIndex(savedUser.getUserIndex())

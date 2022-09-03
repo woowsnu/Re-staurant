@@ -8,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -40,9 +37,22 @@ public class FollowController {
         }
     }
 
-    @PostMapping("/auth/unFollowing")
+    @DeleteMapping("/auth/unFollowing")
     public ResponseEntity<?> unFollowing(@AuthenticationPrincipal User authedUser,
              @RequestBody FollowDTO unFollowDTO) {
-        return null;
+        try{
+            User unFollower = followService.unFollowing(authedUser, unFollowDTO);
+
+            FollowDTO unFollowResponseDTO = FollowDTO.builder()
+//                    .followingList(follower.getFollowingList())
+                    .build();
+
+            return ResponseEntity.ok().body(unFollowResponseDTO);
+        }
+        catch(Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
     }
 }

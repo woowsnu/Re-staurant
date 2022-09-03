@@ -43,4 +43,33 @@ public class FollowService {
 
         return null;
     }
+
+    public User unFollowing(User authedUser, FollowDTO unFollowDTO) {
+
+        // 언팔로우 되는 사람[상대방]
+        User unFollowedUser = userService.findUserByEmail(unFollowDTO.getEmail());
+
+        // 본인[authedUser]이 본인[authedUser]을 unFollow하려고하는지 확인.
+        if(authedUser.getUserIndex() == unFollowedUser.getUserIndex()) {
+            throw new RuntimeException("You can't unFollow yourself.");
+        }
+
+        // authedUser와 unFollowedUser의 Follow 객체 조회.
+        Follow currFollow = followRepository.findFollowByFollowingUserAndFollowedUser(authedUser,unFollowedUser);
+
+        // 현재 로그인 중인 authedUser가 상대방을 follow하고 있는 상태인지 확인.
+        if(currFollow == null) {
+            throw new RuntimeException("언팔로우할 상대가 없습니다.");
+        }
+
+        System.out.println("====== delete되는지 확인.");
+        System.out.println("currFollow Idx: " + currFollow.toString());
+
+        // 현재 follow상태인 currFollow의 followIndex를 통해 currFollow객체 삭제. [언팔로우 기능]
+        followRepository.deleteByFollowIndex(currFollow.getFollowIndex());
+
+        System.out.println("deletedFollow");
+
+        return null;
+    }
 }
