@@ -28,10 +28,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("JwtAuthorizationFilter.");
+        System.out.println("인증이 필요함.");
 
         String jwtHeader = request.getHeader("Authorization");
-        System.out.println("jwtHeader : " + jwtHeader);
+        System.out.println("jwtHeader" + jwtHeader);
 
         if(jwtHeader == null || !jwtHeader.startsWith("Bearer")) {
             chain.doFilter(request,response);
@@ -40,25 +40,19 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
         String jwtToken = request.getHeader("Authorization").replace("Bearer ","");
 
-        try{
-        String userEmail = JWT.require(Algorithm.HMAC512("gun_secret")).build().verify(jwtToken).getClaim("email").asString();
-        System.out.println(userEmail);
+        String username = JWT.require(Algorithm.HMAC512("gun_secret")).build().verify(jwtToken).getClaim("username").asString();
 
-        if (userEmail!=null) {
+        if (username!=null) {
+            System.out.println("username : "+ username);
+            User userEntity = userRepository.findByUsername(username);
 
-                User userEntity = userRepository.findUserByEmail(userEmail);
+            PrincipalDetails principalDetails = new PrincipalDetails(userEntity);
 
-                PrincipalDetails principalDetails = new PrincipalDetails(userEntity);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(principalDetails,null,principalDetails.getAuthorities());
 
-                Authentication authentication = new UsernamePasswordAuthenticationToken(principalDetails.getUser(),null,principalDetails.getAuthorities());
-
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                chain.doFilter(request,response);
-            }
-
-        } catch (Exception e) {
-            logger.error(e.getMessage());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            response.setHeader("username",userEntity.getUsername());
             chain.doFilter(request,response);
         }
-        }
+    }
 }
