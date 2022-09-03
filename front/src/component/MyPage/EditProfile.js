@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import styles from "./EditProfile.module.css";
+import Button from "../UI/Button";
 import Uploader from "./Uploader";
 import axios from "../../api/axios";
 import Modal from "../UI/Modal";
+import colors from "../../styles/colors"
+import Input from "../UI/Input";
 
 const EditProfile = (props) => {
   const [nickname, setNickname] = useState("");
 
   const nicknameChangeHandler = (e) => {
     e.preventDefault();
+    console.log(e.target.value);
     setNickname(e.target.value);
   };
 
@@ -50,15 +54,15 @@ const EditProfile = (props) => {
       <Uploader/>
       <br/><br/>
       <label htmlFor="nickname">닉네임</label>
-      <input
+      <Input
         id="nickname"
         type="text"
         value={nickname}
         onChange={nicknameChangeHandler}
       />
       <br/><br/><br/>
-      <button type="submit" onClick={saveNewProfileHandler}>저장하기</button>
-      <button onClick={closeModal}>닫기</button>
+      <Button style={{backgroundColor : `${colors.primary2}`}} type="submit" onClick={saveNewProfileHandler}>저장하기</Button>
+      <Button style={{backgroundColor : `${colors.primary2}`}} onClick={closeModal}>닫기</Button>
     </Modal>
   );
 };

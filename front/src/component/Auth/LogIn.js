@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "../../api/axios";
+import AuthContext from "../../store/auth-context";
+import { useContext } from "react";
 
 const URL = "http://localhost:8080/login";
 
-const LogIn = () => {
+const LogIn = (props) => {
   let navigate = useNavigate();
+  const ctx = useContext(AuthContext);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -30,17 +33,18 @@ const LogIn = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-
-      console.log(response.headers.authorization);
       const token = response.headers.authorization;
+
       localStorage.setItem("token", token);
-      navigate(-1)
+      
+      ctx.onLogin(username, password);
+
+      navigate(-1);
+
     } catch (err) {
       console.log(err);
     }
   };
-
-  const token = localStorage.getItem("token")
 
   return (
     <div>

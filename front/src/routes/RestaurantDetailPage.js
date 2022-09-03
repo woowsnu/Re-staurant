@@ -11,8 +11,6 @@ const RestaurantDetailPage = () => {
   const [simpleAddress, setSimpleAddress] = useState([]);
   const [menus, setMenus] = useState([]);
   const [reviews, setReviews] = useState([]);
-  // const [goodReviews, setGoodReviews] = useState();
-  // const [badReviews, setBadReviews] = useState();
 
   useEffect(() => {
     const fetchRestaurant = async () => {
@@ -26,10 +24,6 @@ const RestaurantDetailPage = () => {
         setSimpleAddress(address);
         setMenus(response.data[0].menu);
         setReviews(response.data[0].reviews);
-        // const goodReviewsData = response.data[0].reviews.filter((el) => el.revisit == 1);
-        // const badReviewsData = response.data[0].reviews.filter((el) => el.revisit == 0);
-        // setGoodReviews(goodReviewsData);
-        // setBadReviews(badReviewsData);
       } catch (error) {
         console.log(error);
       }
@@ -41,6 +35,7 @@ const RestaurantDetailPage = () => {
       <RestaurantProfile
         restaurant={restaurant}
         simpleAddress={simpleAddress}
+        reviews={reviews}
       />
       <RestaurantTab reviewCount={reviews.length} />
       <div className="detail">
