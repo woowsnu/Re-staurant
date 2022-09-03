@@ -2,11 +2,11 @@ package com.restaurant.app.model;
 
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Entity
 @Builder
@@ -21,17 +21,29 @@ public class User {
     @Column(name="user_index")
     private Long userIndex;
 
+
     @Column
     private String email;
 
     @Column
-    private String username;
-
+    private String nickname;
     @Column
     private String roles;
 
     @Column
     private String password;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="user", cascade = CascadeType.ALL)
+    private Set<Review> reviewList = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="followingUser",cascade = CascadeType.ALL)
+    private Set<Follow> followingList = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="followedUser",cascade = CascadeType.ALL)
+    private Set<Follow> followerList = new HashSet<>();
+
+    @CreatedDate
+    private LocalDateTime createDate;
 
     public List<String> getRoleList() {
         if(this.roles.length() > 0) {
@@ -41,6 +53,7 @@ public class User {
         return new ArrayList<>();
     }
 
-
-
+    public String reviewListToString() {
+        return reviewList.toString();
+    }
 }
