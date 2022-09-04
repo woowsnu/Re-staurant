@@ -27,9 +27,9 @@ public class Menus {
     @Column(name="menu_price")
     private String menuPrice;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = RestaurantProfile.class)
-    @JoinColumn(name = "restaurant_profile_index")
-    private RestaurantProfile restaurantProfile;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Restaurant.class)
+    @JoinColumn(name = "restaurant_index")
+    private Restaurant restaurant;
 
 
     //순환참조 해결용 toString Override

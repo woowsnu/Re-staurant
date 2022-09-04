@@ -1,7 +1,5 @@
 package com.restaurant.app.service;
 
-
-import com.restaurant.app.model.RestaurantProfile;
 import com.restaurant.app.repository.RestaurantProfileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

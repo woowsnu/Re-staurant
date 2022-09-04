@@ -32,7 +32,7 @@ public class Options {
     @Column(name="option_order")
     private int optionOrder;
 
-    @JsonBackReference
+
     @ManyToOne(fetch =FetchType.LAZY, targetEntity = Restaurant.class)
     @JoinColumn(name= "restaurant_index")
     private Restaurant restaurant;
