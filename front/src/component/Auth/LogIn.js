@@ -10,12 +10,12 @@ const LogIn = (props) => {
   let navigate = useNavigate();
   const ctx = useContext(AuthContext);
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
-  const usernameInputHandler = (e) => {
+  const emailInputHandler = (e) => {
     e.preventDefault();
-    setUsername(e.target.value);
+    setEmail(e.target.value);
   };
 
   const passwordInputHandler = (e) => {
@@ -28,16 +28,17 @@ const LogIn = (props) => {
     try {
       const response = await axios.post(
         URL,
-        JSON.stringify({ username, password }),
+        JSON.stringify({ email, password }),
         {
           headers: { "Content-Type": "application/json" },
         }
       );
-      const token = response.headers.authorization;
+      // console.log(response)
+      const token = response.data.jwtToken;
 
       localStorage.setItem("token", token);
       
-      ctx.onLogin(username, password);
+      ctx.onLogin(email, password);
 
       navigate(-1);
 
@@ -50,12 +51,12 @@ const LogIn = (props) => {
     <div>
       <h2>로그인</h2>
       <form onSubmit={submitHandler}>
-        <label htmlFor="username">아이디</label>
+        <label htmlFor="email">아이디</label>
         <input
           type="text"
-          id="username"
-          value={username}
-          onChange={usernameInputHandler}
+          id="email"
+          value={email}
+          onChange={emailInputHandler}
         />
         <br />
         <label htmlFor="password">비밀번호</label>

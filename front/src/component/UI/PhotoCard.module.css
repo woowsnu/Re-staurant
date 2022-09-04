@@ -18,7 +18,6 @@ input[type="checkbox"] {
   display: none;
 }
 
-
 .imgwrapper {
   position: relative;
   padding: 0.7rem;
@@ -41,7 +40,6 @@ input[type="checkbox"] {
   cursor: pointer;
   padding-left: 22px;
   background-repeat: no-repeat;
-  background: url("../../assets/image/icon/bookmark.png");
 }
 
 .bggradient {
