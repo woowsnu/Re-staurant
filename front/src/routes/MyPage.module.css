@@ -1,9 +1,27 @@
 .tabbar {
-    background-color:aquamarine;
-    padding-left: 0px;
+    margin: 0;
     list-style: none;
     display: flex;
     justify-content: space-evenly;
+}
+
+.tabbar button {
+    border: none;
+    cursor: pointer;
+    padding: 14px;
+    width: 470px;
+    overflow: hidden;
+    font-size: 15px;
+}
+
+.tab {
+    background-color: inherit;
+    font-weight: 600;
+}
+.tabactive {
+    background-color: white;
+    border-bottom: 0.2rem solid black;
+    font-weight: 700;
 }
 
 .userinfo {
@@ -14,4 +32,9 @@
 
 .follow {
     margin-bottom: 0px;
+}
+
+.wrapper {
+    min-height: 100vh;
+    padding: 2rem 0rem 2rem 0rem;
 }

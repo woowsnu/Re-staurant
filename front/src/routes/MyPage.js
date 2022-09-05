@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import MyEatketList from "../component/MyPage/MyEatketList";
 import MyReviews from "../component/MyPage/MyReviews";
 import styles from "./MyPage.module.css";
@@ -7,6 +7,7 @@ import Profile from "../component/MyPage/Profile";
 
 const MyPage = () => {
   const [tabselect, setTabselect] = useState(false);
+  const [tempUser, setTempUser] = useState("");
   const [user, setUser] = useState("");
   const [restaurant, setRestaurant] = useState("");
   const [datafetch, setDatafetch] = useState(false);
@@ -36,7 +37,7 @@ const MyPage = () => {
       .get("http://localhost:3500/user")
       .then(function (response) {
         const data = response.data[0];
-        setUser(data);
+        setTempUser(data);
         setDatafetch(true);
       })
       .catch(function (error) {
@@ -44,24 +45,55 @@ const MyPage = () => {
       });
   }, [isUpdated]);
 
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/user/auth/userInfo", {
+        headers: { "Content-Type": "application/json", Authorization: token },
+      })
+      .then(function (response) {
+        const data = response.data;
+        console.log(data);
+        setUser(data);
+        setDatafetch(true);
+      })
+      .catch(function (error) {
+        console.log(error + "에러 ㅠㅠ");
+      });
+  }, [isUpdated, token]);
+
   return (
     datafetch && (
-      <>
+      <div className={styles.wrapper}>
         <Profile user={user} updateHandler={() => setIsUpdated(true)} />
-        <div id="mypage_tabmenu" className={styles.tabmenu}>
-          <ul className={styles.tabbar}>
-            <li onClick={showReviewsHandler}>작성 리뷰</li>
-            <li onClick={showEatketListHandler}>먹킷 리스트 </li>
-          </ul>
-        </div>
+        <nav id="mypage_tabmenu" className={styles.tabmenu}>
+          <div className={styles.tabbar}>
+            <div className={tabselect ? styles.tab : styles.tabactive}>
+              <button
+                className={tabselect ? styles.tab : styles.tabactive}
+                onClick={showReviewsHandler}
+              >
+                작성 리뷰
+              </button>
+            </div>
+            <div className={tabselect ? styles.tabactive : styles.tab}>
+              <button
+                className={tabselect ? styles.tabactive : styles.tab}
+                onClick={showEatketListHandler}
+              >
+                먹킷 리스트{" "}
+              </button>
+            </div>
+          </div>
+        </nav>
         <div>
           {tabselect ? (
             <MyEatketList restaurantdata={restaurant} />
           ) : (
-            <MyReviews userdata={user} />
+            <MyReviews userdata={tempUser} />
           )}
         </div>
-      </>
+      </div>
     )
   );
 };
