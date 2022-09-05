@@ -1,23 +1,40 @@
 package com.restaurant.app.service;
 
-import com.restaurant.app.dto.RestaurantDTO;
+import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.repository.RestaurantRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class RestaurantService {
 
-    private final RestaurantRepository restaurantRepository;
-    private Restaurant restaurant;
+    @Autowired
+    private RestaurantRepository restaurantRepository;
     public List<Restaurant> findAll() {
         return restaurantRepository.findAll();}
+
+    public Restaurant createPlaceInfo(RestaurantDTO restaurantDTO) {
+
+//        if(restaurantRepository.findRestaurantByBusId(restaurantDTO.getBusId()) == null) {
+//            throw new RuntimeException("없는 식당이에욤.");
+//        }
+
+        Restaurant restaurant = Restaurant.builder()
+                                .busId(restaurantDTO.getBusId())
+                                .restaurantCategory(restaurantDTO.getRestaurantCategory())
+                                .restaurantName(restaurantDTO.getRestaurantName())
+                                .fullAddress(restaurantDTO.getFullAddress())
+//                                .menuList(restaurantDTO.menuToString())
+                                .build();
+
+        return restaurantRepository.save(restaurant);
+    }
+
 
     public List<Restaurant> findRestaurantByName(String restaurantName){
         List<Restaurant> restaurantList = restaurantRepository.findRestaurantByRestaurantName(restaurantName);

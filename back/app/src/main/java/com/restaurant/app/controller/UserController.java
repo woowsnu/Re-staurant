@@ -21,11 +21,6 @@ public class UserController {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @GetMapping("/")
-    public ResponseEntity test() {
-        return ResponseEntity.ok().body("logout 되었습니다.");
-    }
-
     // Create User : [회원가입 -> 로그인 필요없는 메서드]
     @PostMapping("/join")
     public ResponseEntity<?> join(@RequestBody UserDTO userDTO) {

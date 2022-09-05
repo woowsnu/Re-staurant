@@ -1,12 +1,10 @@
-package com.restaurant.app.dto;
+package com.restaurant.app.DTO;
 
 import com.restaurant.app.model.Restaurant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
 
 @Data
 @Builder
@@ -19,18 +17,16 @@ public class RestaurantDTO {
     private String restaurantName;
     private Float x;
     private Float y;
+
+    private String busId;
     private String fullAddress;
     private String fullRoadAddress;
-
     private String siCode;
-
     private String gunCode;
-
     private String guCode;
     private String tellNumber;
     private String businessHourInfo;
     private String snsUrl;
-
     private String menuList;
 
     public RestaurantDTO(Restaurant restaurant) {

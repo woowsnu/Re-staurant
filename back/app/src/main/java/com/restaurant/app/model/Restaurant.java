@@ -1,14 +1,10 @@
 package com.restaurant.app.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.hibernate.annotations.Columns;
 
 import javax.persistence.*;
-import java.awt.*;
-import java.util.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -65,10 +61,13 @@ public class Restaurant {
     private String busId;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
-    private List<Options> options  = new ArrayList<>();
+    private Set<Options> options  = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
-    private List<Menus> menuList = new ArrayList<>();
+    private Set<Menus> menuList = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private Set<Review> reviewList = new HashSet();
 
     //arrayToString?
     public String menuToString() {
