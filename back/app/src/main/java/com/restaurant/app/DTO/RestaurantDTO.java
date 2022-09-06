@@ -34,6 +34,8 @@ public class RestaurantDTO {
         this.restaurantCategory = restaurant.getRestaurantCategory();
         this.restaurantName = restaurant.getRestaurantName();
         this.description = restaurant.getDescription();
+        this.restaurantCategory = restaurant.getRestaurantCategory();
+        this.restaurantName = restaurant.getRestaurantName();
         this.x = restaurant.getX();
         this.y = restaurant.getY();
         this.fullAddress = restaurant.getFullAddress();
