@@ -18,7 +18,6 @@ public class RestaurantDTO {
     private String restaurantName;
     private Float x;
     private Float y;
-
     private String description;
     private String fullAddress;
     private String fullRoadAddress;
@@ -31,6 +30,10 @@ public class RestaurantDTO {
     private String menuList;
     public RestaurantDTO(Restaurant restaurant) {
         this.restaurantIndex = restaurant.getRestaurantIndex();
+        this.busId = restaurant.getBusId();
+        this.restaurantCategory = restaurant.getRestaurantCategory();
+        this.restaurantName = restaurant.getRestaurantName();
+        this.description = restaurant.getDescription();
         this.restaurantCategory = restaurant.getRestaurantCategory();
         this.restaurantName = restaurant.getRestaurantName();
         this.x = restaurant.getX();
@@ -45,8 +48,4 @@ public class RestaurantDTO {
         this.snsUrl = restaurant.getSnsUrl();
 
     }
-
-    //관리자 또는 가게 운영자가 자신의 가게 프로필을 프론트엔드에서 등록하려는 경우 필요
-
-
 }

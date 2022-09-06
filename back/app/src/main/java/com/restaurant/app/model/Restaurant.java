@@ -54,10 +54,10 @@ public class Restaurant {
     @Column(name="tell_number")
     private String tellNumber;
 
-    @Column(name="description")
+    @Column(name="description",columnDefinition = "TEXT")
     private String description;
 
-    @Column(name="business_hour_info")
+    @Column(name="business_hour_info",columnDefinition = "TEXT")
     private String businessHourInfo;
 
     @Column(name="sns_url")

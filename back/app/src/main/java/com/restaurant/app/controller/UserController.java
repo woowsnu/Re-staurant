@@ -26,14 +26,12 @@ public class UserController {
     public ResponseEntity<?> join(@RequestBody UserDTO userDTO) {
         System.out.println("POST요청[/join]: 회원가입 메서드" + userDTO.toString());
 
-
-
         try{
             User savedUser = userService.save(userDTO, bCryptPasswordEncoder);
 
-            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
+            ResponseDTO userResponseDTO = ResponseDTO.builder().result(1).build();
 
-            return ResponseEntity.ok().body(responseDTO);
+            return ResponseEntity.ok().body(userResponseDTO);
         }
 
         catch(Exception e) {
@@ -115,4 +113,3 @@ public class UserController {
     }
 
     }
-}

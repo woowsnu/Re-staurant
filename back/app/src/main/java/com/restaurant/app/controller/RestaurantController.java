@@ -34,7 +34,6 @@ public class RestaurantController {
             Restaurant savedRestaurant = restaurantService.createPlaceInfo(restaurantDTO);
 
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
-
             return ResponseEntity.ok().body(responseDTO);
 
         }
@@ -81,12 +80,7 @@ public class RestaurantController {
         try{
             Restaurant restaurant = restaurantService.findRestaurantByBusId(busId);
 
-            RestaurantDTO restaurantResponseDTO = RestaurantDTO.builder()
-                                            .restaurantCategory(restaurant.getRestaurantCategory())
-                                            .restaurantName(restaurant.getRestaurantName())
-                                            .fullAddress(restaurant.getFullAddress())
-                                            .menuList(restaurant.menuToString())
-                                            .build();
+            RestaurantDTO restaurantResponseDTO = new RestaurantDTO(restaurant);
 
 
             return ResponseEntity.ok().body(restaurantResponseDTO);

@@ -1,14 +1,11 @@
 package com.restaurant.app.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+
+import lombok.*;
 
 @Builder
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter @Setter
 public class ResponseDTO<T> {
 
     private String error;
