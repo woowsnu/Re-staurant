@@ -1,0 +1,10 @@
+.search {
+    width: 100%;
+    display: flex;
+}
+
+.searchbar {
+    margin: 0 auto;
+    width: 40rem;
+    padding: 0.8rem;
+}
