@@ -1,0 +1,17 @@
+.photocards {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px 20px 20px 20px;
+}
+
+.pagetitle {
+    font-size: 24px;
+    font-weight: 700;
+    padding: 20px 20px 30px 20px;
+}
+
+.reviewRecommend {
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 20px;
+}

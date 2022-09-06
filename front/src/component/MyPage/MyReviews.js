@@ -38,9 +38,6 @@ const MyReviews = (props) => {
         console.log(error);
       });
   };
-
-  console.log(props.userdata.review[0]);
-  if (props.userdata.review[0])
   
   return (
     <>

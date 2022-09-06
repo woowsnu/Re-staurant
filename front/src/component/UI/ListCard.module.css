@@ -1,0 +1,31 @@
+.wrapper {
+    width : 90%;
+    height: 250px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); */
+}
+
+.description {
+    width: 75%;
+}
+
+.imgsection {
+    padding : 10px 20px 10px 20px;
+}
+
+.img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.bookmark {
+    text-align: right;
+}
+
+.bookmarkImg {
+    cursor: pointer;
+}
