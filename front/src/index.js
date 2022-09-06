@@ -14,8 +14,6 @@ import ReviewWrite from "./component/Review/ReviewWrite";
 import Admin from "./routes/Admin";
 import RestaurantSearch from "./routes/RestaurantSearch";
 import EditUserInfo from "./component/MyPage/EditUserInfo";
-import EditNickname from "./component/MyPage/EditUserInfo/EditNickname";
-import EditPassword from "./component/MyPage/EditUserInfo/EditPassword";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -34,8 +32,6 @@ root.render(
         <Route element={<ProtectedRoutes />}>
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/editmyprofile" element={<EditUserInfo />} />
-          <Route path="/editnickname" element={<EditNickname />} />
-          <Route path="/editpassword" element={<EditPassword />} />
           <Route path="/review/write/:id" element={<ReviewWrite />} />
         </Route>
       </Routes>
