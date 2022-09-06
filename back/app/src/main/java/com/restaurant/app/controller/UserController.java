@@ -21,27 +21,16 @@ public class UserController {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @GetMapping("/")
-    public ResponseEntity test() {
-        return ResponseEntity.ok().body("logout 되었습니다.");
-    }
-
     // Create User : [회원가입 -> 로그인 필요없는 메서드]
     @PostMapping("/join")
     public ResponseEntity<?> join(@RequestBody UserDTO userDTO) {
         System.out.println("POST요청[/join]: 회원가입 메서드" + userDTO.toString());
 
-
-
         try{
             User savedUser = userService.save(userDTO, bCryptPasswordEncoder);
 
-            UserDTO userResponseDTO = UserDTO.builder()
-                    .userIndex(savedUser.getUserIndex())
-                    .email(savedUser.getEmail())
-                    .nickname(savedUser.getNickname())
-                    .roles(savedUser.getRoles())
-                    .build();
+            ResponseDTO userResponseDTO = ResponseDTO.builder().result(1).build();
+
             return ResponseEntity.ok().body(userResponseDTO);
         }
 
@@ -64,6 +53,7 @@ public class UserController {
             UserDTO userResponseDTO = UserDTO.builder()
                     .userIndex(authedUser.getUserIndex())
                     .email(authedUser.getEmail())
+                    .password(authedUser.getPassword())
                     .nickname(authedUser.getNickname())
                     .roles(authedUser.getRoles())
                     .reviewList(authedUser.reviewListToString())
@@ -122,5 +112,4 @@ public class UserController {
         }
     }
 
-
-}
+    }

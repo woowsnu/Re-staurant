@@ -11,6 +11,9 @@ import ProtectedRoutes from "./routes/ProtectedRoutes";
 import ProtectedRoutesAuth from "./routes/ProtectedRoutesAuth";
 import RestaurantDetailPage from "./routes/RestaurantDetailPage";
 import ReviewWrite from "./component/Review/ReviewWrite";
+import Admin from "./routes/Admin";
+import RestaurantSearch from "./routes/RestaurantSearch";
+import EditUserInfo from "./component/MyPage/EditUserInfo";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,6 +22,8 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="*" element={<App />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/search" element={<RestaurantSearch />} />
         <Route path="/detail/:id" element={<RestaurantDetailPage />} />
         <Route element={<ProtectedRoutesAuth />}>
           <Route path="/login" element={<LogIn />} />
@@ -26,6 +31,7 @@ root.render(
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/editmyprofile" element={<EditUserInfo />} />
           <Route path="/review/write/:id" element={<ReviewWrite />} />
         </Route>
       </Routes>

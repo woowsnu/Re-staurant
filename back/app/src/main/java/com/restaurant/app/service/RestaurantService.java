@@ -3,21 +3,47 @@ package com.restaurant.app.service;
 import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.repository.RestaurantRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class RestaurantService {
 
-    private final RestaurantRepository restaurantRepository;
-    private Restaurant restaurant;
+    @Autowired
+    private RestaurantRepository restaurantRepository;
     public List<Restaurant> findAll() {
         return restaurantRepository.findAll();}
+
+    public Restaurant createPlaceInfo(RestaurantDTO restaurantDTO) {
+
+        if(restaurantRepository.findRestaurantByBusId(restaurantDTO.getBusId()) != null) {
+            throw new RuntimeException("이미 DB에 저장되어있습니다.");
+        }
+
+        Restaurant restaurant = Restaurant.builder()
+                                .busId(restaurantDTO.getBusId())
+                                .restaurantCategory(restaurantDTO.getRestaurantCategory())
+                                .restaurantName(restaurantDTO.getRestaurantName())
+                                .tellNumber(restaurantDTO.getTellNumber())
+                                .fullAddress(restaurantDTO.getFullAddress())
+                                .fullRoadAddress(restaurantDTO.getFullRoadAddress())
+                                .siCode(restaurantDTO.getSiCode())
+                                .guCode(restaurantDTO.getGuCode())
+                                .dongCode(restaurantDTO.getDongCode())
+                                .restaurantCategory(restaurantDTO.getRestaurantCategory())
+                                .businessHourInfo(restaurantDTO.getBusinessHourInfo())
+                                .description(restaurantDTO.getDescription())
+                                .x(restaurantDTO.getX())
+                                .y(restaurantDTO.getY())
+                                .build();
+
+        return restaurantRepository.save(restaurant);
+    }
+
 
     public List<Restaurant> findRestaurantByName(String restaurantName){
         List<Restaurant> restaurantList = restaurantRepository.findRestaurantByRestaurantName(restaurantName);

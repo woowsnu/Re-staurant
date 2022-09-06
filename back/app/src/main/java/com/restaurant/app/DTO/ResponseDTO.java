@@ -4,11 +4,11 @@ package com.restaurant.app.DTO;
 import lombok.*;
 
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter @Setter
 @ToString
-public class ResponseDTO {
+@Getter @Setter
+public class ResponseDTO<T> {
 
     private String error;
+
+    private int result;
 }

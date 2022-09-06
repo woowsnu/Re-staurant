@@ -21,7 +21,6 @@ public class User {
     @Column(name="user_index")
     private Long userIndex;
 
-
     @Column
     private String email;
 

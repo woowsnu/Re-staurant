@@ -2,11 +2,8 @@ package com.restaurant.app.model;
 
 
 import lombok.*;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Builder
 @Getter
@@ -28,7 +25,7 @@ public class Menus {
     private String menuPrice;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Restaurant.class)
-    @JoinColumn(name = "restaurant_index")
+    @JoinColumn(name = "bus_id")
     private Restaurant restaurant;
 
 

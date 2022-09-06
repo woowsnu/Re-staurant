@@ -1,7 +1,6 @@
 package com.restaurant.app.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,7 +33,7 @@ public class Options {
 
 
     @ManyToOne(fetch =FetchType.LAZY, targetEntity = Restaurant.class)
-    @JoinColumn(name= "restaurant_index")
+    @JoinColumn(name= "bus_id")
     private Restaurant restaurant;
 
     @Override

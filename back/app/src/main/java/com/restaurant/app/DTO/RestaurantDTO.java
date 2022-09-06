@@ -14,28 +14,34 @@ import lombok.NoArgsConstructor;
 public class RestaurantDTO {
 
     private Long restaurantIndex;  //레스토랑 아이디
+    private String busId;
     private String restaurantCategory;   //레스토랑 카테고리
     private String restaurantName;
     private Float x;
     private Float y;
+    private String description;
     private String fullAddress;
     private String fullRoadAddress;
-
     private String siCode;
-
-    private String gunCode;
-
     private String guCode;
+    private String dongCode;
     private String tellNumber;
     private String businessHourInfo;
     private String snsUrl;
+
 
     private String busId;
     private String menuList;
     private String optionsList;
 
+    private String menuList;
+    
     public RestaurantDTO(Restaurant restaurant) {
         this.restaurantIndex = restaurant.getRestaurantIndex();
+        this.busId = restaurant.getBusId();
+        this.restaurantCategory = restaurant.getRestaurantCategory();
+        this.restaurantName = restaurant.getRestaurantName();
+        this.description = restaurant.getDescription();
         this.restaurantCategory = restaurant.getRestaurantCategory();
         this.restaurantName = restaurant.getRestaurantName();
         this.x = restaurant.getX();
@@ -43,7 +49,7 @@ public class RestaurantDTO {
         this.fullAddress = restaurant.getFullAddress();
         this.fullRoadAddress = restaurant.getFullRoadAddress();
         this.siCode = restaurant.getSiCode();
-        this.gunCode = restaurant.getGunCode();
+        this.dongCode = restaurant.getDongCode();
         this.guCode = restaurant.getGuCode();
         this.tellNumber = restaurant.getTellNumber();
         this.businessHourInfo = restaurant.getBusinessHourInfo();
@@ -53,8 +59,4 @@ public class RestaurantDTO {
         this.optionsList = restaurant.optionsList();
 
     }
-
-    //관리자 또는 가게 운영자가 자신의 가게 프로필을 프론트엔드에서 등록하려는 경우 필요
-
-
 }

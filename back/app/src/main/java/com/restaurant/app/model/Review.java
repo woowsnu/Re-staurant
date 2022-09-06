@@ -30,6 +30,10 @@ public class Review {
     @JoinColumn(name = "user_index")
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Restaurant.class)
+    @JoinColumn(name = "bus_id")
+    private Restaurant restaurant;
+
     @CreatedDate
     private LocalDateTime createDate;
 
