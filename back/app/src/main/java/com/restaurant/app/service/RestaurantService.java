@@ -20,16 +20,25 @@ public class RestaurantService {
 
     public Restaurant createPlaceInfo(RestaurantDTO restaurantDTO) {
 
-//        if(restaurantRepository.findRestaurantByBusId(restaurantDTO.getBusId()) == null) {
-//            throw new RuntimeException("없는 식당이에욤.");
-//        }
+        if(restaurantRepository.findRestaurantByBusId(restaurantDTO.getBusId()) != null) {
+            throw new RuntimeException("이미 DB에 저장되어있습니다.");
+        }
 
         Restaurant restaurant = Restaurant.builder()
                                 .busId(restaurantDTO.getBusId())
                                 .restaurantCategory(restaurantDTO.getRestaurantCategory())
                                 .restaurantName(restaurantDTO.getRestaurantName())
+                                .tellNumber(restaurantDTO.getTellNumber())
                                 .fullAddress(restaurantDTO.getFullAddress())
-//                                .menuList(restaurantDTO.menuToString())
+                                .fullRoadAddress(restaurantDTO.getFullRoadAddress())
+                                .siCode(restaurantDTO.getSiCode())
+                                .guCode(restaurantDTO.getGuCode())
+                                .dongCode(restaurantDTO.getDongCode())
+                                .restaurantCategory(restaurantDTO.getRestaurantCategory())
+                                .businessHourInfo(restaurantDTO.getBusinessHourInfo())
+                                .description(restaurantDTO.getDescription())
+                                .x(restaurantDTO.getX())
+                                .y(restaurantDTO.getY())
                                 .build();
 
         return restaurantRepository.save(restaurant);

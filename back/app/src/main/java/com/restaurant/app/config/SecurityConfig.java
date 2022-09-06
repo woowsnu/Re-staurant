@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/review/{\\d+}/auth/**").authenticated()
                 .antMatchers("/user/auth/**").authenticated()
                 .antMatchers("/follow/auth/**").authenticated()
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/restaurant/admin/**").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().permitAll();
 
     }

@@ -13,22 +13,22 @@ import lombok.NoArgsConstructor;
 public class RestaurantDTO {
 
     private Long restaurantIndex;  //레스토랑 아이디
+    private String busId;
     private String restaurantCategory;   //레스토랑 카테고리
     private String restaurantName;
     private Float x;
     private Float y;
 
-    private String busId;
+    private String description;
     private String fullAddress;
     private String fullRoadAddress;
     private String siCode;
-    private String gunCode;
     private String guCode;
+    private String dongCode;
     private String tellNumber;
     private String businessHourInfo;
     private String snsUrl;
     private String menuList;
-
     public RestaurantDTO(Restaurant restaurant) {
         this.restaurantIndex = restaurant.getRestaurantIndex();
         this.restaurantCategory = restaurant.getRestaurantCategory();
@@ -38,7 +38,7 @@ public class RestaurantDTO {
         this.fullAddress = restaurant.getFullAddress();
         this.fullRoadAddress = restaurant.getFullRoadAddress();
         this.siCode = restaurant.getSiCode();
-        this.gunCode = restaurant.getGunCode();
+        this.dongCode = restaurant.getDongCode();
         this.guCode = restaurant.getGuCode();
         this.tellNumber = restaurant.getTellNumber();
         this.businessHourInfo = restaurant.getBusinessHourInfo();

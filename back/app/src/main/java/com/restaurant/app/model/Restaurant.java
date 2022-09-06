@@ -20,6 +20,9 @@ public class Restaurant {
     @Column(name="restaurant_index")
     private Long restaurantIndex; //레스토랑 프로필 id
 
+    @Column(name="bus_id",unique = true)
+    private String busId;
+
     @Column(name="restaurant_name")
     private String restaurantName;
 
@@ -28,10 +31,10 @@ public class Restaurant {
     private String restaurantCategory; //레스토랑 카테고리
 
     @Column(name="x")
-    private float x;
+    private Float x;
 
     @Column(name="y")
-    private float y;
+    private Float y;
 
     @Column(name="full_address")
     private String fullAddress;
@@ -42,14 +45,17 @@ public class Restaurant {
     @Column(name="si_code")
     private String siCode;
 
-    @Column(name="gun_code")
-    private String gunCode;
-
     @Column(name="gu_code")
     private String guCode;
 
+    @Column(name="dong_code")
+    private String dongCode;
+
     @Column(name="tell_number")
     private String tellNumber;
+
+    @Column(name="description")
+    private String description;
 
     @Column(name="business_hour_info")
     private String businessHourInfo;
@@ -57,8 +63,7 @@ public class Restaurant {
     @Column(name="sns_url")
     private String snsUrl;
 
-    @Column(name="bus_id")
-    private String busId;
+
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
     private Set<Options> options  = new HashSet<>();

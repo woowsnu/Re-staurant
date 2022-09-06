@@ -31,13 +31,9 @@ public class UserController {
         try{
             User savedUser = userService.save(userDTO, bCryptPasswordEncoder);
 
-            UserDTO userResponseDTO = UserDTO.builder()
-                    .userIndex(savedUser.getUserIndex())
-                    .email(savedUser.getEmail())
-                    .nickname(savedUser.getNickname())
-                    .roles(savedUser.getRoles())
-                    .build();
-            return ResponseEntity.ok().body(userResponseDTO);
+            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
+
+            return ResponseEntity.ok().body(responseDTO);
         }
 
         catch(Exception e) {
@@ -59,6 +55,7 @@ public class UserController {
             UserDTO userResponseDTO = UserDTO.builder()
                     .userIndex(authedUser.getUserIndex())
                     .email(authedUser.getEmail())
+                    .password(authedUser.getPassword())
                     .nickname(authedUser.getNickname())
                     .roles(authedUser.getRoles())
                     .reviewList(authedUser.reviewListToString())

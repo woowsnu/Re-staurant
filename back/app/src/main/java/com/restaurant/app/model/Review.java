@@ -31,7 +31,7 @@ public class Review {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Restaurant.class)
-    @JoinColumn(name = "restaurant_index")
+    @JoinColumn(name = "bus_id")
     private Restaurant restaurant;
 
     @CreatedDate

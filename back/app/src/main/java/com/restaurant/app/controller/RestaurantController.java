@@ -24,19 +24,18 @@ public class RestaurantController {
     RestaurantService restaurantService;
 
     // test : Create PlaceInfo
-    @PostMapping("/create")
+    @PostMapping("/createRestaurantInfo")
     public ResponseEntity<?> createPlaceInfo(@RequestBody RestaurantDTO restaurantDTO) {
+
+        System.out.println("createRestaurantInfo");
+
+        System.out.println(restaurantDTO);
         try {
             Restaurant savedRestaurant = restaurantService.createPlaceInfo(restaurantDTO);
 
-            RestaurantDTO restaurantResponseDTO = RestaurantDTO.builder()
-                    .restaurantCategory(savedRestaurant.getRestaurantCategory())
-                    .restaurantName(savedRestaurant.getRestaurantName())
-                    .fullAddress(savedRestaurant.getFullAddress())
-                    .menuList(savedRestaurant.menuToString())
-                    .build();
+            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
 
-            return ResponseEntity.ok().body(restaurantResponseDTO);
+            return ResponseEntity.ok().body(responseDTO);
 
         }
 
