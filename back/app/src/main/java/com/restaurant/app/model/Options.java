@@ -37,4 +37,9 @@ public class Options {
     @JoinColumn(name= "restaurant_index")
     private Restaurant restaurant;
 
+    @Override
+    public String toString() {
+        return "iconUrl : " + iconUrl  + ", isCheck : "+ isCheck + ", optionNum : " + optionNum +
+                ", optionOrder : "+optionOrder ;
+    }
 }

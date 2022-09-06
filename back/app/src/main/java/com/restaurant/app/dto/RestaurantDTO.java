@@ -1,12 +1,11 @@
-package com.restaurant.app.dto;
+package com.restaurant.app.DTO;
 
+import com.restaurant.app.model.Menus;
 import com.restaurant.app.model.Restaurant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
 
 @Data
 @Builder
@@ -31,7 +30,9 @@ public class RestaurantDTO {
     private String businessHourInfo;
     private String snsUrl;
 
+    private String busId;
     private String menuList;
+    private String optionsList;
 
     public RestaurantDTO(Restaurant restaurant) {
         this.restaurantIndex = restaurant.getRestaurantIndex();
@@ -47,6 +48,9 @@ public class RestaurantDTO {
         this.tellNumber = restaurant.getTellNumber();
         this.businessHourInfo = restaurant.getBusinessHourInfo();
         this.snsUrl = restaurant.getSnsUrl();
+        this.busId = restaurant.getBusId();
+        this.menuList = restaurant.menuToString();
+        this.optionsList = restaurant.optionsList();
 
     }
 

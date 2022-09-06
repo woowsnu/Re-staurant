@@ -22,7 +22,7 @@ public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="restaurant_index")
-    private Long restaurantIndex; //레스토랑 프로필 id
+    private Long restaurantIndex;
 
     @Column(name="restaurant_name")
     private String restaurantName;
@@ -64,16 +64,20 @@ public class Restaurant {
     @Column(name="bus_id")
     private String busId;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
-    private List<Options> options  = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant",cascade = CascadeType.ALL)
+    private List<Options> optionsList  = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant",cascade = CascadeType.ALL)
     private List<Menus> menuList = new ArrayList<>();
 
     //arrayToString?
     public String menuToString() {
-        return "{"+menuList.toString()+"}";
+        return menuList.toString();
 
+    }
+
+    public String optionsList(){
+        return optionsList.toString();
     }
 
 }

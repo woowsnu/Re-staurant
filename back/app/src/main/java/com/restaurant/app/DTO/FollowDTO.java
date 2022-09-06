@@ -15,7 +15,6 @@ import java.util.Set;
 public class FollowDTO {
 
     private Long followIndex;
-
     private String email;
 
     private Set<Follow> followingList;

@@ -1,8 +1,8 @@
 package com.restaurant.app.controller;
 
 
-import com.restaurant.app.dto.ResponseDTO;
-import com.restaurant.app.dto.RestaurantDTO;
+import com.restaurant.app.DTO.ResponseDTO;
+import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.service.RestaurantService;
 import com.restaurant.app.service.RestaurantServiceImpl;
@@ -62,8 +62,19 @@ public class RestaurantController {
             RestaurantDTO restaurantResponseDTO = RestaurantDTO.builder()
                                             .restaurantCategory(restaurant.getRestaurantCategory())
                                             .restaurantName(restaurant.getRestaurantName())
+                                            .x(restaurant.getX())
+                                            .y(restaurant.getY())
                                             .fullAddress(restaurant.getFullAddress())
+                                            .fullRoadAddress(restaurant.getFullRoadAddress())
+                                            .siCode(restaurant.getSiCode())
+                                            .gunCode(restaurant.getGunCode())
+                                            .guCode(restaurant.getGuCode())
+                                            .tellNumber(restaurant.getTellNumber())
+                                            .businessHourInfo(restaurant.getBusinessHourInfo())
+                                            .snsUrl(restaurant.getSnsUrl())
+                                            .busId(restaurant.getBusId())
                                             .menuList(restaurant.menuToString())
+                                            .optionsList(restaurant.optionsList())
                                             .build();
 
             return ResponseEntity.ok().body(restaurantResponseDTO);

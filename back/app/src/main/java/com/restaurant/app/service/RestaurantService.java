@@ -1,6 +1,6 @@
 package com.restaurant.app.service;
 
-import com.restaurant.app.dto.RestaurantDTO;
+import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;

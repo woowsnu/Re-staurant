@@ -33,13 +33,13 @@ public class User {
     @Column
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="user", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="user", cascade = CascadeType.ALL)
     private Set<Review> reviewList = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="followingUser",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="followingUser",cascade = CascadeType.ALL)
     private Set<Follow> followingList = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="followedUser",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="followedUser",cascade = CascadeType.ALL)
     private Set<Follow> followerList = new HashSet<>();
 
     @CreatedDate

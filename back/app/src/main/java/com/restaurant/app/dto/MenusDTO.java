@@ -1,4 +1,4 @@
-package com.restaurant.app.dto;
+package com.restaurant.app.DTO;
 
 
 import lombok.AllArgsConstructor;
