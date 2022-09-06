@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-import AuthContext from "../../store/auth-context";
 import styles from "./SignUp.module.css";
-import { useContext } from "react";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
 import colors from "../../styles/colors";
+import Welcome from "./Welcome";
 
-// const USERNAME_REGEX = /^[A-z0-9].{5,23}$/;
 const EMAIL_REGEX = /^[A-z0-9-_]+@[A-z0-9-_.].{1,23}$/;
 const PASSWORD_REGEX = /^.{8,}$/;
-const URL = "http://localhost:8080/join";
+const URL = "http://localhost:8080/user/join";
 
 const SignUp = () => {
-  const ctx = useContext(AuthContext);
-
-  const [username, setUsername] = useState("");
-  // const [validUsername, setValidUsername] = useState(false);
-  const [usernameFocus, setUsernameFocus] = useState(false);
+  const [nickname, setNickname] = useState("");
 
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
@@ -32,11 +25,8 @@ const SignUp = () => {
   const [validPasswordCheck, setValidPasswordCheck] = useState(false);
   const [passwordCheckFocus, setPasswordCheckFocus] = useState(false);
 
+  const [err, setErr] = useState("");
   const [signupsuccess, setSignupsuccess] = useState(false);
-
-  // useEffect(() => {
-  //   setValidUsername(USERNAME_REGEX.test(username));
-  // }, [username]);
 
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
@@ -50,9 +40,9 @@ const SignUp = () => {
     setValidPasswordCheck(password === passwordCheck);
   }, [password, passwordCheck]);
 
-  const usernameInputHandler = (e) => {
+  const nicknameInputHandler = (e) => {
     e.preventDefault();
-    setUsername(e.target.value);
+    setNickname(e.target.value);
   };
 
   const emailInputHandler = (e) => {
@@ -72,54 +62,47 @@ const SignUp = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    try {
-      const response = axios.post(
-        URL,
-        JSON.stringify({ username, email, password }),
-        {
-          headers: { "Content-Type": "application/json" },
+    axios
+      .post(URL, JSON.stringify({ nickname, email, password }), {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then(function (response) {
+        console.log(response);
+        setNickname("");
+        setEmail("");
+        setPassword("");
+        setPasswordCheck("");
+        setSignupsuccess(true);
+      })
+      .catch(function (err) {
+        console.log(err.response.status);
+        const errCode = err.response.status;
+        if (errCode === 400) {
+          setErr("이미 존재하는 계정입니다.");
         }
-      );
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    setPasswordCheck("");
-    setSignupsuccess(true);
+      });
   };
+  console.log(err);
 
   return signupsuccess ? (
-    <div>
-      회원가입 성공!
-      <a href="/login">로그인 하러가기</a>
-    </div>
+    <Welcome />
   ) : (
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.pagetitle}>회원가입</div>
-        <form>
-          <label htmlFor="username">닉네임</label>
+        <div className={err !== null ? styles.warning : styles.offscreen}>
+          {err}
+        </div>
+        <br />
+        <form className={styles.form} onSubmit={submitHandler}>
+          <label htmlFor="nickname">닉네임</label>
           <Input
             type="text"
-            id="username"
-            value={username}
-            onFocus={() => setUsernameFocus(true)}
-            onChange={usernameInputHandler}
+            id="nickname"
+            value={nickname}
+            style={{ width: "95%" }}
+            onChange={nicknameInputHandler}
           />
-          {/* <p
-            className={
-              !validUsername && usernameFocus
-                ? styles.warning
-                : styles.offscreen
-            }
-          >
-            아이디는 영문, 숫자 혼합하여 생성이 가능합니다. <br />
-            아이디는 최소 5글자 이상이 되어야합니다.
-          </p> */}
           <br />
           <br />
           <label htmlFor="email">이메일</label>
@@ -127,6 +110,7 @@ const SignUp = () => {
             type="text"
             id="email"
             value={email}
+            style={{ width: "95%" }}
             onFocus={() => setEmailFocus(true)}
             onChange={emailInputHandler}
           />
@@ -136,7 +120,8 @@ const SignUp = () => {
               !validEmail && emailFocus ? styles.warning : styles.offscreen
             }
           >
-            이메일 형식으로 입력해주세요<br/>        
+            이메일 형식으로 입력해주세요
+            <br />
             (예. name@domain.com)
           </p>
           <br />
@@ -145,6 +130,7 @@ const SignUp = () => {
             type="password"
             id="password"
             value={password}
+            style={{ width: "95%" }}
             onFocus={() => setPasswordFocus(true)}
             onChange={passwordInputHandler}
           />
@@ -164,6 +150,7 @@ const SignUp = () => {
             type="password"
             id="passwordCheck"
             value={passwordCheck}
+            style={{ width: "95%" }}
             onFocus={() => setPasswordCheckFocus(true)}
             onChange={passwordCheckInputHandler}
           />
@@ -179,20 +166,19 @@ const SignUp = () => {
           </p>
           <br />
           <div className={styles.buttoncontents}>
-          <Button
-            type="submit"
-            style={{ backgroundColor: `${colors.primary2}`, width: "100%" }}
-            onClick={submitHandler}
-          >
-            회원가입
-          </Button>
+            <Button
+              type="submit"
+              style={{ backgroundColor: `${colors.primary2}`, width: "100%" }}
+            >
+              회원가입
+            </Button>
           </div>
         </form>
         <br />
         <br />
         <div>
           이미 회원이신가요? <br />
-          <a href="/login">로그인 하러가기</a>
+          <a href="/login">로그인 하러가기 </a>
         </div>
       </div>
     </div>

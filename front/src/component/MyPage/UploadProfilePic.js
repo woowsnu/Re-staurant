@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./EditProfile.module.css";
+import styles from "./UploadProfilePic.module.css";
 import Button from "../UI/Button";
 import Uploader from "./Uploader";
 import axios from "../../api/axios";
@@ -7,7 +7,7 @@ import Modal from "../UI/Modal";
 import colors from "../../styles/colors"
 import Input from "../UI/Input";
 
-const EditProfile = (props) => {
+const UploadProfilePic = (props) => {
   const [nickname, setNickname] = useState("");
 
   const nicknameChangeHandler = (e) => {
@@ -23,16 +23,19 @@ const EditProfile = (props) => {
   const stateManage = () => {
     props.stateManage();
   }
+  console.log(props);
 
-  const token = localStorage.getItem("token")
-  const id = props.id;
-  const URL = "http://localhost:3500/user"
+  const token = localStorage.getItem("token");
+  const email = props.email;
+  const password = "passwordpassword";
+  const URL = "http://localhost:8080/user/auth/updateUserInfo"
   const saveNewProfileHandler = (e) => {
     e.preventDefault();
-    const profile = { id, name: nickname };
+    const profile = { email, password, nickname: nickname };
     axios
-      .patch(
-        `${URL}/${id}`,
+      .put(
+        URL,
+        // `${URL}/${id}`,
         JSON.stringify(profile),
         {
           headers: {
@@ -67,4 +70,4 @@ const EditProfile = (props) => {
   );
 };
 
-export default EditProfile;
+export default UploadProfilePic;
