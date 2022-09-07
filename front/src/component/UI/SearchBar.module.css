@@ -1,10 +1,29 @@
 .search {
-    width: 100%;
-    display: flex;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .searchbar {
-    margin: 0 auto;
-    width: 40rem;
-    padding: 0.8rem;
+  font-size: 1.2rem;
+  width: 40rem;
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  border: 0;
+}
+
+.searchbar:focus {
+    outline: 2px solid #51B059;
+  }
+
+.searchbtn {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  /* transform: translatey(-50%); */
 }

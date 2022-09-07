@@ -1,15 +1,34 @@
 import React from "react";
-import Header from "../component/Layout/Header";
-import Main from "../component/Layout/Main";
-import Footer from "../component/Layout/Footer";
+import Layout from '../component/Layout/Layout';
+import Header from '../component/Layout/Header';
+import Tag from '../component/UI/Tag';
+import PhotoCard from '../component/UI/PhotoCard';
 
 const HomePage = () => {
   return (
-    <div>
+    <Layout>
       <Header />
-      <Main />
-      <Footer />
-    </div>
+      <div>
+        <Tag />
+        <Tag />
+        <Tag />
+        <Tag />
+      </div>
+      <div>
+        <h3>맛 보장! 재방문 많은 맛집</h3>
+        <PhotoCard />
+        <PhotoCard />
+        <PhotoCard />
+        <PhotoCard />
+      </div>
+      <div>
+        <h3>맛 보장! 재방문 많은 맛집</h3>
+        <PhotoCard />
+        <PhotoCard />
+        <PhotoCard />
+        <PhotoCard />
+      </div>
+    </Layout>
   );
 };
 
