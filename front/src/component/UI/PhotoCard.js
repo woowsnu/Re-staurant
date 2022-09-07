@@ -9,17 +9,18 @@ const PhotoCard = (props) => {
   const checktest = () => {
     setCheck(!check);
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.imgwrapper}>
-        <Link to={`/detail/${props.resId}`}>
+        <Link to={`/detail/${props.id}`}>
           <p>"가성비가 좋고 분위기가 좋았어요"</p>
           <div className={styles.bggradient}></div>
         </Link>
       </div>
       <div className={styles.infowrapper}>
         <div className={styles.resInfo}>
-          <Link to={`/detail/${props.resId}`}>
+          <Link to={`/detail/${props.id}`}>
             <h4>식당 이름</h4>
             <h5>재방문 희망 72%</h5>
             <p>한식 / 여의도</p>

@@ -1,6 +1,7 @@
 .container {
   width: 200px;
   height: 300px;
+  object-fit: cover;
   display: flex;
   flex-direction: column;
   text-decoration: none;
@@ -14,15 +15,15 @@ a:link,
   color: inherit;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   display: none;
 }
 
 .imgwrapper {
   position: relative;
   padding: 0.7rem;
-  height: 220px;
-  background-image: url("https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20180124_9%2F1516772458748vjMWa_JPEG%2FQ5SNtPm-CjeOJtPhGeSXlMYT.jpg");
+  height: 200px;
+  background-image: url('https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20180124_9%2F1516772458748vjMWa_JPEG%2FQ5SNtPm-CjeOJtPhGeSXlMYT.jpg');
   color: #fff;
   border-radius: 8px;
   display: flex;
@@ -30,11 +31,11 @@ input[type="checkbox"] {
 }
 
 .infowrapper {
-    display: flex;
-    padding: 0.4rem;
-    justify-content: space-between;
-    height: 80px;
-  }
+  display: flex;
+  padding: 0.4rem;
+  justify-content: space-between;
+  height: 80px;
+}
 
 .bookmarkImg {
   cursor: pointer;

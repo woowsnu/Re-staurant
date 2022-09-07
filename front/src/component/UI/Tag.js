@@ -5,9 +5,9 @@ import styles from './Tag.module.css';
 const Tag = (props) => {
   return (
     <div className={styles.container}>
-      {/* <Link to={props.children}> */}
+      <Link to={`/search/${props.name}`}>
         <button className={styles.btn}>{props.name}</button>
-      {/* </Link> */}
+      </Link>
     </div>
   );
 };

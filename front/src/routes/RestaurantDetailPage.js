@@ -5,12 +5,15 @@ import RestaurantMenu from "../component/Restaurant/RestaurantMenu";
 import RestaurantReview from "../component/Restaurant/RestaurantReview";
 import RestaurantTab from "../component/Restaurant/RestaurantTab";
 import axios from "axios";
+import { useParams } from 'react-router-dom';
 
 const RestaurantDetailPage = () => {
   const [restaurant, setRestaurant] = useState([]);
   const [simpleAddress, setSimpleAddress] = useState([]);
   const [menus, setMenus] = useState([]);
   const [reviews, setReviews] = useState([]);
+  // 추후 하나의 식당만 검색 시 사용
+  const id = useParams().id;
 
   useEffect(() => {
     const fetchRestaurant = async () => {
