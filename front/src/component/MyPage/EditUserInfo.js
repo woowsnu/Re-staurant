@@ -1,62 +1,66 @@
-import React, { useState } from "react";
-import Button from "../UI/Button";
+import React, { useState, useEffect } from "react";
 import axios from "../../api/axios";
-import colors from "../../styles/colors"
-import Input from "../UI/Input";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import styles from "./EditUserInfo.module.css";
+import { MdArrowForwardIos } from "react-icons/md";
 
 const EditUserInfo = (props) => {
-  const [nickname, setNickname] = useState("");
-  const [password, setPassword] = useState("");
-
+  const [user, setUser] = useState("");
   const navigate = useNavigate();
-
-  const nicknameChangeHandler = (e) => {
-    e.preventDefault();
-    console.log(e.target.value);
-    setNickname(e.target.value);
-  };
 
   const exitEditPage = () => {
     navigate(-1);
   };
 
   const token = localStorage.getItem("token");
-  const URL = "http://localhost:8080/user/auth/updateUserInfo"
-  const saveNewProfileHandler = (e) => {
-    e.preventDefault();
-    const profile = { nickname: nickname };
+  useEffect(() => {
     axios
-      .put(
-        URL,
-        JSON.stringify(profile),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          }
-        },
-      ).then(function (response) {
-        setNickname("")
+      .get("http://localhost:8080/user/auth/userInfo", {
+        headers: { "Content-Type": "application/json", Authorization: token },
+      })
+      .then(function (response) {
+        const data = response.data;
+        console.log(data);
+        setUser(data);
       })
       .catch(function (error) {
-        console.log(error);
+        console.log(error + "에러 ㅠㅠ");
       });
-  }
+  }, [token]);
 
   return (
-    <div>
-      <br/><br/>
-      <label htmlFor="nickname">닉네임</label>
-      <Input
-        id="nickname"
-        type="text"
-        value={nickname}
-        onChange={nicknameChangeHandler}
-      />
-      <br/><br/><br/>
-      <Button style={{backgroundColor : `${colors.primary2}`}} type="submit" onClick={saveNewProfileHandler}>저장하기</Button>
-      <Button style={{backgroundColor : `${colors.primary2}`}} onClick={exitEditPage}>뒤로 가기</Button>
+    <div className={styles.wrapper}>
+      <div className={styles.tabs}>
+        <h1>내 정보 수정</h1>
+        <div
+          className={styles.nicknameEditTab}
+          onClick={() => {
+            navigate("/editnickname", {
+              state: {
+                email: user.email,
+                password: user.password,
+                nickname: user.nickname,
+              },
+            });
+          }}
+        >
+          <button>닉네임 변경</button>
+          <MdArrowForwardIos />
+        </div>
+        <div
+          className={styles.passwordEditTab}
+          onClick={() => {
+            navigate("/editpassword");
+          }}
+        >
+          <button>비밀번호 변경</button>
+          <MdArrowForwardIos />
+        </div>
+        <div className={styles.withdrawTab}>
+          <button>회원탈퇴</button>
+          <MdArrowForwardIos />
+        </div>
+      </div>
     </div>
   );
 };
