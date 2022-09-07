@@ -16,15 +16,15 @@ const HomePage = () => {
           return <Tag key={i} name={item} />;
         })}
       </div>
-      <div>
-        <h3>맛 보장! 재방문 많은 맛집</h3>
+      <h3>맛 보장! 재방문 많은 맛집</h3>
+      <div className={styles.section}>
         <PhotoCard />
         <PhotoCard />
         <PhotoCard />
         <PhotoCard />
       </div>
-      <div>
-        <h3>맛 보장! 재방문 많은 맛집</h3>
+      <h3>친구가 다녀 온 그 곳!</h3>
+      <div className={styles.section}>
         <PhotoCard />
         <PhotoCard />
         <PhotoCard />
