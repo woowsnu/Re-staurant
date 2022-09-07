@@ -69,15 +69,15 @@ public class UserController {
         }
     }
 
-//     Update User_Info : 유저 상세정보 수정 [개인정보 수정]
-    @PutMapping("/auth/updateUserInfo")
-    public ResponseEntity<?> updateUserInfo(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO updateUserDTO) {
+//     Update User_Info : 유저 닉네임 수정
+    @PutMapping("/auth/update/nickname")
+    public ResponseEntity<?> updateUserNickname(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO updateUserDTO) {
 
         System.out.println("userController.UpdateUserInfo() -> 로그인 중인 사용자: " + authedUser.getEmail());
 
         try {
-            // 로그인된 사용자의 userIndex와 post로 전송된 userIndex가 동일할 경우에만 개인정보 변경 진행.
-            User updatedUser = userService.update(authedUser,updateUserDTO, bCryptPasswordEncoder);
+            // 로그인된 사용자의 userIndex와 post로 전송된 userIndex가 동일할 경우에만 닉네임 변경 진행.
+            User updatedUser = userService.updateNickname(authedUser,updateUserDTO);
 
             UserDTO userResponseDTO = UserDTO.builder()
                     .userIndex(updatedUser.getUserIndex())
@@ -94,7 +94,32 @@ public class UserController {
         }
     }
 
-//     Delete User_Info : 유저 삭제 [탈퇴기능]
+    //     Update User_Info : 유저 닉네임 수정
+    @PutMapping("/auth/update/password")
+    public ResponseEntity<?> updateUserInfo(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO updateUserDTO) {
+
+        System.out.println("userController.UpdateUserInfo() -> 로그인 중인 사용자: " + authedUser.getEmail());
+
+        try {
+            // 로그인된 사용자의 userIndex와 post로 전송된 userIndex가 동일할 경우에만 개인정보 변경 진행.
+            User updatedUser = userService.updatePassword(authedUser,updateUserDTO, bCryptPasswordEncoder);
+
+            UserDTO userResponseDTO = UserDTO.builder()
+                    .userIndex(updatedUser.getUserIndex())
+                    .email(updatedUser.getEmail())
+                    .roles(updatedUser.getRoles())
+                    .reviewList(updatedUser.reviewListToString())
+                    .build();
+
+            return ResponseEntity.ok().body(userResponseDTO);
+
+        } catch (Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
+    //     Delete User_Info : 유저 삭제 [탈퇴기능]
     @DeleteMapping("/auth/deleteUserInfo")
     public ResponseEntity<?> deleteUserInfo(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO deleteUserDTO) {
 
@@ -102,9 +127,11 @@ public class UserController {
 
         try{
 
-            Long deletedUserIndex = userService.delete(authedUser,deleteUserDTO);
+            userService.delete(authedUser,deleteUserDTO);
 
-            return ResponseEntity.ok().body("reviewIndex : " + deletedUserIndex + "has deleted");
+            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
+
+            return ResponseEntity.ok().body(responseDTO);
         }
         catch(Exception e) {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
