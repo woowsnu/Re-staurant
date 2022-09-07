@@ -28,6 +28,7 @@
 .buttoncontents {
     display: flex;
     justify-content: center;
+    padding-bottom: 2rem;
 }
 
 .warning {
@@ -37,13 +38,19 @@
     padding: 5px 0px 0px 5px
 }
 
-/* .form {
-    display: flex;
-    flex-direction: column;
-    width: none;
-    align-items: center;
-} */
+.toLogin {
+    text-align: center;
+}
 
-.logininfo {
-    padding: 30px 0px 0px 10px   
+.toLogin a {
+    text-decoration: underline;
+}
+
+.loginInfo {
+    padding: 2rem 0 0 1rem;
+    text-align: center;
+}
+
+.loginInfo a {
+    text-decoration: underline;
 }

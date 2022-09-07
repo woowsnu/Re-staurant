@@ -1,35 +1,27 @@
 import React from "react";
 import styles from "./MyEatketList.module.css";
-import closeimage from "../../images/close.png";
+import ListCard from "../UI/ListCard";
 
 const MyEatketList = (props) => {
-
   return (
-    <>
-      <div className={styles.flexcontainer}>
-        <ul className={styles.ul}>
-          {props.restaurantdata.map((data) => (
-            <li className={styles.list} key={data.id}>
-              <img className={styles.closebutton} src={closeimage} />
-              <span className={styles.listcontent}>
-                <img className={styles.img} src={data.imgUrl} />
-                {data.name}
-                <br />
-                {data.category} /&nbsp;
-                {data.address.split(" ").splice(0,2).join(" ")}
-                <br />
-                {data.address}
-                <br />
-                {data.phone}
-                <br />
-                {data.sns}
-                <br />
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
+    <div>
+      <div className={styles.listCount}>저장한 먹킷리스트가 24개 있어요</div>
+      <ul className={styles.ul}>
+        {props.restaurantdata.map((data) => (
+          <li className={styles.list} key={data.id}>
+            <ListCard
+              imgLink={data.imgUrl}
+              name={data.name}
+              category={data.category}
+              location={data.address.split(" ").splice(0, 2).join(" ")}
+              address={data.address}
+              phone={data.phone}
+              sns={data.sns}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
