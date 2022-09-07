@@ -1,20 +1,6 @@
 .footer {
-    height: 100px;
-    margin-top: auto;
-    background-color: #888888;
-}
-
-.contents {
-    width: 96%;
-    max-width: 940px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-}
-
-.title {
-    font-weight: 600;
-    font-size: 20px;
+  height: 120px;
+  margin-top: auto;
+  color: #f6f6f6;
+  background-color: #888888;
 }

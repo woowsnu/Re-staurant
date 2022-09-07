@@ -1,0 +1,10 @@
+.container {
+    padding: 1rem 1.2rem;
+}
+
+.btn {
+    width: 100px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 0;
+}
