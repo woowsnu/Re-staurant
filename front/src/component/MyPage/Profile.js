@@ -1,10 +1,9 @@
 import React, { useState, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import basicimage from "../../images/user.png";
 import styles from "./Profile.module.css";
 import UploadProfilePic from "./UploadProfilePic";
 import AuthContext from "../../store/auth-context";
-import EditUserInfo from "./EditUserInfo";
 import Button from "../UI/Button";
 
 const Profile = (props) => {
@@ -12,7 +11,7 @@ const Profile = (props) => {
   const navigate = useNavigate();
 
   const [profileimg, setProfileimg] = useState(
-    <img src={basicimage} width="100px" />
+    <img src={basicimage} width="130px" />
   );
   const [showModal, setShowModal] = useState(false);
   const [profileEdit, setProfileEdit] = useState(false);
@@ -36,18 +35,21 @@ const Profile = (props) => {
   };
 
   return (
-    <>
-      <div>
-        <h2>마이 페이지</h2>
+    <div>
+      <div className={styles.pageTop}>
+        <span className={styles.pageTitle}>마이 페이지</span>
+        <button className={styles.logoutbutton} onClick={logout}>
+          로그아웃
+        </button>
       </div>
-      <div className={styles.logoutbuttonsection}>
-      <button className={styles.logoutbutton} onClick={logout}>로그아웃</button>
-      </div>
-      <div className={styles.profiles}>
+      <div className={styles.profileImage}>
         {profileimg}
-        <div className={styles.userinfo}>
-          {props.user.nickname} <br />({props.user.email})
-          <div>팔로워 51 &nbsp; &nbsp; 팔로잉 244</div>
+        <div className={styles.userInfo}>
+          <div className={styles.nickname}>{props.user.nickname}</div>(
+          {props.user.email})
+          <div className={styles.followInfo}>
+            팔로워 51 &nbsp; &nbsp; 팔로잉 244
+          </div>
         </div>
       </div>
       <div className={styles.mypagebuttons}>
@@ -55,7 +57,6 @@ const Profile = (props) => {
         <Button onClick={editUserInfo}>회원정보 수정</Button>
       </div>
       <div className={styles.grayline}>&nbsp;</div>
-
       {showModal ? (
         <UploadProfilePic
           id={props.user.userIndex}
@@ -72,7 +73,7 @@ const Profile = (props) => {
       ) : (
         ""
       )}
-    </>
+    </div>
   );
 };
 

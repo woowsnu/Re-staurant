@@ -88,12 +88,12 @@ const LogIn = (props) => {
           </Button>
           </div>
         </form>
-        <div className={styles.logininfo}>
-          아직 회원이 아니신가요? <br />
+        <div className={styles.loginInfo}>
+          아직 회원이 아니신가요? &nbsp;&nbsp;
           <a href="/members">회원가입 하러가기</a>
           <br />
           <br />
-          이메일/비밀번호를 잃어버리셨나요? <br />
+          이메일/비밀번호를 잃어버리셨나요? &nbsp;&nbsp;
           <a href="/find">계정정보 찾기</a>
         </div>
       </div>

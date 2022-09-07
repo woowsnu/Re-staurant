@@ -20,6 +20,7 @@ export const AuthContextProvider = (props) => {
 
   const logoutHandler = () => {
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('token');
     setIsLoggedIn(false);
   };
 
