@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import MyEatketList from "../component/MyPage/MyEatketList";
 import MyReviews from "../component/MyPage/MyReviews";
 import styles from "./MyPage.module.css";
 import axios from "../api/axios";
 import Profile from "../component/MyPage/Profile";
+import AuthContext from "../store/auth-context";
+import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
   const [tabselect, setTabselect] = useState(false);
@@ -13,12 +15,14 @@ const MyPage = () => {
   const [datafetch, setDatafetch] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
 
+  const ctx = useContext(AuthContext);
   const showReviewsHandler = () => {
     setTabselect();
   };
   const showEatketListHandler = () => {
     setTabselect(true);
   };
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -43,7 +47,7 @@ const MyPage = () => {
       .catch(function (error) {
         console.log(error + "에러 ㅠㅠ");
       });
-  }, [isUpdated]);
+  }, []);
 
   const token = localStorage.getItem("token");
   useEffect(() => {
@@ -58,7 +62,11 @@ const MyPage = () => {
         setDatafetch(true);
       })
       .catch(function (error) {
+        ctx.onLogout();
         console.log(error + "에러 ㅠㅠ");
+        console.log(ctx.isLoggedIn);
+        alert("로그인 세션이 만료되었습니다.")
+        navigate("/login")
       });
   }, [isUpdated, token]);
 
