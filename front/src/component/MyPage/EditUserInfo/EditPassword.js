@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "./EditPassword.module.css";
 import Input from "../../UI/Input";
 import axios from "../../../api/axios";
-import { RiErrorWarningFill } from "react-icons/ri";
 import Button from "../../UI/Button";
 
 const EditPassword = (props) => {
@@ -51,10 +50,10 @@ const EditPassword = (props) => {
       });
     // }
     if (previousPassword !== props.password) {
-      setWarning(<RiErrorWarningFill /> + "현재 비밀번호를 확인해주세요");
+      setWarning("현재 비밀번호를 확인해주세요");
     }
     if (newPassword !== newPasswordCheck) {
-      setWarning(<RiErrorWarningFill /> + "비밀번호가 일치하지 않습니다");
+      setWarning("비밀번호가 일치하지 않습니다");
     }
   };
 

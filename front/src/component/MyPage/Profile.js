@@ -11,7 +11,7 @@ const Profile = (props) => {
   const ctx = useContext(AuthContext);
   const navigate = useNavigate();
   const [profileimg, setProfileimg] = useState(
-    <img src={basicimage} width="130px" />
+    <img alt="img" src={basicimage} width="130px" />
   );
   const [editProfilePic, setEditProfilePic] = useState(false);
   const [editProfileInfo, setEditProfileInfo] = useState(false);
@@ -53,7 +53,7 @@ const Profile = (props) => {
         </div>
       </div>
       <div className={styles.mypagebuttons}>
-        <Button onClick={profilePicUplaod}>사진 등록</Button>&nbsp;&nbsp;
+        <Button onClick={profilePicUplaod} photoUpdate={()=>setProfileimg()}>사진 등록</Button>&nbsp;&nbsp;
         <Button onClick={editUserInfo}>회원정보 수정</Button>
       </div>
       <div className={styles.grayline}>&nbsp;</div>

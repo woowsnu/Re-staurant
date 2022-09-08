@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import styles from "./EditUserInfo.module.css";
 import { MdArrowForwardIos } from "react-icons/md";
 import Modal from "../../UI/Modal";

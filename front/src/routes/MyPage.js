@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
   const [tabselect, setTabselect] = useState(false);
-  const [tempUser, setTempUser] = useState("");
   const [user, setUser] = useState("");
-  const [restaurant, setRestaurant] = useState("");
+  // const [tempUser, setTempUser] = useState("");
+  // const [restaurant, setRestaurant] = useState("");
   const [datafetch, setDatafetch] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
 
@@ -24,17 +24,17 @@ const MyPage = () => {
   };
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3500/restaurant")
-      .then((response) => {
-        const data = response.data;
-        setRestaurant(data);
-      })
-      .catch((error) => {
-        console.log(error + "에러 ㅠㅠ");
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3500/restaurant")
+  //     .then((response) => {
+  //       const data = response.data;
+  //       setRestaurant(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error + "에러 ㅠㅠ");
+  //     });
+  // }, []);
 
   // useEffect(() => {
   //   axios
@@ -66,7 +66,7 @@ const MyPage = () => {
         alert("로그인 세션이 만료되었습니다.")
         navigate("/login")
       });
-  }, [isUpdated, token]);
+  }, [isUpdated, token, ctx, navigate]);
 
   return (
     datafetch && (
@@ -94,9 +94,9 @@ const MyPage = () => {
         </nav>
         <div>
           {tabselect ? (
-            <MyEatketList restaurantdata={restaurant} />
+            <MyEatketList />
           ) : (
-            <MyReviews userdata={tempUser} />
+            <MyReviews />
           )}
         </div>
       </div>
