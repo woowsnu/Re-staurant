@@ -2,26 +2,26 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import basicimage from "../../images/user.png";
 import styles from "./Profile.module.css";
-import UploadProfilePic from "./UploadProfilePic";
+import UploadProfilePic from "./EditUserInfo/UploadProfilePic";
 import AuthContext from "../../store/auth-context";
 import Button from "../UI/Button";
+import EditUserInfo from "./EditUserInfo/EditUserInfo";
 
 const Profile = (props) => {
   const ctx = useContext(AuthContext);
   const navigate = useNavigate();
-
   const [profileimg, setProfileimg] = useState(
     <img src={basicimage} width="130px" />
   );
-  const [showModal, setShowModal] = useState(false);
-  const [profileEdit, setProfileEdit] = useState(false);
+  const [editProfilePic, setEditProfilePic] = useState(false);
+  const [editProfileInfo, setEditProfileInfo] = useState(false);
 
   const profilePicUplaod = () => {
-    setShowModal(true);
+    setEditProfilePic(true);
   };
 
   const editUserInfo = () => {
-    navigate("/editmyprofile");
+    setEditProfileInfo(true);
   };
 
   const logout = () => {
@@ -57,14 +57,29 @@ const Profile = (props) => {
         <Button onClick={editUserInfo}>회원정보 수정</Button>
       </div>
       <div className={styles.grayline}>&nbsp;</div>
-      {showModal ? (
+      {editProfilePic ? (
         <UploadProfilePic
           id={props.user.userIndex}
           email={props.user.email}
           password={props.user.password}
           nickname={props.user.nickname}
           closeModal={() => {
-            setShowModal(false);
+            setEditProfilePic(false);
+          }}
+          stateManage={() => {
+            stateManage();
+          }}
+        />
+      ) : (
+        ""
+      )}
+      {editProfileInfo ? (
+        <EditUserInfo
+          email={props.user.email}
+          password={props.user.password}
+          nickname={props.user.nickname}
+          closeModal={() => {
+            setEditProfileInfo(false);
           }}
           stateManage={() => {
             stateManage();

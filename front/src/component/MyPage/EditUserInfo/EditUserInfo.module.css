@@ -4,15 +4,17 @@
     justify-content: center;
 }
 
-.tabs {
-    width: 400px;
-    margin-top: 3rem;
+.hideTabs {
+    position: absolute;
+    display: none;
+    visibility: hidden;
 }
 
 .tabs h1 {
     font-size: 1.5rem;
     font-weight: 600;
     padding: 1rem 1rem 1rem 1rem;
+    display: flex;
 }
 
 .nicknameEditTab {
@@ -22,13 +24,6 @@
     cursor: pointer;
 }
 
-.nicknameEditTab button {
-    border: none;
-    font: inherit;
-    padding-right: 260px;
-    background-color: inherit;
-}
-
 .passwordEditTab {
     padding: 1rem 1rem 1rem 1rem;
     display: flex;
@@ -36,23 +31,10 @@
     cursor: pointer;
 }
 
-.passwordEditTab button {
-    border: none;
-    font: inherit;
-    padding-right: 250px;
-    background-color: inherit;
-}
 
 .withdrawTab {
     padding: 1rem 1rem 1rem 1rem;
     display: flex;
     justify-content: space-between;
     cursor: pointer;
-}
-
-.withdrawTab button {
-    border: none;
-    font: inherit;
-    padding-right: 260px;
-    background-color: inherit;
 }

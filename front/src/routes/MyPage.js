@@ -27,27 +27,27 @@ const MyPage = () => {
   useEffect(() => {
     axios
       .get("http://localhost:3500/restaurant")
-      .then(function (response) {
+      .then((response) => {
         const data = response.data;
         setRestaurant(data);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error + "에러 ㅠㅠ");
       });
   }, []);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3500/user")
-      .then(function (response) {
-        const data = response.data[0];
-        setTempUser(data);
-        setDatafetch(true);
-      })
-      .catch(function (error) {
-        console.log(error + "에러 ㅠㅠ");
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3500/user")
+  //     .then(function (response) {
+  //       const data = response.data[0];
+  //       setTempUser(data);
+  //       setDatafetch(true);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error + "에러 ㅠㅠ");
+  //     });
+  // }, []);
 
   const token = localStorage.getItem("token");
   useEffect(() => {
@@ -55,16 +55,14 @@ const MyPage = () => {
       .get("http://localhost:8080/user/auth/userInfo", {
         headers: { "Content-Type": "application/json", Authorization: token },
       })
-      .then(function (response) {
+      .then((response) => {
         const data = response.data;
         console.log(data);
         setUser(data);
         setDatafetch(true);
       })
-      .catch(function (error) {
+      .catch((error) => {
         ctx.onLogout();
-        console.log(error + "에러 ㅠㅠ");
-        console.log(ctx.isLoggedIn);
         alert("로그인 세션이 만료되었습니다.")
         navigate("/login")
       });
