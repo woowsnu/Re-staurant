@@ -12,6 +12,12 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.10);
 }
 
+@media screen and (max-width: 480px) {
+  .App {
+    margin: 0 auto;
+  }
+}
+
 div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,

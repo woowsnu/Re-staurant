@@ -4,21 +4,6 @@
     padding-bottom: 1rem;
 }
 
-.offscreen {
-    position: absolute;
-    display: none;
-    visibility: hidden;
-}
-
-.warning {
-    display: flex;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #EC695B;
-    padding-top: 0.7rem;
-    padding-bottom: 1rem;
-}
-
 .wrapper {
     padding : 1rem 0.5rem 1rem 1rem;
 }
@@ -33,4 +18,19 @@
 
 .buttonArea button {
     width: 47%;
+}
+
+.offscreen {
+    position: absolute;
+    display: none;
+    visibility: hidden;
+}
+
+.warning {
+    display: flex;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #EC695B;
+    padding-top: 0.7rem;
+    padding-bottom: 1rem;
 }
