@@ -18,30 +18,30 @@ const MyReviews = (props) => {
     setEditedReview(e.target.value);
   };
 
-  const token = localStorage.getItem("token");
-  const id = props.userdata.review[0].id;
-  const URL = "http://localhost:3500/user";
-  const saveEditedReview = () => {
-    const newReview = { id, review: editedReview };
-    axios
-      .patch(`${URL}/${id}`, JSON.stringify(newReview), {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      })
-      .then(function (response) {
-        setEditedReview("");
-        // stateManage();
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  // const token = localStorage.getItem("token");
+  // const id = props.userdata.review[0].id;
+  // const URL = "http://localhost:3500/user";
+  // const saveEditedReview = () => {
+  //   const newReview = { id, review: editedReview };
+  //   axios
+  //     .patch(`${URL}/${id}`, JSON.stringify(newReview), {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: token,
+  //       },
+  //     })
+  //     .then(function (response) {
+  //       setEditedReview("");
+  //       // stateManage();
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
   
   return (
     <>
-      <h3>작성한 리뷰가 {props.userdata.review.length}개 있어요</h3>
+      {/* <h3>작성한 리뷰가 {props.userdata.review.length}개 있어요</h3>
 
       <div className={styles.flexcontainer}>
         <ul className={styles.reviewwrap}>
@@ -75,7 +75,7 @@ const MyReviews = (props) => {
             </span>
           </li>
         </ul>
-      </div>
+      </div> */}
     </>
   );
 };
