@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restaurant.app.DTO.UserDTO;
 import com.restaurant.app.config.auth.PrincipalDetails;
+import com.restaurant.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +25,8 @@ import java.util.Date;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+
+    private final UserRepository userRepository;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
@@ -66,16 +69,30 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
 
-        String jwtToken = JWT.create()
+        String accessToken = JWT.create()
                 .withSubject(principalDetails.getUser().getEmail())
-                .withExpiresAt(new Date(System.currentTimeMillis() + (60000 * 10)))
+                .withExpiresAt(new Date(System.currentTimeMillis() + (60000 * 1)))
                 .withClaim("userIndex",principalDetails.getUser().getUserIndex())
                 .withClaim("email",principalDetails.getUser().getEmail())
                 .sign(Algorithm.HMAC512("gun_secret"));
 
+        String refreshToken = JWT.create()
+                .withSubject(principalDetails.getUser().getEmail())
+                .withExpiresAt(new Date(System.currentTimeMillis() + (60000 * 300)))
+                .withClaim("userIndex",principalDetails.getUser().getUserIndex())
+                .withClaim("email",principalDetails.getUser().getEmail())
+                .sign(Algorithm.HMAC512("gun_secret"));
+
+        principalDetails.getUser().setAccessToken(accessToken);
+        principalDetails.getUser().setRefreshToken(refreshToken);
+
+        userRepository.save(principalDetails.getUser());
+
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("{\"jwtToken\"" + ":" + "\"Bearer " + jwtToken + "\"" +"}");
+        response.getWriter().write("{\"jwtToken\"" + ":" + "\"Bearer " + accessToken + "\""
+               + ",\"refreshToken\"" + ":" + "\"Bearer " + refreshToken + "\"" +"}");
+
 
     }
 
@@ -87,6 +104,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         logger.debug("failed authentication while attempting to access");
 
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-                "Authentication Failed");
+                "로그인에 실패했습니다.");
     }
 }
