@@ -32,6 +32,13 @@ public class User {
     @Column
     private String password;
 
+    @Column
+    private String accessToken;
+
+    @Column
+    private String refreshToken;
+
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy="user", cascade = CascadeType.ALL)
     private Set<Review> reviewList = new HashSet<>();
 
