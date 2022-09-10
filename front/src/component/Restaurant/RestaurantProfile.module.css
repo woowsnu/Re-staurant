@@ -1,21 +1,30 @@
 .container {
-    max-width: 1080px;
-    background: #d9d9db;
     margin: 0 auto;
     display: flex;
-    padding: 1rem;
+    padding: 2rem;
   }
   
   .resImage {
-    width: 20rem;
-    height: 20rem;
+    width: 360px;
+    height: 360px;
+    object-fit: cover;
+    
   }
   
   .wrap {
-    margin: 0 2rem;
+    padding-left: 2rem;
   }
   
   .profileWrap {
     display: flex;
     justify-content: space-between;
+    font-size: 16px;
+    color: #888888;
+  }
+
+  .restaurantName {
+    font-size: 28px;
+    font-weight: 600;
+    color: #51B059;
+    padding-top: 8px;
   }

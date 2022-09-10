@@ -4,9 +4,6 @@ import styles from "./ChartBar.module.css";
 const ChartBar = (props) => {
   const reviewCount = props.reviews.length;
   const reviewRevisit = props.reviews.filter((el) => el.revisit === 1).length;
-
-  console.log(reviewCount);
-  console.log(reviewRevisit);
   
   let barFillWidth = "0%";
 

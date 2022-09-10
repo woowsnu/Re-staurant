@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./RestaurantTab.module.css";
 
-const RestaurantTab = (props) => {
+const RestaurantTab = () => {
   return (
     <div className={styles.wrap}>
       <ul className={styles.tabs}>
@@ -12,7 +12,8 @@ const RestaurantTab = (props) => {
           <a href="#res-menu">메뉴정보</a>
         </li>
         <li>
-          <a href="#res-reviews">리뷰 ({props.reviewCount})</a>
+          {/* <a href="#res-reviews">리뷰 ({props.reviewCount})</a> */}
+          <a href="#res-reviews">리뷰</a>
         </li>
       </ul>
     </div>

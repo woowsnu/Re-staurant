@@ -6,7 +6,8 @@ import PhotoCard from '../component/UI/PhotoCard';
 import styles from './HomePage.module.css';
 
 const TAG = ['삼겹살', '우동', '카레', '까눌레', '중식'];
-const MANY_REVISIT = [1, 2, 3, 4];
+const MANY_REVISIT = [755216020, 694411058, 69398098, 612749116];
+
 const FOLLOW_REVISIT = [5, 6, 7, 8];
 
 const HomePage = () => {

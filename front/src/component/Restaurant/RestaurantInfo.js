@@ -3,12 +3,12 @@ import styles from "./RestaurantInfo.module.css";
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from "react-naver-maps";
 
 const RestaurantInfo = (props) => {
-  const position = { lat: props.restaurant.latitude, lng: props.restaurant.longitude };
+  const position = { lat: props.restaurant.x, lng: props.restaurant.y };
   return (
     <div id="res-info" className={styles.container}>
       <div>
         <h3>영업시간</h3>
-        <p>{props.restaurant.bizhourInfo}</p>
+        <p>{props.restaurant.businessHourInfo}</p>
       </div>
       <div>
         <h3>편의시설</h3>
@@ -20,12 +20,13 @@ const RestaurantInfo = (props) => {
       </div>
       <div>
         <h3>전화번호</h3>
-        <p>{props.restaurant.phone}</p>
+        <p>{props.restaurant.tellNumber}</p>
       </div>
-      <div>
+      {props.restaurant.snsUrl && (<div>
         <h3>SNS</h3>
-        <p>{props.restaurant.sns}</p>
-      </div>
+        <p>{props.restaurant.snsUrl}</p>
+      </div>)}
+      
       <div>
         <h3>위치정보</h3>
         <p>{props.restaurant.fullRoadAddress}</p>

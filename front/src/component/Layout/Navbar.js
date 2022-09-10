@@ -10,15 +10,17 @@ const Navbar = () => {
   return (
     <div className={styles.container}>
       <div>
-        <img src='#' alt='logo' />
+        <Link to='/'>
+          <img src={require('../../assets/images/logo.png')} alt='logo' />
+        </Link>
       </div>
       <div>
         {loginStatus ? (
-          <Link to='/'>
+          <Link to='/mypage'>
             <button className={styles.navbtn}>마이페이지</button>
           </Link>
         ) : (
-          <Link to='/'>
+          <Link to='/login'>
             <button className={styles.navbtn}>회원가입/로그인</button>
           </Link>
         )}
