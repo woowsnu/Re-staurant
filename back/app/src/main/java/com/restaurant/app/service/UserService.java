@@ -35,37 +35,17 @@ public class UserService {
     // Update UserNickname
     public User updateNickname(User authedUser, UserDTO updateUserDTO) {
 
-         User updatedUser = userRepository.save(User.builder()
-                .userIndex(authedUser.getUserIndex()) // userIndex는 변경불가.
-                .email(authedUser.getEmail()) // email도 변경불가.
-                .nickname(updateUserDTO.getNickname()) // 닉네임 변경
-                .password(authedUser.getPassword()) // password 변경 불가.
-                .roles("ROLE_USER")
-                .reviewList(authedUser.getReviewList())
-                .followerList(authedUser.getFollowerList())
-                .followingList(authedUser.getFollowingList())
-                 .createDate(authedUser.getCreateDate())
-                .build());
+         authedUser.setNickname(updateUserDTO.getNickname());
 
-        return updatedUser;
+        return userRepository.save(authedUser);
     }
 
     // Update UserPassword
     public User updatePassword(User authedUser, UserDTO updateUserDTO,BCryptPasswordEncoder bCryptPasswordEncoder) {
 
-        User updatedUser = userRepository.save(User.builder()
-                .userIndex(authedUser.getUserIndex()) // userIndex는 변경불가.
-                .email(authedUser.getEmail()) // email도 변경불가.
-                .nickname(authedUser.getNickname())
-                .password(bCryptPasswordEncoder.encode(updateUserDTO.getPassword())) // password 변경.
-                .roles("ROLE_USER")
-                .reviewList(authedUser.getReviewList())
-                .followerList(authedUser.getFollowerList())
-                .followingList(authedUser.getFollowingList())
-                .createDate(authedUser.getCreateDate())
-                .build());
+        authedUser.setPassword(bCryptPasswordEncoder.encode(updateUserDTO.getPassword()));
 
-        return updatedUser;
+        return userRepository.save(authedUser);
     }
 
     // Delete UserInfo

@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .usernameParameter("email").disable()
                 .httpBasic().disable()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager())) // JwtFilter를 직접 등록해줌.
+                .addFilter(new JwtAuthenticationFilter(authenticationManager(),userRepository)) // JwtFilter를 직접 등록해줌.
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository)) // JwtFilter를 직접 등록해줌.
                 .authorizeRequests()
                 .antMatchers("/auth/**").authenticated()

@@ -3,7 +3,6 @@ import axios from "../../api/axios";
 import styles from "./SignUp.module.css";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
-import colors from "../../styles/colors";
 import Welcome from "./Welcome";
 
 const EMAIL_REGEX = /^[A-z0-9-_]+@[A-z0-9-_.].{1,23}$/;
@@ -165,10 +164,9 @@ const SignUp = () => {
             비밀번호가 일치하지 않습니다.
           </p>
           <br />
-          <div className={styles.buttoncontents}>
+          <div className={styles.buttonContents}>
             <Button
               type="submit"
-              style={{ backgroundColor: `${colors.primary2}`, width: "100%" }}
             >
               회원가입
             </Button>

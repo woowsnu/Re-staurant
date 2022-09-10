@@ -6,7 +6,6 @@ import { useContext } from "react";
 import styles from "./SignUp.module.css";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
-import colors from "../../styles/colors";
 
 const URL = "http://localhost:8080/login";
 
@@ -79,10 +78,9 @@ const LogIn = (props) => {
           />
           <br />
           <br />
-          <div className={styles.buttoncontents}>
+          <div className={styles.buttonContents}>
           <Button
             type="submit"
-            style={{ backgroundColor: `${colors.primary2}`, width: "100%" }}
           >
             로그인
           </Button>

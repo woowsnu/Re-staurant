@@ -8,6 +8,9 @@
       }
 }
 
+/* @media screen and (max-width: 800px) {
+    flex-direction : column;
+  } */
 .pageTitle {
     font-size: 1.6rem;
     font-weight: 700;
@@ -60,3 +63,10 @@
     font-size: 1.4rem;
     font-weight: 500;
 }
+
+@media screen and (max-width: 800px) {
+    
+    .mypagebuttons {
+        flex-direction : column;
+    }
+  }

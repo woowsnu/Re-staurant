@@ -25,10 +25,18 @@
     text-align: center;
 }
 
-.buttoncontents {
+.buttonContents {
     display: flex;
     justify-content: center;
     padding-bottom: 2rem;
+}
+
+.buttonContents button {
+    width: 100%
+}
+
+.buttonContents button:hover {
+    background-color: #D6F0DF;
 }
 
 .warning {

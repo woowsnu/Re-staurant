@@ -5,7 +5,7 @@ import ListCard from "../UI/ListCard";
 const MyEatketList = (props) => {
   return (
     <div>
-      <div className={styles.listCount}>저장한 먹킷리스트가 24개 있어요</div>
+      {/* <div className={styles.listCount}>저장한 먹킷리스트가 24개 있어요</div>
       <ul className={styles.ul}>
         {props.restaurantdata.map((data) => (
           <li className={styles.list} key={data.id}>
@@ -20,7 +20,7 @@ const MyEatketList = (props) => {
             />
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };
