@@ -1,14 +1,15 @@
 .chartBar {
-  width: 200px;
-  height: 10px;
+  width: 100%;
+  height: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 10px;
 }
 
 .chartBarInner {
-  height: 100%;
   width: 100%;
+  height: 100%;
   border: 1px solid #cccccc;
   border-radius: 4px;
   background-color: #d6f0df;
@@ -21,5 +22,14 @@
 .chartBarFill {
   background-color: #51b059;
   width: 100%;
-  transition: all 0.3s ease-out;
+  height: 100%;
+  transition: all 0.3s ease-in;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chartBarFill span {
+  color: #fff;
+  font-weight: 600;
 }

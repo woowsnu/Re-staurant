@@ -1,0 +1,34 @@
+.chartBar {
+    width: 100%;
+    height: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .chartBarInner {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    background-color: #d6f0df;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  
+  .chartBarFill {
+    background-color: #51b059;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease-in;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .chartBarFill span {
+    color: #fff;
+    font-weight: 600;
+  }
