@@ -1,12 +1,24 @@
-.wrap {
-    max-width: 1080px;
-    height: 60px;
-    margin: 0 auto;
-    padding: 1rem;
-    background: rgb(107, 107, 107);
+.tabsWrap {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  background-color: #fff;
 }
 
-.tabs {
-    display: flex;
-    justify-content: space-around;
+.tab {
+  width: calc(100% / 3);
+  padding: 20px;
+  text-align: center;
+}
+
+.tabsClicked {
+  width: calc(100% / 3);
+  padding: 20px;
+  text-align: center;
+  font-weight: 600;
+  color: #51b059;
+  border-bottom: 3px solid #51b059;
 }

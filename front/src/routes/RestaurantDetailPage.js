@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Layout from '../component/Layout/Layout';
 import RestaurantDetail from '../component/Restaurant/RestaurantDetail';
 import Navbar from '../component/Layout/Navbar';
 
 const RestaurantDetailPage = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <Layout>
       <Navbar />
