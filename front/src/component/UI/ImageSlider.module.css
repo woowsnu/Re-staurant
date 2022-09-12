@@ -1,0 +1,84 @@
+.container {
+  position: relative;
+  z-index: inherit;
+  width: 100%;
+}
+
+.imgwrap {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+
+.imgbox {
+  width: 360px;
+  height: 360px;
+  object-fit: cover;
+}
+
+.btns {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btns button{
+  font-size: 28px;
+  color: rgba(255, 255, 255, 0.5);
+  border: 0;
+  outline: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.btns button:hover{
+  color: #51B059;
+  cursor: pointer;
+}
+
+.counts {
+  position: absolute;
+  z-index: 12;
+  font-size: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 0.3rem 0.6rem;
+  border: 0;
+  border-radius: 1rem;
+  bottom: 5%;
+  left: 42%;
+}
+
+
+@media screen and (max-width: 680px) {
+  .container {
+    position: relative;
+    z-index: inherit;
+    width: 100%;
+  }
+  
+  .imgwrap {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+  }
+  
+  .imgbox {
+    width: 100vw;
+    height: 480px;
+    object-fit: cover;
+    margin: 0 auto;
+  }
+
+  .btns {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
