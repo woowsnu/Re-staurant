@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import AuthContext from '../../store/auth-context';
+import { Link } from 'react-router-dom';
+import { useMediaQuery } from "react-responsive";
 import styles from './Navbar.module.css';
 // GNB 역할
 const Navbar = () => {
   const ctx = useContext(AuthContext);
   const loginStatus = ctx.isLoggedIn;
+  const isMobile = useMediaQuery({ query: "(max-width: 680px)" });
 
   return (
     <div className={styles.container}>
@@ -15,7 +17,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div>
-        {loginStatus ? (
+        {loginStatus && !isMobile ? (
           <Link to='/mypage'>
             <button className={styles.navbtn}>마이페이지</button>
           </Link>
