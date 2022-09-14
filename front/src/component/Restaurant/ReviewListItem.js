@@ -45,7 +45,7 @@ const ReviewListItem = (props) => {
           {props.review.img?.length <= 3 &&
             props.review.img.map((item) => {
               return (
-                <li>
+                <li key={item.id}>
                   <img alt='리뷰 이미지' src={item.url} />
                 </li>
               );
