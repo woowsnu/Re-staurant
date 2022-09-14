@@ -1,0 +1,52 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.tags {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+}
+
+.section {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-left: 2rem;
+}
+
+@media screen and (max-width: 680px) {
+  .container {
+    width: 100vw;
+    margin: 0 auto;
+  }
+
+  .tags {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .section {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-left: 0;
+  }
+  
+}
