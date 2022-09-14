@@ -9,9 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 
-    public User findUserByEmail(String email);
+//    public User findByUserIndex(Long userIndex);
 
     @Transactional
     public Long deleteUserByUserIndex(Long deleteUserIndex);
+
+    public  User findUserByEmail(String email);
+
 }
 

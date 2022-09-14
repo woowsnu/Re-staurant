@@ -84,11 +84,11 @@ public class RestaurantController {
         }
     }
 
-    // 시군으로 조회
-    @GetMapping("/region/{siCode}/{gunCode}")
-    public ResponseEntity<?> findBySiCodeAndGunCode(@PathVariable String siCode, @PathVariable String gunCode){
+    // 시구으로 조회
+    @GetMapping("/region/{siCode}/{guCode}")
+    public ResponseEntity<?> findBySiCodeAndGuCode(@PathVariable String siCode, @PathVariable String guCode){
         try{
-            List<Restaurant> restaurantList = restaurantService.findRestaurantBySiCodeAndGunCode(siCode,gunCode);
+            List<Restaurant> restaurantList = restaurantService.findRestaurantBySiCodeAndGuCode(siCode,guCode);
             List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
 
             return ResponseEntity.ok().body(restaurantsDTO);
@@ -100,11 +100,11 @@ public class RestaurantController {
     }
 
 
-    //시군구로 조회
-    @GetMapping("/region/{siCode}/{gunCode}/{guCode}")
-    public ResponseEntity<?> findBySiCodeAndGunCodeAndGuCode(@PathVariable String siCode, @PathVariable String gunCode, @PathVariable String guCode){
+    //시군동로 조회
+    @GetMapping("/region/{siCode}/{guCode}/{dongCode}")
+    public ResponseEntity<?> findBySiCodeAndGuCodeAndDongCode(@PathVariable String siCode, @PathVariable String guCode, @PathVariable String dongCode){
         try{
-            List<Restaurant> restaurantList = restaurantService.findRestaurantBySiCodeAndGunCodeAndGuCode(siCode,gunCode, guCode);
+            List<Restaurant> restaurantList = restaurantService.findRestaurantBySiCodeAndGuCodeAndDongCode(siCode,guCode, dongCode);
             List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
 
             return ResponseEntity.ok().body(restaurantsDTO);
@@ -136,7 +136,7 @@ public class RestaurantController {
 
     // 상세페이지
     @GetMapping("/restaurantDetail/{busId}")
-    public ResponseEntity<?> restaurantInfo(@PathVariable String busId) {
+    public ResponseEntity<?> restaurantInfo(@PathVariable Long busId) {
 
         try{
             Restaurant restaurant = restaurantService.findRestaurantByBusId(busId);

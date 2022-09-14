@@ -2,8 +2,10 @@ package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.ReviewDTO;
+import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.model.Review;
 import com.restaurant.app.model.User;
+import com.restaurant.app.repository.RestaurantRepository;
 import com.restaurant.app.service.ReviewService;
 import com.restaurant.app.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +27,12 @@ public class ReviewController {
     @Autowired
     private final ReviewService reviewService;
 
+    private final RestaurantRepository restaurantRepository;
+
     // Create Review
     @PostMapping("/{busId}/auth/createReview")
     public ResponseEntity<?> createReview(@AuthenticationPrincipal User authedUser
-                                          , @PathVariable String busId, @RequestBody ReviewDTO reviewDTO) {
+            , @PathVariable Long busId, @RequestBody ReviewDTO reviewDTO) {
 
         try {
 
@@ -49,30 +53,31 @@ public class ReviewController {
 
 
     // Update Review
-    @PutMapping("{reviewIndex}/auth/updateReview")
-    public ResponseEntity<?> updateReview(@AuthenticationPrincipal User authedUser,
-                                          @RequestBody ReviewDTO updateReviewDTO,
-                                          @PathVariable Long reviewIndex) {
-        try{
+//    @PutMapping("{busId}/auth/updateReview")
+//    public ResponseEntity<?> updateReview(@AuthenticationPrincipal User authedUser,
+//                                          @RequestBody ReviewDTO updateReviewDTO,
+//                                          @PathVariable Long busId, Long userIndex ) {
+//        try{
+//
+//            List<Review> reviewList = reviewService.update(authedUser, updateReviewDTO,busId,userIndex);
+//
+//            ReviewDTO responseReviewDTO = ReviewDTO.builder()
+//                    .reviewIndex(updateReviewDTO.getReviewIndex())
+//                    .reviewTitle(updateReviewDTO.getReviewTitle())
+//                    .reviewContent(updateReviewDTO.getReviewContent())
+//                    .email(updateReviewDTO.getEmail())
+//                    .busId(updateReviewDTO.getBusId())
+//                    .build();
+//
+//            return ResponseEntity.ok().body(responseReviewDTO);
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+//            return ResponseEntity.badRequest().body(responseDTO);
+//        }
+//    }
 
-        Review updatedReview = reviewService.update(authedUser, updateReviewDTO,reviewIndex);
-
-        ReviewDTO responseReviewDTO = ReviewDTO.builder()
-                .reviewIndex(updatedReview.getReviewIndex())
-                .reviewTitle(updatedReview.getReviewTitle())
-                .reviewContent(updatedReview.getReviewContent())
-                .email(updatedReview.getUser().getEmail())
-                .busId(updatedReview.getBusId())
-                .build();
-
-            return ResponseEntity.ok().body(responseReviewDTO);
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.badRequest().body(responseDTO);
-        }
-    }
 
     // Delete Review
     @DeleteMapping("{reviewIndex}/auth/deleteReview")
