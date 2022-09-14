@@ -6,7 +6,6 @@ import { useContext } from "react";
 import styles from "./SignUp.module.css";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
-import colors from "../../styles/colors";
 
 const URL = "http://localhost:8080/login";
 
@@ -28,18 +27,22 @@ const LogIn = (props) => {
     e.preventDefault();
     setPassword(e.target.value);
   };
-
+  
   const submitHandler = async (e) => {
     e.preventDefault();
     await axios
       .post(URL, JSON.stringify({ email, password }), {
         headers: { "Content-Type": "application/json" },
+        // withCredentials: true,
       })
       .then((response) => {
-        const token = response.data.jwtToken;
-        localStorage.setItem("token", token);
+        console.log(response);
+        const accessToken = response.data.jwtToken;
+        // const refreshToken = response.data.refreshToken;
+        localStorage.setItem("accessToken", accessToken);
+        // localStorage.setItem("refreshToken", refreshToken);
         ctx.onLogin(email, password);
-        navigate(-1);
+        // navigate(-1);
       })
       .catch((err) => {
         console.log(err);
@@ -79,21 +82,20 @@ const LogIn = (props) => {
           />
           <br />
           <br />
-          <div className={styles.buttoncontents}>
+          <div className={styles.buttonContents}>
           <Button
             type="submit"
-            style={{ backgroundColor: `${colors.primary2}`, width: "100%" }}
           >
             로그인
           </Button>
           </div>
         </form>
-        <div className={styles.logininfo}>
-          아직 회원이 아니신가요? <br />
+        <div className={styles.loginInfo}>
+          아직 회원이 아니신가요? &nbsp;&nbsp;
           <a href="/members">회원가입 하러가기</a>
           <br />
           <br />
-          이메일/비밀번호를 잃어버리셨나요? <br />
+          이메일/비밀번호를 잃어버리셨나요? &nbsp;&nbsp;
           <a href="/find">계정정보 찾기</a>
         </div>
       </div>

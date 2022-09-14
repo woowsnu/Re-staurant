@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../api/axios";
+import { instance } from "../../api/axios";
 import styles from "./SignUp.module.css";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
-import colors from "../../styles/colors";
 import Welcome from "./Welcome";
 
 const EMAIL_REGEX = /^[A-z0-9-_]+@[A-z0-9-_.].{1,23}$/;
@@ -62,7 +62,7 @@ const SignUp = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    axios
+    instance
       .post(URL, JSON.stringify({ nickname, email, password }), {
         headers: { "Content-Type": "application/json" },
       })
@@ -165,19 +165,16 @@ const SignUp = () => {
             비밀번호가 일치하지 않습니다.
           </p>
           <br />
-          <div className={styles.buttoncontents}>
+          <div className={styles.buttonContents}>
             <Button
               type="submit"
-              style={{ backgroundColor: `${colors.primary2}`, width: "100%" }}
             >
               회원가입
             </Button>
           </div>
         </form>
-        <br />
-        <br />
-        <div>
-          이미 회원이신가요? <br />
+        <div className={styles.toLogin}>
+          이미 회원이신가요?&nbsp;&nbsp;
           <a href="/login">로그인 하러가기 </a>
         </div>
       </div>

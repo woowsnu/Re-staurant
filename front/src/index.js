@@ -13,11 +13,9 @@ import RestaurantDetailPage from "./routes/RestaurantDetailPage";
 import ReviewWrite from "./component/Review/ReviewWrite";
 import Admin from "./routes/Admin";
 import RestaurantSearch from "./routes/RestaurantSearch";
-import EditUserInfo from "./component/MyPage/EditUserInfo";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
     <AuthContextProvider>
     <BrowserRouter>
       <Routes>
@@ -31,11 +29,9 @@ root.render(
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/mypage" element={<MyPage />} />
-          <Route path="/editmyprofile" element={<EditUserInfo />} />
           <Route path="/review/write/:id" element={<ReviewWrite />} />
         </Route>
       </Routes>
       </BrowserRouter>
     </AuthContextProvider>
-  </React.StrictMode>
 );

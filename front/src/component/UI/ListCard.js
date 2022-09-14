@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import styles from "./ListCard.module.css";
+import { FaRunning } from "react-icons/fa";
+import { FaBookmark, FaRegBookmark } from 'react-icons/fa';
 
-const ListCard = () => {
+const ListCard = (props) => {
   const [check, setCheck] = useState(false);
   const checkOnClickHandler = () => {
     setCheck(true);
@@ -13,23 +15,24 @@ const ListCard = () => {
         <img
           alt="search_result_img"
           className={styles.img}
-          src="https://image.toast.com/aaaaaqx/catchtable/shopinfo/s17377/17377_2261409570791374.png"
+          src={props.imgLink}
         />
       </div>
       <div className={styles.description}>
-        <div className={styles.bookmark}>
+        <div className={styles.firstline}>
+          <div className={styles.restaurantName}>{props.name}</div>
           <label htmlFor="bookmark" className={styles.bookmarkImg}>
-            {check ? "💚" : "🤍"}
+            {check ? <FaRegBookmark/> : <FaBookmark/>}
           </label>
           <input id="bookmark" type="checkbox" onClick={checkOnClickHandler} />
         </div>
-        <div>녘 여의도점</div>
-        <div>
-          녁(Nyug)은 '녘'의 오탈자로 비표준을 바탕으로 생생한 경험을 전하려고
-          합니다.{" "}
+        <div className={styles.revisit}>
+          <FaRunning /> 재방문 희망 98%{" "}
         </div>
-        <div>재방문 희망 98%</div>
-        <div>여의도 / 이탈리아 음식</div>
+        <div className={styles.detail}>레스토랑 상세설명 삽입예정 </div>
+        <div className={styles.detail2}>
+          <div>{props.location} / 음식 장르</div>
+        </div>
       </div>
     </div>
   );

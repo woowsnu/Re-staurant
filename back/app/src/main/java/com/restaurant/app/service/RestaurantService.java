@@ -56,7 +56,7 @@ public class RestaurantService {
     }
 
 
-    public Restaurant findRestaurantByBusId(String busId) {
+    public Restaurant findRestaurantByBusId(Long busId) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
 
         if (restaurant == null) {
@@ -65,6 +65,7 @@ public class RestaurantService {
 
         return restaurant;
     }
+
 
     public List<Restaurant>  findRestaurantBySiCode(String siCode){
         List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBySiCode(siCode);
@@ -76,8 +77,8 @@ public class RestaurantService {
         return restaurantList;
     }
 
-    public List<Restaurant>  findRestaurantBySiCodeAndGunCode(String siCode ,String gunCode){
-        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBysiCodeAndGunCode(siCode, gunCode);
+    public List<Restaurant>  findRestaurantBySiCodeAndGuCode(String siCode ,String guCode){
+        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBysiCodeAndGuCode(siCode, guCode);
 
 
         if (restaurantList.size() == 0) {
@@ -87,8 +88,8 @@ public class RestaurantService {
         return restaurantList;
     }
 
-    public List<Restaurant>  findRestaurantBySiCodeAndGunCodeAndGuCode(String siCode ,String gunCode,String guCode){
-        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBysiCodeAndGunCodeAndGuCode(siCode, gunCode, guCode);
+    public List<Restaurant>  findRestaurantBySiCodeAndGuCodeAndDongCode(String siCode ,String guCode,String dongCode){
+        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBySiCodeAndGuCodeAndDongCode(siCode, guCode, dongCode);
 
 
         if (restaurantList.size() == 0) {

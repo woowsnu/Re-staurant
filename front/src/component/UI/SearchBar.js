@@ -1,11 +1,14 @@
 import React from 'react';
 import styles from './SearchBar.module.css';
+import { FaSearch } from 'react-icons/fa';
 
 const SearchBar = () => {
   return (
-    <div className={styles.search}>
-      <input className={styles.searchbar} type='search' />
-    </div>
+    <form action='' className={styles.search}>
+      <label><FaSearch style={{fontSize: "20px"}}/></label>
+      <input className={styles.searchbar} type='text' />
+      <button type='submit'>검색</button>
+    </form>
   );
 };
 

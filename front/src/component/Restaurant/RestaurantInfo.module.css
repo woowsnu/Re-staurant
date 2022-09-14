@@ -1,4 +1,30 @@
 .container {
-    max-width: 1080px;
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.container h3 {
+  padding-top: 1.4rem;
+  padding-bottom: 1rem;
+  padding-left: 0;
+}
+
+.container p {
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+@media screen and (max-width: 680px) {
+  .container {
+    max-width: 100%;
     margin: 0 auto;
+    padding: 0 0.4rem;
+  }
+
+  .container h3 {
+    padding-top: 1.4rem;
+    padding-bottom: 1rem;
+    padding-left: 0;
+  }
 }

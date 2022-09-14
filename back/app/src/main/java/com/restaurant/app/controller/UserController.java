@@ -79,14 +79,9 @@ public class UserController {
             // 로그인된 사용자의 userIndex와 post로 전송된 userIndex가 동일할 경우에만 닉네임 변경 진행.
             User updatedUser = userService.updateNickname(authedUser,updateUserDTO);
 
-            UserDTO userResponseDTO = UserDTO.builder()
-                    .userIndex(updatedUser.getUserIndex())
-                    .email(updatedUser.getEmail())
-                    .roles(updatedUser.getRoles())
-                    .reviewList(updatedUser.reviewListToString())
-                    .build();
+            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
 
-            return ResponseEntity.ok().body(userResponseDTO);
+            return ResponseEntity.ok().body(responseDTO);
 
         } catch (Exception e) {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
@@ -104,14 +99,9 @@ public class UserController {
             // 로그인된 사용자의 userIndex와 post로 전송된 userIndex가 동일할 경우에만 개인정보 변경 진행.
             User updatedUser = userService.updatePassword(authedUser,updateUserDTO, bCryptPasswordEncoder);
 
-            UserDTO userResponseDTO = UserDTO.builder()
-                    .userIndex(updatedUser.getUserIndex())
-                    .email(updatedUser.getEmail())
-                    .roles(updatedUser.getRoles())
-                    .reviewList(updatedUser.reviewListToString())
-                    .build();
+            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
 
-            return ResponseEntity.ok().body(userResponseDTO);
+            return ResponseEntity.ok().body(responseDTO);
 
         } catch (Exception e) {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();

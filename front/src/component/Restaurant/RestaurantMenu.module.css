@@ -1,5 +1,59 @@
 .container {
-  max-width: 1080px;
+  max-width: 940px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0 2rem;
+}
+
+.container h3 {
+  padding-top: 1.4rem;
+  padding-bottom: 1rem;
+  padding-left: 0;
+}
+
+.container li {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+  font-size: 15px;
+  line-height: 1.5;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed rgb(211, 211, 211);
+}
+
+.viewmore {
+  max-width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.viewmore button {
+  font-weight: 600;
+  color: #51b059;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 680px) {
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 0.4rem;
+  }
+
+  .container h3 {
+    padding-top: 1.4rem;
+    padding-bottom: 1rem;
+    padding-left: 0;
+  }
+
+  .container li {
+    max-width: 96%;
+  }
+
+  .viewmore {
+    max-width: 96%;
+  }
 }
