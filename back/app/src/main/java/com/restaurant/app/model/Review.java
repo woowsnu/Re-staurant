@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,14 +12,15 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Review {
+public class Review implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "review_index")
     private Long reviewIndex;
 
-    @Column(name="business_id")
-    private String busId;
+//    @Column(name="business_id")
+//    private String busId;
 
     @Column(name="review_title")
     private String reviewTitle;
@@ -27,11 +29,11 @@ public class Review {
     private String reviewContent;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinColumn(name = "user_index")
+    @JoinColumn(name = "user_index",referencedColumnName = "user_index")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Restaurant.class)
-    @JoinColumn(name = "bus_id")
+    @JoinColumn(name = "bus_id",referencedColumnName = "bus_id")
     private Restaurant restaurant;
 
     @CreatedDate
@@ -39,6 +41,9 @@ public class Review {
 
     @Override
     public String toString() {
-        return "{ reviewIndex :" + reviewIndex + ", busId : " + busId + ", reviewTitle : " + reviewTitle  + ", reviewContent : "+ reviewContent +"}";
+        return "{ reviewIndex :" + reviewIndex + ", reviewTitle : " + reviewTitle  + ", reviewContent : "+ reviewContent +"}";
     }
+
+
+
 }

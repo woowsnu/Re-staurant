@@ -70,12 +70,60 @@ public class RestaurantController {
 
 
 
+    // 시로 조회
+    @GetMapping("/region/{siCode}")
+    public ResponseEntity<?> findBySiCode(@PathVariable String siCode){
+        try{
+            List<Restaurant> restaurantList = restaurantService.findRestaurantBySiCode(siCode);
+            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
+
+            return ResponseEntity.ok().body(restaurantsDTO);
+        }
+        catch(Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
+    // 시구으로 조회
+    @GetMapping("/region/{siCode}/{guCode}")
+    public ResponseEntity<?> findBySiCodeAndGuCode(@PathVariable String siCode, @PathVariable String guCode){
+        try{
+            List<Restaurant> restaurantList = restaurantService.findRestaurantBySiCodeAndGuCode(siCode,guCode);
+            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
+
+            return ResponseEntity.ok().body(restaurantsDTO);
+        }
+        catch(Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
+
+    //시군동로 조회
+    @GetMapping("/region/{siCode}/{guCode}/{dongCode}")
+    public ResponseEntity<?> findBySiCodeAndGuCodeAndDongCode(@PathVariable String siCode, @PathVariable String guCode, @PathVariable String dongCode){
+        try{
+            List<Restaurant> restaurantList = restaurantService.findRestaurantBySiCodeAndGuCodeAndDongCode(siCode,guCode, dongCode);
+            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
+
+            return ResponseEntity.ok().body(restaurantsDTO);
+        }
+        catch(Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
+
+
     //     식카테고리, 사용자위치 별로 조회
 
 
     // 상세페이지
     @GetMapping("/restaurantDetail/{busId}")
-    public ResponseEntity<?> restaurantInfo(@PathVariable String busId) {
+    public ResponseEntity<?> restaurantInfo(@PathVariable Long busId) {
 
         try{
             Restaurant restaurant = restaurantService.findRestaurantByBusId(busId);

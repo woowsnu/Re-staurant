@@ -56,7 +56,7 @@ public class RestaurantService {
     }
 
 
-    public Restaurant findRestaurantByBusId(String busId) {
+    public Restaurant findRestaurantByBusId(Long busId) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
 
         if (restaurant == null) {
@@ -65,4 +65,51 @@ public class RestaurantService {
 
         return restaurant;
     }
+
+
+    public List<Restaurant>  findRestaurantBySiCode(String siCode){
+        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBySiCode(siCode);
+
+        if (restaurantList.size() == 0) {
+            throw new RuntimeException("식당이 없습니다.");
+        }
+
+        return restaurantList;
+    }
+
+    public List<Restaurant>  findRestaurantBySiCodeAndGuCode(String siCode ,String guCode){
+        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBysiCodeAndGuCode(siCode, guCode);
+
+
+        if (restaurantList.size() == 0) {
+            throw new RuntimeException("식당이 없습니다.");
+        }
+
+        return restaurantList;
+    }
+
+    public List<Restaurant>  findRestaurantBySiCodeAndGuCodeAndDongCode(String siCode ,String guCode,String dongCode){
+        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBySiCodeAndGuCodeAndDongCode(siCode, guCode, dongCode);
+
+
+        if (restaurantList.size() == 0) {
+            throw new RuntimeException("식당이 없습니다.");
+        }
+
+        return restaurantList;
+    }
+
+
+    public List<Restaurant> findRestaurantByRestaurantCategory(String restaurantCategory){
+        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByrestaurantCategory(restaurantCategory);
+
+
+        if (restaurantList.size() == 0) {
+            throw new RuntimeException("식당이 없습니다.");
+        }
+
+        return restaurantList;
+    }
+
+
 }

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class RestaurantDTO {
 
     private Long restaurantIndex;  //레스토랑 아이디
-    private String busId;
+    private Long busId;
     private String restaurantCategory;   //레스토랑 카테고리
     private String restaurantName;
     private Float x;
@@ -28,6 +28,13 @@ public class RestaurantDTO {
     private String businessHourInfo;
     private String snsUrl;
     private String menuList;
+
+
+    private String optionsList;
+
+    private String reviewList;
+
+
     public RestaurantDTO(Restaurant restaurant) {
         this.restaurantIndex = restaurant.getRestaurantIndex();
         this.busId = restaurant.getBusId();
@@ -46,6 +53,11 @@ public class RestaurantDTO {
         this.tellNumber = restaurant.getTellNumber();
         this.businessHourInfo = restaurant.getBusinessHourInfo();
         this.snsUrl = restaurant.getSnsUrl();
+
+        this.menuList = restaurant.menuToString();
+        this.optionsList = restaurant.optionsList();
+        this.reviewList = restaurant.reviewList();
+
 
     }
 }

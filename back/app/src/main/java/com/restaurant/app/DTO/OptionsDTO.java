@@ -1,5 +1,6 @@
 package com.restaurant.app.DTO;
 
+import com.restaurant.app.model.Options;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,5 +17,15 @@ public class OptionsDTO {
     private int isCheck;
     private int optionNum;
     private int optionOrder;
+
+
+    public OptionsDTO(Options options){
+        this.restaurantOptionIndex = options.getRestaurantOptionIndex();
+        this.iconUrl = options.getIconUrl();
+        this.isCheck = options.getIsCheck();
+        this.optionNum = options.getOptionNum();
+        this.optionOrder = options.getOptionOrder();
+    }
+
 
 }
