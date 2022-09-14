@@ -27,3 +27,13 @@
   cursor: pointer;
   /* transform: translatey(-50%); */
 }
+
+
+@media screen and (max-width: 680px) {
+  .search {
+    width: 80vw;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -21,8 +21,8 @@ input[type='checkbox'] {
 
 .imgwrapper {
   position: relative;
-  padding: 0.7rem;
   height: 200px;
+  padding: 0.7rem;
   background-image: url('https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20180124_9%2F1516772458748vjMWa_JPEG%2FQ5SNtPm-CjeOJtPhGeSXlMYT.jpg');
   color: #fff;
   border-radius: 8px;
@@ -31,10 +31,10 @@ input[type='checkbox'] {
 }
 
 .infowrapper {
-  display: flex;
-  padding: 0.4rem;
-  justify-content: space-between;
   height: 80px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0.4rem 0 0.4rem;
 }
 
 .bookmarkImg {
@@ -56,4 +56,24 @@ input[type='checkbox'] {
     #000000 70.83%
   );
   border-radius: 0px 0px 8px 8px;
+}
+
+.resInfo {
+  font-size: 18px;
+  font-weight: 600;
+  padding-top: 4px;
+}
+
+.resInfo p {
+  font-size: 14px;
+  color: #888888;
+  font-weight: 400;
+  padding-top: 6px;
+}
+
+.ChartBar {
+  display: flex;
+  align-items: center;
+  padding: 0 0.4rem;
+  margin: 0;
 }

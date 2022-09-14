@@ -2,6 +2,10 @@
     display: flex;
     justify-content: space-between;
     padding: 0 2rem 3rem 2rem;
+
+    @media screen and (max-width: 480px) {
+        flex-direction: column;
+      }
 }
 
 /* @media screen and (max-width: 800px) {

@@ -1,0 +1,94 @@
+.container {
+  max-width: 940px;
+  margin: 0 auto;
+  border-bottom: 1px solid #cccccc;
+  padding: 1rem 0 1.5rem 0;
+}
+
+.container:hover {
+  background-color: #f6f6f6;
+}
+
+.reviewInfo {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #888888;
+}
+
+.reviewInfo h6 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+  padding-bottom: 0.4rem;
+}
+
+.reviewInfo img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #f6f6f6;
+  margin-right: 0.6rem;
+}
+
+.reviewContent {
+  padding-top: 0.6rem;
+}
+
+.reviewContent h4 {
+  font-size: 16px;
+  font-weight: 600;
+  padding-top: 0.6rem;
+  color: #51B059;
+}
+
+.reviewContent p {
+    font-size: 14px;
+    padding-top: 0.6rem;
+    line-height: 1.4;
+    word-break: break-all;
+  }
+
+.reviewImage {
+  display: flex;
+}
+
+.reviewImage img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  padding-right: 0.8rem;
+}
+
+.reviewImageOver {
+  position: inherit;
+}
+
+.imgBlack {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: cover;
+  color: #fff;
+  font-size: 28px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+@media screen and (max-width: 680px) {
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem 0.4rem 1.5rem 0.4rem;
+  }
+
+  .reviewImage img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    padding-right: 0.4rem;
+  }
+}

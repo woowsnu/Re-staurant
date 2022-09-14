@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import styles from "./RestaurantMenu.module.css";
+import React, { useState } from 'react';
+import styles from './RestaurantMenu.module.css';
+import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
 
 const RestaurantMenu = (props) => {
   const simpleMenu = props.menus.slice(0, 5);
@@ -10,16 +11,15 @@ const RestaurantMenu = (props) => {
   };
 
   return (
-    <div id="res-menu" className={styles.container}>
+    <div id='res-menu' className={styles.container}>
       <h3>메뉴정보</h3>
       {!viewMore
         ? simpleMenu.map((menu) => {
             return (
               <ul key={menu.id}>
                 <li>
-                  <span>{menu.name}</span>
-                  <span>---------------</span>
-                  <span>{menu.price}</span>
+                  <p>{menu.name}</p>
+                  <p>{menu.price.toLocaleString()}원</p>
                 </li>
               </ul>
             );
@@ -28,16 +28,17 @@ const RestaurantMenu = (props) => {
             return (
               <ul key={menu.id}>
                 <li>
-                  <span>{menu.name}</span>
-                  <span>---------------</span>
-                  <span>{menu.price}</span>
+                  <p>{menu.name}</p>
+                  <p>{menu.price.toLocaleString()}원</p>
                 </li>
               </ul>
             );
           })}
-      <button onClick={viewMoreHandler}>
-        {viewMore ? "메뉴 접기" : "더보기"}
-      </button>
+      <div className={styles.viewmore}>
+        <button onClick={viewMoreHandler}>
+          {viewMore ? <span>메뉴 접기 <FaAngleUp/></span> : <span>더보기 <FaAngleDown/></span>}
+        </button>
+      </div>
     </div>
   );
 };

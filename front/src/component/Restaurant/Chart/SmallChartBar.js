@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./ChartBar.module.css";
+import styles from "./SmallChartBar.module.css";
 
-const ChartBar = ({reviews, reviewCount}) => {
+const SmallChartBar = ({reviews, reviewCount}) => {
   let barFillWidth = "0%";
 
   if (reviewCount > 0) {
@@ -20,4 +20,4 @@ const ChartBar = ({reviews, reviewCount}) => {
   );
 };
 
-export default ChartBar;
+export default SmallChartBar;
