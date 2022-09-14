@@ -80,4 +80,4 @@ const MyReviews = (props) => {
   );
 };
 
-export default MyReviews;
+export default React.memo(MyReviews);

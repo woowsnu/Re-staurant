@@ -16,7 +16,6 @@ import RestaurantSearch from "./routes/RestaurantSearch";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
     <AuthContextProvider>
     <BrowserRouter>
       <Routes>
@@ -35,5 +34,4 @@ root.render(
       </Routes>
       </BrowserRouter>
     </AuthContextProvider>
-  </React.StrictMode>
 );

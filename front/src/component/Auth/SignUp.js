@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../api/axios";
+import { instance } from "../../api/axios";
 import styles from "./SignUp.module.css";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
@@ -61,7 +62,7 @@ const SignUp = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    axios
+    instance
       .post(URL, JSON.stringify({ nickname, email, password }), {
         headers: { "Content-Type": "application/json" },
       })

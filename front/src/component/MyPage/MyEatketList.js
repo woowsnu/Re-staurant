@@ -25,4 +25,4 @@ const MyEatketList = (props) => {
   );
 };
 
-export default MyEatketList;
+export default React.memo(MyEatketList);
