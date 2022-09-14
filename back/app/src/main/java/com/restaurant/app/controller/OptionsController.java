@@ -1,17 +1,28 @@
 package com.restaurant.app.controller;
 
+
 import com.restaurant.app.DTO.OptionsDTO;
 import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.ReviewDTO;
 import com.restaurant.app.model.Options;
 import com.restaurant.app.model.Review;
+
+import com.restaurant.app.model.Options;
+
 import com.restaurant.app.service.OptionsService;
 import com.restaurant.app.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,11 +46,11 @@ public class OptionsController {
         List<OptionsDTO> optionsDTO = options.stream().map(OptionsDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok(optionsDTO);
     }
-
+    
     //    create
     @PostMapping("/create/{busId}")
     public ResponseEntity<?> save(@PathVariable Long busId, @RequestBody OptionsDTO optionsDTO) {
-//
+
         try {
 
             List<Options> optionsList = optionsService.save(optionsDTO,busId);
@@ -102,4 +113,5 @@ public class OptionsController {
 //        }
 
     }
+
 }

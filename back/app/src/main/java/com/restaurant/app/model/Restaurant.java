@@ -69,6 +69,8 @@ public class Restaurant implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
     private Set<Options> optionsList    = new HashSet<>();
+
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
     private Set<Menus> menuList = new HashSet<>();
 
@@ -81,6 +83,7 @@ public class Restaurant implements Serializable {
 
     }
 
+
     public String optionsList(){
 
         return "{" + optionsList.toString() + "}";
@@ -92,6 +95,5 @@ public class Restaurant implements Serializable {
         return "{" + reviewList.toString() + "}";
 
     }
-
 
 }

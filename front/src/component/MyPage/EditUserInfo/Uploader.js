@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "../../api/axios";
+import axios from "../../../api/axios";
 
 const Uploader = () => {
   const [image, setImage] = useState({
@@ -62,7 +62,7 @@ const Uploader = () => {
         style={{ display: "none" }}
       />
       <div className="img-wrapper">
-        <img src={image.preview_URL} />
+        <img alt="img" src={image.preview_URL} width="150px"/>
       </div>
 
       <div className="upload-button">

@@ -1,17 +1,11 @@
 import React from "react";
 import styles from "./ChartBar.module.css";
 
-const ChartBar = (props) => {
-  const reviewCount = props.reviews.length;
-  const reviewRevisit = props.reviews.filter((el) => el.revisit === 1).length;
-
-  console.log(reviewCount);
-  console.log(reviewRevisit);
-  
+const ChartBar = ({reviews, reviewCount}) => {
   let barFillWidth = "0%";
 
   if (reviewCount > 0) {
-    barFillWidth = Math.round((reviewRevisit / reviewCount) * 100) + "%";
+    barFillWidth = Math.round((reviews/ reviewCount) * 100) + "%";
   }
 
   return (
@@ -20,7 +14,7 @@ const ChartBar = (props) => {
         <div
           className={styles.chartBarFill}
           style={{ width: barFillWidth }}
-        ></div>
+        ><span>{barFillWidth}</span></div>
       </div>
     </div>
   );

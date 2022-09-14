@@ -66,6 +66,7 @@ public class RestaurantService {
         return restaurant;
     }
 
+
     public List<Restaurant>  findRestaurantBySiCode(String siCode){
         List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBySiCode(siCode);
 

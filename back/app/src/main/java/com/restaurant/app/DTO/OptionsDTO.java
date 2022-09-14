@@ -18,6 +18,7 @@ public class OptionsDTO {
     private int optionNum;
     private int optionOrder;
 
+
     public OptionsDTO(Options options){
         this.restaurantOptionIndex = options.getRestaurantOptionIndex();
         this.iconUrl = options.getIconUrl();
@@ -25,5 +26,6 @@ public class OptionsDTO {
         this.optionNum = options.getOptionNum();
         this.optionOrder = options.getOptionOrder();
     }
+
 
 }

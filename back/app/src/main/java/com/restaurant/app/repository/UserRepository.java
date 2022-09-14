@@ -11,6 +11,8 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
 //    public User findByUserIndex(Long userIndex);
 
+    public User findUserByAccessToken(String accessToken);
+
     @Transactional
     public Long deleteUserByUserIndex(Long deleteUserIndex);
 
