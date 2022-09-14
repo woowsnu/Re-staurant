@@ -1,14 +1,13 @@
 package com.restaurant.app.controller;
 
+import com.restaurant.app.DTO.OptionsDTO;
 import com.restaurant.app.model.Options;
+import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.service.OptionsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,4 +25,11 @@ public class OptionsController {
     public List<Options> findAll(){
         return optionsService.findAll();
     }
+
+    //create
+//    @PutMapping()
+//    @RequestBody
+//    public OptionsDTO optionsCreate (@PathVariable ){
+//
+//    }
 }
