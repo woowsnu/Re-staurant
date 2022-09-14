@@ -27,18 +27,22 @@ const LogIn = (props) => {
     e.preventDefault();
     setPassword(e.target.value);
   };
-
+  
   const submitHandler = async (e) => {
     e.preventDefault();
     await axios
       .post(URL, JSON.stringify({ email, password }), {
         headers: { "Content-Type": "application/json" },
+        // withCredentials: true,
       })
       .then((response) => {
-        const token = response.data.jwtToken;
-        localStorage.setItem("token", token);
+        console.log(response);
+        const accessToken = response.data.jwtToken;
+        // const refreshToken = response.data.refreshToken;
+        localStorage.setItem("accessToken", accessToken);
+        // localStorage.setItem("refreshToken", refreshToken);
         ctx.onLogin(email, password);
-        navigate(-1);
+        // navigate(-1);
       })
       .catch((err) => {
         console.log(err);

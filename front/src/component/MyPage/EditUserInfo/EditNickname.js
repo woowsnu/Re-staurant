@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./EditNickname.module.css";
 import Input from "../../UI/Input";
-import axios from "../../../api/axios";
+import axios, { instance } from "../../../api/axios";
 import Button from "../../UI/Button";
 
 const EditNickname = (props) => {
@@ -16,12 +16,12 @@ const EditNickname = (props) => {
     props.nicknameChangeExit();
   };
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   const URL = "http://localhost:8080/user/auth/update/nickname";
   const nicknameChangeSubmit = (e) => {
     e.preventDefault();
     const profile = { nickname: nickname };
-    axios
+    instance
       .put(URL, JSON.stringify(profile), {
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const EditNickname = (props) => {
           />
         </form>
         <div className={styles.buttonArea}>
-          <Button type="submit" onClick={nicknameChangeSubmit} style={{"margin-right" : "6px"}}>
+          <Button type="submit" onClick={nicknameChangeSubmit} style={{"marginRight" : "6px"}}>
             저장하기
           </Button>
           <Button
