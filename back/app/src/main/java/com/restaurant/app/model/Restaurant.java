@@ -48,6 +48,9 @@ public class Restaurant {
     @Column(name="gu_code")
     private String guCode;
 
+    @Column(name="gun_code")
+    private String gunCode;
+
     @Column(name="dong_code")
     private String dongCode;
 
@@ -66,7 +69,7 @@ public class Restaurant {
 
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
-    private Set<Options> options  = new HashSet<>();
+    private Set<Options> optionsList    = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
     private Set<Menus> menuList = new HashSet<>();
@@ -79,5 +82,10 @@ public class Restaurant {
         return "{"+menuList.toString()+"}";
 
     }
+
+    public String optionsList(){
+        return optionsList.toString();
+    }
+
 
 }
