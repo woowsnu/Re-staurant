@@ -69,69 +69,8 @@ public class RestaurantController {
     //    지역별로 조회(시,군,구로 조회)
 
 
-    // 시로 조회
-    @GetMapping("/region/{siCode}")
-    public ResponseEntity<?> findBySiCode(@PathVariable String siCode){
-        try{
-            List<Restaurant> restaurantList = restaurantService.findRestaurantBySiCode(siCode);
-            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
-
-            return ResponseEntity.ok().body(restaurantsDTO);
-        }
-        catch(Exception e) {
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.badRequest().body(responseDTO);
-        }
-    }
-
-    // 시군으로 조회
-    @GetMapping("/region/{siCode}/{gunCode}")
-    public ResponseEntity<?> findBySiCodeAndGunCode(@PathVariable String siCode, @PathVariable String gunCode){
-        try{
-            List<Restaurant> restaurantList = restaurantService.findRestaurantBySiCodeAndGunCode(siCode,gunCode);
-            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
-
-            return ResponseEntity.ok().body(restaurantsDTO);
-        }
-        catch(Exception e) {
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.badRequest().body(responseDTO);
-        }
-    }
-
-
-    //시군구로 조회
-    @GetMapping("/region/{siCode}/{gunCode}/{guCode}")
-    public ResponseEntity<?> findBySiCodeAndGunCodeAndGuCode(@PathVariable String siCode, @PathVariable String gunCode, @PathVariable String guCode){
-        try{
-            List<Restaurant> restaurantList = restaurantService.findRestaurantBySiCodeAndGunCodeAndGuCode(siCode,gunCode, guCode);
-            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
-
-            return ResponseEntity.ok().body(restaurantsDTO);
-        }
-        catch(Exception e) {
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.badRequest().body(responseDTO);
-        }
-    }
-
-
-
-
 
     //     식카테고리, 사용자위치 별로 조회
-    @GetMapping("/category/{restaurantCategory}")
-    public ResponseEntity<?> findByRestaurantCategory(@PathVariable String restaurantCategory){
-        try {
-            List<Restaurant> restaurantList = restaurantService.findRestaurantByRestaurantCategory(restaurantCategory);
-            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
-            return ResponseEntity.ok().body(restaurantsDTO);
-        }
-        catch(Exception e) {
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.badRequest().body(responseDTO);
-        }
-    }
 
 
     // 상세페이지
