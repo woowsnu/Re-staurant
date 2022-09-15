@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../api/axios";
 import { instance } from "../../api/axios";
 import styles from "./SignUp.module.css";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
 import Welcome from "./Welcome";
+import logo from "../../assets/images/logo_big.png";
 
 const EMAIL_REGEX = /^[A-z0-9-_]+@[A-z0-9-_.].{1,23}$/;
 const PASSWORD_REGEX = /^.{8,}$/;
@@ -67,7 +67,6 @@ const SignUp = () => {
         headers: { "Content-Type": "application/json" },
       })
       .then(function (response) {
-        console.log(response);
         setNickname("");
         setEmail("");
         setPassword("");
@@ -87,95 +86,96 @@ const SignUp = () => {
   return signupsuccess ? (
     <Welcome />
   ) : (
-    <div className={styles.wrapper}>
-      <div className={styles.content}>
-        <div className={styles.pagetitle}>회원가입</div>
-        <div className={err !== null ? styles.warning : styles.offscreen}>
-          {err}
+    <div className={styles.wrap}>
+      <div className={styles.wrapper}>
+        <div className={styles.imgWrap}>
+          <img src={logo} alt="logo" width="180px" />
         </div>
-        <br />
-        <form className={styles.form} onSubmit={submitHandler}>
-          <label htmlFor="nickname">닉네임</label>
-          <Input
-            type="text"
-            id="nickname"
-            value={nickname}
-            style={{ width: "95%" }}
-            onChange={nicknameInputHandler}
-          />
-          <br />
-          <br />
-          <label htmlFor="email">이메일</label>
-          <Input
-            type="text"
-            id="email"
-            value={email}
-            style={{ width: "95%" }}
-            onFocus={() => setEmailFocus(true)}
-            onChange={emailInputHandler}
-          />
-          <br />
-          <p
-            className={
-              !validEmail && emailFocus ? styles.warning : styles.offscreen
-            }
-          >
-            이메일 형식으로 입력해주세요
-            <br />
-            (예. name@domain.com)
-          </p>
-          <br />
-          <label htmlFor="password">비밀번호</label>
-          <Input
-            type="password"
-            id="password"
-            value={password}
-            style={{ width: "95%" }}
-            onFocus={() => setPasswordFocus(true)}
-            onChange={passwordInputHandler}
-          />
-          <br />
-          <p
-            className={
-              !validPassword && passwordFocus
-                ? styles.warning
-                : styles.offscreen
-            }
-          >
-            8자리 이상으로 설정해주세요.
-          </p>
-          <br />
-          <label htmlFor="passwordCheck">비밀번호 확인</label>
-          <Input
-            type="password"
-            id="passwordCheck"
-            value={passwordCheck}
-            style={{ width: "95%" }}
-            onFocus={() => setPasswordCheckFocus(true)}
-            onChange={passwordCheckInputHandler}
-          />
-          <br />
-          <p
-            className={
-              !validPasswordCheck && passwordCheckFocus
-                ? styles.warning
-                : styles.offscreen
-            }
-          >
-            비밀번호가 일치하지 않습니다.
-          </p>
-          <br />
-          <div className={styles.buttonContents}>
-            <Button
-              type="submit"
-            >
-              회원가입
-            </Button>
+        <div className={styles.content}>
+          <div className={styles.pagetitle}>회원가입</div>
+          <div className={err !== null ? styles.warning : styles.offscreen}>
+            {err}
           </div>
-        </form>
-        <div className={styles.toLogin}>
-          이미 회원이신가요?&nbsp;&nbsp;
-          <a href="/login">로그인 하러가기 </a>
+          <br />
+          <form className={styles.form} onSubmit={submitHandler}>
+            <label htmlFor="nickname">닉네임</label>
+            <Input
+              type="text"
+              id="nickname"
+              value={nickname}
+              style={{ width: "95%" }}
+              onChange={nicknameInputHandler}
+            />
+            <br />
+            <br />
+            <label htmlFor="email">이메일</label>
+            <Input
+              type="text"
+              id="email"
+              value={email}
+              style={{ width: "95%" }}
+              onFocus={() => setEmailFocus(true)}
+              onChange={emailInputHandler}
+            />
+            <br />
+            <p
+              className={
+                !validEmail && emailFocus ? styles.warning : styles.offscreen
+              }
+            >
+              이메일 형식으로 입력해주세요
+              <br />
+              (예. name@domain.com)
+            </p>
+            <br />
+            <label htmlFor="password">비밀번호</label>
+            <Input
+              type="password"
+              id="password"
+              value={password}
+              style={{ width: "95%" }}
+              onFocus={() => setPasswordFocus(true)}
+              onChange={passwordInputHandler}
+            />
+            <br />
+            <p
+              className={
+                !validPassword && passwordFocus
+                  ? styles.warning
+                  : styles.offscreen
+              }
+            >
+              8자리 이상으로 설정해주세요.
+            </p>
+            <br />
+            <label htmlFor="passwordCheck">비밀번호 확인</label>
+            <Input
+              type="password"
+              id="passwordCheck"
+              value={passwordCheck}
+              style={{ width: "95%" }}
+              onFocus={() => setPasswordCheckFocus(true)}
+              onChange={passwordCheckInputHandler}
+            />
+            <br />
+            <p
+              className={
+                !validPasswordCheck && passwordCheckFocus
+                  ? styles.warning
+                  : styles.offscreen
+              }
+            >
+              비밀번호가 일치하지 않습니다.
+            </p>
+            <br />
+            <div className={styles.buttonContents}>
+              <Button type="submit">회원가입</Button>
+            </div>
+          </form>
+          <div className={styles.toLogin}>
+            이미 회원이신가요?&nbsp;&nbsp;
+            <a href="/login">로그인 하러가기 </a>
+          </div>
         </div>
       </div>
     </div>

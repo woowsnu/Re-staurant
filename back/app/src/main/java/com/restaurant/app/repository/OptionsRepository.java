@@ -14,12 +14,13 @@ public interface OptionsRepository extends JpaRepository<Options, Long> {
     List<Options> findAll();
 
 //    @Transactional
+//List<Options> findOptionsByRestaurantBusId(Long busId);
+
+
     List<Options> findOptionsByRestaurantBusId(Long busId);
-@Transactional
-//    Options findOptionsByRestaurantBusId(Long busId);
 //    Long deleteOptionsByRestaurantBusId(Long restaurantOptionIndex);
 
-    Options findByRestaurantOptionIndex(Long restaurantOptionIndex);
+//    Options findByRestaurantOptionIndex(Long restaurantOptionIndex);
 
 
 //    @Transactional

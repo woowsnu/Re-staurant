@@ -100,13 +100,15 @@ public class RestaurantService {
     }
 
 
-    public List<Restaurant> findRestaurantByRestaurantCategory(String restaurantCategory){
-        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByrestaurantCategory(restaurantCategory);
+    public List<Restaurant>  findByRestaurantCategory(String restaurantCategory){
+        List<Restaurant> restaurantList = restaurantRepository.findByRestaurantCategoryContainingIgnoreCase(restaurantCategory);
 
 
-        if (restaurantList.size() == 0) {
-            throw new RuntimeException("식당이 없습니다.");
+        if (restaurantList == null) {
+            throw new RuntimeException("해당 식당이 없습니다.");
         }
+
+
 
         return restaurantList;
     }
