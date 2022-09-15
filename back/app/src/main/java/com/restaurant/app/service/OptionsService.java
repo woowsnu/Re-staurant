@@ -48,24 +48,12 @@ public class OptionsService {
 
     }
 
-    public ResponseEntity<?> findByRestaurant(OptionsDTO optionsDTO, Long busId) {
-        try {
-            Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
-            List<Options> option = optionsRepository.findOptionsByRestaurantBusId(busId);
-            Options options = Options.builder()
-                    .restaurant(restaurant)
-                    .restaurantOptionIndex(optionsDTO.getRestaurantOptionIndex())
-                    .iconUrl(optionsDTO.getIconUrl())
-                    .isCheck(optionsDTO.getIsCheck())
-                    .optionNum(optionsDTO.getOptionNum())
-                    .optionOrder(optionsDTO.getOptionOrder())
-                    .build();
-            return ResponseEntity.ok(options);
-        } catch (Exception e) {
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.badRequest().body(responseDTO);
-        }
-
+//    @Transactional(readOnly = true)
+    public List<Options> findByBusId(Long busId) {
+//        try {
+        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
+        List<Options> option = optionsRepository.findOptionsByRestaurantBusId(busId);
+            return option;
     }
 
     public List<Options> update(OptionsDTO optionsDTO, Long busId) {
