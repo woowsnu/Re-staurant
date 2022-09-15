@@ -21,7 +21,7 @@ root.render(
       <Routes>
         <Route path="*" element={<App />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/search" element={<RestaurantSearch />} />
+        <Route path="/search/:id" element={<RestaurantSearch />} />
         <Route path="/detail/:id" element={<RestaurantDetailPage />} />
         <Route element={<ProtectedRoutesAuth />}>
           <Route path="/login" element={<LogIn />} />
