@@ -1,7 +1,6 @@
 package com.restaurant.app.service;
 
 import com.restaurant.app.DTO.OptionsDTO;
-import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.model.Options;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.repository.OptionsRepository;
@@ -9,7 +8,6 @@ import com.restaurant.app.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,65 +28,66 @@ public class OptionsService {
     }
 //
 
-    public List<Options> save(OptionsDTO optionsDTO, Long busId) {
-        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
-        List<Options> optionsList = optionsRepository.findOptionsByRestaurantBusId(busId);
+    public List<Options> save(OptionsDTO optionsDTO) {
+        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(optionsDTO.getBusId());
 
         Options options = Options.builder()
-                .restaurant(restaurant)
-                .restaurantOptionIndex(optionsDTO.getRestaurantOptionIndex())
-                .iconUrl(optionsDTO.getIconUrl())
+                .optionId(optionsDTO.getOptionId())
+                .optionName(optionsDTO.getOptionName())
                 .isCheck(optionsDTO.getIsCheck())
-                .optionNum(optionsDTO.getOptionNum())
-                .optionOrder(optionsDTO.getOptionOrder())
+                .orderCount(optionsDTO.getOrderCount())
+                .iconUrl(optionsDTO.getIconUrl())
+                .restaurant(restaurant)
                 .build();
-        Options saveOptions = optionsRepository.save(options);
-        return optionsRepository.findOptionsByRestaurantBusId(busId);
+
+        optionsRepository.save(options);
+
+        return optionsRepository.findOptionsByRestaurantBusId(optionsDTO.getBusId());
 
 
     }
 
-    public ResponseEntity<?> findByRestaurant(OptionsDTO optionsDTO, Long busId) {
-        try {
-            Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
-            List<Options> option = optionsRepository.findOptionsByRestaurantBusId(busId);
-            Options options = Options.builder()
-                    .restaurant(restaurant)
-                    .restaurantOptionIndex(optionsDTO.getRestaurantOptionIndex())
-                    .iconUrl(optionsDTO.getIconUrl())
-                    .isCheck(optionsDTO.getIsCheck())
-                    .optionNum(optionsDTO.getOptionNum())
-                    .optionOrder(optionsDTO.getOptionOrder())
-                    .build();
-            return ResponseEntity.ok(options);
-        } catch (Exception e) {
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.badRequest().body(responseDTO);
-        }
-
-    }
-
-    public List<Options> update(OptionsDTO optionsDTO, Long busId) {
-        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
-        List<Options> option = optionsRepository.findOptionsByRestaurantBusId(busId);
+//    public ResponseEntity<?> findByRestaurant(OptionsDTO optionsDTO, String busId) {
+//        try {
+//            Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
+//            List<Options> option = optionsRepository.findOptionsByRestaurantBusId(busId);
+//            Options options = Options.builder()
+//                    .restaurant(restaurant)
+//                    .optionIndex(optionsDTO.getOptionIndex())
+//                    .iconUrl(optionsDTO.getIconUrl())
+//                    .isCheck(optionsDTO.getIsCheck())
+//                    .optionNum(optionsDTO.getOptionNum())
+//                    .optionOrder(optionsDTO.getOptionOrder())
+//                    .build();
+//            return ResponseEntity.ok(options);
+//        } catch (Exception e) {
+//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+//            return ResponseEntity.badRequest().body(responseDTO);
+//        }
 //
-        Options options = Options.builder()
-                .restaurant(restaurant)
-                .restaurantOptionIndex(optionsDTO.getRestaurantOptionIndex())
-                .iconUrl(optionsDTO.getIconUrl())
-                .isCheck(optionsDTO.getIsCheck())
-                .optionNum(optionsDTO.getOptionNum())
-                .optionOrder(optionsDTO.getOptionOrder())
-                .build();
-        Options optionUpdate = optionsRepository.save(options);
-        return optionsRepository.findOptionsByRestaurantBusId(busId);
-
-
-    }
+//    }
+//
+//    public List<Options> update(OptionsDTO optionsDTO, String busId) {
+//        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
+//        List<Options> option = optionsRepository.findOptionsByRestaurantBusId(busId);
+////
+//        Options options = Options.builder()
+//                .restaurant(restaurant)
+//                .optionIndex(optionsDTO.getRestaurantOptionIndex())
+//                .iconUrl(optionsDTO.getIconUrl())
+//                .isCheck(optionsDTO.getIsCheck())
+//                .optionNum(optionsDTO.getOptionNum())
+//                .optionOrder(optionsDTO.getOptionOrder())
+//                .build();
+//        Options optionUpdate = optionsRepository.save(options);
+//        return optionsRepository.findOptionsByRestaurantBusId(busId);
+//
+//
+//    }
 
 //    @Override
     @Transactional
-    public void  delete(Long busId) {
+    public void  delete(String busId) {
 //        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
 //        Options option = optionsRepository.findOptionsByRestaurantBusId(busId);
 //        Options option = optionsRepository.findByRestaurantOptionIndex(restaurantOptionIndex);

@@ -2,14 +2,10 @@ package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.ReviewDTO;
-import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.model.Review;
 import com.restaurant.app.model.User;
-import com.restaurant.app.repository.RestaurantRepository;
 import com.restaurant.app.service.ReviewService;
-import com.restaurant.app.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -22,17 +18,12 @@ import java.util.stream.Collectors;
 @RequestMapping("/review")
 public class ReviewController {
 
-    private final UserService userService;
-
-    @Autowired
     private final ReviewService reviewService;
-
-    private final RestaurantRepository restaurantRepository;
 
     // Create Review
     @PostMapping("/{busId}/auth/createReview")
     public ResponseEntity<?> createReview(@AuthenticationPrincipal User authedUser
-            , @PathVariable Long busId, @RequestBody ReviewDTO reviewDTO) {
+            , @PathVariable String busId, @RequestBody ReviewDTO reviewDTO) {
 
         try {
 

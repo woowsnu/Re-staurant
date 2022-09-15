@@ -1,7 +1,6 @@
 package com.restaurant.app.service;
 
 import com.restaurant.app.DTO.ReviewDTO;
-import com.restaurant.app.model.Options;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.model.Review;
 import com.restaurant.app.model.User;
@@ -25,13 +24,14 @@ public class ReviewService {
 
     private final UserRepository userRepository;
 
-    public List<Review> save(User authedUser, ReviewDTO reviewDTO, Long busId) {
+    public List<Review> save(User authedUser, ReviewDTO reviewDTO, String busId) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
         List<Review> reviews = reviewRepository.findReviewByUser(authedUser);
         List<Review> reviewList = reviewRepository.findReviewByRestaurantBusId(busId);
 
 
         Review review = Review.builder()
+                .user(authedUser)
                 .restaurant(restaurant)
                 .reviewTitle(reviewDTO.getReviewTitle())
                 .reviewContent(reviewDTO.getReviewContent())

@@ -17,30 +17,32 @@ public class Options implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="restaurant_option_index")
-    private Long restaurantOptionIndex;
+    @Column(name="option_index")
+    private Long optionIndex;
 
-    @Column(name="icon_url")
-    private String iconUrl;
+    @Column(name="option_id")
+    private Long optionId;
+
+    @Column(name="option_name")
+    private String optionName;
 
     @Column(name="is_check")
     private int isCheck;
 
-    @Column(name="option_num")
-    private int optionNum;
+    @Column(name="order_Count")
+    private int orderCount;
 
-    @Column(name="option_order")
-    private int optionOrder;
-
+    @Column(name="icon_url")
+    private String iconUrl;
 
     @ManyToOne(fetch =FetchType.LAZY, targetEntity = Restaurant.class)
-    @JoinColumn(name= "bus_id" ,referencedColumnName = "bus_id")
+    @JoinColumn(name = "restaurant_index",referencedColumnName = "restaurant_index")
     private Restaurant restaurant;
 
     @Override
     public String toString() {
-        return "iconUrl : " + iconUrl  + ", isCheck : "+ isCheck + ", optionNum : " + optionNum +
-                ", optionOrder : "+optionOrder ;
+        return "optionId : " + optionId  + "optionName : " + optionName
+                + "iconUrl : " + iconUrl  + ", isCheck : "+ isCheck + ", orderCount : "+orderCount ;
 
     }
 
