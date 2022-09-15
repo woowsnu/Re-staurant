@@ -33,16 +33,13 @@ const LogIn = (props) => {
     await axios
       .post(URL, JSON.stringify({ email, password }), {
         headers: { "Content-Type": "application/json" },
-        // withCredentials: true,
       })
       .then((response) => {
         console.log(response);
         const accessToken = response.data.jwtToken;
-        // const refreshToken = response.data.refreshToken;
         localStorage.setItem("accessToken", accessToken);
-        // localStorage.setItem("refreshToken", refreshToken);
         ctx.onLogin(email, password);
-        // navigate(-1);
+        navigate(-1);
       })
       .catch((err) => {
         console.log(err);
