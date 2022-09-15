@@ -4,10 +4,24 @@
     visibility: hidden;
 }
 
-.wrapper {
+.imgWrap {
+    justify-content: center;
+    display: flex;
+    margin-top: 3rem;
+    margin-bottom: 0;
+}
+
+.wrap {
     display: flex;
     justify-content: center;
-    height: 100%
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    max-width: 400px;
 }
 
 .content {

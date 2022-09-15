@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "../../../api/axios";
+import { instance } from "../../../api/axios";
 
 const Uploader = () => {
   const [image, setImage] = useState({
@@ -35,7 +35,7 @@ const Uploader = () => {
     if (image.image_file) {
       const formData = new FormData();
       formData.append("file", image.image_file);
-      await axios.post("http://localhost:3500/profile-img", formData);
+      await instance.post("http://localhost:3500/profile-img", formData);
       for (let value of formData.values()) {
         console.log(value);
       }

@@ -10,19 +10,7 @@ import java.util.List;
 public interface OptionsRepository extends JpaRepository<Options, Long> {
     List<Options> findAll();
 
-//    @Transactional
     List<Options> findOptionsByRestaurantBusId(String busId);
-//@Transactional
-//    Options findOptionsByRestaurantBusId(Long busId);
-//    Long deleteOptionsByRestaurantBusId(Long restaurantOptionIndex);
-
-//    Options findByRestaurantOptionIndex(Long restaurantOptionIndex);
-
-
-//    @Transactional
-//    Options findByRestaurantBusId(Long busId);
-//    @Transactional
-//    Long deleteByRestaurantBusId(Long busId);
 
 
 }

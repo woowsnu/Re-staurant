@@ -10,9 +10,11 @@ const RestaurantInfo = (props) => {
       <div>
         <h3>영업시간</h3>
         {!props.restaurant.businessHourInfo?.includes('|') && <p>{props.restaurant.businessHourInfo}</p>}
+        <ul>
         {props.restaurant.businessHourInfo?.includes('|') && props.restaurant.businessHourInfo.split('|').map((hour, i)=>{
-          return <p key={i}>{hour}</p>
+          return <li key={i}>{hour}</li>
         })}
+        </ul>
         <p></p>
       </div>
       <div>

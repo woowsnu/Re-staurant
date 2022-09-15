@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import axios from "../../api/axios";
+import { instance } from "../../api/axios";
 import AuthContext from "../../store/auth-context";
 import { useContext } from "react";
 import styles from "./SignUp.module.css";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
 
-const URL = "http://localhost:8080/login";
+// const URL = "http://localhost:8080/login";
 
 const LogIn = (props) => {
   let navigate = useNavigate();
@@ -30,19 +30,15 @@ const LogIn = (props) => {
   
   const submitHandler = async (e) => {
     e.preventDefault();
-    await axios
-      .post(URL, JSON.stringify({ email, password }), {
+    await  instance.post('/login', JSON.stringify({ email, password }), {
         headers: { "Content-Type": "application/json" },
-        // withCredentials: true,
       })
       .then((response) => {
         console.log(response);
         const accessToken = response.data.jwtToken;
-        // const refreshToken = response.data.refreshToken;
         localStorage.setItem("accessToken", accessToken);
-        // localStorage.setItem("refreshToken", refreshToken);
         ctx.onLogin(email, password);
-        // navigate(-1);
+        navigate(-1);
       })
       .catch((err) => {
         console.log(err);

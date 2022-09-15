@@ -51,6 +51,7 @@ public class OptionsController {
 
     //read
     //가게 이름으로 조회
+
 //    @GetMapping("/findName/{restaurantName}")
 //    public ResponseEntity<?> findByRestaurant(@RequestBody OptionsDTO optionsDTO, @PathVariable String busId) {
 //        return optionsService.findByRestaurant(optionsDTO, busId);
@@ -79,6 +80,7 @@ public class OptionsController {
 //            return ResponseEntity.badRequest().body(responseDTO);
 //        }
 //    }
+
 
     //delete
     @DeleteMapping("/delete/{busId}")
