@@ -29,9 +29,9 @@ public class RestaurantController {
 
         System.out.println("createRestaurantInfo");
 
-        System.out.println(restaurantDTO);
+        System.out.println(restaurantDTO.getBusId());
         try {
-            Restaurant savedRestaurant = restaurantService.createPlaceInfo(restaurantDTO);
+            restaurantService.createPlaceInfo(restaurantDTO);
 
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
             return ResponseEntity.ok().body(responseDTO);
@@ -138,7 +138,7 @@ public class RestaurantController {
 
     // 상세페이지
     @GetMapping("/restaurantDetail/{busId}")
-    public ResponseEntity<?> restaurantInfo(@PathVariable Long busId) {
+    public ResponseEntity<?> restaurantInfo(@PathVariable String busId) {
 
         try{
             Restaurant restaurant = restaurantService.findRestaurantByBusId(busId);

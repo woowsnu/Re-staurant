@@ -12,19 +12,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OptionsDTO {
 
-    private Long restaurantOptionIndex;
-    private String iconUrl;
+    private Long optionIndex;
+
+    private Long optionId;
+
+    private String optionName;
+
     private int isCheck;
-    private int optionNum;
-    private int optionOrder;
+    private int orderCount;
+
+    private String iconUrl;
+
+    private String busId;
 
 
     public OptionsDTO(Options options){
-        this.restaurantOptionIndex = options.getRestaurantOptionIndex();
+        this.optionIndex = options.getOptionIndex();
         this.iconUrl = options.getIconUrl();
         this.isCheck = options.getIsCheck();
-        this.optionNum = options.getOptionNum();
-        this.optionOrder = options.getOptionOrder();
+        this.orderCount = options.getOrderCount();
     }
 
 

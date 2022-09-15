@@ -32,8 +32,9 @@ public class Review implements Serializable {
     @JoinColumn(name = "user_index",referencedColumnName = "user_index")
     private User user;
 
+
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Restaurant.class)
-    @JoinColumn(name = "bus_id",referencedColumnName = "bus_id")
+    @JoinColumn(name = "restaurant_index",referencedColumnName = "restaurant_index")
     private Restaurant restaurant;
 
     @CreatedDate
