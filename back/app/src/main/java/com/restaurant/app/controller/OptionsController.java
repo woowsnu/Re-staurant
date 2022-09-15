@@ -68,9 +68,21 @@ public class OptionsController {
 
     //read
     //가게 이름으로 조회
-    @GetMapping("/findName/{restaurantName}")
-    public ResponseEntity<?> findByRestaurant(@RequestBody OptionsDTO optionsDTO, @PathVariable Long busId) {
-        return optionsService.findByRestaurant(optionsDTO, busId);
+    @GetMapping("/findBusId/{busId}")
+    public ResponseEntity<?>  read( @PathVariable Long busId) {
+        try {
+
+            List<Options> optionsList = optionsService.findByBusId(busId);
+            List<OptionsDTO> optionsDTOs = optionsList.stream().map(OptionsDTO::new).collect(Collectors.toList());
+
+            return ResponseEntity.ok().body(optionsDTOs);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+
     }
 
     //update
