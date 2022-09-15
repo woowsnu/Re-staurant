@@ -184,9 +184,6 @@ const RestaurantDetail = () => {
           <RestaurantInfo restaurant={restaurant} options={OPTIONS}/>
           <RestaurantMenu menus={MENUS} />
           <RestaurantReview reviews={REVIEWS} restaurant={restaurant} />
-          <Link to={"/review/write/1"}>
-            <button>리뷰쓰기</button>
-          </Link>
         </div>
       </div>
     );
