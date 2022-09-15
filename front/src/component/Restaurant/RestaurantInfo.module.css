@@ -15,6 +15,13 @@
   line-height: 1.4;
 }
 
+.container ul {
+  /* text-decoration: dotted; */
+  list-style: disc;
+  padding-left: 1.5rem;
+  line-height: 1.4;
+}
+
 @media screen and (max-width: 680px) {
   .container {
     max-width: 100%;

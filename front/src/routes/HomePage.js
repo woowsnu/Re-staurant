@@ -5,7 +5,6 @@ import Header from '../component/Layout/Header';
 import Tag from '../component/UI/Tag';
 import PhotoCard from '../component/UI/PhotoCard';
 import styles from './HomePage.module.css';
-import CardSlider from '../component/UI/CardSlider';
 
 const TAG = ['삼겹살', '우동', '카레', '까눌레', '중식'];
 const MANY_REVISIT = [1698767904, 1788964881, 1274871069, 37064850];
