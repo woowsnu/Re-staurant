@@ -32,7 +32,7 @@ const RestaurantReview = (props) => {
       <div>
         <h3>리뷰</h3>
       </div>
-      <Link to={'/review/write/1'} state={simpleRestaurantProfile}>
+      <Link to={`/review/${busId}`} state={simpleRestaurantProfile}>
         <Button>리뷰쓰기</Button>
       </Link>
       <div className={styles.visitbtn}>

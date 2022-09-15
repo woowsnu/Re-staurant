@@ -10,7 +10,7 @@ import MyPage from "./routes/MyPage";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import ProtectedRoutesAuth from "./routes/ProtectedRoutesAuth";
 import RestaurantDetailPage from "./routes/RestaurantDetailPage";
-import ReviewWrite from "./component/Review/ReviewWrite";
+import ReviewWritePage from "./routes/ReviewWritePage";
 import Admin from "./routes/Admin";
 import RestaurantSearch from "./routes/RestaurantSearch";
 
@@ -29,7 +29,7 @@ root.render(
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/mypage" element={<MyPage />} />
-          <Route path="/review/write/:id" element={<ReviewWrite />} />
+          <Route path="/review/:id" element={<ReviewWritePage />} />
         </Route>
       </Routes>
       </BrowserRouter>
