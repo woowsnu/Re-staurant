@@ -1,0 +1,25 @@
+.tabbar {
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.tabbar button {
+    border: none;
+    cursor: pointer;
+    padding: 14px;
+    width: 470px;
+    overflow: hidden;
+    font-size: 15px;
+}
+
+.tab {
+    background-color: inherit;
+    font-weight: 600;
+}
+.tabactive {
+    background-color: white;
+    border-bottom: 0.2rem solid black;
+    font-weight: 700;
+}
