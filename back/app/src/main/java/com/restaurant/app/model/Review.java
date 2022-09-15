@@ -28,6 +28,9 @@ public class Review implements Serializable {
     @Column(name="review_content")
     private String reviewContent;
 
+    @Column(name="review_image")
+    private String review_image;
+
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "user_index",referencedColumnName = "user_index")
     private User user;
@@ -42,7 +45,8 @@ public class Review implements Serializable {
 
     @Override
     public String toString() {
-        return "{ reviewIndex :" + reviewIndex + ", reviewTitle : " + reviewTitle  + ", reviewContent : "+ reviewContent +"}";
+        return "{ reviewIndex :" + reviewIndex + ", reviewTitle : " + reviewTitle  + ", reviewContent : "+ reviewContent +
+                ", email : " + user.getEmail() + "}";
     }
 
 

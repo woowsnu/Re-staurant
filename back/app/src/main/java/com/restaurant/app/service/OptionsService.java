@@ -47,7 +47,7 @@ public class OptionsService {
 
     }
 
-//    public ResponseEntity<?> findByRestaurant(OptionsDTO optionsDTO, String busId) {
+//    public List<Options> findByRestaurant(OptionsDTO optionsDTO, String busId) {
 //        try {
 //            Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
 //            List<Options> option = optionsRepository.findOptionsByRestaurantBusId(busId);
@@ -59,31 +59,34 @@ public class OptionsService {
 //                    .optionNum(optionsDTO.getOptionNum())
 //                    .optionOrder(optionsDTO.getOptionOrder())
 //                    .build();
-//            return ResponseEntity.ok(options);
+//            return
 //        } catch (Exception e) {
 //            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
 //            return ResponseEntity.badRequest().body(responseDTO);
 //        }
 //
 //    }
-//
-//    public List<Options> update(OptionsDTO optionsDTO, String busId) {
-//        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
-//        List<Options> option = optionsRepository.findOptionsByRestaurantBusId(busId);
-////
-//        Options options = Options.builder()
-//                .restaurant(restaurant)
-//                .optionIndex(optionsDTO.getRestaurantOptionIndex())
-//                .iconUrl(optionsDTO.getIconUrl())
-//                .isCheck(optionsDTO.getIsCheck())
-//                .optionNum(optionsDTO.getOptionNum())
-//                .optionOrder(optionsDTO.getOptionOrder())
-//                .build();
-//        Options optionUpdate = optionsRepository.save(options);
-//        return optionsRepository.findOptionsByRestaurantBusId(busId);
-//
-//
-//    }
+
+    public void update(OptionsDTO optionsDTO, String busId) {
+        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
+        List<Options> option = optionsRepository.findOptionsByRestaurantBusId(busId);
+
+        if(option == null || restaurant == null) {
+            throw new RuntimeException("invalid options");
+        }
+
+        Options options = Options.builder()
+                .optionIndex(optionsDTO.getOptionIndex())
+                .optionId(optionsDTO.getOptionId())
+                .optionName(optionsDTO.getOptionName())
+                .isCheck(optionsDTO.getIsCheck())
+                .orderCount(optionsDTO.getOrderCount())
+                .iconUrl(optionsDTO.getIconUrl())
+                .restaurant(restaurant)
+                .build();
+
+        optionsRepository.save(options);
+    }
 
 //    @Override
     @Transactional

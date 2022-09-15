@@ -90,8 +90,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("{\"jwtToken\"" + ":" + "\"Bearer " + accessToken + "\""
-               + ",\"refreshToken\"" + ":" + "\"Bearer " + refreshToken + "\"" +"}");
+        response.getWriter().write("{\"jwtToken\"" + ":" + "\"Bearer " + accessToken + "\"" +"}");
 
 
     }

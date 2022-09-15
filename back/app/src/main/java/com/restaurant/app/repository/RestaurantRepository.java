@@ -20,7 +20,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     List<Restaurant> findRestaurantBySiCodeAndGuCode(String siCode, String guCode);
     List<Restaurant> findRestaurantBySiCodeAndGuCodeAndDongCode(String siCode, String guCode, String dongCode);
 
-    List<Restaurant> findByRestaurantCategoryContainingIgnoreCase(String restaurantCategory);
 
 
     List<Restaurant> findAll();

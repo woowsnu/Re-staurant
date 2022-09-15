@@ -51,35 +51,31 @@ public class OptionsController {
 
     //read
     //가게 이름으로 조회
-
 //    @GetMapping("/findName/{restaurantName}")
 //    public ResponseEntity<?> findByRestaurant(@RequestBody OptionsDTO optionsDTO, @PathVariable String busId) {
+//
+//        List<Options> options = optionsService.findByRestaurant(optionsDTO,busId);
+//
 //        return optionsService.findByRestaurant(optionsDTO, busId);
 //    }
-//
-//    //update
-//    @PutMapping("/update/{busId}")
-//    public ResponseEntity<?> update(@RequestBody OptionsDTO optionsDTO,@PathVariable String busId) {
-//        try {
-//
-//            List<Options> optionsList= optionsService.update(optionsDTO,busId);
-//
-//            OptionsDTO optionDto = OptionsDTO.builder()
-//                    .restaurantOptionIndex(optionsDTO.getRestaurantOptionIndex())
-//                    .iconUrl(optionsDTO.getIconUrl())
-//                    .isCheck(optionsDTO.getIsCheck())
-//                    .optionNum(optionsDTO.getOptionNum())
-//                    .optionOrder(optionsDTO.getOptionOrder())
-//                    .build();
-//
-//            return ResponseEntity.ok().body(optionDto);
-//
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-//            return ResponseEntity.badRequest().body(responseDTO);
-//        }
-//    }
+
+    //update
+    @PutMapping("/update/{busId}")
+    public ResponseEntity<?> update(@RequestBody OptionsDTO optionsDTO,@PathVariable String busId) {
+        try {
+
+            optionsService.update(optionsDTO,busId);
+
+            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
+
+            return ResponseEntity.ok().body(responseDTO);
+
+        } catch (Exception e) {
+
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
 
 
     //delete
