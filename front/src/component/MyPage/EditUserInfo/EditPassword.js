@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./EditPassword.module.css";
 import Input from "../../UI/Input";
-import axios from "../../../api/axios";
+import { instance } from "../../../api/axios";
 import Button from "../../UI/Button";
 
 const EditPassword = (props) => {
@@ -29,14 +29,14 @@ const EditPassword = (props) => {
     props.passwordChangeExit();
   };
 
-  const URL = "http://localhost:8080/user/auth/update/password";
+  // const URL = "http://localhost:8080/user/auth/update/password";
   const token = localStorage.getItem("token");
   const handleSubmit = (e) => {
     e.preventDefault();
     const profile = { password: newPassword };
     // if (previousPassword === props.password) {
-    axios
-      .put(URL, JSON.stringify(profile), {
+    instance
+      .put('/user/auth/update/password', JSON.stringify(profile), {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,

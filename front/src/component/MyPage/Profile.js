@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import basicimage from "../../images/user.png";
+import basicimage from "../../assets/images/user.png";
 import styles from "./Profile.module.css";
 import UploadProfilePic from "./EditUserInfo/UploadProfilePic";
 import AuthContext from "../../store/auth-context";

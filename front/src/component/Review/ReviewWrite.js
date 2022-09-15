@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-// import { client } from '../../api/review-instance';
+import { instance } from '../../api/axios';
 // import ReviewImgUpload from "./ReviewImgUpload";
 
 const ReviewWrite = () => {
@@ -60,39 +60,34 @@ const ReviewWrite = () => {
   const reviewSubmitHandler = async (e) => {
     e.preventDefault();
 
-    // const today = new Date();
-    // const now = today.toLocaleString();
-    // console.log(now);
-
-    // 나중에 유저 정보도 추가되어야 함!
+    // 리뷰데이터
     const newReview = {
       reviewTitle: comment,
       reviewContent: review,
     };
-    // date: now,
-
-    // const token = localStorage.getItem('access_token');
+    // 헤더
+    const token = localStorage.getItem('accessToken');
     const config = {
       Headers: {
-        'content-type': 'application/json',
-        // Authorization: 'Bearer ' + token,
+        Authorization: token,
       },
     };
 
     try {
-      const response = await axios.post(
-        `http://localhost:8080/review/${restaurant.busId}/auth/createReview`,
+      const response = await instance.post(
+        `/review/${restaurant.busId}/auth/createReview`,
         newReview,
         config
-      ).then((response) => {
-        if (response.data.jwtToken != null) {
-        localStorage.setItem("token",response.data.jwtToken)
-        }
-      })
-      if (response.status === 201) {
-        await alert('작성이 완료되었습니다.');
-        await navigate(-1);}
-    } catch (error) {}
+      );
+      console.log(response);
+      // if (response.data.status === 403) {
+      //   console.log("dhkdkdkdkdkdkdk")
+      //   await alert('작성이 완료되었습니다.');
+      //   await navigate(-1);
+      // }
+    } catch (error) {
+      console.log(error.response.data.status);
+    }
   };
 
   return (

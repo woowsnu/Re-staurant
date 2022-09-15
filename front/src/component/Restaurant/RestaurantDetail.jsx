@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from 'react-router-dom';
-import axios from '../../api/axios';
+import { useParams } from 'react-router-dom';
+import { instance } from '../../api/axios';
 import RestaurantProfile from "./RestaurantProfile";
 import RestaurantInfo from "./RestaurantInfo";
 import RestaurantMenu from "./RestaurantMenu";
@@ -162,7 +162,7 @@ const RestaurantDetail = () => {
     // restaurant data fetch
     const fetchRestaurantData = async () => {
       try {
-        const response = await axios.get(`/restaurant/restaurantDetail/${restaurantid}`);
+        const response = await instance.get(`/restaurant/restaurantDetail/${restaurantid}`);
         setRestaurant(response.data)
       } catch (error) {
         console.error("에러가 발생했습니다. : ", error)
