@@ -6,8 +6,11 @@ import com.restaurant.app.repository.RestaurantRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -15,8 +18,8 @@ public class RestaurantService {
 
     @Autowired
     private RestaurantRepository restaurantRepository;
-    public List<Restaurant> findAll() {
-        return restaurantRepository.findAll();}
+//    public List<Restaurant> findAll() {
+//        return restaurantRepository.findAll();}
 
     public Restaurant createPlaceInfo(RestaurantDTO restaurantDTO) {
 
@@ -111,6 +114,17 @@ public class RestaurantService {
 
 
         return restaurantList;
+    }
+
+    @Transactional(readOnly = true)
+    public List<RestaurantDTO>  findByRestaurantCategoryOrRestaurantName(String restaurantName,String restaurantCategory){
+        return restaurantRepository.findByRestaurantNameContainingOrRestaurantCategoryContaining(restaurantName, restaurantCategory)
+                .stream().map(RestaurantDTO::new).collect(Collectors.toList());
+//        List<Restaurant> restaurantList = restaurantRepository.findByRestaurantNameContainingOrRestaurantCategoryContaining( restaurantName, restaurantCategory);
+//        if (restaurantList == null) {
+//            throw new RuntimeException("해당 식당이 없습니다.");
+//        }
+//        return restaurantList;
     }
 
 

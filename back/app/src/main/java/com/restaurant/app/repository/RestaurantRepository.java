@@ -3,12 +3,14 @@ package com.restaurant.app.repository;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.model.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
+public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, JpaSpecificationExecutor<Restaurant> {
 
     List<Restaurant>  findRestaurantByRestaurantName(String restaurantName);
 
@@ -24,6 +26,8 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     List<Restaurant> findByRestaurantCategoryContainingIgnoreCase(String restaurantCategory);
 
     List<Restaurant> findAll();
+
+    List<Restaurant> findByRestaurantNameContainingOrRestaurantCategoryContaining(String restaurantName,String restaurantCategory);
 
 
 }

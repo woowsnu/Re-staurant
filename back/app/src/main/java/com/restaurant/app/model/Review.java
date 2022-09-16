@@ -19,8 +19,6 @@ public class Review implements Serializable {
     @Column(name = "review_index")
     private Long reviewIndex;
 
-//    @Column(name="business_id")
-//    private String busId;
 
     @Column(name="review_title")
     private String reviewTitle;
@@ -41,7 +39,8 @@ public class Review implements Serializable {
 
     @Override
     public String toString() {
-        return "{ reviewIndex :" + reviewIndex + ", reviewTitle : " + reviewTitle  + ", reviewContent : "+ reviewContent +"}";
+        return "{ reviewIndex :" + reviewIndex + ", reviewTitle : " + reviewTitle  + ", reviewContent : "+ reviewContent + "}";
+
     }
 
 
