@@ -17,14 +17,14 @@ public class MenusDTO {
     private String menuName;
     private String menuPrice;
 
-    private String busId;
 
+    private String busId;
 
     //만약 관리자 또는 가게 운영자가 자신의 메뉴를 프론트엔드에서 등록하려는 경우 필요
     public MenusDTO(Menus menus){
-        this.menuIndex = getMenuIndex();
-        this.menuName = getMenuName();
-        this.menuPrice = getMenuPrice();
+        this.menuIndex = menus.getMenuIndex();
+        this.menuName = menus.getMenuName();
+        this.menuPrice = menus.getMenuPrice();
     }
 
 }

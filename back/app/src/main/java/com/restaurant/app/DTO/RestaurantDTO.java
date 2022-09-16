@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -32,10 +34,11 @@ public class RestaurantDTO {
     private Float avgRating;
 
     private Long authorCount;
-    private String menuList;
-    private String optionsList;
-    private String reviewList;
+    private List<MenusDTO> menusList;
+    private List<OptionsDTO> optionsList;
+    private List<ReviewDTO>reviewList;
 
+    private List<VotedKeywordsDTO> keywordList;
 
     public RestaurantDTO(Restaurant restaurant) {
         this.restaurantIndex = restaurant.getRestaurantIndex();
@@ -58,9 +61,10 @@ public class RestaurantDTO {
         this.authorCount = restaurant.getAuthorCount();
         this.snsUrl = restaurant.getSnsUrl();
 
-        this.menuList = restaurant.menuToString();
-        this.optionsList = restaurant.optionsList();
-        this.reviewList = restaurant.reviewList();
+        this.menusList = restaurant.menusList(restaurant.getMenusList());
+        this.optionsList = restaurant.optionsList(restaurant.getOptionsList());
+        this.reviewList = restaurant.reviewList(restaurant.getReviewList());
+        this.keywordList = restaurant.keywordsList(restaurant.getKeywordsList());
 
 
     }
