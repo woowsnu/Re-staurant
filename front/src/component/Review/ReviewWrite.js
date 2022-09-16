@@ -13,9 +13,10 @@ const ReviewWrite = (props) => {
   const { name, siCode, guCode, category, busId } = props.restaurant;
 
   const [comment, setComment] = useState('');
+  const [image, setImage] = useState('');
   const [review, setReview] = useState('');
   const [revisit, setRevisit] = useState(1);
-  const [image, setImage] = useState(null);
+  // const [image, setImage] = useState(null);
 
   // 재방문의사
   const revisitClickHandler = (value) => {
@@ -28,6 +29,11 @@ const ReviewWrite = (props) => {
     setComment(e.target.value);
   };
 
+  // 한줄평
+  const imageChangeHandler = (e) => {
+    setComment(e.target.value);
+  };
+
   // 리뷰
   const reviewChangeHandler = (e) => {
     setReview(e.target.value);
@@ -37,21 +43,21 @@ const ReviewWrite = (props) => {
   const saveImage = async (e) => {
     e.preventDefault();
     console.log(e.target.files[0]);
-    // if(e.target.files[0]) {
-    //   URL.revokeObjectURL(image.preview_URL);
+    if(e.target.files[0]) {
+      URL.revokeObjectURL(image.preview_URL);
     setImage(e.target.files[0]);
-    // }
-    // await console.log(image)
+    }
+    await console.log(image)
   };
 
   const sendToServer = async () => {
     const formData = new FormData();
     formData.append('file', image.file);
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //   }
-    // }
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
+    }
     await axios.post('http://localhost:3500/review-img', formData);
   };
 
@@ -68,6 +74,7 @@ const ReviewWrite = (props) => {
     const newReview = {
       reviewTitle: comment,
       reviewContent: review,
+      imgUrl: image
     };
 
     try {
@@ -137,6 +144,15 @@ const ReviewWrite = (props) => {
           placeholder='한줄평을 작성해주세요'
           onChange={commentChangeHandler}
           value={comment}
+        />
+        <h3>이미지 등록</h3>
+        <input
+          id='image'
+          style={{ width: '100%' }}
+          type='text'
+          placeholder='한줄평을 작성해주세요'
+          onChange={imageChangeHandler}
+          value={image}
         />
         <h3>상세리뷰</h3>
         <textarea
