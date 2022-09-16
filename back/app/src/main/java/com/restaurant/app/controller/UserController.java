@@ -1,8 +1,11 @@
 package com.restaurant.app.controller;
 
+import com.restaurant.app.DTO.FollowDTO;
 import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.UserDTO;
+import com.restaurant.app.model.Follow;
 import com.restaurant.app.model.User;
+import com.restaurant.app.service.FollowService;
 import com.restaurant.app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,6 +25,8 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
+    private final FollowService followService;
+
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     // Create User : [회원가입 -> 로그인 필요없는 메서드]
@@ -27,7 +35,7 @@ public class UserController {
         System.out.println("POST요청[/join]: 회원가입 메서드" + userDTO.toString());
 
         try{
-            User savedUser = userService.save(userDTO, bCryptPasswordEncoder);
+            userService.save(userDTO, bCryptPasswordEncoder);
 
             ResponseDTO userResponseDTO = ResponseDTO.builder().result(1).build();
 
@@ -49,6 +57,12 @@ public class UserController {
         System.out.println("userController.ReadUserInfo() -> 로그인 중인 사용자: " + authedUser.getEmail());
 
         try {
+            List<Follow> followingList = followService.findFollowByFollowingUser(authedUser);
+            List<FollowDTO> followingDTOList = followingList.stream().map(FollowDTO::new).collect((Collectors.toList()));
+
+            List<Follow> followedList = followService.findFollowByFollowedUser(authedUser);
+            List<FollowDTO> followedDTOList = followedList.stream().map(FollowDTO::new).collect((Collectors.toList()));
+
 
             UserDTO userResponseDTO = UserDTO.builder()
                     .userIndex(authedUser.getUserIndex())
@@ -56,8 +70,12 @@ public class UserController {
                     .password(authedUser.getPassword())
                     .nickname(authedUser.getNickname())
                     .roles(authedUser.getRoles())
-                    .reviewList(authedUser.reviewListToString())
+                    .reviewList(authedUser.reviewList(authedUser.getReviewList()))
+                    .followingList(followingDTOList)
+                    .followerList(followedDTOList)
                     .build();
+
+
 
             return ResponseEntity.ok().body(userResponseDTO);
         } catch (Exception e) {

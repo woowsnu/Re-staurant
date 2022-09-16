@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -16,14 +14,14 @@ public class FollowDTO {
 
     private Long followIndex;
 
-    private String email;
+    private String followingEmail;
 
-    private Set<Follow> followingList;
+    private String followedEmail;
 
     public FollowDTO(Follow follow) {
         this.followIndex = follow.getFollowIndex();
-        this.email = follow.getFollowingUser().getEmail();
-
+        this.followingEmail = follow.getFollowingUser().getEmail();
+        this.followedEmail = follow.getFollowedUser().getEmail();
     }
 
 

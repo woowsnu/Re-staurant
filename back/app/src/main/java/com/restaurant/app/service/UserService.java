@@ -15,7 +15,7 @@ public class UserService {
     private UserRepository userRepository;
 
     // Create UserInfo
-    public User save(UserDTO userDTO, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public void save(UserDTO userDTO, BCryptPasswordEncoder bCryptPasswordEncoder) {
 
         User user = User.builder()
                 .email(userDTO.getEmail())
@@ -29,7 +29,7 @@ public class UserService {
         }
 
         System.out.println("회원가입 완료.");
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     // Update UserNickname

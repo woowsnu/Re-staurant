@@ -33,11 +33,14 @@ public class Restaurant implements Serializable {
     @Column(name="restaurant_name")
     private String restaurantName;
 
-    @Column(name="large_category")
-    private String largeCategory;
+//    @Column(name="large_category")
+//    private String largeCategory;
+//
+//    @Column(name="mid_category")
+//    private String midCategory;
 
-    @Column(name="mid_category")
-    private String midCategory;
+    @Column(name="restaurantCategory")
+    private String restaurantCategory;
 
     @Column(name="x")
     private Float x;
