@@ -104,7 +104,7 @@ public class RestaurantService {
 
 
     public List<Restaurant> findRestaurantByRestaurantCategory(String restaurantCategory){
-        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByRestaurantCategory(restaurantCategory);
+        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByRestaurantCategoryContainingIgnoreCase(restaurantCategory);
 
 
         if (restaurantList.size() == 0) {
