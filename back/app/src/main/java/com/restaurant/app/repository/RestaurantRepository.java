@@ -1,5 +1,6 @@
 package com.restaurant.app.repository;
 
+import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.model.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -26,7 +27,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, J
 
     List<Restaurant> findAll();
 
-    List<Restaurant> findByRestaurantNameContainingOrRestaurantCategoryContaining(String restaurantName,String restaurantCategory);
-
+////    Optional<Restaurant> findByRestaurantNameOryLargeCategoryContainingOrMidCategory(String restaurantName, String largeCategory, String midCategory );
+//Optional<Restaurant> findByRestaurantName(String restaurantName );
 
 }

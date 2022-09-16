@@ -55,8 +55,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/RestaurantDTO.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/OptionsController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/RestaurantController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Restaurant.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantRepository.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/RestaurantService.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -123,7 +127,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/Spec/RestaruantSpecs.java</url>
           <line>17</line>
-          <properties method="toPredicate">
+          <properties>
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
