@@ -1,10 +1,12 @@
 package com.restaurant.app.service;
 
 import com.restaurant.app.DTO.RestaurantDTO;
+import com.restaurant.app.Specification.RestaurantSpecs;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.repository.RestaurantRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,7 +53,7 @@ public class RestaurantService {
 
 //
     public List<Restaurant> findRestaurantByName(String restaurantName){
-        List<Restaurant> restaurantList = restaurantRepository.findRestaurantByRestaurantName(restaurantName);
+        List<Restaurant> restaurantList = restaurantRepository.findRestaurantByRestaurantNameContainingIgnoreCase(restaurantName);
 
         if (restaurantList.size() == 0) {
             throw new RuntimeException("식당이 없습니다.");
@@ -119,8 +121,9 @@ public class RestaurantService {
 
 
 //    @Transactional(readOnly = true)
-//    public Optional<Restaurant>  findByRestaurantName(RestaurantDTO restaurantDTO){
-//        return restaurantRepository.findByRestaurantName(restaurantDTO.getRestaurantName());
+//    public Optional<Restaurant>  findByRestaurantSearch(RestaurantDTO restaurantDTO){
+//        return restaurantRepository.findByRestaurantNameContainingOrLargeCategoryContainingOrMidCategoryContaining(
+//                restaurantDTO.getRestaurantName(),restaurantDTO.getLargeCategory(),restaurantDTO.getMidCategory());
 ////                .stream().map(RestaurantDTO::new).collect(Collectors.toList());
 ////        List<Restaurant> restaurantList = restaurantRepository.findByRestaurantNameContainingOrRestaurantCategoryContaining( restaurantName, restaurantCategory);
 ////        if (restaurantList == null) {
@@ -129,4 +132,16 @@ public class RestaurantService {
 ////        return restaurantList;
 //    }
 
+//    public List<Restaurant> findAll(Specification<Restaurant> withRestaurantName){
+//        return restaurantRepository.findAll(withRestaurantName);
+//
+//    }
+//
+//    public List<Restaurant> findAll(Specification<Restaurant> withMidCategory) {
+//        return restaurantRepository.findAll(withMidCategory);
+//    }
+//
+//    public List<Restaurant> findAll(Specification<Restaurant> withLargeCategory) {
+//        return restaurantRepository.findAll(withLargeCategory);
+//    }
 }
