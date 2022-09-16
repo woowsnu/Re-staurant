@@ -14,9 +14,7 @@ public class RestaurantDTO {
 
     private Long restaurantIndex;  //레스토랑 아이디
     private String busId;
-
     private String largeCategory;   // 대분류
-
     private String midCategory;   // 소분류
     private String restaurantName;
     private Float x;
@@ -30,10 +28,12 @@ public class RestaurantDTO {
     private String tellNumber;
     private String businessHourInfo;
     private String snsUrl;
+
+    private Float avgRating;
+
+    private Long authorCount;
     private String menuList;
-
     private String optionsList;
-
     private String reviewList;
 
 
@@ -54,6 +54,8 @@ public class RestaurantDTO {
         this.guCode = restaurant.getGuCode();
         this.tellNumber = restaurant.getTellNumber();
         this.businessHourInfo = restaurant.getBusinessHourInfo();
+        this.avgRating = restaurant.getAvgRating();
+        this.authorCount = restaurant.getAuthorCount();
         this.snsUrl = restaurant.getSnsUrl();
 
         this.menuList = restaurant.menuToString();

@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/options")
-@CrossOrigin("*")
 @Slf4j
 public class OptionsController {
 

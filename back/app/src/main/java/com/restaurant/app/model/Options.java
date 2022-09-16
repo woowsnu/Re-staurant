@@ -43,7 +43,6 @@ public class Options implements Serializable {
     public String toString() {
         return "optionId : " + optionId  + "optionName : " + optionName
                 + "iconUrl : " + iconUrl  + ", isCheck : "+ isCheck + ", orderCount : "+orderCount ;
-
     }
 
 
