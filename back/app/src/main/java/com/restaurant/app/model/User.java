@@ -1,12 +1,15 @@
 package com.restaurant.app.model;
 
 
+import com.restaurant.app.DTO.FollowDTO;
+import com.restaurant.app.DTO.ReviewDTO;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Builder
@@ -59,8 +62,24 @@ public class User {
         return new ArrayList<>();
     }
 
-    public String reviewListToString() {
-        return reviewList.toString();
+    public List<ReviewDTO> reviewList(Set<Review> reviewList){
+
+        List<ReviewDTO> reviewDTOList = reviewList.stream().map(ReviewDTO::new).collect((Collectors.toList()));
+
+        return reviewDTOList;
     }
 
+    public List<FollowDTO> followingList(Set<Follow> followingList){
+
+        List<FollowDTO> followingDTOList = followingList.stream().map(FollowDTO::new).collect((Collectors.toList()));
+
+        return followingDTOList;
+    }
+
+    public List<FollowDTO> followerList(Set<Follow> followerList){
+
+        List<FollowDTO> followerDTOList = followerList.stream().map(FollowDTO::new).collect((Collectors.toList()));
+
+        return followerDTOList;
+    }
 }

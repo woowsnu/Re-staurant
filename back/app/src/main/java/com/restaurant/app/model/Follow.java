@@ -34,9 +34,4 @@ public class Follow {
         this.followedUser = followedUser;
         this.createDate = LocalDateTime.now();
     }
-
-    @Override
-    public String toString() {
-        return "{ followIndex :" + followIndex + "}";
-    }
 }

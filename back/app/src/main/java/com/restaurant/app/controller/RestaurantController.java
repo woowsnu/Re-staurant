@@ -5,7 +5,6 @@ import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.Specification.RestaurantSpecs;
 import com.restaurant.app.model.Restaurant;
-import com.restaurant.app.repository.RestaurantRepository;
 import com.restaurant.app.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,8 +24,6 @@ public class RestaurantController {
 
     @Autowired
     RestaurantService restaurantService;
-    @Autowired
-    RestaurantRepository restaurantRepository;
 
     // test : Create PlaceInfo
     @PostMapping("/createRestaurantInfo")
@@ -34,7 +31,6 @@ public class RestaurantController {
 
         System.out.println("createRestaurantInfo");
 
-        System.out.println(restaurantDTO.getBusId());
         try {
             restaurantService.createPlaceInfo(restaurantDTO);
 
