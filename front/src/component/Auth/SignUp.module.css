@@ -4,31 +4,22 @@
     visibility: hidden;
 }
 
-.imgWrap {
-    justify-content: center;
-    display: flex;
-    margin-top: 3rem;
-    margin-bottom: 0;
-}
-
-.wrap {
+.container {
     display: flex;
     justify-content: center;
 }
 
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     height: 100%;
     max-width: 400px;
+    height: 100vh;
+    margin-top: 4rem;
 }
 
 .content {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 100vh;
     min-width: 350px;
 }
 
