@@ -1,11 +1,17 @@
 package com.restaurant.app.model;
 
+import com.restaurant.app.DTO.MenusDTO;
+import com.restaurant.app.DTO.OptionsDTO;
+import com.restaurant.app.DTO.ReviewDTO;
+import com.restaurant.app.DTO.VotedKeywordsDTO;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Builder
@@ -15,7 +21,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Restaurant implements Serializable {
-//public class Restaurant{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,32 +72,50 @@ public class Restaurant implements Serializable {
     @Column(name="sns_url")
     private String snsUrl;
 
+    @Column(name="avgRating")
+    private Float avgRating;
+
+    @Column(name="authorCount")
+    private Long authorCount;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
     private Set<Options> optionsList    = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
-    private Set<Menus> menuList = new HashSet<>();
+    private Set<Menus> menusList = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant", cascade = CascadeType.ALL)
     private Set<Review> reviewList = new HashSet();
 
-    //arrayToString?
-    public String menuToString() {
-        return "{"+menuList.toString()+"}";
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private Set<VotedKeywords> keywordsList = new HashSet();
 
+    public List<MenusDTO> menusList(Set<Menus> menusList){
+
+        List<MenusDTO> menusDTOList = menusList.stream().map(MenusDTO::new).collect((Collectors.toList()));
+
+        return  menusDTOList;
     }
 
+    public List<OptionsDTO> optionsList(Set<Options> optionsList){
 
-    public String optionsList(){
+        List<OptionsDTO> optionsDTOList = optionsList.stream().map(OptionsDTO::new).collect((Collectors.toList()));
 
-        return "{" + optionsList.toString() + "}";
-//        return "{Restaurant" + optionsList+ "}";
+        return  optionsDTOList;
     }
 
-    public String reviewList(){
+    public List<ReviewDTO> reviewList(Set<Review> reviewList){
 
-        return "{" + reviewList.toString() + "}";
+        List<ReviewDTO> reviewDTOList = reviewList.stream().map(ReviewDTO::new).collect((Collectors.toList()));
 
+        return reviewDTOList;
+    }
+
+    public List<VotedKeywordsDTO> keywordsList(Set<VotedKeywords> keywordsList){
+
+        List<VotedKeywordsDTO> keywordsDTOList = keywordsList.stream().map(VotedKeywordsDTO::new).collect((Collectors.toList()));
+
+        return keywordsDTOList;
     }
 
 }

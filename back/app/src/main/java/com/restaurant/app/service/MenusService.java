@@ -24,7 +24,7 @@ public class MenusService {
     }
 
 
-    public Menus createMenus(MenusDTO menusDTO) {
+    public void createMenus(MenusDTO menusDTO) {
 
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(menusDTO.getBusId());
 
@@ -38,7 +38,7 @@ public class MenusService {
                  .restaurant(restaurant)
                  .build();
 
-         return menusRepository.save(menus);
+          menusRepository.save(menus);
 
     }
 

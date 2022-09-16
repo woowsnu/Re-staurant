@@ -31,6 +31,9 @@ public class OptionsService {
     public List<Options> save(OptionsDTO optionsDTO) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(optionsDTO.getBusId());
 
+        if (restaurant == null) {
+            throw new RuntimeException("해당 식당이 없습니다.");
+        }
         Options options = Options.builder()
                 .optionId(optionsDTO.getOptionId())
                 .optionName(optionsDTO.getOptionName())

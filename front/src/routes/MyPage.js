@@ -8,6 +8,7 @@ import Tabs from "../component/MyPage/Tabs";
 
 import styles from "./MyPage.module.css";
 import Navbar from "../component/Layout/Navbar";
+import Logobar from "../component/Layout/Logobar";
 
 const MyPage = () => {
   const [user, setUser] = useState("");
@@ -40,7 +41,6 @@ const MyPage = () => {
   return (
     datafetch && (
       <div className={styles.wrapper}>
-        <Navbar />
         <Profile user={user} updateHandler={() => setIsUpdated(!isUpdated)} />
         <Tabs />
       </div>
