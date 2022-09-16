@@ -162,22 +162,22 @@ public class RestaurantController {
 
     }
 
-    @PostMapping("/search")
-    public ResponseEntity<?> search( @RequestParam String restaurantName, @RequestParam String restaurantCategory){
-
-        try{
-            List<RestaurantDTO> restaurantList = restaurantService.findByRestaurantCategoryOrRestaurantName(restaurantCategory,restaurantName);
-
-//            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
-
-
-            return ResponseEntity.ok().body(restaurantList);
-        }
-        catch(Exception e) {
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.badRequest().body(responseDTO);
-        }
-    }
+//    @PostMapping("/search")
+//    public ResponseEntity<?> search(@ModelAttribute RestaurantDTO restaurantDTO ){
+//
+//        try{
+//            Optional<Restaurant> restaurantList = restaurantService.findByRestaurantName(restaurantDTO);
+//
+////            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
+//
+//
+//            return ResponseEntity.ok().body(restaurantList);
+//        }
+//        catch(Exception e) {
+//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+//            return ResponseEntity.badRequest().body(responseDTO);
+//        }
+//    }
 
 
 }

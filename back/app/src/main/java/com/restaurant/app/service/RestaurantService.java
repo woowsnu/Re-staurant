@@ -116,15 +116,15 @@ public class RestaurantService {
 
 
 
-    @Transactional(readOnly = true)
-    public List<RestaurantDTO>  findByRestaurantCategoryOrRestaurantName(String restaurantName,String restaurantCategory){
-        return restaurantRepository.findByRestaurantNameContainingOrRestaurantCategoryContaining(restaurantName, restaurantCategory)
-                .stream().map(RestaurantDTO::new).collect(Collectors.toList());
-//        List<Restaurant> restaurantList = restaurantRepository.findByRestaurantNameContainingOrRestaurantCategoryContaining( restaurantName, restaurantCategory);
-//        if (restaurantList == null) {
-//            throw new RuntimeException("해당 식당이 없습니다.");
-//        }
-//        return restaurantList;
-    }
+//    @Transactional(readOnly = true)
+//    public Optional<Restaurant>  findByRestaurantName(RestaurantDTO restaurantDTO){
+//        return restaurantRepository.findByRestaurantName(restaurantDTO.getRestaurantName());
+////                .stream().map(RestaurantDTO::new).collect(Collectors.toList());
+////        List<Restaurant> restaurantList = restaurantRepository.findByRestaurantNameContainingOrRestaurantCategoryContaining( restaurantName, restaurantCategory);
+////        if (restaurantList == null) {
+////            throw new RuntimeException("해당 식당이 없습니다.");
+////        }
+////        return restaurantList;
+//    }
 
 }
