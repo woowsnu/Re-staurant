@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class FollowService {
@@ -21,7 +23,7 @@ public class FollowService {
     public User following(User authedUser, FollowDTO followDTO) {
 
         // 팔로우 되는 사람[상대방]
-        User followedUser = userService.findUserByEmail(followDTO.getEmail());
+        User followedUser = userService.findUserByEmail(followDTO.getFollowingEmail());
 
         // 현재 로그인 중인 authedUser가 상대방을 이미 follow하고 있는지 확인.
         if(followRepository.findFollowByFollowingUserAndFollowedUser(authedUser,followedUser) != null) {
@@ -46,8 +48,8 @@ public class FollowService {
 
     public User unFollowing(User authedUser, FollowDTO unFollowDTO) {
 
-        // 언팔로우 되는 사람[상대방]
-        User unFollowedUser = userService.findUserByEmail(unFollowDTO.getEmail());
+//        // 언팔로우 되는 사람[상대방]
+        User unFollowedUser = userService.findUserByEmail(unFollowDTO.getFollowingEmail());
 
         // 본인[authedUser]이 본인[authedUser]을 unFollow하려고하는지 확인.
         if(authedUser.getUserIndex() == unFollowedUser.getUserIndex()) {
@@ -63,13 +65,23 @@ public class FollowService {
         }
 
         System.out.println("====== delete되는지 확인.");
-        System.out.println("currFollow Idx: " + currFollow.toString());
+        System.out.println("currFollow Idx: " + currFollow.getFollowIndex());
 
         // 현재 follow상태인 currFollow의 followIndex를 통해 currFollow객체 삭제. [언팔로우 기능]
-        followRepository.deleteByFollowIndex(currFollow.getFollowIndex());
+        followRepository.deleteFollowByFollowIndex(unFollowDTO.getFollowIndex());
 
         System.out.println("deletedFollow");
 
         return null;
+    }
+
+    public List<Follow> findFollowByFollowingUser(User authedUser) {
+
+        return followRepository.findFollowByFollowingUser(authedUser);
+    }
+
+    public List<Follow> findFollowByFollowedUser(User authedUser) {
+
+        return followRepository.findFollowByFollowedUser(authedUser);
     }
 }
