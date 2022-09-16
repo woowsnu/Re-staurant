@@ -3,21 +3,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.4rem 1rem;
+  padding: 1rem 1rem;
 }
 
-.navbtn {
+.navIcons {
+  display: flex;
+  align-items: center;
   padding: 0.4rem 0.6rem;
   color: #51b059;
-  font-size: 1rem;
-  border: 2px solid #51b059;
-  border-radius: 0.3rem;
-  background-color: transparent;
-}
-
-.navbtn:hover {
-  color: #fff;
-  background-color: #51b059;
+  font-size: 1.5rem;
 }
 
 @media screen and (max-width: 680px) {

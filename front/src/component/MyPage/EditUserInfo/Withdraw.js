@@ -1,79 +1,81 @@
-import React, { useState } from "react";
-// import axios from "../../../api/axios";
+import React, { useContext, useState } from "react";
 import styles from "./Withdraw.module.css";
-import Input from "../../UI/Input";
 import Button from "../../UI/Button";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../../../store/auth-context";
+import { instance } from "../../../api/axios";
 
 const Withdraw = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const emailInput = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const passwordInput = (e) => {
-    setPassword(e.target.value);
-  };
+  const [withdrawDone, setWithdrawDone] = useState(false);
+  const navigate = useNavigate();
+  const ctx = useContext(AuthContext);
+  const email = props.email;
+  console.log(email);
 
   const exitWithdrawMode = () => {
     props.withdrawExit();
   };
 
   const URL = "http://localhost:8080/user/auth/deleteUserInfo";
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const profile = { email: email };
-    // await axios
-    //   .delete(URL, JSON.stringify(profile), {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "Authorization": token,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    
-    fetch(URL, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify(profile),
-    })
+    const profile = { email : email };
+    instance
+      .delete(URL, JSON.stringify(profile), {
+        headers: {
+          Authorization: token,
+        },
+      })
       .then((res) => {
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
+
+    // await fetch(URL, {
+    //   method: "DELETE",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: token,
+    //   },
+    //   body: JSON.stringify(profile),
+    // })
+    //   .then((res) => {
+    //     console.log(res);
+    //     // setWithdrawDone(true);
+    //     // ctx.onLogout();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.modalTitle}>회원탈퇴</div>
-      <label htmlFor="email">이메일</label>
-      <Input id="email" type="text" value={email} onChange={emailInput} />
-      <br />
-      <br />
-      <label htmlFor="password">비밀번호</label>
-      <Input
-        id="password"
-        type="password"
-        value={password}
-        onChange={passwordInput}
-      />
-      <div className={styles.buttonArea}>
+      <div className={withdrawDone ? styles.offscreen : styles.show}>
+        회원탈퇴 직후 리뷰 등 계정 내 모든 정보가 사라집니다. <br />
+        회원 탈퇴 전에 꼭 신중하게 생각해주세요 !
+      </div>
+      <div className={withdrawDone ? styles.show : styles.offscreen}>
+        떠나신다니 아쉬워요 😢 <br />또 다시 RE:STRAUNT에서 만날 수 있기를 !
+      </div>
+      <div className={withdrawDone ? styles.offscreen : styles.buttonArea}>
         <Button onClick={handleSubmit} style={{ marginRight: "6px" }}>
-          저장하기
+          탈퇴하기
         </Button>
         <Button onClick={exitWithdrawMode}>취소</Button>
+      </div>
+      <div className={withdrawDone ? styles.buttonArea : styles.offscreen}>
+        <Button
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          닫기
+        </Button>
       </div>
     </div>
   );

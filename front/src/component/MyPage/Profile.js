@@ -6,6 +6,7 @@ import UploadProfilePic from "./EditUserInfo/UploadProfilePic";
 import AuthContext from "../../store/auth-context";
 import Button from "../UI/Button";
 import EditUserInfo from "./EditUserInfo/EditUserInfo";
+import Logobar from "../Layout/Logobar";
 
 const Profile = (props) => {
   const ctx = useContext(AuthContext);
@@ -36,9 +37,10 @@ const Profile = (props) => {
 
   return (
     <div>
+      <Logobar />
       <div className={styles.pageTop}>
         <span className={styles.pageTitle}>마이 페이지</span>
-        <button className={styles.logoutbutton} onClick={logout}>
+        <button className={styles.logoutButton} onClick={logout}>
           로그아웃
         </button>
       </div>
@@ -52,7 +54,7 @@ const Profile = (props) => {
           </div>
         </div>
       </div>
-      <div className={styles.mypagebuttons}>
+      <div className={styles.mypageButtons}>
         <Button onClick={profilePicUplaod} photoUpdate={()=>setProfileimg()}>사진 등록</Button>&nbsp;&nbsp;
         <Button onClick={editUserInfo}>회원정보 수정</Button>
       </div>

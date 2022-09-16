@@ -18,8 +18,10 @@
     background-color: inherit;
     font-weight: 600;
 }
+
 .tabactive {
     background-color: white;
-    border-bottom: 0.2rem solid black;
+    color : #51B059;
+    border-bottom: 0.2rem solid #51B059;
     font-weight: 700;
 }

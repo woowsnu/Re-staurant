@@ -29,12 +29,11 @@ const EditPassword = (props) => {
     props.passwordChangeExit();
   };
 
-  // const URL = "http://localhost:8080/user/auth/update/password";
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   const handleSubmit = (e) => {
     e.preventDefault();
     const profile = { password: newPassword };
-    // if (previousPassword === props.password) {
+    if (newPassword === newPasswordCheck) {
     instance
       .put('/user/auth/update/password', JSON.stringify(profile), {
         headers: {
@@ -44,13 +43,13 @@ const EditPassword = (props) => {
       })
       .then((response) => {
         console.log(response);
+        setNewPassword("");
+        setNewPasswordCheck("");
+        setWarning("비밀번호 변경 완료!")
       })
       .catch((err) => {
         console.log(err);
       });
-    // }
-    if (previousPassword !== props.password) {
-      setWarning("현재 비밀번호를 확인해주세요");
     }
     if (newPassword !== newPasswordCheck) {
       setWarning("비밀번호가 일치하지 않습니다");
@@ -61,16 +60,6 @@ const EditPassword = (props) => {
     <div className={styles.wrapper}>
       <div>
         <p className={warning ? styles.warning : styles.offscreen}>{warning}</p>
-        <div className={styles.modalTitle}>비밀번호 변경</div>
-        <label htmlFor="previousPassword">현재 비밀번호</label>
-        <Input
-          id="previousPassword"
-          type="password"
-          value={previousPassword}
-          onChange={previousPasswordInput}
-        />
-        <br />
-        <br />
         <label htmlFor="password">변경 비밀번호</label>
         <Input
           id="password"

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./EditNickname.module.css";
 import Input from "../../UI/Input";
-import axios, { instance } from "../../../api/axios";
+import { instance } from "../../../api/axios";
 import Button from "../../UI/Button";
 
 const EditNickname = (props) => {

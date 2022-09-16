@@ -6,8 +6,7 @@ import { useContext } from "react";
 import styles from "./SignUp.module.css";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
-
-// const URL = "http://localhost:8080/login";
+import Logobar from "../Layout/Logobar";
 
 const LogIn = (props) => {
   let navigate = useNavigate();
@@ -27,10 +26,11 @@ const LogIn = (props) => {
     e.preventDefault();
     setPassword(e.target.value);
   };
-  
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    await  instance.post('/login', JSON.stringify({ email, password }), {
+    await instance
+      .post("/login", JSON.stringify({ email, password }), {
         headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
@@ -50,52 +50,53 @@ const LogIn = (props) => {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.content}>
-        <div className={styles.pagetitle}>로그인</div>
-        <div className={err !== null ? styles.warning : styles.offscreen}>
-          {err}
-        </div>
-        <br />
-        <form className={styles.form} onSubmit={submitHandler}>
-          <label htmlFor="email">아이디</label>
-          <Input
-            type="text"
-            id="email"
-            value={email}
-            onChange={emailInputHandler}
-            style={{ width: "95%" }}
-          />
-          <br />
-          <br />
-          <label htmlFor="password">비밀번호</label>
-          <Input
-            type="password"
-            id="password"
-            value={password}
-            onChange={passwordInputHandler}
-            style={{ width: "95%" }}
-          />
-          <br />
-          <br />
-          <div className={styles.buttonContents}>
-          <Button
-            type="submit"
-          >
-            로그인
-          </Button>
+    <>
+      <Logobar />
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <div className={styles.content}>
+            <div className={styles.pagetitle}>로그인</div>
+            <div className={err !== null ? styles.warning : styles.offscreen}>
+              {err}
+            </div>
+            <br />
+            <form className={styles.form} onSubmit={submitHandler}>
+              <label htmlFor="email">아이디</label>
+              <Input
+                type="text"
+                id="email"
+                value={email}
+                onChange={emailInputHandler}
+                style={{ width: "95%" }}
+              />
+              <br />
+              <br />
+              <label htmlFor="password">비밀번호</label>
+              <Input
+                type="password"
+                id="password"
+                value={password}
+                onChange={passwordInputHandler}
+                style={{ width: "95%" }}
+              />
+              <br />
+              <br />
+              <div className={styles.buttonContents}>
+                <Button type="submit">로그인</Button>
+              </div>
+            </form>
+            <div className={styles.loginInfo}>
+              아직 회원이 아니신가요? &nbsp;&nbsp;
+              <a href="/members">회원가입 하러가기</a>
+              <br />
+              <br />
+              이메일/비밀번호를 잃어버리셨나요? &nbsp;&nbsp;
+              <a href="/find">계정정보 찾기</a>
+            </div>
           </div>
-        </form>
-        <div className={styles.loginInfo}>
-          아직 회원이 아니신가요? &nbsp;&nbsp;
-          <a href="/members">회원가입 하러가기</a>
-          <br />
-          <br />
-          이메일/비밀번호를 잃어버리셨나요? &nbsp;&nbsp;
-          <a href="/find">계정정보 찾기</a>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
