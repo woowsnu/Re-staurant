@@ -120,21 +120,21 @@ public class RestaurantController {
 
 
     //     식카테고리, 사용자위치 별로 조회
-//    @GetMapping("/category/{restaurantCategory}")
-//    public ResponseEntity<?> restaurantCategory(@PathVariable String restaurantCategory ){
-//        try{
-//            List<Restaurant> restaurantList = restaurantService.findByRestaurantCategory(restaurantCategory);
-//
-//            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
-//
-//
-//            return ResponseEntity.ok().body(restaurantsDTO);
-//        }
-//        catch(Exception e) {
-//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-//            return ResponseEntity.badRequest().body(responseDTO);
-//        }
-//    }
+   @GetMapping("/category/{restaurantCategory}")
+   public ResponseEntity<?> restaurantCategory(@PathVariable String restaurantCategory ){
+       try{
+           List<Restaurant> restaurantList = restaurantService.findByRestaurantCategory(restaurantCategory);
+
+           List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
+
+
+           return ResponseEntity.ok().body(restaurantsDTO);
+       }
+       catch(Exception e) {
+           ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+           return ResponseEntity.badRequest().body(responseDTO);
+       }
+   }
 
 
     // 상세페이지
