@@ -1,6 +1,7 @@
 package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.ResponseDTO;
+import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.DTO.ReviewDTO;
 import com.restaurant.app.model.Review;
 import com.restaurant.app.model.User;
@@ -37,6 +38,23 @@ public class ReviewController {
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
+    //read
+    @GetMapping("/{email}/auth/findUserView")
+    public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser,@PathVariable String email){
+        try{
+            List<Review> reviewList = reviewService.findByEmail(authedUser,email);
+
+            List<ReviewDTO> reviewDTOs = reviewList.stream().map(ReviewDTO::new).collect((Collectors.toList()));
+
+
+            return ResponseEntity.ok().body(reviewDTOs);
+        }
+        catch(Exception e) {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
             return ResponseEntity.badRequest().body(responseDTO);
         }

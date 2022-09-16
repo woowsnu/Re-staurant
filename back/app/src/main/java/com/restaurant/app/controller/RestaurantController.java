@@ -4,14 +4,18 @@ package com.restaurant.app.controller;
 import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.model.Restaurant;
+import com.restaurant.app.repository.RestaurantRepository;
 import com.restaurant.app.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -22,6 +26,8 @@ public class RestaurantController {
 
     @Autowired
     RestaurantService restaurantService;
+    @Autowired
+    RestaurantRepository restaurantRepository;
 
     // test : Create PlaceInfo
     @PostMapping("/createRestaurantInfo")
@@ -140,6 +146,7 @@ public class RestaurantController {
     @GetMapping("/restaurantDetail/{busId}")
     public ResponseEntity<?> restaurantInfo(@PathVariable String busId) {
 
+
         try{
             Restaurant restaurant = restaurantService.findRestaurantByBusId(busId);
 
@@ -153,6 +160,24 @@ public class RestaurantController {
             return ResponseEntity.badRequest().body(responseDTO);
         }
 
-
     }
+
+    @PostMapping("/search")
+    public ResponseEntity<?> search( @RequestParam String restaurantName, @RequestParam String restaurantCategory){
+
+        try{
+            List<RestaurantDTO> restaurantList = restaurantService.findByRestaurantCategoryOrRestaurantName(restaurantCategory,restaurantName);
+
+//            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
+
+
+            return ResponseEntity.ok().body(restaurantList);
+        }
+        catch(Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
+
 }

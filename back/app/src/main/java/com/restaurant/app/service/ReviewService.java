@@ -46,6 +46,12 @@ public class ReviewService {
         return reviewRepository.findReviewByRestaurantBusId(busId);
     }
 
+    public List<Review> findByEmail( User authedUser,String email){
+        List<Review> review = reviewRepository.findOptionsByUserEmail(email);
+        List<Review> reviews = reviewRepository.findReviewByUser(authedUser);
+        return review;
+    }
+
 //    public List<Review> update(User authedUser ,ReviewDTO updateReviewDTO, Long busId , Long userIndex) {
 //        // 기존 review 로드
 //
