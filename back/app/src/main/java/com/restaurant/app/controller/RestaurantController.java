@@ -3,6 +3,7 @@ package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.RestaurantDTO;
+import com.restaurant.app.Specification.RestaurantSpecs;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.repository.RestaurantRepository;
 import com.restaurant.app.service.RestaurantService;
@@ -166,7 +167,7 @@ public class RestaurantController {
 //    public ResponseEntity<?> search(@ModelAttribute RestaurantDTO restaurantDTO ){
 //
 //        try{
-//            Optional<Restaurant> restaurantList = restaurantService.findByRestaurantName(restaurantDTO);
+//            Optional<Restaurant> restaurantList = restaurantService.findByRestaurantSearch(restaurantDTO);
 //
 ////            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
 //
@@ -178,6 +179,23 @@ public class RestaurantController {
 //            return ResponseEntity.badRequest().body(responseDTO);
 //        }
 //    }
+
+    @PostMapping("/search")
+    public List<Restaurant> getRestaurantList(@RequestParam(required = false) String restaurantName,
+                                              @RequestParam(required = false) String largeCategory,
+                                              @RequestParam(required = false) String midCategory) {
+        if (largeCategory != null) {
+
+            return restaurantRepository.findAll(RestaurantSpecs.withLargeCategory(largeCategory));
+        }
+        else if(midCategory != null){
+            return restaurantRepository.findAll(RestaurantSpecs.withMidCategory(midCategory));
+        }
+
+
+        return restaurantRepository.findAll(RestaurantSpecs.withRestaurantName(restaurantName));
+    }
+
 
 
 }
