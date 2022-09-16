@@ -1,11 +1,9 @@
 package com.restaurant.app.controller;
 
-
-import com.restaurant.app.DTO.MenusDTO;
 import com.restaurant.app.DTO.ResponseDTO;
-import com.restaurant.app.service.MenusService;
+import com.restaurant.app.DTO.VotedKeywordsDTO;
+import com.restaurant.app.service.VotedKeywordsService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,17 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/menus")
-@Slf4j
-public class MenusController {
+@RequestMapping("/keywords")
+public class VotedKeywordsController {
 
     @Autowired
-    MenusService menusService;
+    private final VotedKeywordsService votedKeywordsService;
 
-    @PostMapping("/createMenus")
-    public ResponseEntity<?> createMenus(@RequestBody MenusDTO menusDTO) {
-        try{
-            menusService.createMenus(menusDTO);
+    @PostMapping("/createKeywords")
+    public ResponseEntity<?> createKeywords(@RequestBody VotedKeywordsDTO keywordsDTO) {
+        System.out.println("create_keywords");
+
+        try {
+            votedKeywordsService.createKeywords(keywordsDTO);
 
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
 
@@ -33,10 +32,8 @@ public class MenusController {
         }
         catch (RuntimeException e) {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+
             return ResponseEntity.badRequest().body(responseDTO);
         }
-
     }
-
-
 }

@@ -15,7 +15,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Restaurant implements Serializable {
-//public class Restaurant{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,6 +66,12 @@ public class Restaurant implements Serializable {
     @Column(name="sns_url")
     private String snsUrl;
 
+    @Column(name="avgRating")
+    private Float avgRating;
+
+    @Column(name="authorCount")
+    private Long authorCount;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
     private Set<Options> optionsList    = new HashSet<>();
 
@@ -76,12 +81,14 @@ public class Restaurant implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant", cascade = CascadeType.ALL)
     private Set<Review> reviewList = new HashSet();
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private Set<VotedKeywords> keywordsList = new HashSet();
+
     //arrayToString?
     public String menuToString() {
         return "{"+menuList.toString()+"}";
 
     }
-
 
     public String optionsList(){
 
@@ -92,7 +99,11 @@ public class Restaurant implements Serializable {
     public String reviewList(){
 
         return "{" + reviewList.toString() + "}";
+    }
 
+    public String keyordsList(){
+
+        return "{" + keywordsList.toString() + "}";
     }
 
 }

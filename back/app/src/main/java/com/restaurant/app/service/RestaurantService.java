@@ -39,6 +39,8 @@ public class RestaurantService {
                                 .description(restaurantDTO.getDescription())
                                 .x(restaurantDTO.getX())
                                 .y(restaurantDTO.getY())
+                                .avgRating(restaurantDTO.getAvgRating())
+                                .authorCount(restaurantDTO.getAuthorCount())
                                 .build();
 
         return restaurantRepository.save(restaurant);

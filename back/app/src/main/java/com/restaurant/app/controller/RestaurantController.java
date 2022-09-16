@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/restaurant")
+@CrossOrigin("*")
 @Slf4j
 public class RestaurantController {
 
