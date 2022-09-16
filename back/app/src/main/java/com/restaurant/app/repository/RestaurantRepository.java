@@ -1,13 +1,11 @@
 package com.restaurant.app.repository;
 
-import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.model.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, JpaSpecificationExecutor<Restaurant> {
@@ -24,9 +22,10 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, J
     List<Restaurant> findRestaurantBySiCodeAndGuCodeAndDongCode(String siCode, String guCode, String dongCode);
 
 
+    List<Restaurant> findRestaurantByRestaurantCategory(String restaurantCategory);
 
     List<Restaurant> findAll();
-    List<Restaurant> findByRestaurantNameContainingOrLargeCategoryContainingOrMidCategoryContaining(String restaurantName, String largeCategory, String midCategory );
+//    List<Restaurant> findByRestaurantNameContainingOrLargeCategoryContainingOrMidCategoryContaining(String restaurantName, String largeCategory, String midCategory );
 
 ////    Optional<Restaurant> findByRestaurantNameOryLargeCategoryContainingOrMidCategory(String restaurantName, String largeCategory, String midCategory );
 //Optional<Restaurant> findByRestaurantName(String restaurantName );

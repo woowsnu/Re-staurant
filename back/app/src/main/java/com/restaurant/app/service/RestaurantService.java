@@ -1,12 +1,10 @@
 package com.restaurant.app.service;
 
 import com.restaurant.app.DTO.RestaurantDTO;
-import com.restaurant.app.Specification.RestaurantSpecs;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.repository.RestaurantRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -105,16 +103,16 @@ public class RestaurantService {
     }
 
 
-//    public List<Restaurant> findRestaurantByRestaurantCategory(String restaurantCategory){
-//        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByrestaurantCategory(restaurantCategory);
-//
-//
-//        if (restaurantList.size() == 0) {
-//            throw new RuntimeException("식당이 없습니다.");
-//        }
-//
-//        return restaurantList;
-//    }
+    public List<Restaurant> findRestaurantByRestaurantCategory(String restaurantCategory){
+        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByRestaurantCategory(restaurantCategory);
+
+
+        if (restaurantList.size() == 0) {
+            throw new RuntimeException("식당이 없습니다.");
+        }
+
+        return restaurantList;
+    }
 
 
 

@@ -5,6 +5,7 @@ import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.Specification.RestaurantSpecs;
 import com.restaurant.app.model.Restaurant;
+import com.restaurant.app.repository.RestaurantRepository;
 import com.restaurant.app.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,9 @@ public class RestaurantController {
 
     @Autowired
     RestaurantService restaurantService;
+
+    @Autowired
+    RestaurantRepository restaurantRepository;
 
     // test : Create PlaceInfo
     @PostMapping("/createRestaurantInfo")
@@ -123,7 +127,7 @@ public class RestaurantController {
    @GetMapping("/category/{restaurantCategory}")
    public ResponseEntity<?> restaurantCategory(@PathVariable String restaurantCategory ){
        try{
-           List<Restaurant> restaurantList = restaurantService.findByRestaurantCategory(restaurantCategory);
+           List<Restaurant> restaurantList = restaurantService.findRestaurantByRestaurantCategory(restaurantCategory);
 
            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
 
