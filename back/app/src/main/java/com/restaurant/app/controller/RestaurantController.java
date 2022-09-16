@@ -35,9 +35,9 @@ public class RestaurantController {
 
         System.out.println("createRestaurantInfo");
 
-        System.out.println(restaurantDTO);
+        System.out.println(restaurantDTO.getBusId());
         try {
-            Restaurant savedRestaurant = restaurantService.createPlaceInfo(restaurantDTO);
+            restaurantService.createPlaceInfo(restaurantDTO);
 
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
             return ResponseEntity.ok().body(responseDTO);
@@ -125,27 +125,27 @@ public class RestaurantController {
 
 
     //     식카테고리, 사용자위치 별로 조회
-    @GetMapping("/category/{restaurantCategory}")
-    public ResponseEntity<?> restaurantCategory(@PathVariable String restaurantCategory ){
-        try{
-            List<Restaurant> restaurantList = restaurantService.findByRestaurantCategory(restaurantCategory);
-
-            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
-
-
-            return ResponseEntity.ok().body(restaurantsDTO);
-        }
-        catch(Exception e) {
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.badRequest().body(responseDTO);
-        }
-    }
+//    @GetMapping("/category/{restaurantCategory}")
+//    public ResponseEntity<?> restaurantCategory(@PathVariable String restaurantCategory ){
+//        try{
+//            List<Restaurant> restaurantList = restaurantService.findByRestaurantCategory(restaurantCategory);
+//
+//            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
+//
+//
+//            return ResponseEntity.ok().body(restaurantsDTO);
+//        }
+//        catch(Exception e) {
+//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+//            return ResponseEntity.badRequest().body(responseDTO);
+//        }
+//    }
 
 
     // 상세페이지
     @GetMapping("/restaurantDetail/{busId}")
+    public ResponseEntity<?> restaurantInfo(@PathVariable String busId) {
 
-    public ResponseEntity<?> restaurantInfo(@PathVariable Long busId) {
 
         try{
             Restaurant restaurant = restaurantService.findRestaurantByBusId(busId);

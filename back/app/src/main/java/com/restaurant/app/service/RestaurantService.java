@@ -29,7 +29,8 @@ public class RestaurantService {
 
         Restaurant restaurant = Restaurant.builder()
                                 .busId(restaurantDTO.getBusId())
-                                .restaurantCategory(restaurantDTO.getRestaurantCategory())
+                                .largeCategory(restaurantDTO.getLargeCategory())
+                                .midCategory(restaurantDTO.getMidCategory())
                                 .restaurantName(restaurantDTO.getRestaurantName())
                                 .tellNumber(restaurantDTO.getTellNumber())
                                 .fullAddress(restaurantDTO.getFullAddress())
@@ -37,7 +38,6 @@ public class RestaurantService {
                                 .siCode(restaurantDTO.getSiCode())
                                 .guCode(restaurantDTO.getGuCode())
                                 .dongCode(restaurantDTO.getDongCode())
-                                .restaurantCategory(restaurantDTO.getRestaurantCategory())
                                 .businessHourInfo(restaurantDTO.getBusinessHourInfo())
                                 .description(restaurantDTO.getDescription())
                                 .x(restaurantDTO.getX())
@@ -47,7 +47,7 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
-
+//
     public List<Restaurant> findRestaurantByName(String restaurantName){
         List<Restaurant> restaurantList = restaurantRepository.findRestaurantByRestaurantName(restaurantName);
 
@@ -59,7 +59,7 @@ public class RestaurantService {
     }
 
 
-    public Restaurant findRestaurantByBusId(Long busId) {
+    public Restaurant findRestaurantByBusId(String busId) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
 
         if (restaurant == null) {
@@ -81,7 +81,7 @@ public class RestaurantService {
     }
 
     public List<Restaurant>  findRestaurantBySiCodeAndGuCode(String siCode ,String guCode){
-        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBysiCodeAndGuCode(siCode, guCode);
+        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBySiCodeAndGuCode(siCode, guCode);
 
 
         if (restaurantList.size() == 0) {
@@ -103,18 +103,18 @@ public class RestaurantService {
     }
 
 
-    public List<Restaurant>  findByRestaurantCategory(String restaurantCategory){
-        List<Restaurant> restaurantList = restaurantRepository.findByRestaurantCategoryContainingIgnoreCase(restaurantCategory);
+//    public List<Restaurant> findRestaurantByRestaurantCategory(String restaurantCategory){
+//        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByrestaurantCategory(restaurantCategory);
+//
+//
+//        if (restaurantList.size() == 0) {
+//            throw new RuntimeException("식당이 없습니다.");
+//        }
+//
+//        return restaurantList;
+//    }
 
 
-        if (restaurantList == null) {
-            throw new RuntimeException("해당 식당이 없습니다.");
-        }
-
-
-
-        return restaurantList;
-    }
 
     @Transactional(readOnly = true)
     public List<RestaurantDTO>  findByRestaurantCategoryOrRestaurantName(String restaurantName,String restaurantCategory){
@@ -126,6 +126,5 @@ public class RestaurantService {
 //        }
 //        return restaurantList;
     }
-
 
 }

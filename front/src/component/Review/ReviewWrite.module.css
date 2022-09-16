@@ -1,0 +1,42 @@
+.container {
+  width: 80%;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.container h3 {
+  padding-top: 1.4rem;
+  padding-bottom: 1rem;
+  padding-left: 0;
+}
+
+.simpleProfile {
+  border: 1px solid #888888;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+.simpleProfile img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  background-color: blue;
+}
+
+.comment {
+  width: 100%;
+}
+
+.visitbtn {
+  max-width: 100%;
+}
+
+.visitbtn button {
+  width: calc(100% / 2);
+  border: 0;
+  outline: 0;
+  padding: 1rem 0;
+  border-radius: 0.6rem;
+}

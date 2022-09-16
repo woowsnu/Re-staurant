@@ -17,20 +17,22 @@ import java.util.Set;
 public class Restaurant implements Serializable {
 //public class Restaurant{
 
-        @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="restaurant_index")
     private Long restaurantIndex; //레스토랑 프로필 id
 
-    @Column(name="bus_id",unique = true,nullable = false, updatable = false)
-    private Long busId;
+    @Column(name="bus_id")
+    private String busId;
 
     @Column(name="restaurant_name")
     private String restaurantName;
 
+    @Column(name="large_category")
+    private String largeCategory;
 
-    @Column(name="restaurant_category")
-    private String restaurantCategory; //레스토랑 카테고리
+    @Column(name="mid_category")
+    private String midCategory;
 
     @Column(name="x")
     private Float x;
@@ -65,11 +67,8 @@ public class Restaurant implements Serializable {
     @Column(name="sns_url")
     private String snsUrl;
 
-
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
     private Set<Options> optionsList    = new HashSet<>();
-
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
     private Set<Menus> menuList = new HashSet<>();

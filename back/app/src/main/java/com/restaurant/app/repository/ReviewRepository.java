@@ -18,7 +18,7 @@ public interface ReviewRepository extends JpaRepository<Review,Long> {
 
     @Transactional
     public Long deleteByReviewIndex(Long reviewIndex);
-    List<Review> findReviewByRestaurantBusId(Long busId);
+    List<Review> findReviewByRestaurantBusId(String busId);
 
 
     List<Review> findOptionsByUserEmail(String email);
