@@ -1,11 +1,17 @@
 package com.restaurant.app.model;
 
+import com.restaurant.app.DTO.MenusDTO;
+import com.restaurant.app.DTO.OptionsDTO;
+import com.restaurant.app.DTO.ReviewDTO;
+import com.restaurant.app.DTO.VotedKeywordsDTO;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Builder
@@ -76,7 +82,7 @@ public class Restaurant implements Serializable {
     private Set<Options> optionsList    = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant",cascade = CascadeType.ALL)
-    private Set<Menus> menuList = new HashSet<>();
+    private Set<Menus> menusList = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant", cascade = CascadeType.ALL)
     private Set<Review> reviewList = new HashSet();
@@ -84,26 +90,32 @@ public class Restaurant implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant", cascade = CascadeType.ALL)
     private Set<VotedKeywords> keywordsList = new HashSet();
 
-    //arrayToString?
-    public String menuToString() {
-        return "{"+menuList.toString()+"}";
+    public List<MenusDTO> menusList(Set<Menus> menusList){
 
+        List<MenusDTO> menusDTOList = menusList.stream().map(MenusDTO::new).collect((Collectors.toList()));
+
+        return  menusDTOList;
     }
 
-    public String optionsList(){
+    public List<OptionsDTO> optionsList(Set<Options> optionsList){
 
-        return "{" + optionsList.toString() + "}";
-//        return "{Restaurant" + optionsList+ "}";
+        List<OptionsDTO> optionsDTOList = optionsList.stream().map(OptionsDTO::new).collect((Collectors.toList()));
+
+        return  optionsDTOList;
     }
 
-    public String reviewList(){
+    public List<ReviewDTO> reviewList(Set<Review> reviewList){
 
-        return "{" + reviewList.toString() + "}";
+        List<ReviewDTO> reviewDTOList = reviewList.stream().map(ReviewDTO::new).collect((Collectors.toList()));
+
+        return reviewDTOList;
     }
 
-    public String keyordsList(){
+    public List<VotedKeywordsDTO> keywordsList(Set<VotedKeywords> keywordsList){
 
-        return "{" + keywordsList.toString() + "}";
+        List<VotedKeywordsDTO> keywordsDTOList = keywordsList.stream().map(VotedKeywordsDTO::new).collect((Collectors.toList()));
+
+        return keywordsDTOList;
     }
 
 }
