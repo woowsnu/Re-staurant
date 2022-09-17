@@ -5,31 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f141b506-fdf4-4a49-aff2-ab3531f8b631" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16__7_28__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16__7_28__Changes_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16__7_28__Changes_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16__7_31__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_28_[Changes]/createRestaurantInfo.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_28_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_28_[Changes]1/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_28_[Changes]2/createRestaurantInfo.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_28_[Changes]2/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_31_[Changes]/createRestaurantInfo.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_31_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_crawling/.ipynb_checkpoints/place_profile-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_crawling/.ipynb_checkpoints/place_review-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_crawling/.ipynb_checkpoints/reviewing_bot-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Options.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Options.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/RestaurantDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/RestaurantDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/ReviewDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/ReviewDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/Specification/RestaurantSpecs.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/Specification/RestaurantSpecs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/RestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/RestaurantController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Review.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/RestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/RestaurantService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_crawling/createRestaurantInfo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data_crawling/createRestaurantInfo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_crawling/place_profile.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data_crawling/place_profile.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_crawling/place_review.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data_crawling/place_review.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_crawling/reviewing_bot.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data_crawling/reviewing_bot.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

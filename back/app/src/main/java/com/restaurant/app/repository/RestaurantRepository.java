@@ -23,8 +23,10 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, J
 
 
     List<Restaurant> findRestaurantByRestaurantCategoryContainingIgnoreCase(String restaurantCategory);
+    List<Restaurant> findRestaurantByRestaurantCategoryContainingIgnoreCaseOrRestaurantNameContainingIgnoreCase(String restaurantCategory, String  restaurantName);
 
     List<Restaurant> findAll();
+
 //    List<Restaurant> findByRestaurantNameContainingOrLargeCategoryContainingOrMidCategoryContaining(String restaurantName, String largeCategory, String midCategory );
 
 ////    Optional<Restaurant> findByRestaurantNameOryLargeCategoryContainingOrMidCategory(String restaurantName, String largeCategory, String midCategory );
