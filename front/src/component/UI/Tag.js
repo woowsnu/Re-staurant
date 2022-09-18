@@ -1,13 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Tag.module.css';
 
 const Tag = (props) => {
+  const [search, setSearch] = useState(props.name)
+  const navigate = useNavigate();
+
+  const tagClickHandler = () => {
+    navigate(`/search/${props.name}`, {state : {search: search}} )
+  };
+
   return (
     <div className={styles.container}>
-      <Link to={`/search/${props.name}`}>
-        <button className={styles.btn}>{props.name}</button>
-      </Link>
+        <button className={styles.btn} onClick={tagClickHandler}>{props.name}</button>
     </div>
   );
 };

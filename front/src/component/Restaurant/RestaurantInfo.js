@@ -9,24 +9,33 @@ const RestaurantInfo = (props) => {
     <div id='res-info' className={styles.container}>
       <div>
         <h3>영업시간</h3>
-        {!props.restaurant.businessHourInfo?.includes('|') && <p>{props.restaurant.businessHourInfo}</p>}
+        {!props.restaurant.businessHourInfo?.includes('|') && (
+          <p>{props.restaurant.businessHourInfo}</p>
+        )}
         <ul>
-        {props.restaurant.businessHourInfo?.includes('|') && props.restaurant.businessHourInfo.split('|').map((hour, i)=>{
-          return <li key={i}>{hour}</li>
-        })}
+          {props.restaurant.businessHourInfo?.includes('|') &&
+            props.restaurant.businessHourInfo.split('|').map((hour, i) => {
+              return <li key={i}>{hour}</li>;
+            })}
         </ul>
         <p></p>
       </div>
-      <div>
-        <h3>편의시설</h3>
+      {props.options.length > 0 && (
         <div>
-          {props.options.map((option) => {
-            return (
-              <img key={option.id} src={option.iconURL} alt={option.name} />
-            );
-          })}
+          <h3>편의시설</h3>
+          <div className={styles.option}>
+            {props.options.map((option) => {
+              return (
+                <img
+                  key={option.optionId}
+                  src={option.iconUrl}
+                  alt={option.optionName}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
       <div>
         <h3>전화번호</h3>
         <p>{props.restaurant.tellNumber}</p>
@@ -37,9 +46,11 @@ const RestaurantInfo = (props) => {
           <p>{props.restaurant.snsUrl}</p>
         </div>
       )}
-      <div>
+      {/* <div>
         <h3>위치정보</h3>
-        <p  style={{paddingBottom: '1rem'}}>{props.restaurant.fullRoadAddress}</p>
+        <p style={{ paddingBottom: '1rem' }}>
+          {props.restaurant.fullRoadAddress}
+        </p>
         <RenderAfterNavermapsLoaded ncpClientId={'2ebca41zbe'}>
           <NaverMap
             mapDivId={'maps-getting-started-uncontrolled'} // default: react-naver-map
@@ -54,8 +65,7 @@ const RestaurantInfo = (props) => {
             <Marker position={position} />
           </NaverMap>
         </RenderAfterNavermapsLoaded>
-        {/* <button>레스토랑 길찾기</button> */}
-      </div>
+      </div> */}
     </div>
   );
 };
