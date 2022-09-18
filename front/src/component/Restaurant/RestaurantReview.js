@@ -1,28 +1,36 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ReviewListItem from '../Restaurant/ReviewListItem';
 import Button from '../UI/Button';
 import styles from './RestaurantReview.module.css';
 
 const RestaurantReview = (props) => {
-  const {restaurantName, siCode, guCode, restaurantCategory, busId, ...others } = props.restaurant; 
-  const revisitYes = props.reviews?.filter((el) => el.revisit === 1);
-  const revisitNo = props.reviews?.filter((el) => el.revisit === 0);
-  const [hopeRevisit, setHopeRevisit] = useState(true);
+  const isLogin = localStorage.getItem('isLoggedIn');
+  const {
+    restaurantName,
+    siCode,
+    guCode,
+    restaurantCategory,
+    busId,
+    ...others
+  } = props.restaurant;
+  // const revisitYes = props.reviews?.filter((el) => el.revisit === 1);
+  // const revisitNo = props.reviews?.filter((el) => el.revisit === 0);
+  // const [hopeRevisit, setHopeRevisit] = useState(true);
 
-  const hopeRevisitHandler = () => {
-    setHopeRevisit(true);
-  };
+  // const hopeRevisitHandler = () => {
+  //   setHopeRevisit(true);
+  // };
 
-  const nopeRevisitHandler = () => {
-    setHopeRevisit(false);
-  };
+  // const nopeRevisitHandler = () => {
+  //   setHopeRevisit(false);
+  // };
 
   const simpleRestaurantProfile = {
     name: restaurantName,
     siCode: siCode,
     guCode: guCode,
-    category : restaurantCategory,
+    category: restaurantCategory,
     busId: busId,
     // img: props.restaurant.imgUrl,
   };
@@ -32,10 +40,15 @@ const RestaurantReview = (props) => {
       <div>
         <h3>리뷰</h3>
       </div>
-      <Link to={`/review/${busId}`} state={simpleRestaurantProfile}>
-        <Button>리뷰쓰기</Button>
-      </Link>
-      <div className={styles.visitbtn}>
+      {!!isLogin ? (
+        <Link to={`/review/${busId}`} state={simpleRestaurantProfile}>
+          <Button>리뷰쓰기</Button>
+        </Link>
+      ) : (
+        <div>리뷰는 로그인 후 작성 가능합니다.</div>
+      )}
+
+      {/* <div className={styles.visitbtn}>
         <button className={styles.visitbtn1} onClick={hopeRevisitHandler}>
           재방문하고 싶어요
         </button>
@@ -49,13 +62,13 @@ const RestaurantReview = (props) => {
           : revisitNo.map((review) => {
               return <ReviewListItem key={review.id} review={review} />;
             })}
+      </ul> */}
+      {props.reviews?.length === 0 && <div>아직 등록된 리뷰가 없습니다.</div>}
+      <ul>
+        {props.reviews?.map((review) => {
+          return <ReviewListItem key={review.reveiwIndex} review={review} />;
+        })}
       </ul>
-      {/* <div>
-        페이지네이션
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-      </div> */}
     </div>
   );
 };

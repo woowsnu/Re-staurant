@@ -44,7 +44,7 @@ const RestaurantProfile = (props) => {
         </div>
         <h1 className={styles.restaurantName}>{restaurantName}</h1>
         <div className={styles.revisit}>
-        {props.reviews?.length && (<div>
+        {props.reviews?.length > 0 && (<div>
           <p><FaRunning /> 재방문하고 싶어요 ({props.reviews?.length}명의 리뷰)</p>
           <ChartBar reviews={props.reviews?.filter((el)=>el.revisit ===1).length} reviewCount={props.reviews?.length}/>
         </div>)}

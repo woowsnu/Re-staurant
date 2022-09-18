@@ -5,7 +5,7 @@ import { instance } from '../../api/axios';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
 import styles from './ReviewWrite.module.css';
-// import ReviewImgUpload from "./ReviewImgUpload";
+import ReviewImgUpload from './ReviewImgUpload';
 
 const ReviewWrite = (props) => {
   const navigate = useNavigate();
@@ -17,7 +17,8 @@ const ReviewWrite = (props) => {
   const [review, setReview] = useState('');
   const [revisit, setRevisit] = useState(1);
   // const [image, setImage] = useState(null);
-
+  const [imgUrl, setImgUrl] = useState([]);
+  console.log("이미지 목록",  imgUrl);
   // 재방문의사
   const revisitClickHandler = (value) => {
     setRevisit(value);
@@ -42,12 +43,19 @@ const ReviewWrite = (props) => {
   // 사진 업로드
   const saveImage = async (e) => {
     e.preventDefault();
-    console.log(e.target.files[0]);
-    if(e.target.files[0]) {
+    const reader = new FileReader();
+    const file = e.target.files[0];
+
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setImgUrl([...imgUrl, reader.result]);
+      console.log('이미지url', reader.result);
+    };
+    if (e.target.files[0]) {
       URL.revokeObjectURL(image.preview_URL);
-    setImage(e.target.files[0]);
+      setImage(e.target.files[0]);
     }
-    await console.log(image)
+    await console.log(image);
   };
 
   const sendToServer = async () => {
@@ -55,9 +63,9 @@ const ReviewWrite = (props) => {
     formData.append('file', image.file);
     const config = {
       headers: {
-        "Content-Type": "multipart/form-data",
-      }
-    }
+        'Content-Type': 'multipart/form-data',
+      },
+    };
     await axios.post('http://localhost:3500/review-img', formData);
   };
 
@@ -74,7 +82,7 @@ const ReviewWrite = (props) => {
     const newReview = {
       reviewTitle: comment,
       reviewContent: review,
-      imgUrl: image
+      imgUrl: image,
     };
 
     try {
@@ -168,6 +176,11 @@ const ReviewWrite = (props) => {
           <p>사진은 최대 5장까지 등록 가능합니다.</p>
           <input type='file' multiple={true} onChange={saveImage} />
           <button onClick={sendToServer}>등록</button>
+          <div>
+            {imgUrl?.map((img, i)=>{
+              return <img className={styles.prevImg} src={img} key={i}/>
+            })}
+          </div>
         </div>
         {/* <ReviewImgUpload /> */}
         <div>

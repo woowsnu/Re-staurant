@@ -20,16 +20,22 @@ const RestaurantInfo = (props) => {
         </ul>
         <p></p>
       </div>
-      <div>
-        <h3>편의시설</h3>
-        {/* <div>
-          {props.options.map((option) => {
-            return (
-              <img key={option.id} src={option.iconURL} alt={option.name} />
-            );
-          })}
-        </div> */}
-      </div>
+      {props.options.length > 0 && (
+        <div>
+          <h3>편의시설</h3>
+          <div className={styles.option}>
+            {props.options.map((option) => {
+              return (
+                <img
+                  key={option.optionId}
+                  src={option.iconUrl}
+                  alt={option.optionName}
+                />
+              );
+            })}
+          </div>
+        </div>
+      )}
       <div>
         <h3>전화번호</h3>
         <p>{props.restaurant.tellNumber}</p>

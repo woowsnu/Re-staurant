@@ -13,6 +13,7 @@ const ReviewImgUpload = () => {
     e.preventDefault();
     if (e.target.files[0]) {
       URL.revokeObjectURL(image.preview_URL);
+      console.log(image.preview_URL)
       const preview_URL = URL.createObjectURL(e.target.files[0]);
 
       setImage(() => ({
