@@ -46,7 +46,7 @@ const RestaurantInfo = (props) => {
           <p>{props.restaurant.snsUrl}</p>
         </div>
       )}
-      <div>
+      {/* <div>
         <h3>위치정보</h3>
         <p style={{ paddingBottom: '1rem' }}>
           {props.restaurant.fullRoadAddress}
@@ -65,8 +65,7 @@ const RestaurantInfo = (props) => {
             <Marker position={position} />
           </NaverMap>
         </RenderAfterNavermapsLoaded>
-        {/* <button>레스토랑 길찾기</button> */}
-      </div>
+      </div> */}
     </div>
   );
 };

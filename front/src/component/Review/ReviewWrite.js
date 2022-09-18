@@ -30,9 +30,9 @@ const ReviewWrite = (props) => {
     setComment(e.target.value);
   };
 
-  // 한줄평
+  // 이미지
   const imageChangeHandler = (e) => {
-    setComment(e.target.value);
+    setImgUrl(e.target.value);
   };
 
   // 리뷰
@@ -46,11 +46,11 @@ const ReviewWrite = (props) => {
     const reader = new FileReader();
     const file = e.target.files[0];
 
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      setImgUrl([...imgUrl, reader.result]);
-      console.log('이미지url', reader.result);
-    };
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   setImgUrl([...imgUrl, reader.result]);
+    //   console.log('이미지url', reader.result);
+    // };
     if (e.target.files[0]) {
       URL.revokeObjectURL(image.preview_URL);
       setImage(e.target.files[0]);
@@ -156,11 +156,12 @@ const ReviewWrite = (props) => {
         <h3>이미지 등록</h3>
         <input
           id='image'
+          name='image'
           style={{ width: '100%' }}
           type='text'
           placeholder='한줄평을 작성해주세요'
           onChange={imageChangeHandler}
-          value={image}
+          value={imgUrl}
         />
         <h3>상세리뷰</h3>
         <textarea
@@ -176,11 +177,11 @@ const ReviewWrite = (props) => {
           <p>사진은 최대 5장까지 등록 가능합니다.</p>
           <input type='file' multiple={true} onChange={saveImage} />
           <button onClick={sendToServer}>등록</button>
-          <div>
+          {/* <div>
             {imgUrl?.map((img, i)=>{
               return <img className={styles.prevImg} src={img} key={i}/>
             })}
-          </div>
+          </div> */}
         </div>
         {/* <ReviewImgUpload /> */}
         <div>
