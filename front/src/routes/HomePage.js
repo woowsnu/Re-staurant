@@ -7,9 +7,9 @@ import PhotoCard from '../component/UI/PhotoCard';
 import styles from './HomePage.module.css';
 
 const TAG = ['삼겹살', '우동', '카레', '까눌레', '중식'];
-const MANY_REVISIT = [1698767904, 1788964881, 1274871069, 37064850];
+const MANY_REVISIT = [11619295, 13493819, 11678488, 19878437];
 
-const FOLLOW_REVISIT = [5, 6, 7, 8];
+const FOLLOW_REVISIT = [ 13097213, 6, 7, 8];
 
 const HomePage = () => {
   //restaurant list fetching (전체 완성 후 호출하는 코드 추가하기)
@@ -35,14 +35,14 @@ const HomePage = () => {
         </div>
         <h3>맛 보장! 재방문 많은 맛집</h3>
         <div className={styles.section}>
-            {MANY_REVISIT.map((id) => (
-              <PhotoCard
-                key={id}
-                id={id}
-                isChecked={isChecked}
-                updateBookmark={updateBookmark}
-              />
-            ))}
+          {MANY_REVISIT.map((id) => (
+            <PhotoCard
+              key={id}
+              id={id}
+              isChecked={isChecked}
+              updateBookmark={updateBookmark}
+            />
+          ))}
         </div>
         <h3>친구가 다녀 온 그 곳!</h3>
         <div className={styles.section}>

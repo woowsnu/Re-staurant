@@ -9,23 +9,26 @@ const RestaurantInfo = (props) => {
     <div id='res-info' className={styles.container}>
       <div>
         <h3>영업시간</h3>
-        {!props.restaurant.businessHourInfo?.includes('|') && <p>{props.restaurant.businessHourInfo}</p>}
+        {!props.restaurant.businessHourInfo?.includes('|') && (
+          <p>{props.restaurant.businessHourInfo}</p>
+        )}
         <ul>
-        {props.restaurant.businessHourInfo?.includes('|') && props.restaurant.businessHourInfo.split('|').map((hour, i)=>{
-          return <li key={i}>{hour}</li>
-        })}
+          {props.restaurant.businessHourInfo?.includes('|') &&
+            props.restaurant.businessHourInfo.split('|').map((hour, i) => {
+              return <li key={i}>{hour}</li>;
+            })}
         </ul>
         <p></p>
       </div>
       <div>
         <h3>편의시설</h3>
-        <div>
+        {/* <div>
           {props.options.map((option) => {
             return (
               <img key={option.id} src={option.iconURL} alt={option.name} />
             );
           })}
-        </div>
+        </div> */}
       </div>
       <div>
         <h3>전화번호</h3>
@@ -39,7 +42,9 @@ const RestaurantInfo = (props) => {
       )}
       <div>
         <h3>위치정보</h3>
-        <p  style={{paddingBottom: '1rem'}}>{props.restaurant.fullRoadAddress}</p>
+        <p style={{ paddingBottom: '1rem' }}>
+          {props.restaurant.fullRoadAddress}
+        </p>
         <RenderAfterNavermapsLoaded ncpClientId={'2ebca41zbe'}>
           <NaverMap
             mapDivId={'maps-getting-started-uncontrolled'} // default: react-naver-map
