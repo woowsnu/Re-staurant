@@ -75,7 +75,6 @@ const SignUp = () => {
         setSignupsuccess(true);
       })
       .catch(function (err) {
-        console.log(err.response.status);
         const errCode = err.response.status;
         if (errCode === 400) {
           setErr("이미 존재하는 계정입니다.");
