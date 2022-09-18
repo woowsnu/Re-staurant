@@ -3,7 +3,9 @@ package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.RestaurantDTO;
+import com.restaurant.app.Specification.RestaurantSpecs;
 import com.restaurant.app.model.Restaurant;
+import com.restaurant.app.repository.RestaurantRepository;
 import com.restaurant.app.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,11 +19,15 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/restaurant")
+@CrossOrigin("*")
 @Slf4j
 public class RestaurantController {
 
     @Autowired
     RestaurantService restaurantService;
+
+    @Autowired
+    RestaurantRepository restaurantRepository;
 
     // test : Create PlaceInfo
     @PostMapping("/createRestaurantInfo")
@@ -29,7 +35,6 @@ public class RestaurantController {
 
         System.out.println("createRestaurantInfo");
 
-        System.out.println(restaurantDTO.getBusId());
         try {
             restaurantService.createPlaceInfo(restaurantDTO);
 
@@ -119,26 +124,27 @@ public class RestaurantController {
 
 
     //     식카테고리, 사용자위치 별로 조회
-//    @GetMapping("/category/{restaurantCategory}")
-//    public ResponseEntity<?> restaurantCategory(@PathVariable String restaurantCategory ){
-//        try{
-//            List<Restaurant> restaurantList = restaurantService.findByRestaurantCategory(restaurantCategory);
-//
-//            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
-//
-//
-//            return ResponseEntity.ok().body(restaurantsDTO);
-//        }
-//        catch(Exception e) {
-//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-//            return ResponseEntity.badRequest().body(responseDTO);
-//        }
-//    }
+   @GetMapping("/category/{restaurantCategory}")
+   public ResponseEntity<?> restaurantCategory(@PathVariable String restaurantCategory ){
+       try{
+           List<Restaurant> restaurantList = restaurantService.findRestaurantByRestaurantCategory(restaurantCategory);
+
+           List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
+
+
+           return ResponseEntity.ok().body(restaurantsDTO);
+       }
+       catch(Exception e) {
+           ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+           return ResponseEntity.badRequest().body(responseDTO);
+       }
+   }
 
 
     // 상세페이지
     @GetMapping("/restaurantDetail/{busId}")
     public ResponseEntity<?> restaurantInfo(@PathVariable String busId) {
+
 
         try{
             Restaurant restaurant = restaurantService.findRestaurantByBusId(busId);
@@ -153,6 +159,41 @@ public class RestaurantController {
             return ResponseEntity.badRequest().body(responseDTO);
         }
 
-
     }
+
+//    @PostMapping("/search")
+//    public ResponseEntity<?> search(@ModelAttribute RestaurantDTO restaurantDTO ){
+//
+//        try{
+//            Optional<Restaurant> restaurantList = restaurantService.findByRestaurantSearch(restaurantDTO);
+//
+////            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
+//
+//
+//            return ResponseEntity.ok().body(restaurantList);
+//        }
+//        catch(Exception e) {
+//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+//            return ResponseEntity.badRequest().body(responseDTO);
+//        }
+//    }
+
+    @PostMapping("/search")
+    public List<Restaurant> getRestaurantList(@RequestParam(required = false) String restaurantName,
+                                              @RequestParam(required = false) String largeCategory,
+                                              @RequestParam(required = false) String midCategory) {
+        if (largeCategory != null) {
+
+            return restaurantRepository.findAll(RestaurantSpecs.withLargeCategory(largeCategory));
+        }
+        else if(midCategory != null){
+            return restaurantRepository.findAll(RestaurantSpecs.withMidCategory(midCategory));
+        }
+
+
+        return restaurantRepository.findAll(RestaurantSpecs.withRestaurantName(restaurantName));
+    }
+
+
+
 }

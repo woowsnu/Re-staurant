@@ -39,12 +39,13 @@ public class Options implements Serializable {
     @JoinColumn(name = "restaurant_index",referencedColumnName = "restaurant_index")
     private Restaurant restaurant;
 
-    @Override
-    public String toString() {
-        return "optionId : " + optionId  + "optionName : " + optionName
-                + "iconUrl : " + iconUrl  + ", isCheck : "+ isCheck + ", orderCount : "+orderCount ;
+//    @Override
+//    public String toString() {
+//        return "optionId : " + optionId  + "optionName : " + optionName
+//                + "iconUrl : " + iconUrl  + ", isCheck : "+ isCheck + ", orderCount : "+orderCount ;
+//
+//    }
 
-    }
 
 
 }

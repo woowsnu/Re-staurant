@@ -1,8 +1,10 @@
-import React, { useContext } from 'react';
-import AuthContext from '../../store/auth-context';
-import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import AuthContext from "../../store/auth-context";
+import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import styles from './Navbar.module.css';
+import styles from "./Navbar.module.css";
+import { FaUserCircle } from "react-icons/fa";
+
 // GNB 역할
 const Navbar = () => {
   const ctx = useContext(AuthContext);
@@ -12,18 +14,22 @@ const Navbar = () => {
   return (
     <div className={styles.container}>
       <div>
-        <Link to='/'>
-          <img src={require('../../assets/images/logo.png')} alt='logo' />
+        <Link to="/">
+          <img
+            src={require("../../assets/images/logo_big.png")}
+            width="180px"
+            alt="logo"
+          />
         </Link>
       </div>
-      <div>
+      <div className={styles.navIcons}>
         {loginStatus && !isMobile ? (
-          <Link to='/mypage'>
-            <button className={styles.navbtn}>마이페이지</button>
+          <Link to="/mypage">
+              <FaUserCircle />
           </Link>
         ) : (
-          <Link to='/login'>
-            <button className={styles.navbtn}>회원가입/로그인</button>
+          <Link to="/login">
+            <FaUserCircle />
           </Link>
         )}
       </div>

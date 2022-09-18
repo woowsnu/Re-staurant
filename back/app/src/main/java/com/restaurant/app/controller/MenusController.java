@@ -3,7 +3,6 @@ package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.MenusDTO;
 import com.restaurant.app.DTO.ResponseDTO;
-import com.restaurant.app.model.Menus;
 import com.restaurant.app.service.MenusService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,14 +25,11 @@ public class MenusController {
     @PostMapping("/createMenus")
     public ResponseEntity<?> createMenus(@RequestBody MenusDTO menusDTO) {
         try{
-            Menus menus = menusService.createMenus(menusDTO);
+            menusService.createMenus(menusDTO);
 
-            MenusDTO responseMenusDTO = MenusDTO.builder()
-                    .menuIndex(menus.getMenuIndex())
-                    .menuName(menus.getMenuName())
-                    .menuPrice(menus.getMenuPrice())
-                    .build();
-            return ResponseEntity.ok().body(responseMenusDTO);
+            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
+
+            return ResponseEntity.ok().body(responseDTO);
         }
         catch (RuntimeException e) {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();

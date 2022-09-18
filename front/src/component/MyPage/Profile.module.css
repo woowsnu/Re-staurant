@@ -1,16 +1,13 @@
 .pageTop {
     display: flex;
     justify-content: space-between;
-    padding: 0 2rem 3rem 2rem;
-
-    @media screen and (max-width: 480px) {
-        flex-direction: column;
-      }
+    padding: 1.5rem 2rem 3rem 2rem;
 }
 
 /* @media screen and (max-width: 800px) {
     flex-direction : column;
   } */
+  
 .pageTitle {
     font-size: 1.6rem;
     font-weight: 700;
@@ -21,13 +18,7 @@
     padding-left: 3rem;
 }
 
-.logoutbuttonsection {
-    display: flex;
-    align-items: right;
-    justify-content: right;
-}
-
-.logoutbutton {
+.logoutButton {
     align-items: right;
     text-align: right;
     font: inherit;
@@ -36,14 +27,19 @@
     cursor: pointer;
 }
 
-.mypagebuttons {
+.mypageButtons {
     padding: 1rem 2rem 1rem 1rem;
     display: flex;
     justify-content: space-around;
 }
 
-.mypagebuttons button {
+.mypageButtons button {
     width : 70%;
+}
+
+.mypageButtons button:hover {
+    background-color : #51B059;
+    color: white;
 }
 
 .grayline {
@@ -59,6 +55,7 @@
 .followInfo {
     padding-top: 1.5rem;
 }
+
 .nickname {
     font-size: 1.4rem;
     font-weight: 500;

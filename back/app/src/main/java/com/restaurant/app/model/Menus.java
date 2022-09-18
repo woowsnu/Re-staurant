@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -29,10 +30,5 @@ public class Menus {
     private Restaurant restaurant;
 
 
-    //순환참조 해결용 toString Override
-    @Override
-    public String toString() {
-        return "{menuName : " + menuName  + ", menuPrice : "+ menuPrice +"}";
-    }
 
 }

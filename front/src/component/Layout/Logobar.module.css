@@ -1,0 +1,8 @@
+.container {
+    position: sticky;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.3rem 1.3rem;
+    border-bottom: #EEEEEE solid;
+}

@@ -27,16 +27,31 @@ public class ReviewController {
 
         try {
 
-            List<Review> reviewList = reviewService.save(authedUser,reviewDTO,busId);
-            List<ReviewDTO> reviewsDTO = reviewList.stream().map(ReviewDTO::new).collect(Collectors.toList());
+            reviewService.save(authedUser,reviewDTO,busId);
 
-            System.out.println("reviewList : " + reviewList);
-
-            return ResponseEntity.ok().body(reviewsDTO);
+            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
+            return ResponseEntity.ok().body(responseDTO);
 
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
+    //read
+    @GetMapping("/{email}/auth/findUserView")
+    public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser,@PathVariable String email){
+        try{
+            List<Review> reviewList = reviewService.findByEmail(authedUser,email);
+
+            List<ReviewDTO> reviewDTOs = reviewList.stream().map(ReviewDTO::new).collect((Collectors.toList()));
+
+
+            return ResponseEntity.ok().body(reviewDTOs);
+        }
+        catch(Exception e) {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
             return ResponseEntity.badRequest().body(responseDTO);
         }

@@ -15,8 +15,8 @@ public class RestaurantService {
 
     @Autowired
     private RestaurantRepository restaurantRepository;
-    public List<Restaurant> findAll() {
-        return restaurantRepository.findAll();}
+//    public List<Restaurant> findAll() {
+//        return restaurantRepository.findAll();}
 
     public Restaurant createPlaceInfo(RestaurantDTO restaurantDTO) {
 
@@ -26,8 +26,9 @@ public class RestaurantService {
 
         Restaurant restaurant = Restaurant.builder()
                                 .busId(restaurantDTO.getBusId())
-                                .largeCategory(restaurantDTO.getLargeCategory())
-                                .midCategory(restaurantDTO.getMidCategory())
+//                                .largeCategory(restaurantDTO.getLargeCategory())
+//                                .midCategory(restaurantDTO.getMidCategory())
+                                .restaurantCategory(restaurantDTO.getRestaurantCategory())
                                 .restaurantName(restaurantDTO.getRestaurantName())
                                 .tellNumber(restaurantDTO.getTellNumber())
                                 .fullAddress(restaurantDTO.getFullAddress())
@@ -39,6 +40,8 @@ public class RestaurantService {
                                 .description(restaurantDTO.getDescription())
                                 .x(restaurantDTO.getX())
                                 .y(restaurantDTO.getY())
+                                .avgRating(restaurantDTO.getAvgRating())
+                                .authorCount(restaurantDTO.getAuthorCount())
                                 .build();
 
         return restaurantRepository.save(restaurant);
@@ -46,7 +49,7 @@ public class RestaurantService {
 
 //
     public List<Restaurant> findRestaurantByName(String restaurantName){
-        List<Restaurant> restaurantList = restaurantRepository.findRestaurantByRestaurantName(restaurantName);
+        List<Restaurant> restaurantList = restaurantRepository.findRestaurantByRestaurantNameContainingIgnoreCase(restaurantName);
 
         if (restaurantList.size() == 0) {
             throw new RuntimeException("식당이 없습니다.");
@@ -100,17 +103,41 @@ public class RestaurantService {
     }
 
 
-//    public List<Restaurant> findRestaurantByRestaurantCategory(String restaurantCategory){
-//        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByrestaurantCategory(restaurantCategory);
-//
-//
-//        if (restaurantList.size() == 0) {
-//            throw new RuntimeException("식당이 없습니다.");
-//        }
-//
-//        return restaurantList;
+    public List<Restaurant> findRestaurantByRestaurantCategory(String restaurantCategory){
+        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByRestaurantCategoryContainingIgnoreCase(restaurantCategory);
+
+
+        if (restaurantList.size() == 0) {
+            throw new RuntimeException("식당이 없습니다.");
+        }
+
+        return restaurantList;
+    }
+
+
+
+//    @Transactional(readOnly = true)
+//    public Optional<Restaurant>  findByRestaurantSearch(RestaurantDTO restaurantDTO){
+//        return restaurantRepository.findByRestaurantNameContainingOrLargeCategoryContainingOrMidCategoryContaining(
+//                restaurantDTO.getRestaurantName(),restaurantDTO.getLargeCategory(),restaurantDTO.getMidCategory());
+////                .stream().map(RestaurantDTO::new).collect(Collectors.toList());
+////        List<Restaurant> restaurantList = restaurantRepository.findByRestaurantNameContainingOrRestaurantCategoryContaining( restaurantName, restaurantCategory);
+////        if (restaurantList == null) {
+////            throw new RuntimeException("해당 식당이 없습니다.");
+////        }
+////        return restaurantList;
 //    }
 
-
-
+//    public List<Restaurant> findAll(Specification<Restaurant> withRestaurantName){
+//        return restaurantRepository.findAll(withRestaurantName);
+//
+//    }
+//
+//    public List<Restaurant> findAll(Specification<Restaurant> withMidCategory) {
+//        return restaurantRepository.findAll(withMidCategory);
+//    }
+//
+//    public List<Restaurant> findAll(Specification<Restaurant> withLargeCategory) {
+//        return restaurantRepository.findAll(withLargeCategory);
+//    }
 }

@@ -28,6 +28,8 @@ public class OptionsDTO {
 
     public OptionsDTO(Options options){
         this.optionIndex = options.getOptionIndex();
+        this.optionId = options.getOptionId();
+        this.optionName = options.getOptionName();
         this.iconUrl = options.getIconUrl();
         this.isCheck = options.getIsCheck();
         this.orderCount = options.getOrderCount();
