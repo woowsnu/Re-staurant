@@ -26,8 +26,6 @@ public class RestaurantService {
 
         Restaurant restaurant = Restaurant.builder()
                                 .busId(restaurantDTO.getBusId())
-//                                .largeCategory(restaurantDTO.getLargeCategory())
-//                                .midCategory(restaurantDTO.getMidCategory())
                                 .restaurantCategory(restaurantDTO.getRestaurantCategory())
                                 .restaurantName(restaurantDTO.getRestaurantName())
                                 .tellNumber(restaurantDTO.getTellNumber())
@@ -114,6 +112,17 @@ public class RestaurantService {
         return restaurantList;
     }
 
+    public List<Restaurant> findRestaurantByRestaurantCategoryOrRestaurantName(String restaurantCategory,String restaurantName){
+        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByRestaurantCategoryContainingIgnoreCaseOrRestaurantNameContainingIgnoreCase(restaurantCategory,restaurantName);
+
+
+        if (restaurantList.size() == 0) {
+            throw new RuntimeException("식당이 없습니다.");
+        }
+
+        return restaurantList;
+    }
+
 
 
 //    @Transactional(readOnly = true)
@@ -140,4 +149,8 @@ public class RestaurantService {
 //    public List<Restaurant> findAll(Specification<Restaurant> withLargeCategory) {
 //        return restaurantRepository.findAll(withLargeCategory);
 //    }
+
+
+
+
 }
