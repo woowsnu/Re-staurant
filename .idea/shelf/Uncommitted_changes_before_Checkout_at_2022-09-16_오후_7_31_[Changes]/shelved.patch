@@ -1,0 +1,48 @@
+Index: back/app/src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Datasource (MySQL Config)\r\nspring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver\r\nspring.datasource.url=jdbc:mysql://localhost:3306/finalproject?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC\r\nspring.datasource.username=root\r\nspring.datasource.password=Fleur0320!@#\r\n#spring.datasource.hikari.connection-init-sql=set names utf8mb4\r\nspring.datasource.tomcat.init-s-q-l= SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci\r\n\r\n# JPA\r\nspring.jpa.hibernate.ddl-auto=update\r\nspring.jpa.generate-ddl=true\r\nspring.jpa.show-sql=true\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/back/app/src/main/resources/application.properties b/back/app/src/main/resources/application.properties
+--- a/back/app/src/main/resources/application.properties	(revision 0c1958abe7884f9a74e593f3deaf25dfcb0f4d4f)
++++ b/back/app/src/main/resources/application.properties	(date 1663324137625)
+@@ -2,13 +2,17 @@
+ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+ spring.datasource.url=jdbc:mysql://localhost:3306/finalproject?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+ spring.datasource.username=root
+-spring.datasource.password=Fleur0320!@#
++
++spring.datasource.password=qkqh1234!
++
++
+ #spring.datasource.hikari.connection-init-sql=set names utf8mb4
+ spring.datasource.tomcat.init-s-q-l= SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci
+ 
+ # JPA
++
+ spring.jpa.hibernate.ddl-auto=update
++
+ spring.jpa.generate-ddl=true
+ spring.jpa.show-sql=true
+ 
+-
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n    <annotationProcessing>\r\n      <profile default=\"true\" name=\"Default\" enabled=\"true\" />\r\n      <profile name=\"Gradle Imported\" enabled=\"true\">\r\n        <outputRelativeToContentRoot value=\"true\" />\r\n        <processorPath useClasspath=\"false\">\r\n          <entry name=\"$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.24/13a394eed5c4f9efb2a6d956e2086f1d81e857d9/lombok-1.18.24.jar\" />\r\n        </processorPath>\r\n        <module name=\"app.main\" />\r\n      </profile>\r\n    </annotationProcessing>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision 0c1958abe7884f9a74e593f3deaf25dfcb0f4d4f)
++++ b/.idea/compiler.xml	(date 1663324137639)
+@@ -8,7 +8,6 @@
+         <processorPath useClasspath="false">
+           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.24/13a394eed5c4f9efb2a6d956e2086f1d81e857d9/lombok-1.18.24.jar" />
+         </processorPath>
+-        <module name="app.main" />
+       </profile>
+     </annotationProcessing>
+   </component>

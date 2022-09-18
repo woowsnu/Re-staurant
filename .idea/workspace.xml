@@ -8,14 +8,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/RestaurantDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/RestaurantDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/ReviewDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/ReviewDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/Specification/RestaurantSpecs.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/Specification/RestaurantSpecs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/RestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/RestaurantController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/ReviewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Review.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/ReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/ReviewRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/RestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/RestaurantService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/ReviewService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

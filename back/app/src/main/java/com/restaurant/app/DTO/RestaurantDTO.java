@@ -45,8 +45,6 @@ public class RestaurantDTO {
     public RestaurantDTO(Restaurant restaurant) {
         this.restaurantIndex = restaurant.getRestaurantIndex();
         this.busId = restaurant.getBusId();
-//        this.largeCategory = restaurant.getLargeCategory();
-//        this.midCategory = restaurant.getMidCategory();
         this.restaurantCategory = restaurant.getRestaurantCategory();
         this.restaurantName = restaurant.getRestaurantName();
         this.description = restaurant.getDescription();

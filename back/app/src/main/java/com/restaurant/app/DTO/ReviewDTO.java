@@ -16,6 +16,8 @@ public class ReviewDTO {
     private String reviewTitle;
     private String reviewContent;
 
+    private String nickName;
+
 
 
 
@@ -25,6 +27,7 @@ public class ReviewDTO {
         this.email = review.getUser().getEmail();
         this.reviewTitle = review.getReviewTitle();
         this.reviewContent = review.getReviewContent();
+        this.nickName = review.getUser().getNickname();
 
     }
 
