@@ -124,7 +124,7 @@ const RestaurantSearch = () => {
             <PhotoCard />
           </div>
           <br/>
-          <div className={styles.reviewRecommend}>검색 결과</div>
+          <div className={styles.reviewRecommend}>검색 결과 🔎</div>
           <div>
             {objectToData.map((data) => (
               <>

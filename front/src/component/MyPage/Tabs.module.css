@@ -25,3 +25,13 @@
     border-bottom: 0.2rem solid #51B059;
     font-weight: 700;
 }
+
+@media screen and (max-width: 680px) {
+    .tabbar {
+        margin: 0;
+        list-style: none;
+        display: flex;
+        justify-content: space-evenly;
+        width: 680px;
+    }
+  }  
