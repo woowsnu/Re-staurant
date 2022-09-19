@@ -28,7 +28,7 @@ const RestaurantMenu = (props) => {
               <ul key={i}>
                 <li>
                   <p>{menu.menuName}</p>
-                  <p>{menu.menuPrice}</p>
+                  <p>{menu.menuPrice} 원</p>
                 </li>
               </ul>
             );

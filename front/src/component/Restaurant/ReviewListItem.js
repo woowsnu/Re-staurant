@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ReviewDetail from '../Review/ReviewDetail';
 import styles from './ReviewListItem.module.css';
 
@@ -8,10 +9,13 @@ const ReviewListItem = (props) => {
     setModalView(!modalView);
   };
 
+  const randomNum = Math.floor(Math.random() * 200);
+  const avatar = `https://picsum.photos/id/${randomNum}/50/50`
   return (
     <li key={props.review?.reviewIndex} className={styles.container}>
+      <Link to={`/mypage/${props.review?.email}`}>
       <div className={styles.reviewInfo}>
-      <img alt='avatar' src='https://picsum.photos/50/50' />
+      <img alt='avatar' src={avatar} />
         {/* {props.review.user.profileImg === null ? (
           <img alt='avatar' src={require('../../assets/images/user.png')} />
         ) : (
@@ -22,6 +26,7 @@ const ReviewListItem = (props) => {
           {/* <p>{props.review.date}</p> */}
         </div>
       </div>
+      </Link>
       <div className={styles.reviewContent} onClick={modalViewHandler}>
         {/* <ul className={styles.reviewImage}>
           {props.review.img === null && ''}
