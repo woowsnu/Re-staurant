@@ -1,9 +1,6 @@
 package com.restaurant.app.model;
 
-import com.restaurant.app.DTO.MenusDTO;
-import com.restaurant.app.DTO.OptionsDTO;
-import com.restaurant.app.DTO.ReviewDTO;
-import com.restaurant.app.DTO.VotedKeywordsDTO;
+import com.restaurant.app.DTO.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -93,6 +90,10 @@ public class Restaurant implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant", cascade = CascadeType.ALL)
     private Set<VotedKeywords> keywordsList = new HashSet();
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private Set<RestaurantLike> restaurantLikeList = new HashSet();
+
+
     public List<MenusDTO> menusList(Set<Menus> menusList){
 
         List<MenusDTO> menusDTOList = menusList.stream().map(MenusDTO::new).collect((Collectors.toList()));
@@ -120,5 +121,16 @@ public class Restaurant implements Serializable {
 
         return keywordsDTOList;
     }
+
+
+
+    public List<RestaurantLikeDTO> restaurantLikeList(Set<RestaurantLike> restaurantLikeList){
+
+        List<RestaurantLikeDTO> restaurantLikeDTOList = restaurantLikeList.stream().map(RestaurantLikeDTO::new).collect((Collectors.toList()));
+
+        return restaurantLikeDTOList;
+    }
+
+
 
 }

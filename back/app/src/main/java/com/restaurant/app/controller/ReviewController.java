@@ -59,30 +59,23 @@ public class ReviewController {
 
 
     // Update Review
-//    @PutMapping("{busId}/auth/updateReview")
-//    public ResponseEntity<?> updateReview(@AuthenticationPrincipal User authedUser,
-//                                          @RequestBody ReviewDTO updateReviewDTO,
-//                                          @PathVariable Long busId, Long userIndex ) {
-//        try{
-//
-//            List<Review> reviewList = reviewService.update(authedUser, updateReviewDTO,busId,userIndex);
-//
-//            ReviewDTO responseReviewDTO = ReviewDTO.builder()
-//                    .reviewIndex(updateReviewDTO.getReviewIndex())
-//                    .reviewTitle(updateReviewDTO.getReviewTitle())
-//                    .reviewContent(updateReviewDTO.getReviewContent())
-//                    .email(updateReviewDTO.getEmail())
-//                    .busId(updateReviewDTO.getBusId())
-//                    .build();
-//
-//            return ResponseEntity.ok().body(responseReviewDTO);
-//        }
-//        catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-//            return ResponseEntity.badRequest().body(responseDTO);
-//        }
-//    }
+    @PutMapping("{busId}/auth/updateReview")
+    public ResponseEntity<?> updateReview(@AuthenticationPrincipal User authedUser,
+                                          @RequestBody ReviewDTO updateReviewDTO,
+                                          @PathVariable String busId , Long reviewIndex) {
+        try{
+
+            reviewService.update(authedUser, updateReviewDTO,busId, reviewIndex);
+
+            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
+            return ResponseEntity.ok().body(responseDTO);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
 
 
     // Delete Review

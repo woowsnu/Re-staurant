@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, JpaSpecificationExecutor<Restaurant> {
+public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
     Restaurant findRestaurantByBusId(String busId);
     List<Restaurant> findRestaurantByRestaurantNameContainingIgnoreCase(String restaurantName);
@@ -26,10 +26,5 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, J
     List<Restaurant> findRestaurantByRestaurantCategoryContainingIgnoreCaseOrRestaurantNameContainingIgnoreCase(String restaurantCategory, String  restaurantName);
 
     List<Restaurant> findAll();
-
-//    List<Restaurant> findByRestaurantNameContainingOrLargeCategoryContainingOrMidCategoryContaining(String restaurantName, String largeCategory, String midCategory );
-
-////    Optional<Restaurant> findByRestaurantNameOryLargeCategoryContainingOrMidCategory(String restaurantName, String largeCategory, String midCategory );
-//Optional<Restaurant> findByRestaurantName(String restaurantName );
 
 }

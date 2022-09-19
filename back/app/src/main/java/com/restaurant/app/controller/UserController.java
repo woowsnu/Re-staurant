@@ -2,8 +2,10 @@ package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.FollowDTO;
 import com.restaurant.app.DTO.ResponseDTO;
+import com.restaurant.app.DTO.RestaurantLikeDTO;
 import com.restaurant.app.DTO.UserDTO;
 import com.restaurant.app.model.Follow;
+import com.restaurant.app.model.RestaurantLike;
 import com.restaurant.app.model.User;
 import com.restaurant.app.service.FollowService;
 import com.restaurant.app.service.UserService;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +53,8 @@ public class UserController {
     }
 
     // Read_User_Info : 유저 상세정보 [개인정보 + 팔로우/팔로워 + 리뷰게시글 등]
+
+    @Transactional
     @GetMapping("/auth/userInfo")
     public ResponseEntity<?> ReadUserInfo(@AuthenticationPrincipal User authedUser) {
 //        String email = userDTO.getEmail();
@@ -64,6 +69,7 @@ public class UserController {
             List<FollowDTO> followedDTOList = followedList.stream().map(FollowDTO::new).collect((Collectors.toList()));
 
 
+
             UserDTO userResponseDTO = UserDTO.builder()
                     .userIndex(authedUser.getUserIndex())
                     .email(authedUser.getEmail())
@@ -71,6 +77,7 @@ public class UserController {
                     .nickname(authedUser.getNickname())
                     .roles(authedUser.getRoles())
                     .reviewList(authedUser.reviewList(authedUser.getReviewList()))
+                    .restaurantLikeList(authedUser.restaurantLikeList(authedUser.getRestaurantLikeList()))
                     .followingList(followingDTOList)
                     .followerList(followedDTOList)
                     .build();
