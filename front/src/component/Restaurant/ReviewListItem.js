@@ -8,10 +8,11 @@ const ReviewListItem = (props) => {
     setModalView(!modalView);
   };
 
+  const randomNum = Math.floor(Math.random() * 200);
   return (
     <li key={props.review?.reviewIndex} className={styles.container}>
       <div className={styles.reviewInfo}>
-      <img alt='avatar' src='https://picsum.photos/50/50' />
+      <img alt='avatar' src={`https://picsum.photos/id/${randomNum}50/50`} />
         {/* {props.review.user.profileImg === null ? (
           <img alt='avatar' src={require('../../assets/images/user.png')} />
         ) : (
