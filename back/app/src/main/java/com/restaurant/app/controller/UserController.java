@@ -53,36 +53,33 @@ public class UserController {
     }
 
     // Read_User_Info : 유저 상세정보 [개인정보 + 팔로우/팔로워 + 리뷰게시글 등]
-
-    @Transactional
-    @GetMapping("/auth/userInfo")
-    public ResponseEntity<?> ReadUserInfo(@AuthenticationPrincipal User authedUser) {
-//        String email = userDTO.getEmail();
+    // 상대방 유저정보 조회
+    @PostMapping("/auth/userInfo")
+    public ResponseEntity<?> readCounterProfile(@AuthenticationPrincipal User authedUser,@RequestBody UserDTO userDTO) {
 
         System.out.println("userController.ReadUserInfo() -> 로그인 중인 사용자: " + authedUser.getEmail());
-
+        
         try {
-            List<Follow> followingList = followService.findFollowByFollowingUser(authedUser);
+            User user = userService.findUserByEmail(userDTO.getEmail());
+
+            List<Follow> followingList = followService.findFollowByFollowingUser(user);
             List<FollowDTO> followingDTOList = followingList.stream().map(FollowDTO::new).collect((Collectors.toList()));
 
-            List<Follow> followedList = followService.findFollowByFollowedUser(authedUser);
+            List<Follow> followedList = followService.findFollowByFollowedUser(user);
             List<FollowDTO> followedDTOList = followedList.stream().map(FollowDTO::new).collect((Collectors.toList()));
 
 
-
             UserDTO userResponseDTO = UserDTO.builder()
-                    .userIndex(authedUser.getUserIndex())
-                    .email(authedUser.getEmail())
-                    .password(authedUser.getPassword())
-                    .nickname(authedUser.getNickname())
-                    .roles(authedUser.getRoles())
-                    .reviewList(authedUser.reviewList(authedUser.getReviewList()))
-                    .restaurantLikeList(authedUser.restaurantLikeList(authedUser.getRestaurantLikeList()))
+                    .userIndex(user.getUserIndex())
+                    .email(user.getEmail())
+//                    .password(user.getPassword())
+                    .nickname(user.getNickname())
+                    .roles(user.getRoles())
+                    .reviewList(user.reviewList(user.getReviewList()))
+                    .restaurantLikeList(user.restaurantLikeList(user.getRestaurantLikeList()))
                     .followingList(followingDTOList)
                     .followerList(followedDTOList)
                     .build();
-
-
 
             return ResponseEntity.ok().body(userResponseDTO);
         } catch (Exception e) {
@@ -114,7 +111,7 @@ public class UserController {
         }
     }
 
-    //     Update User_Info : 유저 닉네임 수정
+    //     Update User_Info : 유저 패스워드 수정
     @PutMapping("/auth/update/password")
     public ResponseEntity<?> updateUserInfo(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO updateUserDTO) {
 
