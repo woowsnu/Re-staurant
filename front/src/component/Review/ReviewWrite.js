@@ -82,7 +82,9 @@ const ReviewWrite = (props) => {
     const newReview = {
       reviewTitle: comment,
       reviewContent: review,
-      imgUrl: image,
+      reviewImage: imgUrl,
+      revisit,
+      tag: 1
     };
 
     try {
