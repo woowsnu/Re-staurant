@@ -23,6 +23,8 @@ public class ReviewService {
 
     private  final RestaurantRepository restaurantRepository;
 
+    private final UserRepository userRepository;
+
     @Transactional
     public List<Review> save(User authedUser, ReviewDTO reviewDTO, String busId) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
@@ -53,31 +55,32 @@ public class ReviewService {
         return review;
     }
 
-//    public List<Review> update(User authedUser ,ReviewDTO updateReviewDTO, String busId ) {
-//        // 기존 review 로드
-//
-////        Review currReview = reviewRepository.findReviewByReviewIndex(reviewIndex);
+    public List<Review> update(User authedUser ,ReviewDTO updateReviewDTO, String busId , Long reviewIndex) {
+        // 기존 review 로드
+
+        Review currReview = reviewRepository.findReviewByReviewIndex(reviewIndex);
+
 //        List<Review> reviewList = reviewRepository.findReviewByUser(authedUser);
-//        Review reviews = reviewRepository.findReviewByUserIndex(authedUser);
-//        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
-//        List<Review> reviewLists = reviewRepository.findReviewByRestaurantBusId(busId);
-//
-//        // 기존 review작성자와 현재 로그인한 자의 email이 동일한지 확인.
-//        if (authedUser.getUserIndex() != reviews.getUser().getUserIndex()) {
-//            throw new RuntimeException("updateReview denied. invalid userIndex");
-//        }
-//
-//        Review review = Review.builder()
-//                .reviewIndex(reviews.getReviewIndex())
-////                .user(currReview.getUser())
-//                .restaurant(restaurant)
-//                .user(reviews)
-//                .reviewTitle(updateReviewDTO.getReviewTitle())
-//                .reviewContent(updateReviewDTO.getReviewContent())
-//                .build();
-//        Review reviewUpdate = reviewRepository.save(review);
-//        return reviewRepository.findReviewByRestaurantBusId(busId);
-//    }
+
+
+        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
+        List<Review> reviewLists = reviewRepository.findReviewByRestaurantBusId(busId);
+
+        // 기존 review작성자와 현재 로그인한 자의 email이 동일한지 확인.
+        if (authedUser.getUserIndex() != currReview.getUser().getUserIndex()) {
+            throw new RuntimeException("updateReview denied. invalid userIndex");
+        }
+
+        Review review = Review.builder()
+                .reviewIndex(currReview.getReviewIndex())
+                .user(authedUser)
+                .restaurant(restaurant)
+                .reviewTitle(updateReviewDTO.getReviewTitle())
+                .reviewContent(updateReviewDTO.getReviewContent())
+                .build();
+        Review reviewUpdate = reviewRepository.save(review);
+        return reviewRepository.findReviewByRestaurantBusId(busId);
+    }
 
 
     public Long delete(User authedUser, Long reviewIndex) {
@@ -90,4 +93,6 @@ public class ReviewService {
         return reviewRepository.deleteByReviewIndex(currReview.getReviewIndex());
 
     }
+
+
 }

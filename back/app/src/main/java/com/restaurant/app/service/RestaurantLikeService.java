@@ -26,6 +26,9 @@ public class RestaurantLikeService {
     private final RestaurantLikeRepository restaurantLikeRepository;
 
 
+    @Transactional
+    public List<RestaurantLike> findAll() {return restaurantLikeRepository.findAll(); }
+
     public List<RestaurantLike> save(User authedUser, RestaurantLikeDTO restaurantLikeDTO ) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(restaurantLikeDTO.getBusId());
         List<RestaurantLike> restaurantLikes = restaurantLikeRepository.findRestaurantsLikeByUser(authedUser);
@@ -52,6 +55,23 @@ public class RestaurantLikeService {
         List<RestaurantLike> restaurantLike = restaurantLikeRepository.findRestaurantsLikeByUserEmail(email);
         List<RestaurantLike> restaurantLikes = restaurantLikeRepository.findRestaurantsLikeByUser(authedUser);
         return restaurantLike;
+    }
+
+    public List<RestaurantLike> findRestaurantLikeByUser(User authedUser,String busId){
+        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
+        List<RestaurantLike> restaurantLikes = restaurantLikeRepository.findRestaurantsLikeByUser(authedUser);
+        return restaurantLikes;
+    }
+
+    public Long delete(User authedUser, Long likeIndex) {
+        RestaurantLike currLike = restaurantLikeRepository.findLikeByLikeIndex(likeIndex);
+
+        if (authedUser.getUserIndex() != currLike.getUser().getUserIndex()) {
+            throw new RuntimeException("deleteReview denied. invalid userIndex");
+        }
+
+        return restaurantLikeRepository.deleteByLikeIndex(currLike.getLikeIndex());
+
     }
 
 

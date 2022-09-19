@@ -65,4 +65,27 @@ public class RestaurantLikeController {
         }
     }
 
+    @GetMapping("/auth/findUserView")
+    public ResponseEntity<?>findAll() {
+        List<RestaurantLike> restaurantLikes = restaurantLikeService.findAll();
+        List<RestaurantLikeDTO> restaurantLikeDTO = restaurantLikes.stream().map(RestaurantLikeDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok(restaurantLikeDTO);
+    }
+
+    //북마크 조회
+    @DeleteMapping("{likeIndex}/auth/deleteLike")
+    public ResponseEntity<?> deleteLike(@AuthenticationPrincipal User authedUser,
+                                        @PathVariable Long likeIndex) {
+
+        try{
+            Long deletedLikeIndex = restaurantLikeService.delete(authedUser,likeIndex);
+
+            return ResponseEntity.ok().body("likeIndex : " + deletedLikeIndex  + "has deleted");
+        }
+        catch(Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.ok().body(responseDTO);
+        }
+    }
+
 }
