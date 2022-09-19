@@ -37,6 +37,7 @@ const LogIn = (props) => {
         console.log(response);
         const accessToken = response.data.jwtToken;
         localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("email", email);
         ctx.onLogin(email, password);
         navigate(-1);
       })
