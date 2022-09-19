@@ -8,7 +8,6 @@ import EditPassword from "./EditPassword";
 import Withdraw from "./Withdraw";
 
 const EditUserInfo = (props) => {
-  // const [user, setUser] = useState("");
   const [nicknameEdit, setNicknameEdit] = useState(false);
   const [passwordEdit, setPasswordEdit] = useState(false);
   const [withdraw, setWithdraw] = useState(false);
@@ -51,22 +50,6 @@ const EditUserInfo = (props) => {
   const stateManage = () => {
     props.stateManage();
   };
-
-  // const token = localStorage.getItem("token");
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:8080/user/auth/userInfo", {
-  //       headers: { "Content-Type": "application/json", Authorization: token },
-  //     })
-  //     .then(function (response) {
-  //       const data = response.data;
-  //       console.log(data);
-  //       setUser(data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error + "에러 ㅠㅠ");
-  //     });
-  // }, [token]);
 
   return (
     <Modal>
