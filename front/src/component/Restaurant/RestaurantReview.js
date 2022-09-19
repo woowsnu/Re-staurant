@@ -12,6 +12,8 @@ const RestaurantReview = (props) => {
     guCode,
     restaurantCategory,
     busId,
+    keywordList,
+    authorCount,
     ...others
   } = props.restaurant;
   // const revisitYes = props.reviews?.filter((el) => el.revisit === 1);
@@ -47,7 +49,14 @@ const RestaurantReview = (props) => {
       ) : (
         <div>리뷰는 로그인 후 작성 가능합니다.</div>
       )}
-
+      <p>방문객 {authorCount} 명의 키워드 후기</p>
+      <div className={styles.reviewTags}>
+        {keywordList?.map((item) => (
+          <div className={styles.reviewTag} key={item.keywordsIndex}>
+          <span>{item.keywordsName}</span><span className={styles.reviewTagCount}>{item.keywordsCount}</span>
+          </div>
+        ))}
+      </div>
       {/* <div className={styles.visitbtn}>
         <button className={styles.visitbtn1} onClick={hopeRevisitHandler}>
           재방문하고 싶어요

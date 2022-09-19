@@ -19,6 +19,26 @@
   padding: 0.8rem 0;
 }
 
+.reviewTags {
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.reviewTag {
+  font-size: 14px;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #CCCCCC;
+  border-radius: 2rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.reviewTagCount {
+  padding-left: 4px;
+  font-weight: 600;
+}
+
 @media screen and (max-width: 680px) {
   .container {
     max-width: inherit;
