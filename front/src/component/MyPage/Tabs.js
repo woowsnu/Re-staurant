@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styles from "./Tabs.module.css";
 import MyEatketList from "./MyEatketList";
-import MyReviews from "./MyReviews";
+import MyReviews from "./MyReview/MyReviews";
 
-const Tabs = () => {
+const Tabs = (props) => {
     const [tabselect, setTabselect] = useState(false);
 
     const showReviewsHandler = () => {
@@ -15,7 +15,6 @@ const Tabs = () => {
 
   return (
     <div>
-      <nav id="mypage_tabmenu" className={styles.tabmenu}>
         <div className={styles.tabbar}>
           <div className={tabselect ? styles.tab : styles.tabactive}>
             <button
@@ -34,8 +33,7 @@ const Tabs = () => {
             </button>
           </div>
         </div>
-      </nav>
-      <div>{tabselect ? <MyEatketList /> : <MyReviews />}</div>
+      <div>{tabselect ? <MyEatketList user={props.user} /> : <MyReviews user={props.user} updateHandler={props.updateHandler} />}</div>
     </div>
   );
 };
