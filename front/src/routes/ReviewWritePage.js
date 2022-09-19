@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { instance } from '../api/axios';
 import Layout from '../component/Layout/Layout';
-// import Navbar from '../component/Layout/Navbar';
 import Topbar from '../component/UI/Topbar';
 import ReviewWrite from '../component/Review/ReviewWrite';
 
 const ReviewWritePage = () => {
+  const { pathname } = useLocation();
   const restaurant = useLocation().state;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <Layout>
