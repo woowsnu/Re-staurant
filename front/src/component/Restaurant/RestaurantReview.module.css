@@ -19,6 +19,11 @@
   padding: 0.8rem 0;
 }
 
+.reviewTagArea {
+  margin-top: 1rem;
+  padding: 1rem 0.4rem;
+}
+
 .reviewTags {
   margin: 1rem 0;
   display: flex;

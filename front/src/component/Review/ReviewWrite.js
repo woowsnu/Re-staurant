@@ -10,13 +10,13 @@ import ReviewImgUpload from './ReviewImgUpload';
 const ReviewWrite = (props) => {
   const navigate = useNavigate();
   // RestarantReview에서 대표 이미지도 하나 받아와야함
-  const { name, siCode, guCode, category, busId } = props.restaurant;
+  const { name, siCode, guCode, category, busId, img } = props.restaurant;
 
   const [comment, setComment] = useState('');
   const [image, setImage] = useState('');
   const [review, setReview] = useState('');
   const [revisit, setRevisit] = useState(1);
-  // const [image, setImage] = useState(null);
+  const [uploadImg, setUploadImg] = useState([]);
   const [imgUrl, setImgUrl] = useState([]);
   console.log("이미지 목록",  imgUrl);
   // 재방문의사
@@ -46,16 +46,16 @@ const ReviewWrite = (props) => {
     const reader = new FileReader();
     const file = e.target.files[0];
 
-    // reader.readAsDataURL(file);
-    // reader.onload = () => {
-    //   setImgUrl([...imgUrl, reader.result]);
-    //   console.log('이미지url', reader.result);
-    // };
-    if (e.target.files[0]) {
-      URL.revokeObjectURL(image.preview_URL);
-      setImage(e.target.files[0]);
-    }
-    await console.log(image);
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setUploadImg([...uploadImg, reader.result]);
+      console.log('이미지url', reader.result);
+    };
+    // if (e.target.files[0]) {
+    //   URL.revokeObjectURL(image.preview_URL);
+    //   setImage(e.target.files[0]);
+    // }
+    // await console.log(image);
   };
 
   const sendToServer = async () => {
@@ -82,7 +82,9 @@ const ReviewWrite = (props) => {
     const newReview = {
       reviewTitle: comment,
       reviewContent: review,
-      imgUrl: image,
+      reviewImage: imgUrl,
+      revisit,
+      tag: 1
     };
 
     try {
@@ -111,8 +113,8 @@ const ReviewWrite = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.simpleProfile}>
-        <img src='#' alt={name} />
-        <div>
+        <img src={img} alt={name} />
+        <div className={styles.simpleProfileText}>
           <p>
             {category} / {siCode} {guCode}
           </p>
@@ -177,11 +179,11 @@ const ReviewWrite = (props) => {
           <p>사진은 최대 5장까지 등록 가능합니다.</p>
           <input type='file' multiple={true} onChange={saveImage} />
           <button onClick={sendToServer}>등록</button>
-          {/* <div>
-            {imgUrl?.map((img, i)=>{
+          <div>
+            {uploadImg?.map((img, i)=>{
               return <img className={styles.prevImg} src={img} key={i}/>
             })}
-          </div> */}
+          </div>
         </div>
         {/* <ReviewImgUpload /> */}
         <div>
