@@ -1,5 +1,6 @@
 package com.restaurant.app.repository;
 
+import com.restaurant.app.DTO.ReviewDTO;
 import com.restaurant.app.model.Review;
 import com.restaurant.app.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,4 +23,6 @@ public interface ReviewRepository extends JpaRepository<Review,Long> {
 
 
     List<Review> findOptionsByUserEmail(String email);
+
+
 }
