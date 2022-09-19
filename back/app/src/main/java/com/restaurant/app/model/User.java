@@ -2,6 +2,7 @@ package com.restaurant.app.model;
 
 
 import com.restaurant.app.DTO.FollowDTO;
+import com.restaurant.app.DTO.RestaurantLikeDTO;
 import com.restaurant.app.DTO.ReviewDTO;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -51,6 +52,10 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, mappedBy="followedUser",cascade = CascadeType.ALL)
     private Set<Follow> followerList = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<RestaurantLike> restaurantLikeList = new HashSet();
+
+
     @CreatedDate
     private LocalDateTime createDate;
 
@@ -82,4 +87,14 @@ public class User {
 
         return followerDTOList;
     }
+
+    public List<RestaurantLikeDTO> restaurantLikeList(Set<RestaurantLike> restaurantLikeList){
+        List<RestaurantLikeDTO> restaurantLikeDTOList = restaurantLikeList.stream().map(RestaurantLikeDTO::new).collect((Collectors.toList()));
+        return restaurantLikeDTOList;
+    }
+
+
+
+
+
 }

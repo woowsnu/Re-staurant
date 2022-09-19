@@ -6,13 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="f141b506-fdf4-4a49-aff2-ab3531f8b631" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/RestaurantDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/RestaurantDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/ReviewDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/ReviewDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/Specification/RestaurantSpecs.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/Specification/RestaurantSpecs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/RestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/RestaurantController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/RestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/RestaurantService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/RestaurantLikeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/RestaurantLikeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/ReviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantLikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantLikeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/RestaurantLikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/RestaurantLikeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/ReviewService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +83,11 @@
       <recent name="C:\Users\Leesumin\Documents\GitHub\Re-staurant\data_crawling" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Leesumin\Documents\GitHub\Re-staurant\data_crawling" />
+      <recent name="C:\Users\Leesumin\Documents\GitHub\Re-staurant\back\app\src\main\java\com\restaurant\app\repository" />
+      <recent name="C:\Users\Leesumin\Documents\GitHub\Re-staurant\back\app\src\main\java\com\restaurant\app\service" />
+      <recent name="C:\Users\Leesumin\Documents\GitHub\Re-staurant\back\app\src\main\java\com\restaurant\app\controller" />
+      <recent name="C:\Users\Leesumin\Documents\GitHub\Re-staurant\back\app\src\main\java\com\restaurant\app\model" />
+      <recent name="C:\Users\Leesumin\Documents\GitHub\Re-staurant\back\app\src\main\java\com\restaurant\app\DTO" />
     </key>
   </component>
   <component name="RunManager">
