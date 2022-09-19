@@ -62,10 +62,11 @@ public class ReviewController {
     @PutMapping("{busId}/auth/updateReview")
     public ResponseEntity<?> updateReview(@AuthenticationPrincipal User authedUser,
                                           @RequestBody ReviewDTO updateReviewDTO,
-                                          @PathVariable String busId , Long reviewIndex) {
+                                          @PathVariable String busId,
+                                          Long reviewIndex) {
         try{
 
-            reviewService.update(authedUser, updateReviewDTO,busId, reviewIndex);
+            reviewService.update(authedUser, updateReviewDTO,busId,reviewIndex);
 
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
             return ResponseEntity.ok().body(responseDTO);

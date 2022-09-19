@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f141b506-fdf4-4a49-aff2-ab3531f8b631" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/RestaurantLikeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/RestaurantLikeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/ReviewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantLikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantLikeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/RestaurantLikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/RestaurantLikeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/ReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/ReviewRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/ReviewService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
