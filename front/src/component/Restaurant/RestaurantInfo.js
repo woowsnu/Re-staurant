@@ -1,61 +1,76 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 import styles from './RestaurantInfo.module.css';
-import { RenderAfterNavermapsLoaded, NaverMap, Marker } from 'react-naver-maps';
+import Map from '../UI/Map';
 
-const RestaurantInfo = (props) => {
-  const position = { lat: props.restaurant.x, lng: props.restaurant.y };
+const RestaurantInfo = ({ restaurant, options }) => {
+  const { restaurantName, x, y, businessHourInfo, tellNumber, snsUrl } =
+    restaurant;
+  const position = { lat: x, lng: y };
 
   return (
     <div id='res-info' className={styles.container}>
       <div>
         <h3>영업시간</h3>
-        {!props.restaurant.businessHourInfo?.includes('|') && <p>{props.restaurant.businessHourInfo}</p>}
-        <ul>
-        {props.restaurant.businessHourInfo?.includes('|') && props.restaurant.businessHourInfo.split('|').map((hour, i)=>{
-          return <li key={i}>{hour}</li>
-        })}
-        </ul>
-        <p></p>
+        {businessHourInfo === 'None' ? (
+          <div>
+            영업시간 정보를 제공하지 않는 매장입니다. 매장으로 문의해주세요.
+          </div>
+        ) : (
+          <ul>
+            {businessHourInfo?.includes('|') ? (
+              businessHourInfo.split('|').map((hour, i) => {
+                return <li key={i}>{hour}</li>;
+              })
+            ) : (
+              <li>{businessHourInfo}</li>
+            )}
+          </ul>
+        )}
       </div>
-      <div>
-        <h3>편의시설</h3>
+      {options.length > 0 && (
         <div>
-          {props.options.map((option) => {
-            return (
-              <img key={option.id} src={option.iconURL} alt={option.name} />
-            );
-          })}
-        </div>
-      </div>
-      <div>
-        <h3>전화번호</h3>
-        <p>{props.restaurant.tellNumber}</p>
-      </div>
-      {props.restaurant.snsUrl && (
-        <div>
-          <h3>SNS</h3>
-          <p>{props.restaurant.snsUrl}</p>
+          <h3>편의시설</h3>
+          <div className={styles.option}>
+            {options.map((option) => {
+              return (
+                <img
+                  key={option.optionId}
+                  src={option.iconUrl}
+                  alt={option.optionName}
+                />
+              );
+            })}
+          </div>
         </div>
       )}
-      <div>
-        <h3>위치정보</h3>
-        <p  style={{paddingBottom: '1rem'}}>{props.restaurant.fullRoadAddress}</p>
-        <RenderAfterNavermapsLoaded ncpClientId={'2ebca41zbe'}>
-          <NaverMap
-            mapDivId={'maps-getting-started-uncontrolled'} // default: react-naver-map
-            style={{
-              width: '80%',
-              height: '400px',
-              paddingBottom: '1rem',
-            }}
-            defaultCenter={position}
-            defaultZoom={17}
-          >
-            <Marker position={position} />
-          </NaverMap>
-        </RenderAfterNavermapsLoaded>
-        {/* <button>레스토랑 길찾기</button> */}
-      </div>
+      {tellNumber && (
+        <div>
+          <h3>전화번호</h3>
+          <p>{tellNumber}</p>
+        </div>
+      )}
+
+      {snsUrl && (
+        <div>
+          <h3>SNS</h3>
+          <p>{snsUrl}</p>
+        </div>
+      )}
+      <h3>위치정보</h3>
+      <Link
+        to={`//map.kakao.com/link/to/${restaurantName},${y},${x}`}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        <button className={styles.mapbtn}>
+          <p>지도에서 길찾기</p>
+          <FaExternalLinkAlt style={{ fontSize: '12px'}}/>
+        </button>
+      </Link>
+      <Map position={position} />
+      
     </div>
   );
 };

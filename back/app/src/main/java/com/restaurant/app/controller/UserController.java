@@ -2,8 +2,10 @@ package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.FollowDTO;
 import com.restaurant.app.DTO.ResponseDTO;
+import com.restaurant.app.DTO.RestaurantLikeDTO;
 import com.restaurant.app.DTO.UserDTO;
 import com.restaurant.app.model.Follow;
+import com.restaurant.app.model.RestaurantLike;
 import com.restaurant.app.model.User;
 import com.restaurant.app.service.FollowService;
 import com.restaurant.app.service.UserService;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,6 +58,7 @@ public class UserController {
     public ResponseEntity<?> readCounterProfile(@AuthenticationPrincipal User authedUser,@RequestBody UserDTO userDTO) {
 
         System.out.println("userController.ReadUserInfo() -> 로그인 중인 사용자: " + authedUser.getEmail());
+        
         try {
             User user = userService.findUserByEmail(userDTO.getEmail());
 
@@ -72,6 +76,7 @@ public class UserController {
                     .nickname(user.getNickname())
                     .roles(user.getRoles())
                     .reviewList(user.reviewList(user.getReviewList()))
+                    .restaurantLikeList(user.restaurantLikeList(user.getRestaurantLikeList()))
                     .followingList(followingDTOList)
                     .followerList(followedDTOList)
                     .build();
@@ -85,9 +90,6 @@ public class UserController {
 
         }
     }
-
-
-
 
 //     Update User_Info : 유저 닉네임 수정
     @PutMapping("/auth/update/nickname")
@@ -109,7 +111,7 @@ public class UserController {
         }
     }
 
-    //     Update User_Info : 유저 닉네임 수정
+    //     Update User_Info : 유저 패스워드 수정
     @PutMapping("/auth/update/password")
     public ResponseEntity<?> updateUserInfo(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO updateUserDTO) {
 

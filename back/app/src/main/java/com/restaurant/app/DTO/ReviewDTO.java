@@ -15,13 +15,10 @@ public class ReviewDTO {
     private String email;
     private String reviewTitle;
     private String reviewContent;
-
     private String reviewImage;
-
     private String nickName;
-
+    private String busId;
     private int tag;
-
     private int revisit;
 
     public ReviewDTO(Review review) {
@@ -33,6 +30,9 @@ public class ReviewDTO {
         this.reviewImage = review.getReviewImage();
         this.revisit = review.getRevisit();
         this.tag = review.getTag();
+
+        this.busId = review.getRestaurant().getBusId();
+
     }
 
 

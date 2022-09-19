@@ -22,6 +22,28 @@
   line-height: 1.4;
 }
 
+.option img {
+  padding-right: 0.6rem;
+}
+
+.mapbtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  padding: 0.4rem 0.6rem;
+  width: 160px;
+  border: 1px solid #51b059;
+  border-radius: 0.4rem;
+  background-color: transparent;
+}
+
+.mapbtn p {
+  font-size: 14px;
+  padding-right: 8px;
+}
+
+
 @media screen and (max-width: 680px) {
   .container {
     max-width: 100%;

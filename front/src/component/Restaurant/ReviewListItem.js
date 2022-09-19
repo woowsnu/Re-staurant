@@ -1,29 +1,34 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ReviewDetail from '../Review/ReviewDetail';
 import styles from './ReviewListItem.module.css';
 
 const ReviewListItem = (props) => {
   const [modalView, setModalView] = useState(false);
-
   const modalViewHandler = () => {
     setModalView(!modalView);
   };
 
+  const randomNum = Math.floor(Math.random() * 200);
+  const avatar = `https://picsum.photos/id/${randomNum}/50/50`
   return (
-    <li key={props.review.id} className={styles.container}>
+    <li key={props.review?.reviewIndex} className={styles.container}>
+      <Link to={`/mypage/${props.review?.email}`}>
       <div className={styles.reviewInfo}>
-        {props.review.user.profileImg === null ? (
+      <img alt='avatar' src={avatar} />
+        {/* {props.review.user.profileImg === null ? (
           <img alt='avatar' src={require('../../assets/images/user.png')} />
         ) : (
           <img alt='avatar' src={props.review.user.profileImg} />
-        )}
+        )} */}
         <div>
-          <h6>{props.review.user.name}</h6>
-          <p>{props.review.date}</p>
+          <h6>{props.review?.email}</h6>
+          {/* <p>{props.review.date}</p> */}
         </div>
       </div>
+      </Link>
       <div className={styles.reviewContent} onClick={modalViewHandler}>
-        <ul className={styles.reviewImage}>
+        {/* <ul className={styles.reviewImage}>
           {props.review.img === null && ''}
           {props.review.img?.length > 3 && (
             <>
@@ -50,10 +55,9 @@ const ReviewListItem = (props) => {
                 </li>
               );
             })}
-        </ul>
-        <h4>"{props.review.comment}"</h4>
-        <p>{props.review.review}</p>
-        {/* <button>더보기</button> */}
+        </ul> */}
+        <h4>"{props.review?.reviewTitle}"</h4>
+        <p>{props.review?.reviewContent}</p>
         {modalView ? (
           <ReviewDetail
             review={props.review}

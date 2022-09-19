@@ -24,13 +24,17 @@ public class UserDTO {
     private List<FollowDTO> followerList;
     private String password;
 
+    private List<RestaurantLikeDTO> restaurantLikeList;
+
 
     public UserDTO(User user) {
         this.userIndex = user.getUserIndex();
         this.email = user.getEmail();
         this.nickname = user.getNickname();
         this.roles = user.getRoles();
+
         this.reviewList = user.reviewList(user.getReviewList());
+        this.restaurantLikeList = user.restaurantLikeList(user.getRestaurantLikeList());
 //        this.followingList = user.followerList(user.getFollowerList());
 //        this.followerList = user.followerList(user.getFollowerList());
     }
