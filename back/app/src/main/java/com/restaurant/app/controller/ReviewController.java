@@ -62,17 +62,16 @@ public class ReviewController {
 //    @PutMapping("{busId}/auth/updateReview")
 //    public ResponseEntity<?> updateReview(@AuthenticationPrincipal User authedUser,
 //                                          @RequestBody ReviewDTO updateReviewDTO,
-//                                          @PathVariable Long busId, Long userIndex ) {
+//                                          @PathVariable String busId ) {
 //        try{
 //
-//            List<Review> reviewList = reviewService.update(authedUser, updateReviewDTO,busId,userIndex);
+//            List<Review> reviewList = reviewService.update(authedUser, updateReviewDTO,busId);
 //
 //            ReviewDTO responseReviewDTO = ReviewDTO.builder()
 //                    .reviewIndex(updateReviewDTO.getReviewIndex())
 //                    .reviewTitle(updateReviewDTO.getReviewTitle())
 //                    .reviewContent(updateReviewDTO.getReviewContent())
 //                    .email(updateReviewDTO.getEmail())
-//                    .busId(updateReviewDTO.getBusId())
 //                    .build();
 //
 //            return ResponseEntity.ok().body(responseReviewDTO);

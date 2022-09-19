@@ -6,6 +6,7 @@ import com.restaurant.app.repository.RestaurantRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -57,6 +58,7 @@ public class RestaurantService {
     }
 
 
+    @Transactional
     public Restaurant findRestaurantByBusId(String busId) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
 
@@ -112,6 +114,17 @@ public class RestaurantService {
         return restaurantList;
     }
 
+    public List<Restaurant> findRestaurant(RestaurantDTO restaurantDTO){
+        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByRestaurantCategoryContainingIgnoreCaseOrRestaurantNameContainingIgnoreCase(restaurantDTO.getRestaurantCategory(), restaurantDTO.getRestaurantCategory());
+
+
+        if (restaurantList.size() == 0) {
+            throw new RuntimeException("식당이 없습니다.");
+        }
+
+        return restaurantList;
+    }
+
     public List<Restaurant> findRestaurantByRestaurantCategoryOrRestaurantName(String restaurantCategory,String restaurantName){
         List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByRestaurantCategoryContainingIgnoreCaseOrRestaurantNameContainingIgnoreCase(restaurantCategory,restaurantName);
 
@@ -125,30 +138,6 @@ public class RestaurantService {
 
 
 
-//    @Transactional(readOnly = true)
-//    public Optional<Restaurant>  findByRestaurantSearch(RestaurantDTO restaurantDTO){
-//        return restaurantRepository.findByRestaurantNameContainingOrLargeCategoryContainingOrMidCategoryContaining(
-//                restaurantDTO.getRestaurantName(),restaurantDTO.getLargeCategory(),restaurantDTO.getMidCategory());
-////                .stream().map(RestaurantDTO::new).collect(Collectors.toList());
-////        List<Restaurant> restaurantList = restaurantRepository.findByRestaurantNameContainingOrRestaurantCategoryContaining( restaurantName, restaurantCategory);
-////        if (restaurantList == null) {
-////            throw new RuntimeException("해당 식당이 없습니다.");
-////        }
-////        return restaurantList;
-//    }
-
-//    public List<Restaurant> findAll(Specification<Restaurant> withRestaurantName){
-//        return restaurantRepository.findAll(withRestaurantName);
-//
-//    }
-//
-//    public List<Restaurant> findAll(Specification<Restaurant> withMidCategory) {
-//        return restaurantRepository.findAll(withMidCategory);
-//    }
-//
-//    public List<Restaurant> findAll(Specification<Restaurant> withLargeCategory) {
-//        return restaurantRepository.findAll(withLargeCategory);
-//    }
 
 
 

@@ -38,9 +38,11 @@ public class RestaurantDTO {
     private Long authorCount;
     private List<MenusDTO> menusList;
     private List<OptionsDTO> optionsList;
-    private List<ReviewDTO>reviewList;
+    private List<ReviewDTO> reviewList;
 
     private List<VotedKeywordsDTO> keywordList;
+
+    private List<RestaurantLikeDTO> restaurantLikeList;
 
     public RestaurantDTO(Restaurant restaurant) {
         this.restaurantIndex = restaurant.getRestaurantIndex();
@@ -66,7 +68,7 @@ public class RestaurantDTO {
         this.optionsList = restaurant.optionsList(restaurant.getOptionsList());
         this.reviewList = restaurant.reviewList(restaurant.getReviewList());
         this.keywordList = restaurant.keywordsList(restaurant.getKeywordsList());
-
+        this.restaurantLikeList = restaurant.restaurantLikeList(restaurant.getRestaurantLikeList());
 
     }
 

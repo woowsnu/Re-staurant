@@ -18,6 +18,11 @@ public class ReviewDTO {
 
     private String nickName;
 
+    private String busId;
+
+
+
+
 
 
 
@@ -28,6 +33,7 @@ public class ReviewDTO {
         this.reviewTitle = review.getReviewTitle();
         this.reviewContent = review.getReviewContent();
         this.nickName = review.getUser().getNickname();
+        this.busId = review.getRestaurant().getBusId();
 
     }
 

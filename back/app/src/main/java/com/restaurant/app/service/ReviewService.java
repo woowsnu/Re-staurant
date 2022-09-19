@@ -10,6 +10,7 @@ import com.restaurant.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,8 +23,7 @@ public class ReviewService {
 
     private  final RestaurantRepository restaurantRepository;
 
-    private final UserRepository userRepository;
-
+    @Transactional
     public List<Review> save(User authedUser, ReviewDTO reviewDTO, String busId) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
         List<Review> reviews = reviewRepository.findReviewByUser(authedUser);
@@ -46,19 +46,19 @@ public class ReviewService {
         return reviewRepository.findReviewByRestaurantBusId(busId);
     }
 
+    @Transactional
     public List<Review> findByEmail( User authedUser,String email){
         List<Review> review = reviewRepository.findOptionsByUserEmail(email);
         List<Review> reviews = reviewRepository.findReviewByUser(authedUser);
         return review;
     }
 
-//    public List<Review> update(User authedUser ,ReviewDTO updateReviewDTO, Long busId , Long userIndex) {
+//    public List<Review> update(User authedUser ,ReviewDTO updateReviewDTO, String busId ) {
 //        // 기존 review 로드
 //
 ////        Review currReview = reviewRepository.findReviewByReviewIndex(reviewIndex);
 //        List<Review> reviewList = reviewRepository.findReviewByUser(authedUser);
-//        User user = userRepository.findByUserIndex(userIndex);
-//        Review reviews = reviewRepository.findReviewByUserIndex(userIndex);
+//        Review reviews = reviewRepository.findReviewByUserIndex(authedUser);
 //        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
 //        List<Review> reviewLists = reviewRepository.findReviewByRestaurantBusId(busId);
 //
@@ -71,6 +71,7 @@ public class ReviewService {
 //                .reviewIndex(reviews.getReviewIndex())
 ////                .user(currReview.getUser())
 //                .restaurant(restaurant)
+//                .user(reviews)
 //                .reviewTitle(updateReviewDTO.getReviewTitle())
 //                .reviewContent(updateReviewDTO.getReviewContent())
 //                .build();
