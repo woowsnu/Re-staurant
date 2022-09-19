@@ -15,15 +15,17 @@ const MyPage = () => {
 
   const ctx = useContext(AuthContext);
   const navigate = useNavigate();
-  
+
   const updateHandler = () => {
     setIsUpdated(!isUpdated);
   };
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-     instance
-      .get("/user/auth/userInfo", {
+    const profile = { "email" : localStorage.getItem("email") };
+    console.log(profile)
+    instance
+      .post("/user/auth/userInfo", JSON.stringify(profile), {
         headers: { "Content-Type": "application/json", Authorization: token },
       })
       .then((response) => {
