@@ -17,7 +17,7 @@ const ReviewWrite = (props) => {
   const [review, setReview] = useState('');
   const [revisit, setRevisit] = useState(1);
   const [uploadImg, setUploadImg] = useState([]);
-  const [imgUrl, setImgUrl] = useState([]);
+  const [imgUrl, setImgUrl] = useState("");
   console.log("이미지 목록",  imgUrl);
   // 재방문의사
   const revisitClickHandler = (value) => {
@@ -78,10 +78,7 @@ const ReviewWrite = (props) => {
 
   const reviewSubmitHandler = async (e) => {
     e.preventDefault();
-    if (imgUrl.length === 0) {
-      setImgUrl([""]);
-    }
-
+   
     const newReview = {
       reviewTitle: comment,
       reviewContent: review,

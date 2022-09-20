@@ -24,7 +24,12 @@ const ReviewEdit = (props) => {
   const reviewEditSubmit = (e) => {
     e.preventDefault();
     const token = localStorage.getItem("accessToken");
-    const profile = { reviewTitle: editedTitle, reviewContent: editedContent };
+    const profile = {
+      reviewTitle: editedTitle,
+      reviewContent: editedContent,
+      reviewIndex: props.reviewIndex,
+      revisit: props.revisit,
+    };
     instance
       .put(
         `/review/${props.reviewIndex}/auth/updateReview`,
@@ -41,7 +46,7 @@ const ReviewEdit = (props) => {
         console.log(err);
       });
   };
-  
+
   return (
     <Modal>
       <div className={styles.wrapper}>

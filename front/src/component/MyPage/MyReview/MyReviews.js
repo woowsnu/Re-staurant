@@ -10,7 +10,7 @@ const MyReviews = (props) => {
   const [reviewIndex, setReviewIndex] = useState("");
   const [reviewTitle, setReviewTitle] = useState("");
   const [reviewContent, setReviewContent] = useState("");
-  const [imgNull, setImgNull] = useState(false);
+  const [revisit, setRevisit] = useState("");
 
   const reviewEditOpenHandler = () => {
     setReviewEdit(true);
@@ -31,7 +31,7 @@ const MyReviews = (props) => {
   };
 
   const review = props.user.reviewList;
-
+  console.log(review);
   return (
     <>
       <h3 className={styles.reviewCount}>
@@ -42,13 +42,15 @@ const MyReviews = (props) => {
               <>
                 <div className={styles.reviewCard}>
                   <span className={styles.editbuttons}>
-                    <div className={styles.resTitle}>{data.busId}</div>
+                    <div className={styles.resTitle}>{data.restaurantName}</div>
                     <div className={styles.editbutton}>
                       <Button
                         onClick={() => {
                           setReviewIndex(data.reviewIndex);
                           setReviewTitle(data.reviewTitle);
                           setReviewContent(data.reviewContent);
+                          setRevisit(data.revisit);
+
                           reviewEditOpenHandler();
                         }}
                         style={{ marginRight: "6px" }}
@@ -71,7 +73,7 @@ const MyReviews = (props) => {
                     </div>
                     {data.reviewContent}
                   </div>
-                  { data.reviewImage === "null" ? "" :
+                  { data.reviewImage === "" ? "" :
                   <div>
                     <img src={data.reviewImage} className={styles.img} />
                   </div> }
