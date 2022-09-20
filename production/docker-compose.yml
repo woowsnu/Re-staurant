@@ -1,0 +1,17 @@
+version: "3.0"
+services: 
+  db:
+    image: mysql:8
+    environment: 
+      MYSQL_ROOT_PASSWORD: qkqh1234!
+      MYSQL_PASSWORD: qkqh1234!
+      MYSQL_DATABASE: finalproject
+    ports: 
+      - 3307
+  service-a:
+    build: .
+    restart: on-failure
+    links: 
+      - db
+    depends_on: 
+      - db
