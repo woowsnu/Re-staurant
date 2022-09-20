@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import ReviewListItem from '../Restaurant/ReviewListItem';
 import Button from '../UI/Button';
 import styles from './RestaurantReview.module.css';
+import defaultImg from '../../assets/images/restaurant_default_img.jpg'
 
 const RestaurantReview = (props) => {
   const isLogin = localStorage.getItem('isLoggedIn');
@@ -34,7 +35,7 @@ const RestaurantReview = (props) => {
     guCode: guCode,
     category: restaurantCategory,
     busId: busId,
-    // img: props.restaurant.imgUrl,
+    img: defaultImg,
   };
 
   return (
@@ -49,6 +50,7 @@ const RestaurantReview = (props) => {
       ) : (
         <div>리뷰는 로그인 후 작성 가능합니다.</div>
       )}
+      <div className={styles.reviewTagArea}>
       <p>방문객 {authorCount} 명의 키워드 후기</p>
       <div className={styles.reviewTags}>
         {keywordList?.map((item) => (
@@ -56,6 +58,7 @@ const RestaurantReview = (props) => {
           <span>{item.keywordsName}</span><span className={styles.reviewTagCount}>{item.keywordsCount}</span>
           </div>
         ))}
+      </div>
       </div>
       {/* <div className={styles.visitbtn}>
         <button className={styles.visitbtn1} onClick={hopeRevisitHandler}>
@@ -72,6 +75,12 @@ const RestaurantReview = (props) => {
               return <ReviewListItem key={review.id} review={review} />;
             })}
       </ul> */}
+      <div className={styles.visitbtn}>
+        <button className={styles.visitbtn1}>
+          리스토랑 유저 후기
+        </button>
+        <button>타사 후기</button>
+      </div>
       {props.reviews?.length === 0 && <div>아직 등록된 리뷰가 없습니다.</div>}
       <ul>
         {props.reviews?.map((review) => {

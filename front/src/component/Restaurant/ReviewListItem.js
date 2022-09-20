@@ -13,7 +13,7 @@ const ReviewListItem = (props) => {
   const avatar = `https://picsum.photos/id/${randomNum}/50/50`
   return (
     <li key={props.review?.reviewIndex} className={styles.container}>
-      <Link to={`/mypage/${props.review?.email}`}>
+      <Link to={`/mypage/${props.review?.nickName}`}>
       <div className={styles.reviewInfo}>
       <img alt='avatar' src={avatar} />
         {/* {props.review.user.profileImg === null ? (
@@ -22,7 +22,7 @@ const ReviewListItem = (props) => {
           <img alt='avatar' src={props.review.user.profileImg} />
         )} */}
         <div>
-          <h6>{props.review?.email}</h6>
+          <h6>{props.review?.nickName}</h6>
           {/* <p>{props.review.date}</p> */}
         </div>
       </div>

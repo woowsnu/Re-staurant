@@ -4,6 +4,7 @@ import Button from "../../UI/Button";
 import Input from "../../UI/Input";
 import styles from "./ReviewEdit.module.css";
 import { instance } from "../../../api/axios";
+
 const ReviewEdit = (props) => {
   const [editedTitle, setEditedTitle] = useState(props.reviewTitle);
   const [editedContent, setEditedContent] = useState(props.reviewContent);
@@ -19,6 +20,7 @@ const ReviewEdit = (props) => {
   const updateHandler = () => {
     props.updateHandler();
   };
+
   const reviewEditSubmit = (e) => {
     e.preventDefault();
     const token = localStorage.getItem("accessToken");
@@ -39,6 +41,7 @@ const ReviewEdit = (props) => {
         console.log(err);
       });
   };
+  
   return (
     <Modal>
       <div className={styles.wrapper}>
