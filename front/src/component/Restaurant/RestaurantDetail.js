@@ -38,7 +38,7 @@ const RestaurantDetail = () => {
       <RestaurantProfile restaurant={restaurant} reviews={reviews} />
       <RestaurantTab reviewCount={reviews.length} />
       <div className='detail'>
-        <RestaurantInfo restaurant={restaurant} options={options}/>
+        {/* <RestaurantInfo restaurant={restaurant} options={options}/> */}
         <RestaurantMenu menus={menus} />
         <RestaurantReview reviews={reviews} restaurant={restaurant} />
       </div>
