@@ -15,28 +15,16 @@ public class ReviewDTO {
     private String email;
     private String reviewTitle;
     private String reviewContent;
-<<<<<<< HEAD
 
-=======
->>>>>>> 146e57d95fa830a914af3e03f3867ce8f8aeb424
     private String reviewImage;
     private String nickName;
     private String busId;
-<<<<<<< HEAD
+
 
     private int tag;
 
     private int revisit;
 
-
-
-
-
-
-=======
-    private int tag;
-    private int revisit;
->>>>>>> 146e57d95fa830a914af3e03f3867ce8f8aeb424
 
     public ReviewDTO(Review review) {
         this.reviewIndex = review.getReviewIndex();

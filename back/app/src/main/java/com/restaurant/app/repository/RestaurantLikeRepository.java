@@ -14,28 +14,25 @@ public interface RestaurantLikeRepository extends JpaRepository<RestaurantLike, 
     @Transactional
     List<RestaurantLike> findAll();
 
-<<<<<<< HEAD
     List<RestaurantLike> findRestaurantsLikeByUser(User authedUser);
-=======
+
 //    List<RestaurantLike> findRestaurantsLikeByUser(User user);
 
     @Transactional
     public Long deleteByLikeIndex(Long likeIndex);
 
     public RestaurantLike findLikeByLikeIndex(Long likeIndex);
->>>>>>> 146e57d95fa830a914af3e03f3867ce8f8aeb424
 
     @Transactional
 
     List<RestaurantLike> findRestaurantsLikeByUserEmail(String email);
-    List<RestaurantLike> findRestaurantsLikeByUser(User authedUser);
+
 
     List<RestaurantLike> findRestaurantsLikeByRestaurantBusId(String busId);
 
-    public RestaurantLike findLikeByLikeIndex(Long likeIndex);
 
-    @Transactional
-    public Long deleteByLikeIndex(Long likeIndex);
+
+
 
 
 }
