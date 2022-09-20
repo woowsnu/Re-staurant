@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -25,6 +27,11 @@ public class ReviewDTO {
 
     private int revisit;
 
+    private LocalDateTime createDate;
+
+    private String restaurantName;
+
+
 
     public ReviewDTO(Review review) {
         this.reviewIndex = review.getReviewIndex();
@@ -40,6 +47,11 @@ public class ReviewDTO {
         this.tag = review.getTag();
 
         this.busId = review.getRestaurant().getBusId();
+
+        this.createDate = review.getCreateDate();
+
+        this.restaurantName = review.getRestaurant().getRestaurantName();
+
 
 
 
