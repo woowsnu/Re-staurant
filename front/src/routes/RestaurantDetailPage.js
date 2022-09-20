@@ -5,11 +5,11 @@ import RestaurantDetail from '../component/Restaurant/RestaurantDetail';
 import Navbar from '../component/Layout/Navbar';
 
 const RestaurantDetailPage = () => {
-  const { pathname } = useLocation();
+  const { pathName } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathName]);
 
   return (
     <Layout>

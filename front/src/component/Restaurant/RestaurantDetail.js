@@ -12,18 +12,41 @@ const RestaurantDetail = () => {
   const [menus, setMenus] = useState([]);
   const [options, setOptions] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const restaurantid = useParams().id;
+  const [bookmarkIndex, setBookmarkIndex] = useState(0);
+  const [isMarked, setIsMarked] = useState(false);
+  const busId = useParams().id;
+  const userEmail = localStorage.getItem('email');
 
-  // restaurant data fetch
+  // email로 북마크 조회
+  const fetchBookmark = async () => {
+    try {
+      const res = await instance.get(
+        `/restaurant/${userEmail}/auth/findUserView`
+      );
+      const bookmarkfilter = res.data.filter((el)=>el.busId === busId)
+      if(!!bookmarkfilter) {
+        setBookmarkIndex(res.data[0].likeIndex);
+        setIsMarked(true)
+      } 
+      if (bookmarkIndex.length === 0) {
+        setBookmarkIndex(null)
+        setIsMarked(false)
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //restaurant data fetch
   const fetchRestaurantData = async () => {
     try {
-      const {data} = await instance.get(
-        `/restaurant/restaurantDetail/${restaurantid}`
+      const { data } = await instance.get(
+        `/restaurant/restaurantDetail/${busId}`
       );
       setRestaurant(data);
       setMenus(data.menusList);
-      setOptions(data.optionsList)
-      setReviews(data.reviewList)
+      setOptions(data.optionsList);
+      setReviews(data.reviewList);
     } catch (error) {
       console.error('에러가 발생했습니다. : ', error);
     }
@@ -31,19 +54,26 @@ const RestaurantDetail = () => {
 
   useEffect(() => {
     fetchRestaurantData();
+    fetchBookmark();
   }, []);
+
+  const isMarkedHandler = (data) => {
+    setIsMarked(data)
+  }
 
   return (
     <div>
-      <RestaurantProfile restaurant={restaurant} reviews={reviews} />
+      <RestaurantProfile restaurant={restaurant} reviews={reviews} bookmarkIndex={bookmarkIndex} isMarked={isMarked} isMarkedHandler={isMarkedHandler}/>
       <RestaurantTab reviewCount={reviews.length} />
       <div className='detail'>
-        <RestaurantInfo restaurant={restaurant} options={options}/>
+        <RestaurantInfo restaurant={restaurant} options={options} />
         <RestaurantMenu menus={menus} />
-        <RestaurantReview reviews={reviews} restaurant={restaurant} />
+        <RestaurantReview restaurant={restaurant} reviews={reviews} />
       </div>
     </div>
   );
 };
 
 export default RestaurantDetail;
+
+// bookmark={bookmark} isMarked={isMarked} ismarkedHandler={ismarkedHandler}

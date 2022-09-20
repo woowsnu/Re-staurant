@@ -4,6 +4,12 @@
   padding: 0 2rem;
 }
 
+.titleAndButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .container h3 {
   padding: 0;
 }
@@ -21,7 +27,20 @@
 
 .reviewTagArea {
   margin-top: 1rem;
-  padding: 1rem 0.4rem;
+}
+
+.reviewTagText {
+  display: flex;
+} 
+
+.reviewTagText p{
+  padding-right: 0.5rem;
+} 
+
+.reviewTagTip {
+  font-size: 13px;
+  padding-left: 0.5rem;
+  color: #CCCCCC;
 }
 
 .reviewTags {
@@ -42,6 +61,11 @@
 .reviewTagCount {
   padding-left: 4px;
   font-weight: 600;
+}
+
+.noReview {
+  padding: 3rem 0;
+  text-align: center;
 }
 
 @media screen and (max-width: 680px) {
