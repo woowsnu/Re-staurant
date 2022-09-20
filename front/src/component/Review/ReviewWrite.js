@@ -78,6 +78,9 @@ const ReviewWrite = (props) => {
 
   const reviewSubmitHandler = async (e) => {
     e.preventDefault();
+    if (imgUrl.length === 0) {
+      setImgUrl([""]);
+    }
 
     const newReview = {
       reviewTitle: comment,
