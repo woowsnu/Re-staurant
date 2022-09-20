@@ -42,6 +42,8 @@ const MyPage = () => {
       });
   }, [isUpdated]);
 
+  console.log(user);
+
   return (
     datafetch && (
       <div className={styles.wrapper}>
