@@ -56,10 +56,10 @@ public class ReviewService {
         return review;
     }
 
-    public void update(User authedUser , ReviewDTO updateReviewDTO, String busId, Long reviewIndex ) {
+    public void update(User authedUser , ReviewDTO updateReviewDTO, String busId ) {
         // 기존 review 로드
 
-        Review currReview = reviewRepository.findReviewByReviewIndex(reviewIndex);
+        Review currReview = reviewRepository.findReviewByReviewIndex(updateReviewDTO.getReviewIndex());
 //
 //        List<Review> reviewList = reviewRepository.findReviewByUser(authedUser);
 //
@@ -67,17 +67,23 @@ public class ReviewService {
 //        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
 //        List<Review> reviewLists = reviewRepository.findReviewByRestaurantBusId(busId);
 
-        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
-        List<Review> reviews = reviewRepository.findReviewByUser(authedUser);
-        List<Review> reviewList = reviewRepository.findReviewByRestaurantBusId(busId);
+//        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
+//        List<Review> reviews = reviewRepository.findReviewByUser(authedUser);
+//        List<Review> reviewList = reviewRepository.findReviewByRestaurantBusId(busId);
+//
+//        Review review = Review.builder()
+//                .user(authedUser)
+//                .restaurant(restaurant)
+//                .reviewTitle(updateReviewDTO.getReviewTitle())
+//                .reviewContent(updateReviewDTO.getReviewContent())
+//                .createDate(LocalDateTime.now())
+//                .build();
 
-        Review review = Review.builder()
-                .user(authedUser)
-                .restaurant(restaurant)
-                .reviewTitle(updateReviewDTO.getReviewTitle())
-                .reviewContent(updateReviewDTO.getReviewContent())
-                .createDate(LocalDateTime.now())
-                .build();
+        currReview.setReviewContent(updateReviewDTO.getReviewContent());
+        currReview.setReviewTitle(updateReviewDTO.getReviewTitle());
+        currReview.setReviewImage(updateReviewDTO.getReviewImage());
+        currReview.setRevisit(updateReviewDTO.getRevisit());
+
 
         // 기존 review작성자와 현재 로그인한 자의 email이 동일한지 확인.
 //        if (authedUser.getUserIndex() != currReview.getUser().getUserIndex()) {
@@ -86,7 +92,7 @@ public class ReviewService {
 
 
 //        Review reviewUpdate =
-        reviewRepository.save(review);
+        reviewRepository.save(currReview);
 //        return reviewRepository.findReviewByRestaurantBusId(busId);
 
     }
