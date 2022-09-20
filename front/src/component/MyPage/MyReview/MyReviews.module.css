@@ -54,7 +54,7 @@
 }
 
 .reviewCard {
-  padding: 2rem 2rem 4rem 2rem;
+  padding: 2rem 2rem 2rem 2rem;
   border-bottom: 1px solid #cccccc;
 }
 
@@ -68,6 +68,10 @@
   padding-top: 0.6rem;
   padding-bottom: 1rem;
   color: #51B059;
+}
+
+.reviews {
+  padding-bottom: 1.5rem;
 }
 
 @media screen and (max-width: 680px) {
