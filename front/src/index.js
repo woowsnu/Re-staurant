@@ -23,7 +23,7 @@ root.render(
         <Route path="/admin" element={<Admin />} />
         <Route path="/search/:id" element={<RestaurantSearch />} />
         <Route path="/detail/:id" element={<RestaurantDetailPage />} />
-        <Route path="/mypage/:useEmail" element={<MyPage />} />
+        <Route path="/mypage/:nickName" element={<MyPage />} />
         <Route element={<ProtectedRoutesAuth />}>
           <Route path="/login" element={<LogIn />} />
           <Route path="/members" element={<AuthPage />} />

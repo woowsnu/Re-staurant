@@ -12,17 +12,30 @@
 }
 
 .simpleProfile {
-  border: 1px solid #888888;
+  border: 1px solid #CCCCCC;
   padding: 1.5rem;
   margin-bottom: 1rem;
   display: flex;
+  border-radius: 0.4rem;
 }
 
 .simpleProfile img {
   width: 100px;
   height: 100px;
   object-fit: cover;
-  background-color: blue;
+  padding-right: 1.5rem;
+}
+
+.simpleProfileText {
+  color: #888888;
+  padding-top: 1.5rem;
+}
+
+.simpleProfileText h4{
+  color: #000;
+  font-size: 18px;
+  font-weight: 600;
+  padding-top: 0.6rem;
 }
 
 .comment {
