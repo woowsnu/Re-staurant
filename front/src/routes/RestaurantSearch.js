@@ -1,62 +1,141 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { instance } from "../api/axios";
 import Input from "../component/UI/Input";
 import PhotoCard from "../component/UI/PhotoCard";
 import styles from "./RestaurantSearch.module.css";
 import ListCard from "../component/UI/ListCard";
-import { useLocation, useNavigate } from "react-router-dom";
-import { instance } from "../api/axios";
 import Navbar from "../component/Layout/Navbar";
+import RestaurantSearchNoResult from "../component/Restaurant/RestaurantSearchNoResult";
+import { FaSearch } from 'react-icons/fa';
+import Footer from "../component/Layout/Footer";
 
 const RestaurantSearch = () => {
   const [data, setData] = useState("");
+  const [isUpdated, setIsUpdated] = useState(false);
+  const searchInput = useRef();
+  const [search, setSearch] = useState("");
+  const [keyword, setKeyword] = useState("");
+  const [searchError, setSearchError] = useState(false);
 
   const location = useLocation();
-  const navigate = useNavigate();
 
-  const RES_URL = `http://localhost:8080/restaurant/${location.state.search}`;
-  const CAT_URL = `http://localhost:8080/category/${location.state.search}`;
-  instance
-    .get(RES_URL)
-    .then((res) => {
-      const data = res.data[0];
-      setData(data)
-      console.log(res.data);
-    })
-    .catch((err) => {
-      instance
-        .get(CAT_URL)
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+  const searchHandler = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
 
-    const resDetailShow = () => {
-      navigate(`detail/${data.busId}`)
-    }
+  useEffect(() => {
+    instance
+      .get(`restaurant/${location.state.search}`)
+      .then((res) => {
+        const data = res.data;
+        setData(data);
+        setSearchError(false);
+      })
+      .catch((err) => {
+        setSearchError(true);
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    instance
+      .get(`restaurant/search?restaurantCategory=${location.state.search}`)
+      .then((res) => {
+        const data = res.data;
+        setData(data);
+        setSearchError(false);
+      })
+      .catch((err) => {
+        setSearchError(true);
+        console.log(err);
+      });
+  }, []);
+
+  const objectToData = Object.values(data);
+
+  const searchSubmit = async (e) => {
+    e.preventDefault();
+    setKeyword(search);
+    setIsUpdated(true);
+    await instance
+      .get(`restaurant/search?restaurantCategory=${search}`)
+      .then((res) => {
+        const data = res.data;
+        setData(data);
+        setSearchError(false);
+      })
+      .catch((err) => {
+        setKeyword(search);
+        instance
+          .get(`/restaurant/${search}`)
+          .then((res) => {
+            const data = res.data;
+            setData(data);
+            setIsUpdated(true);
+            setSearchError(false);
+          })
+          .catch((err) => {
+            setKeyword(search);
+            console.log(err);
+            setSearchError(true);
+          });
+      });
+  };
 
   return (
     <div className={styles.wrapper}>
       <Navbar />
       <div className={styles.pagetitle}>
-        "{location.state.search}" 검색결과
+        {isUpdated ? (
+          <span>{keyword} 검색결과</span>
+        ) : (
+          <span>{location.state.search} 검색결과</span>
+        )}{" "}
       </div>
-      <Input type="text" id="restaurantsearch" style={{ marginLeft: "20px" }} />
+      <form onSubmit={searchSubmit} className={styles.search}>
+        <Input
+          type="text"
+          id="search"
+          ref={searchInput}
+          onChange={searchHandler}
+          style={{ marginLeft: "2rem" }}
+        />
+        <button type="submit" className={styles.searchbtn}><FaSearch style={{fontSize: "22px"}}/></button>
+      </form>
       <br />
       <br />
-      <div className={styles.reviewRecommend}>
-        "{location.state.search}" 베스트 리뷰 ✨
-      </div>
-      <div className={styles.photocards}>
-        <PhotoCard />
-        <PhotoCard />
-        <PhotoCard />
-        <PhotoCard />
-      </div>
-      <div className={styles.reviewRecommend}>검색 결과</div>
-      <ListCard data={data} onClick={resDetailShow} />
+      {searchError ? (
+        <RestaurantSearchNoResult />
+      ) : (
+        <div>
+          <div className={styles.reviewRecommend}>
+            {isUpdated ? (
+              <span>{keyword} 관련 베스트 리뷰 ✨</span>
+            ) : (
+              <span>{location.state.search} 관련 베스트 리뷰 ✨</span>
+            )}
+          </div>
+          <div className={styles.photocards}>
+            <PhotoCard />
+            <PhotoCard />
+            <PhotoCard />
+            <PhotoCard />
+          </div>
+          <br/>
+          <div className={styles.reviewRecommend}>검색 결과 🔎</div>
+          <div>
+            {objectToData.map((data) => (
+              <>
+              <ListCard key={data.busId} data={data} />
+              <div className={styles.linebreak}>{""}</div>
+              </>
+            ))}
+          </div>
+        </div>
+      )}
+      <Footer />
     </div>
   );
 };

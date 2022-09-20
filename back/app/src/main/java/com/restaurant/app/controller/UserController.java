@@ -53,23 +53,32 @@ public class UserController {
     }
 
     // Read_User_Info : 유저 상세정보 [개인정보 + 팔로우/팔로워 + 리뷰게시글 등]
+<<<<<<< HEAD
 
     @Transactional
     // 상대방 유저정보 조회
     @PostMapping("/auth/userInfo")
     public ResponseEntity<?> readCounterProfile(@AuthenticationPrincipal User authedUser,@RequestBody UserDTO userDTO) {
 
+=======
+    // 상대방 유저정보 조회
+    @PostMapping("/auth/userInfo")
+    public ResponseEntity<?> readCounterProfile(@AuthenticationPrincipal User authedUser,@RequestBody UserDTO userDTO) {
+>>>>>>> 146e57d95fa830a914af3e03f3867ce8f8aeb424
 
         System.out.println("userController.ReadUserInfo() -> 로그인 중인 사용자: " + authedUser.getEmail());
-
+        
         try {
             User user = userService.findUserByEmail(userDTO.getEmail());
+<<<<<<< HEAD
+=======
+
+>>>>>>> 146e57d95fa830a914af3e03f3867ce8f8aeb424
             List<Follow> followingList = followService.findFollowByFollowingUser(user);
             List<FollowDTO> followingDTOList = followingList.stream().map(FollowDTO::new).collect((Collectors.toList()));
 
             List<Follow> followedList = followService.findFollowByFollowedUser(user);
             List<FollowDTO> followedDTOList = followedList.stream().map(FollowDTO::new).collect((Collectors.toList()));
-
 
 
             UserDTO userResponseDTO = UserDTO.builder()
@@ -83,8 +92,6 @@ public class UserController {
                     .followingList(followingDTOList)
                     .followerList(followedDTOList)
                     .build();
-
-
 
             return ResponseEntity.ok().body(userResponseDTO);
         } catch (Exception e) {
@@ -116,7 +123,7 @@ public class UserController {
         }
     }
 
-    //     Update User_Info : 유저 닉네임 수정
+    //     Update User_Info : 유저 패스워드 수정
     @PutMapping("/auth/update/password")
     public ResponseEntity<?> updateUserInfo(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO updateUserDTO) {
 

@@ -7,8 +7,6 @@ import AuthContext from "../store/auth-context";
 import Tabs from "../component/MyPage/Tabs";
 
 import styles from "./MyPage.module.css";
-import Navbar from "../component/Layout/Navbar";
-import Logobar from "../component/Layout/Logobar";
 
 const MyPage = () => {
   const [user, setUser] = useState("");
@@ -18,10 +16,16 @@ const MyPage = () => {
   const ctx = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const updateHandler = () => {
+    setIsUpdated(!isUpdated);
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-     instance
-      .get("http://localhost:8080/user/auth/userInfo", {
+    const profile = { "email" : localStorage.getItem("email") };
+    console.log(profile)
+    instance
+      .post("/user/auth/userInfo", JSON.stringify(profile), {
         headers: { "Content-Type": "application/json", Authorization: token },
       })
       .then((response) => {
@@ -42,7 +46,7 @@ const MyPage = () => {
     datafetch && (
       <div className={styles.wrapper}>
         <Profile user={user} updateHandler={() => setIsUpdated(!isUpdated)} />
-        <Tabs />
+        <Tabs user={user} updateHandler={updateHandler} />
       </div>
     )
   );

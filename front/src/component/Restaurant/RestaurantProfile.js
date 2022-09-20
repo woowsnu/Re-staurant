@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import ChartBar from './Chart/ChartBar';
-// import SimpleImageSlider from "react-simple-image-slider";
 import styles from './RestaurantProfile.module.css';
 
 import {
@@ -8,6 +7,7 @@ import {
   FaRegBookmark,
   FaShareAlt,
   FaRunning,
+  FaStar,
 } from 'react-icons/fa';
 import ImageSlider from '../UI/ImageSlider';
 
@@ -21,8 +21,9 @@ const DUMMY_IMAGE = [
 
 const RestaurantProfile = (props) => {
   const [images, setImages] = useState(DUMMY_IMAGE)
-  const { restaurantCategory, siCode, guCode, restaurantName, description } =
+  const { restaurantCategory, siCode, guCode, restaurantName, description, busId, avgRating } =
     props.restaurant;
+    
   return (
     <div className={styles.container}>
       {images ? <div className={styles.resImage}><ImageSlider images={images}/></div>: 
@@ -34,17 +35,18 @@ const RestaurantProfile = (props) => {
       <div className={styles.wrap}>
         <div className={styles.profileWrap}>
           <div>
-            {restaurantCategory && restaurantCategory.split('>')[0]} / {siCode}{' '}
-            {guCode}
-          </div>
+            {restaurantCategory?.split('>')[0] === '음식점' ? restaurantCategory?.split('>')[0] : restaurantCategory?.split('>')[1]} / {siCode} {guCode} </div>
           <div>
             <FaBookmark className={styles.bookmark} />
             <FaShareAlt className={styles.share} />
           </div>
         </div>
         <h1 className={styles.restaurantName}>{restaurantName}</h1>
+        <div className={styles.star}>
+        <FaStar style={{color: '#f8d90f', fontSize: '20px'}}/> {avgRating}
+        </div>
         <div className={styles.revisit}>
-        {props.reviews?.length && (<div>
+        {props.reviews?.length > 0 && (<div>
           <p><FaRunning /> 재방문하고 싶어요 ({props.reviews?.length}명의 리뷰)</p>
           <ChartBar reviews={props.reviews?.filter((el)=>el.revisit ===1).length} reviewCount={props.reviews?.length}/>
         </div>)}
@@ -59,10 +61,3 @@ const RestaurantProfile = (props) => {
 };
 
 export default RestaurantProfile;
-
-
-{/* <div className={styles.resImage}><SimpleImageSlider width={360}
-        height={360}
-        images={images}
-        showBullets={true}
-        showNavs={true}/></div> */}

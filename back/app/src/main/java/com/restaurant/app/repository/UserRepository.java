@@ -1,5 +1,6 @@
 package com.restaurant.app.repository;
 
+import com.restaurant.app.DTO.UserDTO;
 import com.restaurant.app.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
     public Long deleteUserByUserIndex(Long deleteUserIndex);
 
     public  User findUserByEmail(String email);
+
 
 }
 

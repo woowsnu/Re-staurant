@@ -16,40 +16,41 @@ const Withdraw = (props) => {
     props.withdrawExit();
   };
 
-  const URL = "http://localhost:8080/user/auth/deleteUserInfo";
-  const token = localStorage.getItem("accessToken");
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("accessToken");
     const profile = { email : email };
-    instance
-      .delete(URL, JSON.stringify(profile), {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    // await fetch(URL, {
-    //   method: "DELETE",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: token,
-    //   },
-    //   body: JSON.stringify(profile),
-    // })
+    // instance
+    //   .delete("/user/auth/deleteUserInfo", 
+    //   JSON.stringify(profile), {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: token,
+    //     },
+    //   })
     //   .then((res) => {
     //     console.log(res);
-    //     // setWithdrawDone(true);
-    //     // ctx.onLogout();
     //   })
     //   .catch((err) => {
     //     console.log(err);
     //   });
+
+    await fetch("http://localhost:8080/user/auth/deleteUserInfo", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+        credentials : "same-origin"
+      },
+      body: JSON.stringify(profile),
+    })
+      .then((res) => {
+        console.log(res);
+        setWithdrawDone(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -69,7 +70,7 @@ const Withdraw = (props) => {
         <Button onClick={exitWithdrawMode}>취소</Button>
       </div>
       <div className={withdrawDone ? styles.buttonArea : styles.offscreen}>
-        <Button
+        <Button style={{ width : "100%"}}
           onClick={() => {
             navigate("/");
           }}

@@ -37,15 +37,16 @@ const LogIn = (props) => {
         console.log(response);
         const accessToken = response.data.jwtToken;
         localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("email", email);
         ctx.onLogin(email, password);
         navigate(-1);
       })
       .catch((err) => {
         console.log(err);
-        const errCode = err.response.status;
-        if (errCode === 401) {
+        // const errCode = err.response.status;
+        // if (errCode === 401) {
           setErr("이메일 혹은 비밀번호를 확인해주세요");
-        }
+        // }
       });
   };
 

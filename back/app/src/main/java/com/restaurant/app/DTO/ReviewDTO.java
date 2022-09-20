@@ -15,11 +15,14 @@ public class ReviewDTO {
     private String email;
     private String reviewTitle;
     private String reviewContent;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 146e57d95fa830a914af3e03f3867ce8f8aeb424
     private String reviewImage;
     private String nickName;
-
     private String busId;
+<<<<<<< HEAD
 
     private int tag;
 
@@ -30,6 +33,10 @@ public class ReviewDTO {
 
 
 
+=======
+    private int tag;
+    private int revisit;
+>>>>>>> 146e57d95fa830a914af3e03f3867ce8f8aeb424
 
     public ReviewDTO(Review review) {
         this.reviewIndex = review.getReviewIndex();
@@ -40,6 +47,10 @@ public class ReviewDTO {
         this.reviewTitle = review.getReviewTitle();
         this.reviewContent = review.getReviewContent();
         this.nickName = review.getUser().getNickname();
+        this.reviewImage = review.getReviewImage();
+        this.revisit = review.getRevisit();
+        this.tag = review.getTag();
+
         this.busId = review.getRestaurant().getBusId();
 
 

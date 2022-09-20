@@ -30,6 +30,9 @@ public class RestaurantLikeService {
 
 
 
+    @Transactional
+    public List<RestaurantLike> findAll() {return restaurantLikeRepository.findAll(); }
+
     public List<RestaurantLike> save(User authedUser, RestaurantLikeDTO restaurantLikeDTO ) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(restaurantLikeDTO.getBusId());
         List<RestaurantLike> restaurantLikes = restaurantLikeRepository.findRestaurantsLikeByUser(authedUser);
