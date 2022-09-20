@@ -65,6 +65,8 @@ public class RestaurantLikeController {
         }
     }
 
+    //북마크 조회
+
     @GetMapping("/auth/findUserView")
     public ResponseEntity<?>findAll() {
         List<RestaurantLike> restaurantLikes = restaurantLikeService.findAll();
