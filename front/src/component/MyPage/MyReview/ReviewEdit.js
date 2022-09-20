@@ -8,19 +8,15 @@ import { instance } from "../../../api/axios";
 const ReviewEdit = (props) => {
   const [editedTitle, setEditedTitle] = useState(props.reviewTitle);
   const [editedContent, setEditedContent] = useState(props.reviewContent);
-
   const reviewEditClose = () => {
     props.reviewEditClose();
   };
-
   const titleEditHandler = (e) => {
     setEditedTitle(e.target.value);
   };
-
   const contentEditHandler = (e) => {
     setEditedContent(e.target.value);
   };
-
   const updateHandler = () => {
     props.updateHandler();
   };
@@ -45,7 +41,7 @@ const ReviewEdit = (props) => {
         console.log(err);
       });
   };
-
+  
   return (
     <Modal>
       <div className={styles.wrapper}>
@@ -80,5 +76,4 @@ const ReviewEdit = (props) => {
     </Modal>
   );
 };
-
 export default ReviewEdit;
