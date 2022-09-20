@@ -27,7 +27,13 @@ public class Review implements Serializable {
     private String reviewContent;
 
     @Column(name="review_image")
-    private String review_image;
+    private String reviewImage;
+
+    @Column(name="review_tag")
+    private int tag;
+
+    @Column(name="revisit")
+    private int revisit;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "user_index",referencedColumnName = "user_index")

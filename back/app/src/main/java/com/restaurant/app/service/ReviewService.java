@@ -26,8 +26,6 @@ public class ReviewService {
     @Transactional
     public List<Review> save(User authedUser, ReviewDTO reviewDTO, String busId) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
-        List<Review> reviews = reviewRepository.findReviewByUser(authedUser);
-        List<Review> reviewList = reviewRepository.findReviewByRestaurantBusId(busId);
 
 
         Review review = Review.builder()
@@ -35,6 +33,9 @@ public class ReviewService {
                 .restaurant(restaurant)
                 .reviewTitle(reviewDTO.getReviewTitle())
                 .reviewContent(reviewDTO.getReviewContent())
+                .reviewImage(reviewDTO.getReviewImage())
+                .revisit(reviewDTO.getRevisit())
+                .tag(reviewDTO.getTag())
                 .createDate(LocalDateTime.now())
                 .build();
 
