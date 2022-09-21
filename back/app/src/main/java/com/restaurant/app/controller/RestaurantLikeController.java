@@ -34,7 +34,7 @@ public class RestaurantLikeController {
 //            List<RestaurantLikeDTO> restaurantLikesDTO = restaurantLikeList.stream().map(RestaurantLikeDTO::new).collect(Collectors.toList());
 
 //            System.out.println("restaurantList : " +restaurantLikeList);
-            restaurantLikeService.save(authedUser,restaurantLikeDTO);
+            restaurantLikeService.createRestaurantLike(authedUser,restaurantLikeDTO);
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
             return ResponseEntity.ok().body(responseDTO);
 
@@ -75,19 +75,19 @@ public class RestaurantLikeController {
     }
 
     //북마크 조회
-    @DeleteMapping("{likeIndex}/auth/deleteLike")
-    public ResponseEntity<?> deleteLike(@AuthenticationPrincipal User authedUser,
-                                        @PathVariable Long likeIndex) {
-
-        try{
-            Long deletedLikeIndex = restaurantLikeService.delete(authedUser,likeIndex);
-
-            return ResponseEntity.ok().body("likeIndex : " + deletedLikeIndex  + "has deleted");
-        }
-        catch(Exception e) {
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.ok().body(responseDTO);
-        }
-    }
+//    @DeleteMapping("{likeIndex}/auth/deleteLike")
+//    public ResponseEntity<?> deleteLike(@AuthenticationPrincipal User authedUser,
+//                                        @PathVariable Long likeIndex) {
+//
+//        try{
+//            Long deletedLikeIndex = restaurantLikeService.delete(authedUser,likeIndex);
+//
+//            return ResponseEntity.ok().body("likeIndex : " + deletedLikeIndex  + "has deleted");
+//        }
+//        catch(Exception e) {
+//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+//            return ResponseEntity.ok().body(responseDTO);
+//        }
+//    }
 
 }

@@ -1,6 +1,7 @@
 package com.restaurant.app.service;
 
 
+import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.DTO.RestaurantLikeDTO;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.model.RestaurantLike;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -30,25 +32,36 @@ public class RestaurantLikeService {
 
 
 
-    public List<RestaurantLike> save(User authedUser, RestaurantLikeDTO restaurantLikeDTO ) {
+    @Transactional
+    public List<RestaurantLike> createRestaurantLike(User authedUser, RestaurantLikeDTO restaurantLikeDTO ) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(restaurantLikeDTO.getBusId());
-        List<RestaurantLike> restaurantLikes = restaurantLikeRepository.findRestaurantsLikeByUser(authedUser);
-        if (restaurant == null) {
-            throw new RuntimeException("해당 식당이 없습니다.");
+//        List<RestaurantLike> restaurantLikes = restaurantLikeRepository.findRestaurantsLikeByUser(authedUser);
+        List<RestaurantLike> restaurantLikeList = restaurantLikeRepository.findRestaurantsLikeByRestaurantBusId(restaurantLikeDTO.getBusId());
+////        List<RestaurantLike> restaurantLikeList1 = restaurantLikeRepository.findRestaurantsLikeByRestaurantRestaurantIndex(restaurantLikeDTO.getRestaurantIndex());
+        if(!restaurantLikeList.isEmpty()) {
+            throw new RuntimeException("이미 추가했습니다!");
         }
 
-        RestaurantLike restaurantLike = RestaurantLike.builder()
-                .likeIndex(restaurantLikeDTO.getLikeIndex())
-                .user(authedUser)
-                .restaurant(restaurant)
-                .build();
+            RestaurantLike restaurantLike = RestaurantLike.builder()
+                    .likeIndex(restaurantLikeDTO.getLikeIndex())
+                    .user(authedUser)
+                    .restaurant(restaurant)
+                    .build();
 
-        restaurantLike.setUser(authedUser);
+            restaurantLike.setUser(authedUser);
 
-        restaurantLikeRepository.save(restaurantLike);
+            restaurantLikeRepository.save(restaurantLike);
 //        System.out.println("savedrestaurantReview" + restaurantLike);
 
-        return restaurantLikeRepository.findRestaurantsLikeByRestaurantBusId(restaurantLikeDTO.getBusId());
+            return restaurantLikeRepository.findRestaurantsLikeByRestaurantBusId(restaurantLikeDTO.getBusId());
+
+
+
+
+
+
+
+
     }
 
     @Transactional
@@ -64,16 +77,16 @@ public class RestaurantLikeService {
         return restaurantLikes;
     }
 
-    public Long delete(User authedUser, Long likeIndex) {
-        RestaurantLike currLike = restaurantLikeRepository.findLikeByLikeIndex(likeIndex);
+//    public Long delete(User authedUser, Long likeIndex) {
+//        RestaurantLike currLike = restaurantLikeRepository.findRestaurantsLikeByLikeIndex(likeIndex);
+//
+//        if (authedUser.getUserIndex() != currLike.getUser().getUserIndex()) {
+//            throw new RuntimeException("deleteReview denied. invalid userIndex");
+//        }
+//
+//        return restaurantLikeRepository.deleteByLikeIndex(currLike.getLikeIndex());
 
-        if (authedUser.getUserIndex() != currLike.getUser().getUserIndex()) {
-            throw new RuntimeException("deleteReview denied. invalid userIndex");
-        }
-
-        return restaurantLikeRepository.deleteByLikeIndex(currLike.getLikeIndex());
-
-    }
+//    }
 
 
 }
