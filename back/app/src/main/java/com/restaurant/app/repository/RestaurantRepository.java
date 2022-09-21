@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
@@ -12,7 +13,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     Restaurant findRestaurantByBusId(String busId);
     List<Restaurant> findRestaurantByRestaurantNameContainingIgnoreCase(String restaurantName);
 
-
+    Restaurant findRestaurantByRestaurantIndex(Long restaurantIndex);
 
     List<Restaurant> findRestaurantBySiCode(String siCode);
 
