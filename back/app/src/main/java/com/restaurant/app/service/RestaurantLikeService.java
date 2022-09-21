@@ -57,19 +57,14 @@ public class RestaurantLikeService {
 
 
 
-
-
-
-
-
     }
-
     @Transactional
     public List<RestaurantLike> findByEmail(User authedUser,String email){
         List<RestaurantLike> restaurantLike = restaurantLikeRepository.findRestaurantsLikeByUserEmail(email);
         List<RestaurantLike> restaurantLikes = restaurantLikeRepository.findRestaurantsLikeByUser(authedUser);
         return restaurantLike;
     }
+
 
     public List<RestaurantLike> findRestaurantLikeByUser(User authedUser,String busId){
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
