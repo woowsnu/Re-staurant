@@ -56,28 +56,21 @@ public class ReviewService {
         return review;
     }
 
+    public  List<Review> findReview (ReviewDTO reviewDTO){
+        List<Review> reviewList = reviewRepository.findReviewByReviewTitleContainingIgnoreCaseOrReviewContentContainingIgnoreCase(reviewDTO.getReviewTitle(),reviewDTO.getReviewContent());
+
+        if (reviewList.size() == 0) {
+            throw new RuntimeException("리뷰가 존재하지 않습니다.");
+        }
+
+        return reviewList;
+    }
+
     public void update(User authedUser , ReviewDTO updateReviewDTO, String busId ) {
         // 기존 review 로드
 
         Review currReview = reviewRepository.findReviewByReviewIndex(updateReviewDTO.getReviewIndex());
 //
-//        List<Review> reviewList = reviewRepository.findReviewByUser(authedUser);
-//
-//
-//        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
-//        List<Review> reviewLists = reviewRepository.findReviewByRestaurantBusId(busId);
-
-//        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
-//        List<Review> reviews = reviewRepository.findReviewByUser(authedUser);
-//        List<Review> reviewList = reviewRepository.findReviewByRestaurantBusId(busId);
-//
-//        Review review = Review.builder()
-//                .user(authedUser)
-//                .restaurant(restaurant)
-//                .reviewTitle(updateReviewDTO.getReviewTitle())
-//                .reviewContent(updateReviewDTO.getReviewContent())
-//                .createDate(LocalDateTime.now())
-//                .build();
 
         currReview.setReviewContent(updateReviewDTO.getReviewContent());
         currReview.setReviewTitle(updateReviewDTO.getReviewTitle());
@@ -85,17 +78,9 @@ public class ReviewService {
         currReview.setRevisit(updateReviewDTO.getRevisit());
 
 
-        // 기존 review작성자와 현재 로그인한 자의 email이 동일한지 확인.
-//        if (authedUser.getUserIndex() != currReview.getUser().getUserIndex()) {
-//            throw new RuntimeException("updateReview denied. invalid userIndex");
-//        }
-
-
-//        Review reviewUpdate =
         reviewRepository.save(currReview);
-//        return reviewRepository.findReviewByRestaurantBusId(busId);
-
     }
+
 
 
     public Long delete(User authedUser, Long reviewIndex) {

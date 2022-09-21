@@ -24,5 +24,7 @@ public interface ReviewRepository extends JpaRepository<Review,Long> {
 
     List<Review> findOptionsByUserEmail(String email);
 
+    List<Review> findReviewByReviewTitleContainingIgnoreCaseOrReviewContentContainingIgnoreCase(String reviewTitle, String reviewContent);
+
 
 }
