@@ -1,0 +1,391 @@
+Script started on Wed Sep 21 14:50:16 2022
+[1m[7m%[27m[1m[0m                                                                                ]7;file://gunui-MacBookPro.local/Users/gun/OneDrive%20-%20%ED%95%9C%EC%96%91%EB%8C%80%ED%95%99%EA%B5%90/bigdata/final_project/production/log[0m[27m[24m[J(base) gun@gunui-MacBookPro log % [K[?2004hs sssh s  ccd ~ c  ccd ..[?2004l
+[1m[7m%[27m[1m[0m                                                                                ]7;file://gunui-MacBookPro.local/Users/gun/OneDrive%20-%20%ED%95%9C%EC%96%91%EB%8C%80%ED%95%99%EA%B5%90/bigdata/final_project/production[0m[27m[24m[J(base) gun@gunui-MacBookPro production % [K[?2004hsssh -i    s  ccd ~D /Do
+[JDocuments/  Downloads/[A[0m[27m[24m[41Ccd ~/Do[Kqwn   wnloads[1m/[0m[0m [?2004l
+[J[1m[7m%[27m[1m[0m                                                                                ]7;file://gunui-MacBookPro.local/Users/gun/Downloads[0m[27m[24m[J(base) gun@gunui-MacBookPro Downloads % [K[?2004hsssh -i docker
+[Jdocker-ce.repo   docker_gun.pem*[A[0m[27m[24m[40Cssh -i docker[K_gun.pem[1m [0m[0m [7m/Users/gun/Desktop[7m/[7mfront/Dockerfile [27m[K[A[44C[27m/[27mU[27ms[27me[27mr[27ms[27m/[27mg[27mu[27mn[27m/[27mD[27me[27ms[27mk[27mt[27mo[27mp/[27mf[27mr[27mo[27mn[27mt[27m/[27mD[27mo[27mc[27mk[27me[27mr[27mf[27mi[27ml[27me[K               / [K[A[79C[K[1B[K[A[79C                 ec2-user@[7m43.200.20[7m2[7m.164[27m[K[A[66C[27m4[27m3[27m.[27m2[27m0[27m0[27m.[27m2[27m02[27m.[27m1[27m6[27m4[?2004l
+[JThe authenticity of host '43.200.202.164 (43.200.202.164)' can't be established.
+ED25519 key fingerprint is SHA256:GZvARO+CoMc2+gBKRbaYqFaFCOF8SoHVGAn2AkL8+lI.
+This host key is known by the following other names/addresses:
+    ~/.ssh/known_hosts:2: 15.164.226.84
+    ~/.ssh/known_hosts:5: 13.125.53.68
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '43.200.202.164' (ED25519) to the list of known hosts.
+Last login: Tue Sep 20 07:56:34 2022 from 182.211.133.88
+]0;ec2-user@ec2-user:~[ec2-user@ec2-user ~]$ g[Ks[Ksu [K[K[Ksu git
+암호:
+]0;git@ec2-user:/home/ec2-user[git@ec2-user ec2-user]$ s[Ks[Ksi[K[Kg[Kg[Kcd ~
+]0;git@ec2-user:~[git@ec2-user ~]$ s[Kll
+합계 4
+drwxrwxr-x. 8 systemd-coredump git 4096  9월 20 08:36 [0m[38;5;33mmysql_db[0m
+drwxrwxr-x. 9 git              git  188  9월 20 03:48 [38;5;33mrepos[0m
+]0;git@ec2-user:~[git@ec2-user ~]$ cd repos/
+]0;git@ec2-user:~/repos[git@ec2-user repos]$ ls
+FETCH_HEAD  [0m[38;5;33mback[0m           [38;5;33mfront[0m              [38;5;33mproduction[0m
+README.md   [38;5;33mdata_crawling[0m  package-lock.json
+]0;git@ec2-user:~/repos[git@ec2-user repos]$ git log
+[?1h=[33mcommit 874661aa65a8f22a80221aceb257e5bcfe9fd303[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m[m
+Merge: a5de108 b1f4d79[m
+Author: gun-0208 <kanggun9908@gmail.com>[m
+Date:   Tue Sep 20 04:51:32 2022 +0000[m
+[m
+    Merge branch 'gun' of https://github.com/woowsnu/Re-staurant[m
+[m
+[33mcommit b1f4d7977df3b07aebae5a9026e89f0e2f5b7dea[m[33m ([m[1;31morigin/gun[m[33m)[m[m
+Author: gun-0208 <kanggun9908@gmail.com>[m
+Date:   Tue Sep 20 13:51:01 2022 +0900[m
+[m
+    Feat: backend-mysql 컨테이너화 완료[m
+[m
+[33mcommit a5de1080fe1b687973824322f4a0ce91599f08c1[m[m
+Merge: e485331 eccda89[m
+Author: gun-0208 <kanggun9908@gmail.com>[m
+Date:   Tue Sep 20 03:48:44 2022 +0000[m
+[m
+    Merge branch 'gun' of https://github.com/woowsnu/Re-staurant[m
+[m
+[33mcommit e485331308e93ed3b97b7b6f06e77139cb699cff[m[33m ([m[1;31morigin/dev[m[33m)[m[m
+Merge: c105827 dbb532b[m
+Author: moonsun <woowsnu@gmail.com>[m
+:[K[K[?1l>]0;git@ec2-user:~/repos[git@ec2-user repos]$ git fetch
+remote: Enumerating objects: 488, done.[K
+remote: Counting objects:   0% (1/408)[Kremote: Counting objects:   1% (5/408)[Kremote: Counting objects:   2% (9/408)[Kremote: Counting objects:   3% (13/408)[Kremote: Counting objects:   4% (17/408)[Kremote: Counting objects:   5% (21/408)[Kremote: Counting objects:   6% (25/408)[Kremote: Counting objects:   7% (29/408)[Kremote: Counting objects:   8% (33/408)[Kremote: Counting objects:   9% (37/408)[Kremote: Counting objects:  10% (41/408)[Kremote: Counting objects:  11% (45/408)[Kremote: Counting objects:  12% (49/408)[Kremote: Counting objects:  13% (54/408)[Kremote: Counting objects:  14% (58/408)[Kremote: Counting objects:  15% (62/408)[Kremote: Counting objects:  16% (66/408)[Kremote: Counting objects:  17% (70/408)[Kremote: Counting objects:  18% (74/408)[Kremote: Counting objects:  19% (78/408)[Kremote: Counting objects:  20% (82/408)[Kremote: Counting objects:  21% (86/408)[Kremote: Counting objects:  22% (90/408)[Kremote: Counting objects:  23% (94/408)[Kremote: Counting objects:  24% (98/408)[Kremote: Counting objects:  25% (102/408)[Kremote: Counting objects:  26% (107/408)[Kremote: Counting objects:  27% (111/408)[Kremote: Counting objects:  28% (115/408)[Kremote: Counting objects:  29% (119/408)[Kremote: Counting objects:  30% (123/408)[Kremote: Counting objects:  31% (127/408)[Kremote: Counting objects:  32% (131/408)[Kremote: Counting objects:  33% (135/408)[Kremote: Counting objects:  34% (139/408)[Kremote: Counting objects:  35% (143/408)[Kremote: Counting objects:  36% (147/408)[Kremote: Counting objects:  37% (151/408)[Kremote: Counting objects:  38% (156/408)[Kremote: Counting objects:  39% (160/408)[Kremote: Counting objects:  40% (164/408)[Kremote: Counting objects:  41% (168/408)[Kremote: Counting objects:  42% (172/408)[Kremote: Counting objects:  43% (176/408)[Kremote: Counting objects:  44% (180/408)[Kremote: Counting objects:  45% (184/408)[Kremote: Counting objects:  46% (188/408)[Kremote: Counting objects:  47% (192/408)[Kremote: Counting objects:  48% (196/408)[Kremote: Counting objects:  49% (200/408)[Kremote: Counting objects:  50% (204/408)[Kremote: Counting objects:  51% (209/408)[Kremote: Counting objects:  52% (213/408)[Kremote: Counting objects:  53% (217/408)[Kremote: Counting objects:  54% (221/408)[Kremote: Counting objects:  55% (225/408)[Kremote: Counting objects:  56% (229/408)[Kremote: Counting objects:  57% (233/408)[Kremote: Counting objects:  58% (237/408)[Kremote: Counting objects:  59% (241/408)[Kremote: Counting objects:  60% (245/408)[Kremote: Counting objects:  61% (249/408)[Kremote: Counting objects:  62% (253/408)[Kremote: Counting objects:  63% (258/408)[Kremote: Counting objects:  64% (262/408)[Kremote: Counting objects:  65% (266/408)[Kremote: Counting objects:  66% (270/408)[Kremote: Counting objects:  67% (274/408)[Kremote: Counting objects:  68% (278/408)[Kremote: Counting objects:  69% (282/408)[Kremote: Counting objects:  70% (286/408)[Kremote: Counting objects:  71% (290/408)[Kremote: Counting objects:  72% (294/408)[Kremote: Counting objects:  73% (298/408)[Kremote: Counting objects:  74% (302/408)[Kremote: Counting objects:  75% (306/408)[Kremote: Counting objects:  76% (311/408)[Kremote: Counting objects:  77% (315/408)[Kremote: Counting objects:  78% (319/408)[Kremote: Counting objects:  79% (323/408)[Kremote: Counting objects:  80% (327/408)[Kremote: Counting objects:  81% (331/408)[Kremote: Counting objects:  82% (335/408)[Kremote: Counting objects:  83% (339/408)[Kremote: Counting objects:  84% (343/408)[Kremote: Counting objects:  85% (347/408)[Kremote: Counting objects:  86% (351/408)[Kremote: Counting objects:  87% (355/408)[Kremote: Counting objects:  88% (360/408)[Kremote: Counting objects:  89% (364/408)[Kremote: Counting objects:  90% (368/408)[Kremote: Counting objects:  91% (372/408)[Kremote: Counting objects:  92% (376/408)[Kremote: Counting objects:  93% (380/408)[Kremote: Counting objects:  94% (384/408)[Kremote: Counting objects:  95% (388/408)[Kremote: Counting objects:  96% (392/408)[Kremote: Counting objects:  97% (396/408)[Kremote: Counting objects:  98% (400/408)[Kremote: Counting objects:  99% (404/408)[Kremote: Counting objects: 100% (408/408)[Kremote: Counting objects: 100% (408/408), done.[K
+remote: Compressing objects:   0% (1/159)[Kremote: Compressing objects:   1% (2/159)[Kremote: Compressing objects:   2% (4/159)[Kremote: Compressing objects:   3% (5/159)[Kremote: Compressing objects:   4% (7/159)[Kremote: Compressing objects:   5% (8/159)[Kremote: Compressing objects:   6% (10/159)[Kremote: Compressing objects:   7% (12/159)[Kremote: Compressing objects:   8% (13/159)[Kremote: Compressing objects:   9% (15/159)[Kremote: Compressing objects:  10% (16/159)[Kremote: Compressing objects:  11% (18/159)[Kremote: Compressing objects:  12% (20/159)[Kremote: Compressing objects:  13% (21/159)[Kremote: Compressing objects:  14% (23/159)[Kremote: Compressing objects:  15% (24/159)[Kremote: Compressing objects:  16% (26/159)[Kremote: Compressing objects:  17% (28/159)[Kremote: Compressing objects:  18% (29/159)[Kremote: Compressing objects:  19% (31/159)[Kremote: Compressing objects:  20% (32/159)[Kremote: Compressing objects:  21% (34/159)[Kremote: Compressing objects:  22% (35/159)[Kremote: Compressing objects:  23% (37/159)[Kremote: Compressing objects:  24% (39/159)[Kremote: Compressing objects:  25% (40/159)[Kremote: Compressing objects:  26% (42/159)[Kremote: Compressing objects:  27% (43/159)[Kremote: Compressing objects:  28% (45/159)[Kremote: Compressing objects:  29% (47/159)[Kremote: Compressing objects:  30% (48/159)[Kremote: Compressing objects:  31% (50/159)[Kremote: Compressing objects:  32% (51/159)[Kremote: Compressing objects:  33% (53/159)[Kremote: Compressing objects:  34% (55/159)[Kremote: Compressing objects:  35% (56/159)[Kremote: Compressing objects:  36% (58/159)[Kremote: Compressing objects:  37% (59/159)[Kremote: Compressing objects:  38% (61/159)[Kremote: Compressing objects:  39% (63/159)[Kremote: Compressing objects:  40% (64/159)[Kremote: Compressing objects:  41% (66/159)[Kremote: Compressing objects:  42% (67/159)[Kremote: Compressing objects:  43% (69/159)[Kremote: Compressing objects:  44% (70/159)[Kremote: Compressing objects:  45% (72/159)[Kremote: Compressing objects:  46% (74/159)[Kremote: Compressing objects:  47% (75/159)[Kremote: Compressing objects:  48% (77/159)[Kremote: Compressing objects:  49% (78/159)[Kremote: Compressing objects:  50% (80/159)[Kremote: Compressing objects:  51% (82/159)[Kremote: Compressing objects:  52% (83/159)[Kremote: Compressing objects:  53% (85/159)[Kremote: Compressing objects:  54% (86/159)[Kremote: Compressing objects:  55% (88/159)[Kremote: Compressing objects:  56% (90/159)[Kremote: Compressing objects:  57% (91/159)[Kremote: Compressing objects:  58% (93/159)[Kremote: Compressing objects:  59% (94/159)[Kremote: Compressing objects:  60% (96/159)[Kremote: Compressing objects:  61% (97/159)[Kremote: Compressing objects:  62% (99/159)[Kremote: Compressing objects:  63% (101/159)[Kremote: Compressing objects:  64% (102/159)[Kremote: Compressing objects:  65% (104/159)[Kremote: Compressing objects:  66% (105/159)[Kremote: Compressing objects:  67% (107/159)[Kremote: Compressing objects:  68% (109/159)[Kremote: Compressing objects:  69% (110/159)[Kremote: Compressing objects:  70% (112/159)[Kremote: Compressing objects:  71% (113/159)[Kremote: Compressing objects:  72% (115/159)[Kremote: Compressing objects:  73% (117/159)[Kremote: Compressing objects:  74% (118/159)[Kremote: Compressing objects:  75% (120/159)[Kremote: Compressing objects:  76% (121/159)[Kremote: Compressing objects:  77% (123/159)[Kremote: Compressing objects:  78% (125/159)[Kremote: Compressing objects:  79% (126/159)[Kremote: Compressing objects:  80% (128/159)[Kremote: Compressing objects:  81% (129/159)[Kremote: Compressing objects:  82% (131/159)[Kremote: Compressing objects:  83% (132/159)[Kremote: Compressing objects:  84% (134/159)[Kremote: Compressing objects:  85% (136/159)[Kremote: Compressing objects:  86% (137/159)[Kremote: Compressing objects:  87% (139/159)[Kremote: Compressing objects:  88% (140/159)[Kremote: Compressing objects:  89% (142/159)[Kremote: Compressing objects:  90% (144/159)[Kremote: Compressing objects:  91% (145/159)[Kremote: Compressing objects:  92% (147/159)[Kremote: Compressing objects:  93% (148/159)[Kremote: Compressing objects:  94% (150/159)[Kremote: Compressing objects:  95% (152/159)[Kremote: Compressing objects:  96% (153/159)[Kremote: Compressing objects:  97% (155/159)[Kremote: Compressing objects:  98% (156/159)[Kremote: Compressing objects:  99% (158/159)[Kremote: Compressing objects: 100% (159/159)[Kremote: Compressing objects: 100% (159/159), done.[K
+오브젝트를 받는 중:   0% (1/488)오브젝트를 받는 중:   1% (5/488)오브젝트를 받는 중:   2% (10/488)오브젝트를 받는 중:   3% (15/488)오브젝트를 받는 중:   4% (20/488)오브젝트를 받는 중:   5% (25/488)오브젝트를 받는 중:   6% (30/488)오브젝트를 받는 중:   7% (35/488)오브젝트를 받는 중:   8% (40/488)오브젝트를 받는 중:   9% (44/488)오브젝트를 받는 중:  10% (49/488)오브젝트를 받는 중:  11% (54/488)오브젝트를 받는 중:  12% (59/488)오브젝트를 받는 중:  13% (64/488)오브젝트를 받는 중:  14% (69/488)오브젝트를 받는 중:  15% (74/488)오브젝트를 받는 중:  16% (79/488)오브젝트를 받는 중:  17% (83/488)오브젝트를 받는 중:  18% (88/488)오브젝트를 받는 중:  19% (93/488)오브젝트를 받는 중:  20% (98/488)오브젝트를 받는 중:  21% (103/488)오브젝트를 받는 중:  22% (108/488)오브젝트를 받는 중:  23% (113/488)오브젝트를 받는 중:  24% (118/488)오브젝트를 받는 중:  25% (122/488)오브젝트를 받는 중:  26% (127/488)오브젝트를 받는 중:  27% (132/488)오브젝트를 받는 중:  28% (137/488)오브젝트를 받는 중:  29% (142/488)오브젝트를 받는 중:  30% (147/488)오브젝트를 받는 중:  31% (152/488)오브젝트를 받는 중:  32% (157/488)오브젝트를 받는 중:  33% (162/488)오브젝트를 받는 중:  34% (166/488)오브젝트를 받는 중:  35% (171/488)오브젝트를 받는 중:  36% (176/488)오브젝트를 받는 중:  37% (181/488)오브젝트를 받는 중:  38% (186/488)오브젝트를 받는 중:  39% (191/488)오브젝트를 받는 중:  40% (196/488)오브젝트를 받는 중:  41% (201/488)오브젝트를 받는 중:  42% (205/488)오브젝트를 받는 중:  43% (210/488)오브젝트를 받는 중:  44% (215/488)오브젝트를 받는 중:  45% (220/488)오브젝트를 받는 중:  46% (225/488)오브젝트를 받는 중:  47% (230/488)오브젝트를 받는 중:  48% (235/488)오브젝트를 받는 중:  49% (240/488)오브젝트를 받는 중:  50% (244/488)오브젝트를 받는 중:  51% (249/488)오브젝트를 받는 중:  52% (254/488)오브젝트를 받는 중:  53% (259/488)오브젝트를 받는 중:  54% (264/488)오브젝트를 받는 중:  55% (269/488)오브젝트를 받는 중:  56% (274/488)오브젝트를 받는 중:  57% (279/488)오브젝트를 받는 중:  58% (284/488)오브젝트를 받는 중:  59% (288/488)오브젝트를 받는 중:  60% (293/488)오브젝트를 받는 중:  61% (298/488)오브젝트를 받는 중:  62% (303/488)오브젝트를 받는 중:  63% (308/488)오브젝트를 받는 중:  64% (313/488)오브젝트를 받는 중:  65% (318/488)오브젝트를 받는 중:  66% (323/488)오브젝트를 받는 중:  67% (327/488)오브젝트를 받는 중:  68% (332/488)오브젝트를 받는 중:  69% (337/488)오브젝트를 받는 중:  70% (342/488)오브젝트를 받는 중:  71% (347/488)오브젝트를 받는 중:  72% (352/488)오브젝트를 받는 중:  73% (357/488)오브젝트를 받는 중:  74% (362/488)오브젝트를 받는 중:  75% (366/488)오브젝트를 받는 중:  76% (371/488)오브젝트를 받는 중:  77% (376/488)오브젝트를 받는 중:  78% (381/488)오브젝트를 받는 중:  79% (386/488)오브젝트를 받는 중:  80% (391/488)오브젝트를 받는 중:  81% (396/488)오브젝트를 받는 중:  82% (401/488)오브젝트를 받는 중:  83% (406/488)remote: Total 488 (delta 262), reused 355 (delta 228), pack-reused 80[K
+오브젝트를 받는 중:  84% (410/488)오브젝트를 받는 중:  85% (415/488)오브젝트를 받는 중:  86% (420/488)오브젝트를 받는 중:  87% (425/488)오브젝트를 받는 중:  88% (430/488)오브젝트를 받는 중:  89% (435/488)오브젝트를 받는 중:  90% (440/488)오브젝트를 받는 중:  91% (445/488)오브젝트를 받는 중:  92% (449/488)오브젝트를 받는 중:  93% (454/488)오브젝트를 받는 중:  94% (459/488)오브젝트를 받는 중:  95% (464/488)오브젝트를 받는 중:  96% (469/488)오브젝트를 받는 중:  97% (474/488)오브젝트를 받는 중:  98% (479/488)오브젝트를 받는 중:  99% (484/488)오브젝트를 받는 중: 100% (488/488)오브젝트를 받는 중: 100% (488/488), 205.81 KiB | 1.22 MiB/s, 완료.
+델타를 알아내는 중:   0% (0/270)델타를 알아내는 중:   1% (3/270)델타를 알아내는 중:   2% (6/270)델타를 알아내는 중:   3% (9/270)델타를 알아내는 중:   4% (11/270)델타를 알아내는 중:   5% (14/270)델타를 알아내는 중:   6% (17/270)델타를 알아내는 중:   7% (19/270)델타를 알아내는 중:   8% (22/270)델타를 알아내는 중:   9% (25/270)델타를 알아내는 중:  10% (27/270)델타를 알아내는 중:  11% (30/270)델타를 알아내는 중:  12% (33/270)델타를 알아내는 중:  13% (36/270)델타를 알아내는 중:  14% (38/270)델타를 알아내는 중:  15% (41/270)델타를 알아내는 중:  16% (44/270)델타를 알아내는 중:  17% (46/270)델타를 알아내는 중:  18% (49/270)델타를 알아내는 중:  19% (52/270)델타를 알아내는 중:  20% (54/270)델타를 알아내는 중:  21% (57/270)델타를 알아내는 중:  22% (60/270)델타를 알아내는 중:  23% (63/270)델타를 알아내는 중:  24% (65/270)델타를 알아내는 중:  25% (68/270)델타를 알아내는 중:  26% (71/270)델타를 알아내는 중:  27% (73/270)델타를 알아내는 중:  28% (76/270)델타를 알아내는 중:  29% (79/270)델타를 알아내는 중:  30% (81/270)델타를 알아내는 중:  31% (84/270)델타를 알아내는 중:  32% (87/270)델타를 알아내는 중:  33% (90/270)델타를 알아내는 중:  34% (92/270)델타를 알아내는 중:  35% (95/270)델타를 알아내는 중:  36% (98/270)델타를 알아내는 중:  37% (100/270)델타를 알아내는 중:  38% (103/270)델타를 알아내는 중:  39% (106/270)델타를 알아내는 중:  40% (108/270)델타를 알아내는 중:  41% (111/270)델타를 알아내는 중:  42% (114/270)델타를 알아내는 중:  43% (117/270)델타를 알아내는 중:  44% (119/270)델타를 알아내는 중:  45% (122/270)델타를 알아내는 중:  46% (125/270)델타를 알아내는 중:  47% (127/270)델타를 알아내는 중:  48% (130/270)델타를 알아내는 중:  49% (133/270)델타를 알아내는 중:  50% (135/270)델타를 알아내는 중:  51% (138/270)델타를 알아내는 중:  52% (141/270)델타를 알아내는 중:  53% (144/270)델타를 알아내는 중:  54% (146/270)델타를 알아내는 중:  55% (149/270)델타를 알아내는 중:  56% (152/270)델타를 알아내는 중:  57% (154/270)델타를 알아내는 중:  58% (157/270)델타를 알아내는 중:  59% (160/270)델타를 알아내는 중:  60% (162/270)델타를 알아내는 중:  61% (165/270)델타를 알아내는 중:  62% (168/270)델타를 알아내는 중:  63% (171/270)델타를 알아내는 중:  64% (173/270)델타를 알아내는 중:  65% (176/270)델타를 알아내는 중:  66% (179/270)델타를 알아내는 중:  67% (181/270)델타를 알아내는 중:  68% (184/270)델타를 알아내는 중:  69% (187/270)델타를 알아내는 중:  70% (189/270)델타를 알아내는 중:  71% (192/270)델타를 알아내는 중:  72% (195/270)델타를 알아내는 중:  73% (198/270)델타를 알아내는 중:  74% (200/270)델타를 알아내는 중:  75% (203/270)델타를 알아내는 중:  76% (206/270)델타를 알아내는 중:  77% (208/270)델타를 알아내는 중:  78% (211/270)델타를 알아내는 중:  79% (214/270)델타를 알아내는 중:  80% (216/270)델타를 알아내는 중:  81% (219/270)델타를 알아내는 중:  82% (222/270)델타를 알아내는 중:  83% (225/270)델타를 알아내는 중:  84% (227/270)델타를 알아내는 중:  85% (230/270)델타를 알아내는 중:  86% (233/270)델타를 알아내는 중:  87% (235/270)델타를 알아내는 중:  88% (238/270)델타를 알아내는 중:  88% (240/270)델타를 알아내는 중:  89% (241/270)델타를 알아내는 중:  90% (243/270)델타를 알아내는 중:  91% (246/270)델타를 알아내는 중:  92% (249/270)델타를 알아내는 중:  93% (252/270)델타를 알아내는 중:  94% (254/270)델타를 알아내는 중:  95% (257/270)델타를 알아내는 중:  96% (260/270)델타를 알아내는 중:  97% (262/270)델타를 알아내는 중:  98% (265/270)델타를 알아내는 중:  99% (268/270)델타를 알아내는 중: 100% (270/270)델타를 알아내는 중: 100% (270/270), 로컬 오브젝트 92개 마침.
+https://github.com/woowsnu/Re-staurant URL에서
+   e485331..72b4bea  dev                -> origin/dev
+ * [새로운 브랜치]   docs/readme        -> origin/docs/readme
+ * [새로운 브랜치]   feature/follow     -> origin/feature/follow
+ * [새로운 브랜치]   feature/member     -> origin/feature/member
+ * [새로운 브랜치]   feature/restaurant -> origin/feature/restaurant
+   b1f4d79..72b4bea  gun                -> origin/gun
+ * [새로운 브랜치]   lee                -> origin/lee
+ * [새로운 브랜치]   main               -> origin/main
+ * [새로운 브랜치]   revert-39-feature/members -> origin/revert-39-feature/members
+ * [새로운 브랜치]   revert-50-lee      -> origin/revert-50-lee
+ * [새로운 브랜치]   yoon               -> origin/yoon
+]0;git@ec2-user:~/repos[git@ec2-user repos]$ gt[K[Kgit pull origin dev
+https://github.com/woowsnu/Re-staurant URL에서
+ * branch            dev        -> FETCH_HEAD
+[33m힌트: Pulling without specifying how to reconcile divergent branches is[m
+[33m힌트: discouraged. You can squelch this message by running one of the following[m
+[33m힌트: commands sometime before your next pull:[m
+[33m힌트: [m
+[33m힌트:   git config pull.rebase false  # merge (the default strategy)[m
+[33m힌트:   git config pull.rebase true   # rebase[m
+[33m힌트:   git config pull.ff only       # fast-forward only[m
+[33m힌트: [m
+[33m힌트: You can replace "git config" with "git config --global" to set a default[m
+[33m힌트: preference for all repositories. You can also pass --rebase, --no-rebase,[m
+[33m힌트: or --ff-only on the command line to override the configured default per[m
+[33m힌트: invocation.[m
+힌트: 편집기가 파일을 닫기를 기다리는 중입니다... [?2004h[?1049h[22;0;0t[?1h=[?2004h[1;24r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[24;1H"~/repos/.git/MERGE_MSG" 6L, 287C[1;1HMerge branch 'dev' of https://github.com/woowsnu/Re-staurant
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
+[94m~                                                                               [8;1H~                                                                               [9;1H~                                                                               [10;1H~                                                                               [11;1H~                                                                               [12;1H~                                                                               [13;1H~                                                                               [14;1H~                                                                               [15;1H~                                                                               [16;1H~                                                                               [17;1H~                                                                               [18;1H~                                                                               [19;1H~                                                                               [20;1H~                                                                               [21;1H~                                                                               [22;1H~                                                                               [23;1H~                                                                               [1;1H[?25h[?25l[m[24;1H[K[24;1H:[?2004h[?25hwq[?25l[?2004l".git/MERGE_MSG" 6L, 287C written
+[?2004l[?1l>[?25h[?1049l[23;0;0t[KMerge made by the 'recursive' strategy.
+ .idea/workspace.xml                                |   4 [32m+[m[31m-[m
+ back/app/gradlew                                   |   0
+ .../java/com/restaurant/app/DTO/ReviewDTO.java     |  22 [32m++[m
+ .../app/controller/RestaurantLikeController.java   |   2 [32m+[m
+ .../app/controller/ReviewController.java           |   5 [32m+[m[31m-[m
+ .../restaurant/app/controller/UserController.java  |   5 [32m+[m[31m-[m
+ .../java/com/restaurant/app/model/Restaurant.java  |   7 [31m-[m
+ .../com/restaurant/app/model/RestaurantLike.java   |   2 [32m+[m[31m-[m
+ .../main/java/com/restaurant/app/model/Review.java |   4 [32m+[m[31m-[m
+ .../app/repository/RestaurantLikeRepository.java   |   9 [32m+[m[31m-[m
+ .../app/repository/RestaurantRepository.java       |   1 [31m-[m
+ .../com/restaurant/app/service/OptionsService.java |  12 [32m+[m[31m-[m
+ .../app/service/RestaurantLikeService.java         |   3 [32m+[m[31m-[m
+ .../com/restaurant/app/service/ReviewService.java  |  32 [32m+[m[31m-[m
+ back/app/src/main/resources/application.properties |   2 [32m+[m[31m-[m
+ data_crawling/createRestaurantInfo.ipynb           |   2 [32m+[m[31m-[m
+ data_crawling/review_data.csv                      | 373 [32m+++++++++++[m[31m----------[m
+ data_crawling/reviewing_bot.ipynb                  | 139 [32m+++++[m[31m---[m
+ front/Dockerfile                                   |   7 [32m+[m
+ front/src/component/Layout/Footer.module.css       |   4 [32m+[m[31m-[m
+ front/src/component/MyPage/MyReview/MyReviews.js   |  22 [32m+[m[31m-[m
+ .../component/MyPage/MyReview/MyReviews.module.css |   6 [32m+[m[31m-[m
+ front/src/component/MyPage/MyReview/ReviewEdit.js  |  71 [32m+++[m[31m-[m
+ .../MyPage/MyReview/ReviewEdit.module.css          |   1 [32m+[m
+ front/src/component/Restaurant/RestaurantDetail.js |  48 [32m++[m[31m-[m
+ front/src/component/Restaurant/RestaurantMenu.js   |   2 [32m+[m[31m-[m
+ .../component/Restaurant/RestaurantMenu.module.css |   2 [32m+[m[31m-[m
+ .../src/component/Restaurant/RestaurantProfile.js  | 133 [32m++++++[m[31m--[m
+ front/src/component/Restaurant/RestaurantReview.js | 143 [32m+++++[m[31m---[m
+ .../Restaurant/RestaurantReview.module.css         |  26 [32m+[m[31m-[m
+ front/src/component/Restaurant/ReviewListItem.js   |  34 [32m+[m[31m-[m
+ .../component/Restaurant/ReviewListItem.module.css |   1 [32m+[m
+ front/src/component/Review/ReviewWrite.js          |   4 [32m+[m[31m-[m
+ front/src/component/UI/ListCard.js                 |  26 [32m+[m[31m-[m
+ front/src/component/UI/ListCard.module.css         |  13 [32m+[m[31m-[m
+ front/src/component/UI/Map.js                      |   2 [31m-[m
+ front/src/component/UI/Pagination.js               |  36 [32m++[m
+ front/src/component/UI/Pagination.module.css       |  16 [32m+[m
+ front/src/component/UI/SmallListCard.js            |  48 [32m+++[m
+ front/src/component/UI/SmallListCard.module.css    |  54 [32m+++[m
+ front/src/index.js                                 |   3 [32m+[m[31m-[m
+ front/src/routes/HomePage.js                       |  70 [32m++[m[31m--[m
+ front/src/routes/HomePage.module.css               |  34 [32m+[m[31m-[m
+ front/src/routes/MyPage.js                         |  14 [32m+[m[31m-[m
+ front/src/routes/MyPageView.js                     |  59 [32m++++[m
+ front/src/routes/RestaurantDetailPage.js           |   4 [32m+[m[31m-[m
+ front/src/routes/RestaurantSearch.js               | 119 [32m++++[m[31m---[m
+ front/src/routes/RestaurantSearch.module.css       |   2 [32m+[m[31m-[m
+ front/src/store/res-context.js                     | 102 [32m++++[m[31m--[m
+ production/Dockerfile                              |   6 [32m+[m[31m-[m
+ production/app-0.0.1-SNAPSHOT.jar                  | Bin [31m42652555[m -> [32m42653487[m bytes
+ production/docker-compose.yml                      |  45 [32m++[m[31m-[m
+ 52 files changed, 1246 insertions(+), 535 deletions(-)
+ mode change 100644 => 100755 back/app/gradlew
+ create mode 100644 front/Dockerfile
+ create mode 100644 front/src/component/UI/Pagination.js
+ create mode 100644 front/src/component/UI/Pagination.module.css
+ create mode 100644 front/src/component/UI/SmallListCard.js
+ create mode 100644 front/src/component/UI/SmallListCard.module.css
+ create mode 100644 front/src/routes/MyPageView.js
+]0;git@ec2-user:~/repos[git@ec2-user repos]$ git log
+[?1h=[33mcommit b6027ffc889b5aa431b4e0975ac90a7297698682[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m[m
+Merge: 874661a 72b4bea[m
+Author: gun-0208 <kanggun9908@gmail.com>[m
+Date:   Wed Sep 21 05:51:23 2022 +0000[m
+[m
+    Merge branch 'dev' of https://github.com/woowsnu/Re-staurant[m
+[m
+[33mcommit 72b4beab6adddef33cf48060dd7710501f46e8dd[m[33m ([m[1;31morigin/gun[m[33m, [m[1;31morigin/dev[m[33m)[m[m
+Author: gun-0208 <kanggun9908@gmail.com>[m
+Date:   Wed Sep 21 13:06:19 2022 +0900[m
+[m
+    Feat: Docker-compose 구현완료[m
+[m
+[33mcommit 96083b58fc5333f3a0565412ad7367c744a45567[m[m
+Merge: 2959cf5 3c49371[m
+Author: moonsun <woowsnu@gmail.com>[m
+Date:   Wed Sep 21 10:36:50 2022 +0900[m
+[m
+    Merge pull request #97 from woowsnu/feature/restaurant[m
+    [m
+    Feat : 메인, 상세 페이지 수정[m
+[m
+[33mcommit 3c49371af732b21043e5b006f27bcb2d5f129267[m[33m ([m[1;31morigin/feature/restaurant[m[33m)[m[m
+:[K[K[?1l>]0;git@ec2-user:~/repos[git@ec2-user repos]$ g[Kg[Kd[Kcd[K[Kll
+합계 8
+-rw-rw-r--. 1 git git    0  9월 20 03:38 FETCH_HEAD
+-rw-rw-r--. 1 git git 3359  9월 20 03:38 README.md
+drwxrwxr-x. 5 git git   41  9월 20 03:38 [0m[38;5;33mback[0m
+drwxrwxr-x. 3 git git  161  9월 21 05:51 [38;5;33mdata_crawling[0m
+drwxrwxr-x. 4 git git  112  9월 21 05:51 [38;5;33mfront[0m
+-rw-rw-r--. 1 git git   92  9월 20 03:38 package-lock.json
+drwxrwxr-x. 2 git git   80  9월 21 05:51 [38;5;33mproduction[0m
+]0;git@ec2-user:~/repos[git@ec2-user repos]$ cd [K[K[Kcd production/
+]0;git@ec2-user:~/repos/production[git@ec2-user production]$ ls
+Dockerfile  [0m[38;5;9mapp-0.0.1-SNAPSHOT.jar[0m  docker-compose.yml
+]0;git@ec2-user:~/repos/production[git@ec2-user production]$ v[Kcat docker-compose.yml 
+version: "3"
+services: 
+  springboot-app:
+    # container_name: spring-app
+    image: springbooot-app
+    restart: always
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_DATABASE: finalproject
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: qkqh1234!
+      MYSQL_PORT: 3306
+    depends_on:
+      - mysqldb
+  mysqldb:
+    container_name: mysqldb
+    image: mysql
+    volumes:
+      - ~/mysql_db/:/var/lib/mysql
+    ports:
+      - 3307:3306
+    environment: 
+      MYSQL_DATABASE: finalproject
+      MYSQL_ROOT_PASSWORD: qkqh1234!
+
+  react-app:
+    build: ~/Desktop/front/.
+    ports:
+      - 3000:3000
+    restart: always
+
+]0;git@ec2-user:~/repos/production[git@ec2-user production]$ cd[K[Kcd ..
+]0;git@ec2-user:~/repos[git@ec2-user repos]$ d[Kdoc[K[K[Kdo[K[Kdocker ps
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json": dial unix /var/run/docker.sock: connect: permission denied
+]0;git@ec2-user:~/repos[git@ec2-user repos]$ systemc[K[K[K[K[K[K[Ksudo syst3emc[K[K[K[Kemctl status docker
+[sudo] git의 암호: 
+[?1h=[0;1;32m●[0m docker.service - Docker Application Container Engine[m
+   Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor pres[m[7m>[27m
+   Active: [0;1;32mactive (running)[0m since Wed 2022-09-21 05:49:36 UTC; 2min 40s ago[m
+     Docs: https://docs.docker.com[m
+ Main PID: 1058 (dockerd)[m
+    Tasks: 8[m
+   Memory: 117.3M[m
+   CGroup: /system.slice/docker.service[m
+           └─1058 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/contai[m[7m>[27m
+[m
+ 9월 21 05:49:34 ec2-user dockerd[1058]: time="2022-09-21T05:49:34.148349915Z" [m[7m>[27m
+ 9월 21 05:49:35 ec2-user dockerd[1058]: time="2022-09-21T05:49:35.539740807Z" [m[7m>[27m
+ 9월 21 05:49:35 ec2-user dockerd[1058]: time="2022-09-21T05:49:35.539900595Z" [m[7m>[27m
+ 9월 21 05:49:35 ec2-user dockerd[1058]: time="2022-09-21T05:49:35.540098974Z" [m[7m>[27m
+ 9월 21 05:49:36 ec2-user dockerd[1058]: time="2022-09-21T05:49:36.224351424Z" [m[7m>[27m
+ 9월 21 05:49:36 ec2-user dockerd[1058]: time="2022-09-21T05:49:36.304460608Z" [m[7m>[27m
+ 9월 21 05:49:36 ec2-user dockerd[1058]: time="2022-09-21T05:49:36.346783076Z" [m[7m>[27m
+ 9월 21 05:49:36 ec2-user dockerd[1058]: time="2022-09-21T05:49:36.346878362Z" [m[7m>[27m
+ 9월 21 05:49:36 ec2-user systemd[1]: Started Docker Application Container Engi[m[7m>[27m
+ 9월 21 05:49:36 ec2-user dockerd[1058]: time="2022-09-21T05:49:36.386095447Z" [m[7m>[27m
+[7mlines 1-20/20 (END)[27m[K[K[?1l>]0;git@ec2-user:~/repos[git@ec2-user repos]$ cd[K[Ks[Ksudo [K[K[K[K[Kwhoami
+git
+]0;git@ec2-user:~/repos[git@ec2-user repos]$ sudo [K[K[K[K[Ksudo hostnamecto[Kl e[Kset-hso[K[Kostname gu[K[Kgit
+]0;git@ec2-user:~/repos[git@ec2-user repos]$ c[Kexit
+exit
+]0;ec2-user@ec2-user:~[ec2-user@ec2-user ~]$ su git
+암호:
+]0;git@ec2-user:/home/ec2-user[git@git ec2-user]$ cd ~
+]0;git@ec2-user:~[git@git ~]$ d[Ks[Kdocker ps
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json": dial unix /var/run/docker.sock: connect: permission denied
+]0;git@ec2-user:~[git@git ~]$ sudo groupadd docker
+groupadd: 'docker' 그룹이 이미 있습니다
+]0;git@ec2-user:~[git@git ~]$ su[K[Ksudo chmod 67[K66 /var/run/docker.sock
+]0;git@ec2-user:~[git@git ~]$ d[Kdocker [K[K[K[K[K[K[Kdocker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+]0;git@ec2-user:~[git@git ~]$ do[K[Kdocker images
+REPOSITORY     TAG       IMAGE ID       CREATED        SIZE
+finalproject   latest    c208eef1d3d7   25 hours ago   697MB
+mysql          latest    43fcfca0776d   6 days ago     449MB
+openjdk        11        47a932d998b7   7 weeks ago    654MB
+]0;git@ec2-user:~[git@git ~]$ d[Kfd[K[Kdocker rmi $(docker images)
+Error response from daemon: invalid reference format: repository name must be lowercase
+Error response from daemon: invalid reference format: repository name must be lowercase
+Error response from daemon: invalid reference format: repository name must be lowercase
+Error response from daemon: invalid reference format: repository name must be lowercase
+Error response from daemon: invalid reference format: repository name must be lowercase
+Error response from daemon: invalid reference format: repository name must be lowercase
+Error response from daemon: conflict: unable to remove repository reference "finalproject" (must force) - container 3c72aa7839c2 is using its referenced image c208eef1d3d7
+Error: No such image: latest
+Error response from daemon: conflict: unable to delete c208eef1d3d7 (must be forced) - image is being used by stopped container 3c72aa7839c2
+Error: No such image: 25
+Error: No such image: hours
+Error: No such image: ago
+Error response from daemon: invalid reference format: repository name must be lowercase
+Error response from daemon: conflict: unable to remove repository reference "mysql" (must force) - container 43393da2ecda is using its referenced image 43fcfca0776d
+Error: No such image: latest
+Error response from daemon: conflict: unable to delete 43fcfca0776d (must be forced) - image is being used by stopped container 43393da2ecda
+Error: No such image: 6
+Error: No such image: days
+Error: No such image: ago
+Error response from daemon: invalid reference format: repository name must be lowercase
+Error: No such image: openjdk
+Error: No such image: 11
+Error response from daemon: conflict: unable to delete 47a932d998b7 (cannot be forced) - image has dependent child images
+Error: No such image: 7
+Error: No such image: weeks
+Error: No such image: ago
+Error response from daemon: invalid reference format: repository name must be lowercase
+]0;git@ec2-user:~[git@git ~]$ doicker[K[K[K[K[K[K[Kdocker images
+REPOSITORY     TAG       IMAGE ID       CREATED        SIZE
+finalproject   latest    c208eef1d3d7   25 hours ago   697MB
+mysql          latest    43fcfca0776d   6 days ago     449MB
+openjdk        11        47a932d998b7   7 weeks ago    654MB
+]0;git@ec2-user:~[git@git ~]$ dicke[K[K[K[K[Kdokcer ps -a[K[K[K[K[K[K[K[K[K[Kcker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS                      PORTS     NAMES
+3c72aa7839c2   finalproject   "java -jar /app/app-…"   25 hours ago   Exited (143) 21 hours ago             finalproject
+43393da2ecda   mysql          "docker-entrypoint.s…"   25 hours ago   Exited (0) 21 hours ago               mysqldb
+]0;git@ec2-user:~[git@git ~]$ docker rmi[K $(docker ps -aq)
+3c72aa7839c2
+43393da2ecda
+]0;git@ec2-user:~[git@git ~]$ dock[K[K[K[Kdocker rmi $(ㅇ[Kdocker ps -aq)
+"docker rmi" requires at least 1 argument.
+See 'docker rmi --help'.
+
+Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]
+
+Remove one or more images
+]0;git@ec2-user:~[git@git ~]$ d[Kdocker[K[K[K[K[K[Kc[Kls[K[Kpwd
+/home/git
+]0;git@ec2-user:~[git@git ~]$ c[Kcd repos/
+]0;git@ec2-user:~/repos[git@git repos]$ ls
+FETCH_HEAD  [0m[38;5;33mback[0m           [38;5;33mfront[0m              [38;5;33mproduction[0m
+README.md   [38;5;33mdata_crawling[0m  package-lock.json
+]0;git@ec2-user:~/repos[git@git repos]$ cd production/
+]0;git@ec2-user:~/repos/production[git@git production]$ ls
+Dockerfile  [0m[38;5;9mapp-0.0.1-SNAPSHOT.jar[0m  docker-compose.yml
+]0;git@ec2-user:~/repos/production[git@git production]$ d[Kdocker[K[K[K[K[K[Kd[Kd=[K[Kdoc[K[K[Kdocker [K-compose
+bash: docker-compose: command not found
+]0;git@ec2-user:~/repos/production[git@git production]$ sudo curl -L "https://github.com/docker/compose/releases/doownload/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-ccompose
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+ 17 11.6M   17 2079k    0     0  2166k      0  0:00:05 --:--:--  0:00:05 2166k 56 11.6M   56 6736k    0     0  3410k      0  0:00:03  0:00:01  0:00:02 4587k100 11.6M  100 11.6M    0     0  4287k      0  0:00:02  0:00:02 --:--:-- 5407k
+]0;git@ec2-user:~/repos/production[git@git production]$ sudo [K[K[K[K[Kls
+Dockerfile  [0m[38;5;9mapp-0.0.1-SNAPSHOT.jar[0m  docker-compose.yml
+]0;git@ec2-user:~/repos/production[git@git production]$ d[Kdo[K[Kdo[K[Ksudo chmod +x /usr.[K/local/i[Kbin/docker-compose
+]0;git@ec2-user:~/repos/production[git@git production]$ do[K[Kdocker-compose --version
+docker-compose version 1.27.4, build 40524192
+]0;git@ec2-user:~/repos/production[git@git production]$ dock[K[K[K[Kdocker [K-cmpose[K[K[K[K[Kompose up
+[31mERROR[0m: build path /home/git/Desktop/front either does not exist, is not accessible, or is not a valid URL.
+]0;git@ec2-user:~/repos/production[git@git production]$ c[Kvi[K[Kvi docker-compose.yml 
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;24r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[24;1H"docker-compose.yml" 34L, 673C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[36mversion[m[35m:[m [31m"3"[m
+[36mservices[m[35m:[m
+  [36mspringboot-app[m[35m:[m
+   [34m # container_name: spring-app[m
+    [36mimage[m[35m:[m springbooot-app
+    [36mrestart[m[35m:[m always
+    [36mbuild[m[35m:[m .
+    [36mports[m[35m:[m[9;7H[38;5;130m- [m8080:8080
+    [36menvironment[m[35m:[m[11;7H[36mMYSQL_HOST[m[35m:[m mysqldb[12;7H[36mMYSQL_DATABASE[m[35m:[m finalproject[13;7H[36mMYSQL_USER[m[35m:[m root[14;7H[36mMYSQL_ROOT_PASSWORD[m[35m:[m qkqh1234![15;7H[36mMYSQL_PORT[m[35m:[m [31m3306[m
+    [36mdepends_on[m[35m:[m[17;7H[38;5;130m- [mmysqldb
+  [36mmysqldb[m[35m:[m
+    [36mcontainer_name[m[35m:[m mysqldb
+    [36mimage[m[35m:[m mysql
+    [36mvolumes[m[35m:[m[22;7H[38;5;130m- [m~/mysql_db/:/var/lib/mysql
+    [36mports[m[35m:[m[24;63H1,1[8C꼭대기[1;1H[?25h[27m[23m[29m[m[H[2J[?25l[1;1H[1m[96mversion[m[38;5;224m:[m [95m"3"[m
+[1m[96mservices[m[38;5;224m:[m
+  [1m[96mspringboot-app[m[38;5;224m:[m
+   [96m # container_name: spring-app[m
+    [1m[96mimage[m[38;5;224m:[m springbooot-app
+    [1m[96mrestart[m[38;5;224m:[m always
+    [1m[96mbuild[m[38;5;224m:[m .
+    [1m[96mports[m[38;5;224m:[m[9;7H[93m- [m8080:8080
+    [1m[96menvironment[m[38;5;224m:[m[11;7H[1m[96mMYSQL_HOST[m[38;5;224m:[m mysqldb[12;7H[1m[96mMYSQL_DATABASE[m[38;5;224m:[m finalproject[13;7H[1m[96mMYSQL_USER[m[38;5;224m:[m root[14;7H[1m[96mMYSQL_ROOT_PASSWORD[m[38;5;224m:[m qkqh1234![15;7H[1m[96mMYSQL_PORT[m[38;5;224m:[m [95m3306[m
+    [1m[96mdepends_on[m[38;5;224m:[m[17;7H[93m- [mmysqldb
+  [1m[96mmysqldb[m[38;5;224m:[m
+    [1m[96mcontainer_name[m[38;5;224m:[m mysqldb
+    [1m[96mimage[m[38;5;224m:[m mysql
+    [1m[96mvolumes[m[38;5;224m:[m[22;7H[93m- [m~/mysql_db/:/var/lib/mysql
+    [1m[96mports[m[38;5;224m:[m[24;63H1,1[8C꼭대기"docker-compose.yml" 34L, 673C[1;1H[?25h[?25l[24;53Hi[1;1H[24;53H [1;1H[24;1H[1m-- 끼워넣기 --[m[24;15H[K[24;63H1,1[8C꼭대기[1;1H[?25h[?25l[24;63H2[2;1H[?25h[?25l[24;63H3[3;1H[?25h[?25l[24;63H4[4;1H[?25h[?25l[24;63H5[5;1H[?25h[?25l[24;63H6[6;1H[?25h[?25l[24;63H7[7;1H[?25h[?25l[24;63H8[8;1H[?25h[?25l[24;63H9[9;1H[?25h[?25l[24;63H10,1[10;1H[?25h[?25l[24;64H1[11;1H[?25h[?25l[24;64H2[12;1H[?25h[?25l[24;64H3[13;1H[?25h[?25l[24;64H4[14;1H[?25h[?25l[24;64H5[15;1H[?25h[?25l[24;64H6[16;1H[?25h[?25l[24;64H7[17;1H[?25h[?25l[24;64H8[18;1H[?25h[?25l[1;23r[23;1H
+[1;24r[23;7H[93m- [m3307:3306[24;63H[K[24;63H19,1[11C9%[18;1H[?25h[?25l[24;64H8[17;1H[?25h[?25l[24;64H7[16;1H[?25h[?25l[24;64H6[15;1H[?25h[?25l[24;64H5[14;1H[?25h[?25l[24;64H6[15;1H[?25h[?25l[24;64H7[16;1H[?25h[?25l[24;64H8[17;1H[?25h[?25l[24;64H9[18;1H[?25h[?25l[1;23r[23;1H
+[1;24r[23;5H[1m[96menvironment[m[38;5;224m:[m[24;63H[K[24;63H20,1[10C18%[18;1H[?25h[?25l[1;23r[23;1H
+[1;24r[23;7H[1m[96mMYSQL_DATABASE[m[38;5;224m:[m finalproject[24;63H[K[24;63H21,1[10C27%[18;1H[?25h[?25l[1;23r[23;1H
+[1;24r[23;7H[1m[96mMYSQL_ROOT_PASSWORD[m[38;5;224m:[m qkqh1234![24;63H[K[24;63H22,1[10C36%[18;1H[?25h[?25l[1;23r[23;1H
+[1;24r[24;63H[K[24;63H23,1[10C45%[18;1H[?25h[?25l[1;23r[23;1H
+[1;24r[23;3H[1m[96mreact-app[m[38;5;224m:[m[24;63H[K[24;63H24,1[10C54%[18;1H[?25h[?25l[1;23r[23;1H
+[1;24r[23;5H[1m[96mbuild[m[38;5;224m:[m ~/Desktop/front/.[24;63H[K[24;63H25,1[10C63%[18;1H[?25h[?25l[1;23r[23;1H
+[1;24r[23;5H[1m[96mports[m[38;5;224m:[m[24;63H[K[24;63H26,1[10C72%[18;1H[?25h[?25l[1;23r[23;1H
+[1;24r[23;7H[93m- [m3000:3000[24;63H[K[24;63H27,1[10C81%[18;1H[?25h[?25l[1;23r[23;1H
+[1;24r[23;5H[1m[96mrestart[m[38;5;224m:[m always[24;63H[K[24;63H28,1[10C90%[18;1H[?25h[?25l[1;23r[23;1H
+[1;24r[24;63H[K[24;63H29,1[9C바닥[18;1H[?25h[?25l[24;63H30[19;1H[?25h[?25l[24;64H1[20;1H[?25h[?25l[24;66H2[20;2H[?25h[?25l[24;64H0[19;2H[?25h[?25l[24;64H1[20;2H[?25h[?25l[24;66H3[20;3H[?25h[?25l[24;64H0[19;3H[?25h[?25l[24;66H4[19;4H[?25h[?25l[24;66H5[19;5H[?25h[?25l[24;66H6[19;6H[?25h[?25l[24;66H7[19;7H[?25h[?25l[24;66H8[19;8H[?25h[?25l[24;66H9[19;9H[?25h[?25l[24;66H10[19;10H[?25h[?25l[24;67H1[19;11H[?25h[?25l[24;67H2[19;12H[?25h[?25l[24;67H3[19;13H[?25h[?25l[24;67H4[19;14H[?25h[?25l[24;67H5[19;15H[?25h[?25l[24;67H6[19;16H[?25h[?25l[24;67H7[19;17H[?25h[?25l[24;67H8[19;18H[?25h[?25l[24;67H9[19;19H[?25h[?25l[24;66H20[19;20H[?25h[?25l[24;67H1[19;21H[?25h[?25l/front/.[19;28H[K[24;67H0[19;20H[?25h[?25l/front/.[19;27H[K[24;66H19[19;19H[?25h[?25l/front/.[19;26H[K[24;67H8[19;18H[?25h[?25l/front/.[19;25H[K[24;67H7[19;17H[?25h[?25l/front/.[19;24H[K[24;67H6[19;16H[?25h[?25l/front/.[19;23H[K[24;67H5[19;15H[?25h[?25l/front/.[19;22H[K[24;67H4[19;14H[?25h[?25lr/front/.[24;67H5[19;15H[?25h[?25le/front/.[24;67H6[19;16H[?25h[?25ls/front/.[24;67H7[19;17H[?25h[?25l/front/.[19;24H[K[24;67H6[19;16H[?25h[?25lp/front/.[24;67H7[19;17H[?25h[?25l0/front/.[24;67H8[19;18H[?25h[?25lo/front/.[24;67H9[19;19H[?25h[?25ls/front/.[24;66H20[19;20H[?25h[?25l/front/.[19;27H[K[24;66H19[19;19H[?25h[?25l/front/.[19;26H[K[24;67H8[19;18H[?25h[?25l/front/.[19;25H[K[24;67H7[19;17H[?25h[?25lo/front/.[24;67H8[19;18H[?25h[?25ls/front/.[24;67H9[19;19H[?25h[?25l[24;66H20[19;20H[?25h[?25l[24;67H1[19;21H[?25h[?25l[24;67H2[19;22H[?25h[?25l[24;67H3[19;23H[?25h[?25l[24;67H4[19;24H[?25h[?25l[24;67H3[19;23H[?25h[?25l[24;67H2[19;22H[?25h[?25l[24;67H1[19;21H[?25h[?25l[24;67H0[19;20H[?25h[24;1H[K[19;19H[?25l[24;53H^[[19;19H[24;53H  [19;20H[24;63H30,19[8C바닥[19;19H[?25h[?25l[24;53H:[19;19H[24;53H[K[24;1H:[?2004h[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"docker-compose.yml" 34L, 671C 저장 했습니다
+[?2004l[?1l>[?25h[?1049l[23;0;0t]0;git@ec2-user:~/repos/production[git@git production]$ c[Kcd ~
+]0;git@ec2-user:~[git@git ~]$ ls[K[K
+]0;git@ec2-user:~[git@git ~]$ ls
+[0m[38;5;33mmysql_db[0m  [38;5;33mrepos[0m
+]0;git@ec2-user:~[git@git ~]$ 
+]0;git@ec2-user:~[git@git ~]$ 
+]0;git@ec2-user:~[git@git ~]$ c[Kcd[K
+bash: c: command not found
+]0;git@ec2-user:~[git@git ~]$ cd
+]0;git@ec2-user:~[git@git ~]$ 
+]0;git@ec2-user:~[git@git ~]$ 
+]0;git@ec2-user:~[git@git ~]$ 
+]0;git@ec2-user:~[git@git ~]$ 

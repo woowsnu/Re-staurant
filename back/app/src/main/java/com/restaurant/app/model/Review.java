@@ -24,7 +24,7 @@ public class Review implements Serializable {
     @Column(name="review_content")
     private String reviewContent;
 
-    @Column(name="review_image")
+    @Column(name="review_image",columnDefinition = "TEXT")
     private String reviewImage;
 
     @Column(name="review_tag")
