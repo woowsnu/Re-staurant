@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes} from "react-router-dom";
 import AuthPage from "./routes/AuthPage";
 import LogIn from "./component/Auth/LogIn";
 import MyPage from "./routes/MyPage";
+import MyPageView from "./routes/MyPageView";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import ProtectedRoutesAuth from "./routes/ProtectedRoutesAuth";
 import RestaurantDetailPage from "./routes/RestaurantDetailPage";
@@ -23,7 +24,7 @@ root.render(
         <Route path="/admin" element={<Admin />} />
         <Route path="/search/:id" element={<RestaurantSearch />} />
         <Route path="/detail/:id" element={<RestaurantDetailPage />} />
-        <Route path="/mypage/:nickName" element={<MyPage />} />
+        <Route path="/mypage/:nickName" element={<MyPageView />} />
         <Route element={<ProtectedRoutesAuth />}>
           <Route path="/login" element={<LogIn />} />
           <Route path="/members" element={<AuthPage />} />

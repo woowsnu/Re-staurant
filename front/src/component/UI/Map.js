@@ -5,7 +5,6 @@ const { kakao } = window;
 
 const Map = (props) => {
 const {lat, lng} = props.position;
-console.log(props.position)
   useEffect(() => {
     let container = document.getElementById('map');
 
@@ -26,7 +25,6 @@ console.log(props.position)
       });
   
       marker.setMap(map);
-    console.log('loading kakaomap');
   }, [lat, lng]);
 
   return (
