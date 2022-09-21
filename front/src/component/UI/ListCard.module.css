@@ -1,9 +1,15 @@
 .wrapper {
     width : 90%;
-    height: 250px;
+    height: auto;
+    padding: 1.3rem 0 1.8rem 0;
     margin: auto;
     display: flex;
     align-items: center;
+    border-bottom: 1px dotted #dddd;
+}
+
+.wrapper:hover {
+    background-color: #f6f6f6;
 }
 
 .description {
@@ -51,4 +57,9 @@
 
 .detail2 {
     font-size: 0.8rem;
+}
+
+.rating {
+    font-size: 12px;
+    font-weight: 500;
 }

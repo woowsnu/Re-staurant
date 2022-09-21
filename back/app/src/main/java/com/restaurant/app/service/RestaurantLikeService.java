@@ -25,9 +25,10 @@ public class RestaurantLikeService {
     @Autowired
     private final RestaurantLikeRepository restaurantLikeRepository;
 
-
     @Transactional
     public List<RestaurantLike> findAll() {return restaurantLikeRepository.findAll(); }
+
+
 
     public List<RestaurantLike> save(User authedUser, RestaurantLikeDTO restaurantLikeDTO ) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(restaurantLikeDTO.getBusId());

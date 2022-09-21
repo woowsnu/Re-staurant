@@ -10,6 +10,7 @@ const MyReviews = (props) => {
   const [reviewIndex, setReviewIndex] = useState("");
   const [reviewTitle, setReviewTitle] = useState("");
   const [reviewContent, setReviewContent] = useState("");
+  const [revisit, setRevisit] = useState("");
 
   const reviewEditOpenHandler = () => {
     setReviewEdit(true);
@@ -30,33 +31,26 @@ const MyReviews = (props) => {
   };
 
   const review = props.user.reviewList;
-
+  console.log(review);
   return (
     <>
       <h3 className={styles.reviewCount}>
         작성한 리뷰가 {review.length}개 있어요
       </h3>
       <div className={styles.container}>
-        <ul className={styles.reviewwrap}>
-          <li className={styles.reviewwrap}>
-            {/* <ul className={styles.imageul}>
-              {props.user.review[0].img.map((img) => (
-                <li className={styles.imagelist} key={img.id}>
-                  <img className={styles.img} src={img.url} />
-                </li>
-              ))}
-            </ul> */}
             {review.map((data) => (
               <>
                 <div className={styles.reviewCard}>
                   <span className={styles.editbuttons}>
-                    <div className={styles.resTitle}>레스토랑 이름</div>
+                    <div className={styles.resTitle}>{data.restaurantName}</div>
                     <div className={styles.editbutton}>
                       <Button
                         onClick={() => {
                           setReviewIndex(data.reviewIndex);
                           setReviewTitle(data.reviewTitle);
                           setReviewContent(data.reviewContent);
+                          setRevisit(data.revisit);
+
                           reviewEditOpenHandler();
                         }}
                         style={{ marginRight: "6px" }}
@@ -79,6 +73,10 @@ const MyReviews = (props) => {
                     </div>
                     {data.reviewContent}
                   </div>
+                  { data.reviewImage === "" ? "" :
+                  <div>
+                    <img src={data.reviewImage} className={styles.img} />
+                  </div> }
                 </div>
                 <div className={styles.blank}>{""}</div>
               </>
@@ -103,8 +101,6 @@ const MyReviews = (props) => {
             ) : (
               ""
             )}
-          </li>
-        </ul>
       </div>
     </>
   );

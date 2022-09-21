@@ -22,11 +22,11 @@ const MyPage = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    const profile = { "email" : localStorage.getItem("email") };
-    console.log(profile)
+    const profile = { email: localStorage.getItem("email") };
+
     instance
       .post("/user/auth/userInfo", JSON.stringify(profile), {
-        headers: { "Content-Type": "application/json", Authorization: token },
+        headers: { "Content-Type": "application/json", Authorization: token, },
       })
       .then((response) => {
         console.log(response);
@@ -35,12 +35,14 @@ const MyPage = () => {
         setDatafetch(true);
       })
       .catch((error) => {
-        ctx.onLogout();
-        alert("로그인 세션이 만료되었습니다.");
-        navigate("/login");
+        // ctx.onLogout();
+        // alert("로그인 세션이 만료되었습니다.");
+        // navigate("/login");
         console.log(error);
       });
   }, [isUpdated]);
+
+  console.log(user);
 
   return (
     datafetch && (

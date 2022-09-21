@@ -66,7 +66,7 @@ const RestaurantDetail = () => {
       <RestaurantProfile restaurant={restaurant} reviews={reviews} bookmarkIndex={bookmarkIndex} isMarked={isMarked} isMarkedHandler={isMarkedHandler}/>
       <RestaurantTab reviewCount={reviews.length} />
       <div className='detail'>
-        <RestaurantInfo restaurant={restaurant} options={options} />
+        {/* <RestaurantInfo restaurant={restaurant} options={options}/> */}
         <RestaurantMenu menus={menus} />
         <RestaurantReview restaurant={restaurant} reviews={reviews} />
       </div>
