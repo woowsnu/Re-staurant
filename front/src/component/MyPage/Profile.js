@@ -7,6 +7,7 @@ import AuthContext from "../../store/auth-context";
 import Button from "../UI/Button";
 import EditUserInfo from "./EditUserInfo/EditUserInfo";
 import Logobar from "../Layout/Logobar";
+import FollowPage from "./Follow/FollowPage";
 
 const Profile = (props) => {
   const ctx = useContext(AuthContext);
@@ -16,6 +17,7 @@ const Profile = (props) => {
   );
   const [editProfilePic, setEditProfilePic] = useState(false);
   const [editProfileInfo, setEditProfileInfo] = useState(false);
+  const [showFollow, setShowFollow] = useState(false);
 
   const profilePicUplaod = () => {
     setEditProfilePic(true);
@@ -23,6 +25,10 @@ const Profile = (props) => {
 
   const editUserInfo = () => {
     setEditProfileInfo(true);
+  };
+
+  const showFollowList = () => {
+    setShowFollow(true);
   };
 
   const logout = () => {
@@ -49,16 +55,30 @@ const Profile = (props) => {
         <div className={styles.userInfo}>
           <div className={styles.nickname}>{props.user.nickname}</div>(
           {props.user.email})
-          <div className={styles.followInfo}>
-            팔로워 51 &nbsp; &nbsp; 팔로잉 244
+          <div className={styles.followInfo} onClick={showFollowList}>
+            팔로워 {props.user.followerList.length} &nbsp; &nbsp; 팔로잉{" "}
+            {props.user.followingList.length}
           </div>
         </div>
       </div>
       <div className={styles.mypageButtons}>
-        <Button onClick={profilePicUplaod} photoUpdate={()=>setProfileimg()}>사진 등록</Button>&nbsp;&nbsp;
+        <Button onClick={profilePicUplaod} photoUpdate={() => setProfileimg()}>
+          사진 등록
+        </Button>
+        &nbsp;&nbsp;
         <Button onClick={editUserInfo}>회원정보 수정</Button>
       </div>
       <div className={styles.grayline}>&nbsp;</div>
+      {showFollow ? (
+        <FollowPage
+          data={props.user}
+          closeModal={() => {
+            setShowFollow(false);
+          }}
+        />
+      ) : (
+        ""
+      )}
       {editProfilePic ? (
         <UploadProfilePic
           id={props.user.userIndex}

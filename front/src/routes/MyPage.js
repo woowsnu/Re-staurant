@@ -35,14 +35,13 @@ const MyPage = () => {
         setDatafetch(true);
       })
       .catch((error) => {
-        // ctx.onLogout();
-        // alert("로그인 세션이 만료되었습니다.");
-        // navigate("/login");
+        ctx.onLogout();
+        alert("로그인 세션이 만료되었습니다.");
+        navigate("/login");
         console.log(error);
       });
   }, [isUpdated]);
 
-  console.log(user);
 
   return (
     datafetch && (
