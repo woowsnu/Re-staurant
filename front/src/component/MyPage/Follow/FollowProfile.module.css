@@ -1,26 +1,11 @@
-.pageTop {
-  display: flex;
-  justify-content: space-between;
-  padding: 1.5rem 2rem 3rem 2rem;
-}
-
-.pageTitle {
-  font-size: 1.6rem;
-  font-weight: 700;
+.profile {
+  padding-top: 3rem;
+  border-top: #EEEEEE solid;
 }
 
 .profileImage {
   display: flex;
   padding-left: 3rem;
-}
-
-.logoutButton {
-  align-items: right;
-  text-align: right;
-  font: inherit;
-  border: none;
-  background-color: white;
-  cursor: pointer;
 }
 
 .mypageButtons {
@@ -50,7 +35,6 @@
 
 .followInfo {
   padding-top: 1.5rem;
-  cursor: pointer;
 }
 
 .nickname {
@@ -67,21 +51,5 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-  .pageTitle {
-    font-size: 1.6rem;
-    font-weight: 700;
-    width: 400px;
-  }
-  .logoutButton {
-    border: #dddd solid;
-    text-align: center;
-    width: 100px;
-    margin-top: 1rem;
-    background-color: rgba(51, 51, 51, 0.05);
-    border-radius: 8px;
-    border-width: 0;
-    padding-top: 0.8rem;
-    padding-bottom: 0.8rem;
   }
 }

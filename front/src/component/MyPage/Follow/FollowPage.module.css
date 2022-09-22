@@ -1,0 +1,63 @@
+.wrapper {
+    padding: 1rem 1rem 1rem 1rem;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+}
+
+.nickname {
+    padding-left: 50%;
+    display: inline-block;
+    padding: 0;
+    margin-right: 40%;
+}
+
+.tabbar {
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.tabbar button {
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    padding: 0.2rem 1rem 0.2rem 1rem;
+    width: 100%;
+    font-size: 15px;
+}
+
+.tab {
+    background-color: inherit;
+    font-weight: 600;
+}
+
+.tabactive {
+    background-color: white;
+    color : #51B059;
+    border-bottom: 0.1rem solid #51B059;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 680px) {
+    .tabbar {
+        margin: 0;
+        list-style: none;
+        display: flex;
+        max-width: 680px;
+    }
+
+    .tabbar button {
+        border: none;
+        cursor: pointer;
+        margin-top: 1rem;
+        padding: 0.2rem 1rem 0.2rem 1rem;
+        width: 100%;
+        font-size: 15px;
+    }
+    
+  }  

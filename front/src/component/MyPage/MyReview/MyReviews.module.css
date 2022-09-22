@@ -14,8 +14,21 @@
   padding: 2rem 2rem 2rem 2rem;
 }
 
+.revisit {
+  font-size: 1.1rem;
+  padding-top: 0.7rem;
+  font-weight: 600;
+  color: #51B059;
+}
+
+.date {
+ padding-top: 0.8rem;
+ font-size: 0.8rem;
+}
+
 .editbuttons {
   display: flex;
+  align-content: center;
   justify-content: space-between;
 }
 
@@ -27,6 +40,12 @@
   font-size: 1.3rem;
   font-weight: 600;
   padding: 1rem 1rem 1rem 0rem;
+}
+
+.resTitle span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 1rem 1rem 1rem 1rem;
 }
 
 .contents {
@@ -67,7 +86,6 @@
   font-weight: 600;
   padding-top: 0.6rem;
   padding-bottom: 1rem;
-  color: #51B059;
 }
 
 .reviews {
