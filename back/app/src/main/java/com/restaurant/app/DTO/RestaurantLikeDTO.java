@@ -31,6 +31,7 @@ public class RestaurantLikeDTO {
         this.restaurantName = restaurantLike.getRestaurant().getRestaurantName();
         this.email = restaurantLike.getUser().getEmail();
         this.nickname = restaurantLike.getUser().getNickname();
+        this.restaurantIndex = restaurantLike.getRestaurant().getRestaurantIndex();
 
     }
 
