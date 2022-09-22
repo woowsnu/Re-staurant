@@ -50,6 +50,7 @@
 
 .followInfo {
   padding-top: 1.5rem;
+  cursor: pointer;
 }
 
 .nickname {

@@ -67,3 +67,23 @@
 .loginInfo a {
     text-decoration: underline;
 }
+
+@media screen and (max-width: 680px) {
+    .container {
+        display: flex;
+        justify-content: center;
+        max-width: 100vw;
+    }
+    
+    .wrapper {
+        height: 100%;
+        height: 100vh;
+        margin-top: 4rem;
+    }
+
+    .content {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+}
