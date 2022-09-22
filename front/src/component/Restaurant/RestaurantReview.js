@@ -104,7 +104,7 @@ const RestaurantReview = (props) => {
         <button onClick={otherReviewHandler}>타사 리뷰</button>
       </div>
       {reviewTag && (
-        <div>
+        <div className={styles.revisit}>
           <p>리스토랑 재방문율</p>
           {props.reviews?.length >= 10 ? (
             <ChartBar
@@ -112,7 +112,7 @@ const RestaurantReview = (props) => {
               reviewCount={ourReview.length}
             />
           ) : (
-            <div>재방문률은 리뷰 10개 이상일 시 노출됩니다.</div>
+            <p className={styles.nochart}>재방문률은 리뷰 10개 이상일 시 노출됩니다.</p>
           )}
           {ourReview.map((review, i) => (
             <ReviewListItem key={i} review={review} />
