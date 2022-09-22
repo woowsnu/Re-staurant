@@ -1,5 +1,5 @@
 version: "3"
-services: 
+services:
   springboot-app:
     container_name: springboot-app
     image: springboot-app
@@ -8,7 +8,7 @@ services:
     ports:
       - 8080:8080
     networks:
-      - backend-network
+      - backend-network      
       - frontend-network
     environment:
       MYSQL_HOST: mysqldb
@@ -25,9 +25,12 @@ services:
       - ~/mysql_db/:/var/lib/mysql
     ports:
       - 3307:3306
-    environment: 
+    environment:
       MYSQL_DATABASE: finalproject
       MYSQL_ROOT_PASSWORD: qkqh1234!
+    networks:
+      - backend-network
+      - db-network
 
   react-app:
     container_name: react-app
@@ -37,7 +40,8 @@ services:
     ports:
       - 3000:3000
     restart: always
-    
+
 networks:
   backend-network:
   frontend-network:
+  db-network:
