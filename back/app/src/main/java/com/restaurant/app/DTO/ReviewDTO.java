@@ -31,6 +31,8 @@ public class ReviewDTO {
 
     private String restaurantName;
 
+    private LocalDateTime modifiedDate;
+
 
 
     public ReviewDTO(Review review) {
@@ -46,9 +48,11 @@ public class ReviewDTO {
         this.revisit = review.getRevisit();
         this.tag = review.getTag();
 
+
         this.busId = review.getRestaurant().getBusId();
 
         this.createDate = review.getCreateDate();
+        this.modifiedDate = review.getModifiedDate();
 
         this.restaurantName = review.getRestaurant().getRestaurantName();
 
