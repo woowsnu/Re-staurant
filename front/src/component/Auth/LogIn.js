@@ -1,14 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { instance } from "../../api/axios";
 import AuthContext from "../../store/auth-context";
-import { useContext } from "react";
 import styles from "./SignUp.module.css";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
 import Logobar from "../Layout/Logobar";
 
-const LogIn = (props) => {
+const LogIn = () => {
   let navigate = useNavigate();
   const ctx = useContext(AuthContext);
 

@@ -34,22 +34,22 @@ const EditPassword = (props) => {
     e.preventDefault();
     const profile = { password: newPassword };
     if (newPassword === newPasswordCheck) {
-    instance
-      .put('/user/auth/update/password', JSON.stringify(profile), {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        setNewPassword("");
-        setNewPasswordCheck("");
-        setWarning("비밀번호 변경 완료!")
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      instance
+        .put("/user/auth/update/password", JSON.stringify(profile), {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          setNewPassword("");
+          setNewPasswordCheck("");
+          setWarning("비밀번호 변경 완료!");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
     if (newPassword !== newPasswordCheck) {
       setWarning("비밀번호가 일치하지 않습니다");
@@ -78,7 +78,9 @@ const EditPassword = (props) => {
         />
       </div>
       <div className={styles.buttonArea}>
-        <Button onClick={handleSubmit} style={{"marginRight" : "6px"}}>저장하기</Button>
+        <Button onClick={handleSubmit} style={{ marginRight: "6px" }}>
+          저장하기
+        </Button>
         <Button onClick={exitPasswordChangeMode}>닫기</Button>
       </div>
     </div>

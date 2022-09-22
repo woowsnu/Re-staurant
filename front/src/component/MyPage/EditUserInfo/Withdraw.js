@@ -35,7 +35,7 @@ const Withdraw = (props) => {
     //     console.log(err);
     //   });
 
-    await fetch("http://localhost:8080/user/auth/deleteUserInfo", {
+    await fetch("http://spring-app:8080/user/auth/deleteUserInfo", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

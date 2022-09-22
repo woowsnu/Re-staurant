@@ -22,6 +22,8 @@ public class RestaurantLikeDTO {
 
     private String nickname;
 
+    private Long restaurantIndex;
+
 
     public RestaurantLikeDTO(RestaurantLike restaurantLike){
         this.LikeIndex = restaurantLike.getLikeIndex();
