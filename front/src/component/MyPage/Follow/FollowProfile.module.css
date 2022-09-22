@@ -1,0 +1,55 @@
+.profile {
+  padding-top: 3rem;
+  border-top: #EEEEEE solid;
+}
+
+.profileImage {
+  display: flex;
+  padding-left: 3rem;
+}
+
+.mypageButtons {
+  padding: 1rem 2rem 1rem 1rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.mypageButtons button {
+  width: 70%;
+}
+
+.mypageButtons button:hover {
+  background-color: #51b059;
+  color: white;
+}
+
+.grayline {
+  font-size: 0.5rem;
+  background-color: #eeeeee;
+  margin-bottom: 1rem;
+}
+
+.userInfo {
+  padding: 1rem 0 1rem 2rem;
+}
+
+.followInfo {
+  padding-top: 1.5rem;
+}
+
+.nickname {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 680px) {
+  .pageTop {
+    display: flex;
+    flex-direction: column;
+  }
+  .mypageButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
