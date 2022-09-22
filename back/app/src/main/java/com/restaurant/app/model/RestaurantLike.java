@@ -1,5 +1,6 @@
 package com.restaurant.app.model;
 
+import com.restaurant.app.DTO.RestaurantLikeDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class RestaurantLike implements Serializable {
     public String toString(){
         return "{ likeIndex : " + likeIndex + ", userEmail :" + user.getEmail() + "userNickName" + user.getNickname() +"}";
     }
+
 
 
 }

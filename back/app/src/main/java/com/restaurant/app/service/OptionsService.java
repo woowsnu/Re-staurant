@@ -78,17 +78,9 @@ public class OptionsService {
             throw new RuntimeException("invalid options");
         }
 
-        Options options = Options.builder()
-                .optionIndex(optionsDTO.getOptionIndex())
-                .optionId(optionsDTO.getOptionId())
-                .optionName(optionsDTO.getOptionName())
-                .isCheck(optionsDTO.getIsCheck())
-                .orderCount(optionsDTO.getOrderCount())
-                .iconUrl(optionsDTO.getIconUrl())
-                .restaurant(restaurant)
-                .build();
 
-        optionsRepository.save(options);
+
+//        optionsRepository.save(options);
     }
 
 //    @Override
