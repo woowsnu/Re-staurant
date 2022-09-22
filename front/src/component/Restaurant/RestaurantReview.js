@@ -23,7 +23,6 @@ const RestaurantReview = (props) => {
   const ourReview = props.reviews?.filter((el) => el.tag === 1);
   const ourReviewRevisit = ourReview?.filter((el) => el.revisit === 1);
   const otherReview = props.reviews?.filter((el) => el.tag === 0);
-  console.log(ourReview);
 
   const [reviewTag, setReviewTag] = useState(true);
 
@@ -115,15 +114,15 @@ const RestaurantReview = (props) => {
           ) : (
             <div>재방문률은 리뷰 10개 이상일 시 노출됩니다.</div>
           )}
-          {ourReview.map((review) => (
-            <ReviewListItem key={review.reveiwIndex} review={review} />
+          {ourReview.map((review, i) => (
+            <ReviewListItem key={i} review={review} />
           ))}
         </div>
       )}
       {!reviewTag && (
         <div>
-          {otherReview.map((review) => (
-            <ReviewListItem key={review.reveiwIndex} review={review} />
+          {otherReview.map((review, i) => (
+            <ReviewListItem key={i} review={review} />
           ))}
         </div>
       )}
