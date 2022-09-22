@@ -17,12 +17,11 @@ const EditNickname = (props) => {
   };
 
   const token = localStorage.getItem("accessToken");
-  const URL = "http://localhost:8080/user/auth/update/nickname";
   const nicknameChangeSubmit = (e) => {
     e.preventDefault();
     const profile = { nickname: nickname };
     instance
-      .put(URL, JSON.stringify(profile), {
+      .put("/user/auth/update/nickname", JSON.stringify(profile), {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
