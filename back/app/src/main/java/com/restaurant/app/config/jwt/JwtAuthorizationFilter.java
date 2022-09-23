@@ -2,6 +2,7 @@ package com.restaurant.app.config.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.restaurant.app.config.auth.PrincipalDetails;
 import com.restaurant.app.model.User;
 import com.restaurant.app.repository.UserRepository;
@@ -16,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
@@ -28,19 +30,33 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+<<<<<<< HEAD
         System.out.println("인증이 필요함.");
 
         String jwtHeader = request.getHeader("Authorization");
         System.out.println("jwtHeader" + jwtHeader);
 
         if(jwtHeader == null || !jwtHeader.startsWith("Bearer")) {
+=======
+        String accessHeader = request.getHeader("Authorization");
+//        System.out.println("jwtHeader : " + jwtHeader);
+
+        if(accessHeader == null || !accessHeader.startsWith("Bearer")) {
+>>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
             chain.doFilter(request,response);
             return;
         }
 
-        String jwtToken = request.getHeader("Authorization").replace("Bearer ","");
+        String accessToken = request.getHeader("Authorization").replace("Bearer ","");
 
+<<<<<<< HEAD
         String username = JWT.require(Algorithm.HMAC512("gun_secret")).build().verify(jwtToken).getClaim("username").asString();
+=======
+        try{
+
+        String userEmail = JWT.require(Algorithm.HMAC512("gun_secret")).build().verify(accessToken).getClaim("email").asString();
+        System.out.println(userEmail);
+>>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
 
         if (username!=null) {
             System.out.println("username : "+ username);
@@ -50,8 +66,58 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(principalDetails,null,principalDetails.getAuthorities());
 
+<<<<<<< HEAD
             SecurityContextHolder.getContext().setAuthentication(authentication);
             response.setHeader("username",userEntity.getUsername());
+=======
+                Authentication authentication = new UsernamePasswordAuthenticationToken(principalDetails.getUser(),null,principalDetails.getAuthorities());
+
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                chain.doFilter(request,response);
+            }
+
+        }
+        catch(TokenExpiredException e) {
+
+            User userEntity = userRepository.findUserByAccessToken(accessToken);
+            System.out.println(userEntity);
+
+
+            try {
+                // 만료된 accesToken이 이전에 발급해서 DB에 저장한 accessToken과 일치하는지 확인.
+                // 일치하고, refreshToken이 만료 안됐으면 accessToken 재발급.
+//                if (userEntity.getAccessToken() != accessToken) {
+//                    throw new Exception();
+//                }
+
+                String userEmail = JWT.require(Algorithm.HMAC512("gun_secret")).build().verify(userEntity.getRefreshToken()).getClaim("email").asString();
+
+                System.out.println("refreshed :" + userEmail);
+
+                String refreshedAccessToken = JWT.create()
+                        .withSubject(userEntity.getEmail())
+                        .withExpiresAt(new Date(System.currentTimeMillis() + (60000 * 1)))
+                        .withClaim("userIndex", userEntity.getUserIndex())
+                        .withClaim("email", userEntity.getEmail())
+                        .sign(Algorithm.HMAC512("gun_secret"));
+
+                userEntity.setAccessToken(refreshedAccessToken);
+
+                // refreshedAccessToken 저장
+                userRepository.save(userEntity);
+
+                // refreshedAccessToken 반환
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Bearer " + refreshedAccessToken);
+
+            } catch (TokenExpiredException re) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "refresh/accessToken이 모두 만료되었습니다. 재 로그인해주세요.");
+            } catch (Exception ex) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "invalid Token");
+            }
+        }
+        catch (Exception e) {
+            logger.error(e.getMessage());
+>>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
             chain.doFilter(request,response);
         }
     }

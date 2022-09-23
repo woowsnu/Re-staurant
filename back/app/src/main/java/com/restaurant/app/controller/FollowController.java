@@ -74,4 +74,8 @@ public class FollowController {
 
         return ResponseEntity.ok().body(followedDTOList);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33

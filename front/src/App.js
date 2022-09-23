@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+<<<<<<< HEAD
 
 function App() {
   return (
@@ -18,6 +19,17 @@ function App() {
           Learn React
         </a>
       </header>
+=======
+import HomePage from './routes/HomePage';
+import { ResContextProvider } from './store/res-context';
+
+function App() {
+  return (
+    <div className='App'>
+      <ResContextProvider>
+        <HomePage />
+      </ResContextProvider>
+>>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
     </div>
   );
 }
