@@ -6,6 +6,7 @@ import Button from '../UI/Button';
 import ChartBar from './Chart/ChartBar';
 import styles from './RestaurantReview.module.css';
 import defaultImg from '../../assets/images/restaurant_default_img.jpg';
+import Pagination from '../UI/Pagination';
 
 const RestaurantReview = (props) => {
   const isLogin = localStorage.getItem('isLoggedIn');
@@ -19,10 +20,15 @@ const RestaurantReview = (props) => {
     authorCount,
     ...others
   } = props.restaurant;
+  const [limit, setLimit] = useState(7);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
   const ourReview = props.reviews?.filter((el) => el.tag === 1);
   const ourReviewRevisit = ourReview?.filter((el) => el.revisit === 1);
   const otherReview = props.reviews?.filter((el) => el.tag === 0);
+
+  console.log(ourReview.sort());
 
   const [currentTab, setCurrentTab] = useState(0);
 
@@ -94,8 +100,18 @@ const RestaurantReview = (props) => {
         </div>
       </div>
       <ul className={styles.visitbtn}>
-        <li onClick={()=>tabHandler(0)} className={currentTab === 0 ? styles.tabsClicked : styles.tab}>RE:STAURANT 리뷰 ({props.reviews.length})</li>
-        <li onClick={()=>tabHandler(1)} className={currentTab === 1 ? styles.tabsClicked : styles.tab}>타사 리뷰</li>
+        <li
+          onClick={() => tabHandler(0)}
+          className={currentTab === 0 ? styles.tabsClicked : styles.tab}
+        >
+          RE:STAURANT 리뷰 ({props.reviews.length})
+        </li>
+        <li
+          onClick={() => tabHandler(1)}
+          className={currentTab === 1 ? styles.tabsClicked : styles.tab}
+        >
+          타사 리뷰
+        </li>
       </ul>
       {currentTab === 0 && (
         <div className={styles.revisit}>
@@ -121,9 +137,17 @@ const RestaurantReview = (props) => {
               </Link>
             </div>
           )}
-          {ourReview.map((review, i) => (
+          <div>
+          {ourReview.slice(offset, offset + limit).map((review, i) => (
             <ReviewListItem key={i} review={review} />
           ))}
+          <Pagination
+        total={ourReview.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
+          </div>
         </div>
       )}
       {currentTab === 1 && (

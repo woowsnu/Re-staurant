@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ChartBar from './Chart/ChartBar';
 import { instance } from '../../api/axios';
 import styles from './RestaurantProfile.module.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ImageSlider from '../UI/ImageSlider';
 import {
   FaBookmark,
@@ -29,9 +29,10 @@ const DUMMY_IMAGE = [
 
 const RestaurantProfile = (props) => {
   const userEmail = localStorage.getItem('email');
-  console.log(userEmail)
   const token = localStorage.getItem('accessToken');
+  const isLogin = !!token;
   const bizId = useParams().id;
+  const navigate = useNavigate();
   const [images, setImages] = useState(DUMMY_IMAGE);
   const [bookmark, setBookmark] = useState([]);
   const [editMark, setEditMark] = useState(false);
@@ -64,9 +65,17 @@ const RestaurantProfile = (props) => {
 
   //북마크 추가
   const createBookmarkHandler = async () => {
+    if (!isLogin){
+      alert('로그인 후 이용 가능합니다.')
+      navigate('/login')
+      return;
+    }
+    const bookmarkData = {
+      busId: bizId,
+      email: userEmail
+    }
     const { data } = await instance.post(
-      `/restaurant/createLike/auth`,
-      { busId: props.restaurant.busId },
+      `/restaurant/createLike/auth`, bookmarkData,
       {
         headers: {
           'Content-Type': 'application/json',
