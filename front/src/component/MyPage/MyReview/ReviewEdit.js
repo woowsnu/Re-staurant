@@ -10,7 +10,6 @@ const ReviewEdit = (props) => {
   const [editedContent, setEditedContent] = useState(props.reviewContent);
   const [editedRevisit, setEditedRevisit] = useState(props.revisit);
   
-  console.log(props)
   const reviewEditClose = () => {
     props.reviewEditClose();
   };

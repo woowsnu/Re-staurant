@@ -31,7 +31,7 @@ const MyReviews = (props) => {
   };
 
   const review = props.user.reviewList;
-  console.log(review);
+  
   return (
     <>
       <h3 className={styles.reviewCount}>
