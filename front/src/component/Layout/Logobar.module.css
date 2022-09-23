@@ -1,0 +1,18 @@
+.container {
+    position: sticky;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.3rem 1.3rem;
+    border-bottom: #EEEEEE solid;
+}
+
+@media screen and (max-width: 680px) {
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 1rem;
+      border-bottom: #EEEEEE solid;
+    }
+  }

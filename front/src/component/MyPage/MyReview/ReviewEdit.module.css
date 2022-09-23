@@ -1,0 +1,30 @@
+.wrapper {
+    padding : 1rem 0.5rem 1rem 1rem;
+}
+
+.buttonArea {
+    padding-top: 1rem;
+}
+
+.buttonArea button {
+    width: 47%;
+}
+
+.buttonArea button:hover {
+    background-color: #D6F0DF;
+}
+
+.textarea {
+    height : 100px;
+    width: 92%;
+    border: 0.5px solid #999;
+    outline-style: none;  /* 포커스시 발생하는 효과 제거를 원한다면 */
+    -webkit-appearance: none;  /* 브라우저별 기본 스타일링 제거 */
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 6px;
+}
+
+.textarea:focus {
+    border: 1px solid #51B059;
+}

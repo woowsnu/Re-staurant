@@ -1,0 +1,31 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.resultText {
+  padding-left: 2rem;
+  padding-bottom: 2.5rem;
+  line-height: 1.3rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.tags {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+}
+
+.section {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-left: 2rem;
+}

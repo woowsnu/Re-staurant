@@ -1,0 +1,78 @@
+.container {
+  max-width: inherit;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.titleAndButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container h3 {
+  padding: 0;
+}
+
+.visitbtn {
+  max-width: 100%;
+}
+
+.visitbtn button {
+  width: calc(100%/2);
+  border: 0;
+  outline: 0;
+  padding: 0.8rem 0;
+}
+
+.reviewTagArea {
+  margin-top: 1rem;
+}
+
+.reviewTagText {
+  display: flex;
+} 
+
+.reviewTagText p{
+  padding-right: 0.5rem;
+} 
+
+.reviewTagTip {
+  font-size: 13px;
+  padding-left: 0.5rem;
+  color: #CCCCCC;
+}
+
+.reviewTags {
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.reviewTag {
+  font-size: 14px;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #CCCCCC;
+  border-radius: 2rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.reviewTagCount {
+  padding-left: 4px;
+  font-weight: 600;
+}
+
+.noReview {
+  padding: 3rem 0;
+  text-align: center;
+}
+
+@media screen and (max-width: 680px) {
+  .container {
+    max-width: inherit;
+    margin: 0 auto;
+    padding: 0 0.4rem;
+  }
+  
+}
