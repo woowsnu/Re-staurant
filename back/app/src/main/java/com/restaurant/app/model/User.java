@@ -36,10 +36,10 @@ public class User {
     @Column
     private String password;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String accessToken;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String refreshToken;
 
 
