@@ -14,5 +14,6 @@
       align-items: center;
       padding: 1rem 1rem;
       border-bottom: #EEEEEE solid;
+      max-width: 100vw;
     }
   }

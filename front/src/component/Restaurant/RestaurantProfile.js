@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ChartBar from './Chart/ChartBar';
 import { instance } from '../../api/axios';
 import styles from './RestaurantProfile.module.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import ImageSlider from '../UI/ImageSlider';
 import {
   FaBookmark,
   FaRegBookmark,
@@ -9,7 +11,6 @@ import {
   FaRunning,
   FaStar,
 } from 'react-icons/fa';
-import ImageSlider from '../UI/ImageSlider';
 
 const DUMMY_IMAGE = [
   {
@@ -24,40 +25,57 @@ const DUMMY_IMAGE = [
     id: 3,
     url: 'https://cdn.pixabay.com/photo/2020/06/08/16/49/pizza-5275191_960_720.jpg',
   },
-  {
-    id: 4,
-    url: 'https://cdn.pixabay.com/photo/2016/06/19/17/56/eggs-1467286_960_720.jpg',
-  },
-  {
-    id: 5,
-    url: 'https://cdn.pixabay.com/photo/2015/11/20/08/17/meat-1052571_960_720.jpg',
-  },
 ];
 
 const RestaurantProfile = (props) => {
+  const userEmail = localStorage.getItem('email');
+  const token = localStorage.getItem('accessToken');
+  const isLogin = !!token;
+  const bizId = useParams().id;
+  const navigate = useNavigate();
   const [images, setImages] = useState(DUMMY_IMAGE);
-  const {
-    restaurantCategory,
-    siCode,
-    guCode,
-    restaurantName,
-    description,
-    busId,
-    avgRating,
-  } = props.restaurant;
-  // const { likeIndex } = props.bookmark;
+  const [bookmark, setBookmark] = useState([]);
+  const [editMark, setEditMark] = useState(false);
 
-  const markChangeHandler = (e) => {
-    console.log(e.target.checked)
-  };
+  useEffect(() => {
+    const fetchBookmark = async () => {
+      try {
+        const res = await instance.get(
+          `/restaurant/${userEmail}/auth/findUserView`,
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+        const bookmarkArray = res.data;
+        const filterByBusId = bookmarkArray.filter((el) => el.busId === bizId);
+        if (filterByBusId.length > 0) {
+          setBookmark(filterByBusId[0]);
+          setEditMark(true);
+        } else if (filterByBusId.length === 0) {
+          setEditMark(false);
+        }
+      } catch (error) {
+        console.error('북마크를 불러오지 못했습니다.', error);
+      }
+    };
+    fetchBookmark();
+  }, [editMark]);
 
   //북마크 추가
-  const createbookmarkHandler = async () => {
-    const token = localStorage.getItem('accessToken');
-    const email = localStorage.getItem('email');
-    const res = await instance.post(
-      `/restaurant/createLike/auth`,
-      { busId: busId, email: email },
+  const createBookmarkHandler = async () => {
+    if (!isLogin){
+      alert('로그인 후 이용 가능합니다.')
+      navigate('/login')
+      return;
+    }
+    const bookmarkData = {
+      busId: bizId,
+      email: userEmail
+    }
+    const { data } = await instance.post(
+      `/restaurant/createLike/auth`, bookmarkData,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -65,22 +83,22 @@ const RestaurantProfile = (props) => {
         },
       }
     );
-    // props.isMarkedHandler(true);
-    console.log(res);
+    console.log(data);
+    setEditMark(true);
   };
-  //북마크 삭제
-  const deletebookmarkHandler = async () => {
-    const token = localStorage.getItem('accessToken');
-    // await instance.delete(
-    //   `/restaurant/${likeIndex}/auth/deleteLike`,
-    //   {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       Authorization: token,
-    //     },
-    //   }
-    // );
-    // props.ismarkedHandler(false);
+
+  const deleteBookmarkHandler = async () => {
+    const res = await instance.delete(
+      `/restaurant/${bookmark?.likeIndex}/auth/deleteLike`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    setBookmark('');
+    setEditMark(false);
+    console.log(res);
   };
 
   return (
@@ -93,34 +111,49 @@ const RestaurantProfile = (props) => {
         <img
           className={styles.resImage}
           src={require('../../assets/images/restaurant_default_img.jpg')}
-          alt={restaurantName}
+          alt={props.restaurant.restaurantName}
         />
       )}
       <div className={styles.wrap}>
         <div className={styles.profileWrap}>
           <div>
-            {restaurantCategory?.split('>')[0] === '음식점'
-              ? restaurantCategory?.split('>')[0]
-              : restaurantCategory?.split('>')[1]}{' '}
-            / {siCode} {guCode}{' '}
+            {props.restaurant.restaurantCategory?.split('>')[0] === '음식점'
+              ? props.restaurant.restaurantCategory?.split('>')[0]
+              : props.restaurant.restaurantCategory?.split('>')[1]}{' '}
+            / {props.restaurant.siCode} {props.restaurant.guCode}
           </div>
           <div>
-            <label>
-              {props.isMarked ? (
-                <FaBookmark className={styles.bookmark} onClick={()=>{props.isMarkedHandler(false)}}/>
-              ) : (
-                <FaRegBookmark className={styles.bookmark} onClick={()=>{props.isMarkedHandler(true)}}/>
-              )}
-            <input type='checkbox' checked={props.isMarked} onChange={markChangeHandler}/>
-            </label>
+            {editMark ? (
+              <label
+                className={styles.bookmark}
+                onClick={deleteBookmarkHandler}
+              >
+                <FaBookmark />
+              </label>
+            ) : (
+              <label
+                className={styles.bookmark}
+                onClick={createBookmarkHandler}
+              >
+                <FaRegBookmark />
+              </label>
+            )}
+            <input
+              type='checkbox'
+              checked={editMark}
+            />
+
             <button>
               <FaShareAlt className={styles.share} />
             </button>
           </div>
         </div>
-        <h1 className={styles.restaurantName}>{restaurantName}</h1>
+        <h1 className={styles.restaurantName}>
+          {props.restaurant.restaurantName}
+        </h1>
         <div className={styles.star}>
-          <FaStar style={{ color: '#f8d90f', fontSize: '20px' }} /> {avgRating}
+          <FaStar style={{ color: '#f8d90f', fontSize: '20px', paddingRight: '4px' }} />
+          <p>{props.restaurant.avgRating}</p>
         </div>
         <div className={styles.revisit}>
           {props.reviews?.length >= 10 && (
@@ -138,7 +171,7 @@ const RestaurantProfile = (props) => {
         </div>
         <div className={styles.description}>
           <h4>매장소개</h4>
-          <p>{description}</p>
+          <p>{props.restaurant.description}</p>
         </div>
       </div>
     </div>

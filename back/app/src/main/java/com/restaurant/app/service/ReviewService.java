@@ -39,6 +39,7 @@ public class ReviewService {
                 .revisit(reviewDTO.getRevisit())
                 .tag(reviewDTO.getTag())
                 .createDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
                 .build();
 
         review.setUser(authedUser);
@@ -76,6 +77,7 @@ public class ReviewService {
         currReview.setReviewTitle(updateReviewDTO.getReviewTitle());
         currReview.setReviewImage(updateReviewDTO.getReviewImage());
         currReview.setRevisit(updateReviewDTO.getRevisit());
+        currReview.setModifiedDate(updateReviewDTO.getModifiedDate());
 
 
         reviewRepository.save(currReview);
