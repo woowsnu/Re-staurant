@@ -31,7 +31,6 @@ services:
     networks:
       - backend-network
       - db-network
-
   react-app:
     container_name: react-app
     build: ~/repos/front/.
