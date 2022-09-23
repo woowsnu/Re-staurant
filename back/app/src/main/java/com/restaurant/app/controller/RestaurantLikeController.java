@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -75,19 +76,20 @@ public class RestaurantLikeController {
     }
 
     //북마크 조회
-//    @DeleteMapping("{likeIndex}/auth/deleteLike")
-//    public ResponseEntity<?> deleteLike(@AuthenticationPrincipal User authedUser,
-//                                        @PathVariable Long likeIndex) {
-//
-//        try{
-//            Long deletedLikeIndex = restaurantLikeService.delete(authedUser,likeIndex);
-//
-//            return ResponseEntity.ok().body("likeIndex : " + deletedLikeIndex  + "has deleted");
-//        }
-//        catch(Exception e) {
-//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-//            return ResponseEntity.ok().body(responseDTO);
-//        }
-//    }
+
+    @DeleteMapping("{likeIndex}/auth/deleteLike")
+    public ResponseEntity<?> deleteLike(@AuthenticationPrincipal User authedUser,
+                                        @PathVariable Long likeIndex) {
+
+        try{
+            Long deletedLikeIndex = restaurantLikeService.delete(authedUser,likeIndex);
+
+            return ResponseEntity.ok().body("likeIndex : " + deletedLikeIndex  + "has deleted");
+        }
+        catch(Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.ok().body(responseDTO);
+        }
+    }
 
 }

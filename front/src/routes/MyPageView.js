@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { instance } from "../api/axios";
 
-import Profile from "../component/MyPage/Profile";
+import FollowProfile from "../component/MyPage/Follow/FollowProfile";
 import AuthContext from "../store/auth-context";
 import Tabs from "../component/MyPage/Tabs";
 
@@ -25,7 +25,6 @@ const MyPage = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    // const profile = { "email" : localStorage.getItem("email") };
     const profile = { "email" : userEmail.email }
     console.log(profile)
     instance
@@ -39,9 +38,6 @@ const MyPage = () => {
         setDatafetch(true);
       })
       .catch((error) => {
-        ctx.onLogout();
-        alert("로그인 세션이 만료되었습니다.");
-        navigate("/login");
         console.log(error);
       });
   }, [isUpdated]);
@@ -49,7 +45,7 @@ const MyPage = () => {
   return (
     datafetch && (
       <div className={styles.wrapper}>
-        <Profile user={user} updateHandler={() => setIsUpdated(!isUpdated)} />
+        <FollowProfile user={user} followEmail={userEmail.email} updateHandler={() => setIsUpdated(!isUpdated)} />
         <Tabs user={user} updateHandler={updateHandler} />
       </div>
     )

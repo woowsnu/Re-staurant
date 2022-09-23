@@ -8,6 +8,9 @@ import { instance } from "../../../api/axios";
 const ReviewEdit = (props) => {
   const [editedTitle, setEditedTitle] = useState(props.reviewTitle);
   const [editedContent, setEditedContent] = useState(props.reviewContent);
+  const [editedRevisit, setEditedRevisit] = useState(props.revisit);
+  
+  console.log(props)
   const reviewEditClose = () => {
     props.reviewEditClose();
   };
@@ -20,6 +23,9 @@ const ReviewEdit = (props) => {
   const updateHandler = () => {
     props.updateHandler();
   };
+  const revisitEdit = (e) => {
+    setEditedRevisit(e);
+  };
 
   const reviewEditSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +34,7 @@ const ReviewEdit = (props) => {
       reviewTitle: editedTitle,
       reviewContent: editedContent,
       reviewIndex: props.reviewIndex,
-      revisit: props.revisit,
+      revisit: editedRevisit,
     };
     instance
       .put(
@@ -51,12 +57,35 @@ const ReviewEdit = (props) => {
     <Modal>
       <div className={styles.wrapper}>
         <form onSubmit={reviewEditSubmit}>
+          <div className={styles.visitbtn}>
+            <button
+              className={ editedRevisit === 1 ? styles.selected : styles.notSelected }
+              name="revisitYes"
+              value={editedRevisit}
+              onClick={() => {
+                revisitEdit(1);
+              }}
+            >
+              재방문 할래요
+            </button>
+            <button
+            className={ editedRevisit === 0 ? styles.selected : styles.notSelected }
+              name="revisitNo"
+              value={editedRevisit}
+              onClick={() => {
+                revisitEdit(0);
+              }}
+            >
+              재방문 안할래요
+            </button>
+          </div>
           <label htmlFor="editedTitle">한줄평</label>
-          <Input
+          <input
             id="editedTitle"
             type="text"
             value={editedTitle}
             onChange={titleEditHandler}
+            className={styles.input}
           />
           <br />
           <br />
@@ -67,7 +96,6 @@ const ReviewEdit = (props) => {
             type="comment"
             value={editedContent}
             className={styles.textarea}
-            cols={47}
             onChange={contentEditHandler}
           />
           <div className={styles.buttonArea}>

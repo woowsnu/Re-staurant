@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./RestaurantSearchNoResult.module.css";
 import Tag from "../UI/Tag";
 import PhotoCard from "../UI/PhotoCard";
+import Footer from "../Layout/Footer";
 
 const RestaurantSearchNoResult = () => {
   const TAG = ["삼겹살", "우동", "카레", "까눌레", "중식"];
@@ -52,6 +53,7 @@ const RestaurantSearchNoResult = () => {
             />
           ))}
         </div>
+        <Footer />
       </div>
     </>
   );
