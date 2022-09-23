@@ -17,6 +17,7 @@ const FollowPage = (props) => {
   const closeModal = () => {
     props.closeModal();
   };
+
   const user = props.data;
 
   return (
@@ -24,7 +25,7 @@ const FollowPage = (props) => {
       <div className={styles.wrapper}>
         <div className={styles.title}>
           <BiArrowBack onClick={closeModal} />
-          <div className={styles.nickname}>{user.nickname}</div>
+          <div className={styles.nickname}>팔로우 정보</div>
         </div>
         <div className={styles.tabbar}>
           <div className={tabselect ? styles.tab : styles.tabactive}>
@@ -44,7 +45,7 @@ const FollowPage = (props) => {
             </button>
           </div>
         </div>
-        <div>{tabselect ? <FollowList /> : <FollowList />}</div>
+        <FollowList user={user} tab={tabselect}/>
       </div>
     </Modal>
   );
