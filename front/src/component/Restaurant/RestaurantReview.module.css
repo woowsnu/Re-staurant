@@ -15,15 +15,34 @@
 }
 
 .visitbtn {
-  max-width: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.visitbtn button {
+.tab {
   width: calc(100%/2);
-  border: 0;
   outline: 0;
-  padding: 0.8rem 0;
-  background-color: #D6F0DF;
+  padding: 1rem 0;
+  background-color: #fff;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: 2px solid #51B059;
+
+}
+
+.tabsClicked {
+  width: calc(100%/2);
+  outline: 0;
+  padding: 1rem 0;
+  font-weight: 600;
+  text-align: center;
+  border-top: 2px solid #51B059;
+  border-left: 2px solid #51B059;
+  border-right: 2px solid #51B059;
+  border-radius: 4px 4px 0 0;
+  color: #51B059;
 }
 
 .revisit {
@@ -35,12 +54,15 @@
   margin-bottom: 1rem;
 }
 
+.chart {
+  margin-bottom: 1rem;
+}
+
 .nochart {
-  padding: 3rem 0;
+  padding: 2.4rem 0 2rem 0;
   text-align: center;
   border: 1px dashed #51B059;
-  background-color: #D6F0DF;
-  opacity: 0.5;
+  background-color: rgba(214,240,223,0.2)
 }
 
 

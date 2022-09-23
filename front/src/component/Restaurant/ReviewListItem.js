@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { instance } from '../../api/axios';
 import ReviewDetail from '../Review/ReviewDetail';
 import Button from '../UI/Button';
 import styles from './ReviewListItem.module.css';
 
 const ReviewListItem = (props) => {
   const [modalView, setModalView] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
 
   const modalViewHandler = () => {
     setModalView(!modalView);
@@ -24,11 +22,6 @@ const ReviewListItem = (props) => {
 
   return (
     <li key={props.review?.reviewIndex} className={styles.container}>
-      {isLoginUser === props.review.email && (
-        <Link to='/mypage'>
-          <Button>리뷰 관리</Button>
-        </Link>
-      )}
       <Link to={`/mypage/${props.review?.nickName}`} state={emailForMypage}>
         <div className={styles.reviewInfo}>
           <img alt='avatar' src={avatar} />
@@ -39,7 +32,7 @@ const ReviewListItem = (props) => {
         )} */}
           <div>
             <h6>{props.review?.nickName}</h6>
-            <p>{props.review.createDate}</p>
+            <p>{props.review?.createDate.split('T')[0]}</p>
           </div>
         </div>
       </Link>
@@ -84,6 +77,13 @@ const ReviewListItem = (props) => {
         ) : (
           ''
         )}
+      </div>
+      <div>
+      {isLoginUser === props.review.email && (
+        <Link to='/mypage'>
+          <Button>리뷰 관리</Button>
+        </Link>
+      )}
       </div>
     </li>
   );

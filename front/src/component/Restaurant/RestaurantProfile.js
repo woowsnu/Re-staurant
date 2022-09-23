@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import ChartBar from './Chart/ChartBar';
 import { instance } from '../../api/axios';
 import styles from './RestaurantProfile.module.css';
+import { useParams } from 'react-router-dom';
+import ImageSlider from '../UI/ImageSlider';
 import {
   FaBookmark,
   FaRegBookmark,
@@ -9,8 +11,6 @@ import {
   FaRunning,
   FaStar,
 } from 'react-icons/fa';
-import ImageSlider from '../UI/ImageSlider';
-import { resolvePath, useParams } from 'react-router-dom';
 
 const DUMMY_IMAGE = [
   {
@@ -29,6 +29,7 @@ const DUMMY_IMAGE = [
 
 const RestaurantProfile = (props) => {
   const userEmail = localStorage.getItem('email');
+  console.log(userEmail)
   const token = localStorage.getItem('accessToken');
   const bizId = useParams().id;
   const [images, setImages] = useState(DUMMY_IMAGE);
@@ -60,10 +61,6 @@ const RestaurantProfile = (props) => {
     };
     fetchBookmark();
   }, [editMark]);
-
-  // const markClickHandler = () => {
-  //   setEditMark(!editMark);
-  // };
 
   //북마크 추가
   const createBookmarkHandler = async () => {
@@ -97,7 +94,6 @@ const RestaurantProfile = (props) => {
 
   return (
     <div className={styles.container}>
-      <input type='checkbox' />
       {images ? (
         <div className={styles.resImage}>
           <ImageSlider images={images} />
@@ -135,9 +131,7 @@ const RestaurantProfile = (props) => {
             )}
             <input
               type='checkbox'
-              // value={editMark}
               checked={editMark}
-              // onChange={markClickHandler}
             />
 
             <button>
@@ -149,8 +143,8 @@ const RestaurantProfile = (props) => {
           {props.restaurant.restaurantName}
         </h1>
         <div className={styles.star}>
-          <FaStar style={{ color: '#f8d90f', fontSize: '20px' }} />{' '}
-          {props.restaurant.avgRating}
+          <FaStar style={{ color: '#f8d90f', fontSize: '20px', paddingRight: '4px' }} />
+          <p>{props.restaurant.avgRating}</p>
         </div>
         <div className={styles.revisit}>
           {props.reviews?.length >= 10 && (
