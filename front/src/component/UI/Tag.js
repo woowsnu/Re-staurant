@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Tag.module.css';
 
-const Tag = (props) => {
-  const { name, icon } = props.item;
-  const [search, setSearch] = useState(name);
+const Tag = ({name, icon}) => {
+  console.log(name)
+  const search = name;
   const navigate = useNavigate();
 
   const tagClickHandler = () => {
-    navigate(`/search/${name}`, { state: { search: search } });
+    navigate(`/search/${search}`, { state: { search: search } });
   };
 
   return (

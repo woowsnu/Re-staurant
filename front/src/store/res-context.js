@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { instance } from '../api/axios';
 
 const ResContext = React.createContext({
@@ -30,7 +30,7 @@ export const ResContextProvider = (props) => {
     if (!!userEmail) {
       fetchBookMark();
     }
-  }, []);
+  }, [userEmail, token]);
 
   let topList = [
     {

@@ -17,7 +17,7 @@ const HomePage = () => {
   const topList = resCtx.topRevisit;
   const tagList = resCtx.tags;
   const topRank = resCtx.topRanking;
-  console.log(topRank);
+  // console.log(tagList);
 
   return (
     <Layout>
@@ -27,7 +27,7 @@ const HomePage = () => {
         <h3>합정에서 뭐 먹지? 🤔</h3>
         <div className={styles.tags}>
           {tagList.map((item, i) => {
-            return <Tag key={i} item={item} />;
+            return <Tag key={i} name={item.name} icon={item.icon}/>;
           })}
         </div>
         <h3>맛 보장! 재방문 많은 맛집</h3>
