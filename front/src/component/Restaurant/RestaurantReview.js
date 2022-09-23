@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ReviewListItem from '../Restaurant/ReviewListItem';
-import { FaPen, FaQuestionCircle } from 'react-icons/fa';
+import { FaPen, FaQuestionCircle, FaRunning } from 'react-icons/fa';
 import Button from '../UI/Button';
 import ChartBar from './Chart/ChartBar';
 import styles from './RestaurantReview.module.css';
 import defaultImg from '../../assets/images/restaurant_default_img.jpg';
+import Pagination from '../UI/Pagination';
 
 const RestaurantReview = (props) => {
   const isLogin = localStorage.getItem('isLoggedIn');
@@ -19,20 +20,20 @@ const RestaurantReview = (props) => {
     authorCount,
     ...others
   } = props.restaurant;
+  const [limit, setLimit] = useState(7);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
   const ourReview = props.reviews?.filter((el) => el.tag === 1);
   const ourReviewRevisit = ourReview?.filter((el) => el.revisit === 1);
   const otherReview = props.reviews?.filter((el) => el.tag === 0);
-  console.log(ourReview);
 
-  const [reviewTag, setReviewTag] = useState(true);
+  console.log(ourReview.sort());
 
-  const ourReviewHandler = () => {
-    setReviewTag(true);
-  };
+  const [currentTab, setCurrentTab] = useState(0);
 
-  const otherReviewHandler = () => {
-    setReviewTag(false);
+  const tabHandler = (index) => {
+    setCurrentTab(index);
   };
 
   const simpleRestaurantProfile = {
@@ -98,32 +99,61 @@ const RestaurantReview = (props) => {
           ))}
         </div>
       </div>
-      <div className={styles.visitbtn}>
-        <button className={styles.visitbtn1} onClick={ourReviewHandler}>
-          리스토랑 리뷰 ({props.reviews.length})
-        </button>
-        <button onClick={otherReviewHandler}>타사 리뷰</button>
-      </div>
-      {reviewTag && (
-        <div>
+      <ul className={styles.visitbtn}>
+        <li
+          onClick={() => tabHandler(0)}
+          className={currentTab === 0 ? styles.tabsClicked : styles.tab}
+        >
+          RE:STAURANT 리뷰 ({props.reviews.length})
+        </li>
+        <li
+          onClick={() => tabHandler(1)}
+          className={currentTab === 1 ? styles.tabsClicked : styles.tab}
+        >
+          타사 리뷰
+        </li>
+      </ul>
+      {currentTab === 0 && (
+        <div className={styles.revisit}>
           <p>리스토랑 재방문율</p>
           {props.reviews?.length >= 10 ? (
-            <ChartBar
-              reviews={ourReviewRevisit.length}
-              reviewCount={ourReview.length}
-            />
+            <div className={styles.chart}>
+              <p>
+                <FaRunning /> 재방문하고 싶어요 ({props.reviews?.length}명의
+                리뷰)
+              </p>
+              <ChartBar
+                reviews={ourReviewRevisit.length}
+                reviewCount={ourReview.length}
+              />
+            </div>
           ) : (
-            <div>재방문률은 리뷰 10개 이상일 시 노출됩니다.</div>
+            <div className={styles.nochart}>
+              <p>재방문률은 리뷰 10개 이상일 시 노출됩니다.</p>
+              <Link to={`/review/${busId}`} state={simpleRestaurantProfile}>
+                <Button style={{ backgroundColor: '#51B059', color: '#fff' }}>
+                  <FaPen style={{ fontSize: '12px' }} /> 참여하기
+                </Button>
+              </Link>
+            </div>
           )}
-          {ourReview.map((review) => (
-            <ReviewListItem key={review.reveiwIndex} review={review} />
+          <div>
+          {ourReview.slice(offset, offset + limit).map((review, i) => (
+            <ReviewListItem key={i} review={review} />
           ))}
+          <Pagination
+        total={ourReview.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
+          </div>
         </div>
       )}
-      {!reviewTag && (
+      {currentTab === 1 && (
         <div>
-          {otherReview.map((review) => (
-            <ReviewListItem key={review.reveiwIndex} review={review} />
+          {otherReview.map((review, i) => (
+            <ReviewListItem key={i} review={review} />
           ))}
         </div>
       )}

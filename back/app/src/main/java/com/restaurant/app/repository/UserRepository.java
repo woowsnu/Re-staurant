@@ -3,13 +3,13 @@ package com.restaurant.app.repository;
 import com.restaurant.app.DTO.UserDTO;
 import com.restaurant.app.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.security.core.userdetails.User;
 
+@Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 
-<<<<<<< HEAD
-    public User findByUsername(String username);
-=======
 //    public User findByUserIndex(Long userIndex);
 
     public User findUserByAccessToken(String accessToken);
@@ -20,5 +20,4 @@ public interface UserRepository extends JpaRepository<User,Long> {
     public  User findUserByEmail(String email);
 
 
->>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
 }

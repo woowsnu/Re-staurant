@@ -13,6 +13,7 @@ const PhotoCard = ({ resInfo }) => {
     siCode,
     guCode,
     avgRating,
+    likeIndex,
   } = resInfo;
 
   return (
@@ -40,13 +41,15 @@ const PhotoCard = ({ resInfo }) => {
         </div>
         <div className={styles.bookmark}>
           <label htmlFor='bookmark' className={styles.bookmarkImg}>
-            {/* <FaRegBookmark
+            {likeIndex !== null ? (
+              <FaBookmark
+                style={{ color: `${colors.primary1}`, fontSize: '24px' }}
+              />
+            ) : (
+              <FaRegBookmark
                 style={{ color: `${colors.gray4}`, fontSize: '24px' }}
               />
-            ) : ( */}
-            <FaBookmark
-              style={{ color: `${colors.primary1}`, fontSize: '24px' }}
-            />
+            )}
           </label>
           <input id='bookmark' type='checkbox' />
         </div>

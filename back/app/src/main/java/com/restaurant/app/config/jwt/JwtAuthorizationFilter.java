@@ -30,46 +30,27 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-<<<<<<< HEAD
-        System.out.println("인증이 필요함.");
-
-        String jwtHeader = request.getHeader("Authorization");
-        System.out.println("jwtHeader" + jwtHeader);
-
-        if(jwtHeader == null || !jwtHeader.startsWith("Bearer")) {
-=======
         String accessHeader = request.getHeader("Authorization");
 //        System.out.println("jwtHeader : " + jwtHeader);
 
         if(accessHeader == null || !accessHeader.startsWith("Bearer")) {
->>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
             chain.doFilter(request,response);
             return;
         }
 
         String accessToken = request.getHeader("Authorization").replace("Bearer ","");
 
-<<<<<<< HEAD
-        String username = JWT.require(Algorithm.HMAC512("gun_secret")).build().verify(jwtToken).getClaim("username").asString();
-=======
         try{
 
-        String userEmail = JWT.require(Algorithm.HMAC512("gun_secret")).build().verify(accessToken).getClaim("email").asString();
-        System.out.println(userEmail);
->>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
+            String userEmail = JWT.require(Algorithm.HMAC512("gun_secret")).build().verify(accessToken).getClaim("email").asString();
+            System.out.println(userEmail);
 
-        if (username!=null) {
-            System.out.println("username : "+ username);
-            User userEntity = userRepository.findByUsername(username);
+            if (userEmail!=null) {
 
-            PrincipalDetails principalDetails = new PrincipalDetails(userEntity);
+                User userEntity = userRepository.findUserByEmail(userEmail);
 
-            Authentication authentication = new UsernamePasswordAuthenticationToken(principalDetails,null,principalDetails.getAuthorities());
+                PrincipalDetails principalDetails = new PrincipalDetails(userEntity);
 
-<<<<<<< HEAD
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            response.setHeader("username",userEntity.getUsername());
-=======
                 Authentication authentication = new UsernamePasswordAuthenticationToken(principalDetails.getUser(),null,principalDetails.getAuthorities());
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -117,7 +98,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         }
         catch (Exception e) {
             logger.error(e.getMessage());
->>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
             chain.doFilter(request,response);
         }
     }

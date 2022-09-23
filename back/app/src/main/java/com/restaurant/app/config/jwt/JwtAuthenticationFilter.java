@@ -3,17 +3,15 @@ package com.restaurant.app.config.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.restaurant.app.DTO.UserDTO;
 import com.restaurant.app.config.auth.PrincipalDetails;
-<<<<<<< HEAD
-import com.restaurant.app.model.User;
-=======
 import com.restaurant.app.repository.UserRepository;
->>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -31,52 +29,46 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private final UserRepository userRepository;
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException{
         System.out.println("JwtAuthenticationFilter");
 
         try {
             ObjectMapper om = new ObjectMapper();
-            User user = om.readValue(request.getInputStream(), User.class);
-            System.out.println(user.toString());
+            UserDTO userDTO = om.readValue(request.getInputStream(), UserDTO.class);
+//            System.out.println(userDTO.toString());
 
             UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword());
+                    new UsernamePasswordAuthenticationToken(userDTO.getEmail(),userDTO.getPassword());
 
             Authentication authentication =
                     authenticationManager.authenticate(authenticationToken);
 
             PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-
             System.out.println("로그인 완료: " + principalDetails.getUser());
 
             return authentication;
 
-        } catch (IOException e) {
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("로그인 실패");
+        }
+        catch (UsernameNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("로그인 실패");
+
         return null;
     }
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain
-                        , Authentication authResult) throws IOException, ServletException {
-        System.out.println("SuccessfulAuthentication");
+            , Authentication authResult) throws IOException, ServletException {
+        System.out.println("SuccessfulAuthentication -> login_authorized");
 
         PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
 
-<<<<<<< HEAD
-        String jwtToken = JWT.create()
-                .withSubject(principalDetails.getUser().getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + (60000*10)))
-                .withClaim("id",principalDetails.getUser().getEmail())
-                .withClaim("username",principalDetails.getUser().getUsername())
-                .sign(Algorithm.HMAC512("gun_secret"));
-
-        response.setHeader("Authorization","Bearer "+jwtToken);
-
-    }
-=======
         String accessToken = JWT.create()
                 .withSubject(principalDetails.getUser().getEmail())
                 .withExpiresAt(new Date(System.currentTimeMillis() + (60000 * 1)))
@@ -113,5 +105,4 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                 "로그인에 실패했습니다.");
     }
->>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
 }

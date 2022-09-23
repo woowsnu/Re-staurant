@@ -12,6 +12,7 @@ import com.restaurant.app.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,9 +36,7 @@ public class RestaurantLikeService {
     @Transactional
     public List<RestaurantLike> createRestaurantLike(User authedUser, RestaurantLikeDTO restaurantLikeDTO ) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(restaurantLikeDTO.getBusId());
-//        List<RestaurantLike> restaurantLikes = restaurantLikeRepository.findRestaurantsLikeByUser(authedUser);
         List<RestaurantLike> restaurantLikeList = restaurantLikeRepository.findRestaurantsLikeByRestaurantBusId(restaurantLikeDTO.getBusId());
-////        List<RestaurantLike> restaurantLikeList1 = restaurantLikeRepository.findRestaurantsLikeByRestaurantRestaurantIndex(restaurantLikeDTO.getRestaurantIndex());
         if(!restaurantLikeList.isEmpty()) {
             throw new RuntimeException("이미 추가했습니다!");
         }
@@ -72,16 +71,18 @@ public class RestaurantLikeService {
         return restaurantLikes;
     }
 
-//    public Long delete(User authedUser, Long likeIndex) {
-//        RestaurantLike currLike = restaurantLikeRepository.findRestaurantsLikeByLikeIndex(likeIndex);
-//
-//        if (authedUser.getUserIndex() != currLike.getUser().getUserIndex()) {
-//            throw new RuntimeException("deleteReview denied. invalid userIndex");
-//        }
-//
-//        return restaurantLikeRepository.deleteByLikeIndex(currLike.getLikeIndex());
+    @Transactional
+    public Long delete(User authedUser, Long likeIndex) {
+        RestaurantLike currLike = restaurantLikeRepository.findRestaurantsLikeByLikeIndex(likeIndex);
 
-//    }
+        if (authedUser.getUserIndex() != currLike.getUser().getUserIndex()) {
+            throw new RuntimeException("deleteReview denied. invalid userIndex");
+        }
+
+        return restaurantLikeRepository.deleteByLikeIndex(currLike.getLikeIndex());
+
+    }
+
 
 
 }

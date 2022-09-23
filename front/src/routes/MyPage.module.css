@@ -2,3 +2,11 @@
     min-height: 100vh;
     padding: 0rem 0rem 2rem 0rem;
 }
+
+@media screen and (max-width: 680px) {
+    .wrapper {
+        min-height: 100vh;
+        padding: 0rem 0rem 0rem 0rem;
+    }
+}
+  

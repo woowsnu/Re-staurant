@@ -7,9 +7,9 @@ import PhotoCard from "../component/UI/PhotoCard";
 import styles from "./RestaurantSearch.module.css";
 import ListCard from "../component/UI/ListCard";
 import Navbar from "../component/Layout/Navbar";
-import { FaSearch } from "react-icons/fa";
 import Footer from "../component/Layout/Footer";
 import Pagination from "../component/UI/Pagination";
+import { FaSearch } from "react-icons/fa";
 
 const RestaurantSearch = () => {
   const [data, setData] = useState("");
@@ -155,7 +155,31 @@ const RestaurantSearch = () => {
           <Footer />
         </div>
       ) : (
-        ""
+        <>
+          <Navbar />
+          <div className={styles.pagetitle}>
+            {isUpdated ? (
+              <span>{keyword} 검색결과</span>
+            ) : (
+              <span>{location.state.search} 검색결과</span>
+            )}{" "}
+          </div>
+          <form onSubmit={searchSubmit} className={styles.search}>
+            <Input
+              type="text"
+              id="search"
+              ref={searchInput}
+              onChange={searchHandler}
+              style={{ marginLeft: "2rem" }}
+            />
+            <button type="submit" className={styles.searchbtn}>
+              <FaSearch style={{ fontSize: "22px" }} />
+            </button>
+          </form>
+          <br />
+          <br />
+          <RestaurantSearchNoResult />
+        </>
       )}
     </>
   );

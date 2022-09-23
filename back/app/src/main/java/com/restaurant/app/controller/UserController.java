@@ -1,9 +1,5 @@
 package com.restaurant.app.controller;
 
-<<<<<<< HEAD
-import com.restaurant.app.model.User;
-import com.restaurant.app.repository.UserRepository;
-=======
 import com.restaurant.app.DTO.FollowDTO;
 import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.UserDTO;
@@ -11,14 +7,12 @@ import com.restaurant.app.model.Follow;
 import com.restaurant.app.model.User;
 import com.restaurant.app.service.FollowService;
 import com.restaurant.app.service.UserService;
->>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,17 +22,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/user")
 public class UserController {
 
-
-<<<<<<< HEAD
     @Autowired
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    @GetMapping("/")
-    public List<User> getUserInfo() {
-        return userRepository.findAll();
-    }
-}
-=======
     private final FollowService followService;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -71,7 +57,7 @@ public class UserController {
 
 
         System.out.println("userController.ReadUserInfo() -> 로그인 중인 사용자: " + authedUser.getEmail());
-        
+
         try {
             User user = userService.findUserByEmail(userDTO.getEmail());
 
@@ -104,7 +90,7 @@ public class UserController {
         }
     }
 
-//     Update User_Info : 유저 닉네임 수정
+    //     Update User_Info : 유저 닉네임 수정
     @PutMapping("/auth/update/nickname")
     public ResponseEntity<?> updateUserNickname(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO updateUserDTO) {
 
@@ -164,5 +150,4 @@ public class UserController {
         }
     }
 
-    }
->>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
+}

@@ -5,17 +5,12 @@ import com.restaurant.app.DTO.FollowDTO;
 import com.restaurant.app.DTO.RestaurantLikeDTO;
 import com.restaurant.app.DTO.ReviewDTO;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-=======
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
->>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
 
 @Entity
 @Builder
@@ -34,20 +29,17 @@ public class User {
     private String email;
 
     @Column
-    private String username;
-
+    private String nickname;
     @Column
     private String roles;
 
     @Column
     private String password;
 
-<<<<<<< HEAD
-=======
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String accessToken;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String refreshToken;
 
 
@@ -67,7 +59,6 @@ public class User {
     @CreatedDate
     private LocalDateTime createDate;
 
->>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
     public List<String> getRoleList() {
         if(this.roles.length() > 0) {
             return Arrays.asList(this.roles.split(","));
@@ -76,8 +67,6 @@ public class User {
         return new ArrayList<>();
     }
 
-<<<<<<< HEAD
-=======
     public List<ReviewDTO> reviewList(Set<Review> reviewList){
 
         List<ReviewDTO> reviewDTOList = reviewList.stream().map(ReviewDTO::new).collect((Collectors.toList()));
@@ -106,7 +95,6 @@ public class User {
 
 
 
->>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33
 
 
 }
