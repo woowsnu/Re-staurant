@@ -13,6 +13,7 @@ import { FaSearch } from "react-icons/fa";
 
 const RestaurantSearch = () => {
   const [data, setData] = useState("");
+  const [reviewData, setReviewData] = useState("");
   const [isUpdated, setIsUpdated] = useState(false);
   const searchInput = useRef();
   const [search, setSearch] = useState("");
@@ -59,6 +60,22 @@ const RestaurantSearch = () => {
       });
   }, []);
 
+  useEffect(() => {
+    const profile = { reviewTitle : location.state.search }
+    instance
+      .get(`review/reviewSearch`, JSON.stringify(profile))
+      .then((res) => {
+        const data = res.data;
+        setReviewData(data);
+        setDataFetch(true);
+        setSearchError(false);
+      })
+      .catch((err) => {
+        setSearchError(true);
+        console.log(err);
+      });
+  }, []);
+
   const objectToData = Object.values(data);
 
   const searchSubmit = async (e) => {
@@ -91,6 +108,8 @@ const RestaurantSearch = () => {
           });
       });
   };
+
+
 
   return (
     <>
