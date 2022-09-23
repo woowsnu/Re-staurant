@@ -6,21 +6,7 @@
 .profileImage {
   display: flex;
   padding-left: 3rem;
-}
-
-.mypageButtons {
-  padding: 1rem 2rem 1rem 1rem;
-  display: flex;
-  justify-content: space-around;
-}
-
-.mypageButtons button {
-  width: 70%;
-}
-
-.mypageButtons button:hover {
-  background-color: #51b059;
-  color: white;
+  padding-bottom: 2rem;
 }
 
 .grayline {
@@ -31,15 +17,31 @@
 
 .userInfo {
   padding: 1rem 0 1rem 2rem;
+  min-width: 80%;
 }
 
 .followInfo {
   padding-top: 1.5rem;
+  cursor: pointer;
 }
 
 .nickname {
   font-size: 1.4rem;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.followed button {
+  background: none;
+  color : #EC695B;
+  font-size: 1.2rem;
+}
+
+.notFollowed button {
+  background: none;
+  font-size: 1.2rem;
 }
 
 @media screen and (max-width: 680px) {
@@ -47,9 +49,28 @@
     display: flex;
     flex-direction: column;
   }
-  .mypageButtons {
+
+  .userInfo {
+    padding: 1rem 0 1rem 2rem;
+    min-width: 80%;
+  }
+
+  .profile {
+    padding-top: 3rem;
+    border-top: #EEEEEE solid;
+    max-width: 100vw;
+  }
+  
+  .profileImage {
     display: flex;
-    flex-direction: column;
+    padding-left: 3rem;
+  }
+
+  .nickname {
+    width: 80%;
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: flex;
     justify-content: space-between;
   }
 }

@@ -9,10 +9,10 @@
 }
 
 .nickname {
-    padding-left: 50%;
+    font-size: 1.1rem;
     display: inline-block;
     padding: 0;
-    margin-right: 40%;
+    margin-right: 47%;
 }
 
 .tabbar {

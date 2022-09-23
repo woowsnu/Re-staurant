@@ -32,6 +32,15 @@
         list-style: none;
         display: flex;
         justify-content: space-evenly;
-        width: 680px;
+        max-width: 100vw;
+    }
+
+    .tabbar button {
+        border: none;
+        cursor: pointer;
+        padding: auto;
+        width: 70%;
+        overflow: hidden;
+        font-size: 15px;
     }
   }  
