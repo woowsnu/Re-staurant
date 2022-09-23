@@ -1,14 +1,38 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { instance } from '../api/axios';
 
 const ResContext = React.createContext({
   topRevisit: [],
   topRanking: [],
   tags: [],
+  bookmark: [],
 });
 
 export const ResContextProvider = (props) => {
-  const topList = [
+  const userEmail = localStorage.getItem('email');
+  const token = localStorage.getItem('accessToken');
+  const [bookmark, setBookmark] = useState([]);
+
+  useEffect(() => {
+    const fetchBookMark = async () => {
+      const res = await instance.get(
+        `/restaurant/${userEmail}/auth/findUserView`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+        }
+      );
+      setBookmark(res.data);
+    };
+
+    if (!!userEmail) {
+      fetchBookMark();
+    }
+  }, [userEmail, token]);
+
+  let topList = [
     {
       restaurantIndex: 1,
       busId: '1836765337',
@@ -47,7 +71,7 @@ export const ResContextProvider = (props) => {
     },
   ];
 
-  const ranking = [
+  let ranking = [
     {
       restaurantIndex: 36,
       busId: '38009729',
@@ -95,7 +119,35 @@ export const ResContextProvider = (props) => {
     },
   ];
 
-  const tagList = ['삼겹살', '우동', '카레', '카페', '중식']
+  const tagList = [
+    { name: '한식', icon: '🍲' },
+    { name: '중식', icon: '🍜' },
+    { name: '일식', icon: '🍣' },
+    { name: '양식', icon: '🍕' },
+    { name: '술집', icon: '🍺' },
+    { name: '카페', icon: '☕' },
+  ];
+
+  topList = topList.map((item) => ({ ...item, likeIndex: null }));
+
+  for (let i = 0; i < bookmark.length; i++) {
+    for (let j = 0; j < topList.length; j++) {
+      if (bookmark[i].busId === topList[j].busId) {
+        topList[j].likeIndex = bookmark[i].likeIndex;
+      }
+    }
+  }
+
+  ranking = ranking.map((item) => ({ ...item, likeIndex: null }));
+  
+  for (let i = 0; i < bookmark.length; i++) {
+    for (let j = 0; j < ranking.length; j++) {
+      if (bookmark[i].busId === ranking[j].busId) {
+        ranking[j].likeIndex = bookmark[i].likeIndex;
+      }
+    }
+  }
+
   // let restaurantInfo = [];
   // let endpoints = [
   //   'http://localhost:8080/restaurant/restaurantDetail/859857359',
@@ -123,7 +175,8 @@ export const ResContextProvider = (props) => {
       value={{
         topRevisit: topList,
         topRanking: ranking,
-        tags: tagList
+        tags: tagList,
+        bookmark: bookmark,
       }}
     >
       {props.children}

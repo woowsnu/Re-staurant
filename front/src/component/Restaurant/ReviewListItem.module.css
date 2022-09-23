@@ -2,7 +2,7 @@
   max-width: 940px;
   margin: 0 auto;
   border-bottom: 1px solid #cccccc;
-  padding: 1rem 0 1.5rem 0;
+  padding: 1.5rem 0.6rem;
   list-style: none;
 }
 
@@ -12,19 +12,24 @@
 
 .reviewInfo {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   font-size: 14px;
   color: #888888;
 }
 
-.reviewInfo h6 {
+.profile {
+  display: flex;
+}
+
+.profile h6 {
   font-size: 16px;
   font-weight: 600;
   color: #262626;
-  padding-bottom: 0.4rem;
+  padding: 0.4rem 0;
 }
 
-.reviewInfo img {
+.profile img {
   width: 50px;
   height: 50px;
   object-fit: cover;
