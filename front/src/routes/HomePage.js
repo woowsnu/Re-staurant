@@ -14,40 +14,20 @@ import { instance } from '../api/axios';
 
 const HomePage = () => {
   const resCtx = useContext(ResContext);
-  const authCtx = useContext(AuthContext);
-  const [topList, setTopList] = useState(resCtx.topRevisit);
-  const topRank = resCtx.topRanking;
+  const topList = resCtx.topRevisit;
   const tagList = resCtx.tags;
-  const userEmail = localStorage.getItem('email');
-  const token = localStorage.getItem('accessToken')
-  const [marked, setMarked] = useState(null)
-
-  const fetchBookMark = async () => {
-    const res = await instance.get(`/restaurant/${userEmail}/auth/findUserView`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token,
-      },
-    })
-    console.log(res.data)
-    setMarked(res.data)
-  };
-
-  useEffect(()=>{
-    if(authCtx.isLoggedIn) {
-      fetchBookMark();
-    }
-  },[])
+  const topRank = resCtx.topRanking;
+  console.log(topRank);
 
   return (
     <Layout>
       <Navbar />
       <Header />
       <div className={styles.container}>
-        <h3>RE:STAURANT 인기 키워드</h3>
+        <h3>합정에서 뭐 먹지? 🤔</h3>
         <div className={styles.tags}>
           {tagList.map((item, i) => {
-            return <Tag key={i} name={item} />;
+            return <Tag key={i} item={item} />;
           })}
         </div>
         <h3>맛 보장! 재방문 많은 맛집</h3>
