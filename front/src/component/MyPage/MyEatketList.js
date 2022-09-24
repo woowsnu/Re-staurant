@@ -1,27 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./MyEatketList.module.css";
-import ListCard from "../UI/ListCard";
+import { instance } from "../../api/axios";
 
 const MyEatketList = (props) => {
+  const data = props.user.restaurantLikeList;
+  const [resarray, setResarray] = useState(false);
+
+  let resName = [];
+  data.map((data) => {
+    resName.push(data.restaurantName);
+  });
+
+  let resInfo = [];
+
+  const resDataFetch = async () => {
+    const promises = resName.map(async (res, index) => {
+      const { data } = await instance.get(`restaurant/${res}`);
+      resInfo.push(data[0]);
+    });
+    await Promise.all(promises);
+  };
+
+  useEffect(() => {
+    const dataFetch = async () => {
+      await resDataFetch();
+      console.log(resarray);
+      console.log(resInfo);
+    };
+    dataFetch();
+  }, [resarray]);
+
   return (
-    <div>
-      {/* <div className={styles.listCount}>저장한 먹킷리스트가 24개 있어요</div>
-      <ul className={styles.ul}>
-        {props.restaurantdata.map((data) => (
-          <li className={styles.list} key={data.id}>
-            <ListCard
-              imgLink={data.imgUrl}
-              name={data.name}
-              category={data.category}
-              location={data.address.split(" ").splice(0, 2).join(" ")}
-              address={data.address}
-              phone={data.phone}
-              sns={data.sns}
-            />
-          </li>
-        ))}
-      </ul> */}
-    </div>
+    resarray && (
+      <div>
+        <div className={styles.listCount}>
+          저장한 먹킷리스트가 {resInfo.length}개 있어요
+        </div>
+        <ul className={styles.ul}>
+          {resInfo.map((data) => (
+            <li className={styles.list} key={data.busId}>
+              {data.restaurantName}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
   );
 };
 
