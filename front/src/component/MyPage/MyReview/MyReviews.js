@@ -3,6 +3,8 @@ import styles from "./MyReviews.module.css";
 import Button from "../../UI/Button";
 import ReviewDelete from "./ReviewDelete";
 import ReviewEdit from "./ReviewEdit";
+import Pagination from "../../UI/Pagination";
+import LargeImage from "../../UI/LargeImage";
 
 const MyReviews = (props) => {
   const [reviewEdit, setReviewEdit] = useState(false);
@@ -11,6 +13,10 @@ const MyReviews = (props) => {
   const [reviewTitle, setReviewTitle] = useState("");
   const [reviewContent, setReviewContent] = useState("");
   const [revisit, setRevisit] = useState("");
+  const [reviewImg, setReviewImg] = useState("");
+  const [imgMagnify, setImgMagnify] = useState(false);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * 7;
 
   const reviewEditOpenHandler = () => {
     setReviewEdit(true);
@@ -31,19 +37,24 @@ const MyReviews = (props) => {
   };
 
   const review = props.user.reviewList;
-  
+  const imgLargeClose = () => {
+    setImgMagnify(false);
+  }
+
   return (
     <>
       <h3 className={styles.reviewCount}>
         작성한 리뷰가 {review.length}개 있어요
       </h3>
       <div className={styles.container}>
-        {review.map((data) => (
+        {review.slice(offset, offset + 7).map((data) => (
           <>
             <div className={styles.reviewCard}>
               <span className={styles.editbuttons}>
                 <span className={styles.revisit}>
-                  {data.revisit === 1 ? "재방문 할래요 😘" : "재방문 안할래요 ☹️"}
+                  {data.revisit === 1
+                    ? "재방문 할래요 😘"
+                    : "재방문 안할래요 ☹️"}
                 </span>
                 {props.user.email === localStorage.getItem("email") ? (
                   <div className={styles.editbutton}>
@@ -87,7 +98,14 @@ const MyReviews = (props) => {
                 ""
               ) : (
                 <div>
-                  <img src={data.reviewImage} className={styles.img} />
+                  <img
+                    src={data.reviewImage}
+                    className={styles.img}
+                    onClick={() => {
+                      setImgMagnify(true);
+                      setReviewImg(data.reviewImage);
+                    }}
+                  />
                 </div>
               )}
             </div>
@@ -114,6 +132,12 @@ const MyReviews = (props) => {
           />
         ) : (
           ""
+        )}
+        {imgMagnify ? <LargeImage img={reviewImg} imgLargeClose={imgLargeClose}/> : ""}
+        {review.length === 0 ? (
+          ""
+        ) : (
+          <Pagination total={review.length} page={page} setPage={setPage} />
         )}
       </div>
     </>
