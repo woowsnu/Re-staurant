@@ -36,7 +36,7 @@ public class RestaurantLikeService {
     @Transactional
     public List<RestaurantLike> createRestaurantLike(User authedUser, RestaurantLikeDTO restaurantLikeDTO ) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(restaurantLikeDTO.getBusId());
-        List<RestaurantLike> restaurantLikeList = restaurantLikeRepository.findRestaurantsLikeByRestaurantBusId(restaurantLikeDTO.getBusId());
+        List<RestaurantLike> restaurantLikeList = restaurantLikeRepository.findRestaurantsLikeByRestaurantBusIdAndUserEmail(restaurantLikeDTO.getBusId(),restaurantLikeDTO.getEmail());
         if(!restaurantLikeList.isEmpty()) {
             throw new RuntimeException("이미 추가했습니다!");
         }
@@ -52,7 +52,7 @@ public class RestaurantLikeService {
             restaurantLikeRepository.save(restaurantLike);
 //        System.out.println("savedrestaurantReview" + restaurantLike);
 
-            return restaurantLikeRepository.findRestaurantsLikeByRestaurantBusId(restaurantLikeDTO.getBusId());
+            return restaurantLikeRepository.findRestaurantsLikeByRestaurantBusIdAndUserEmail(restaurantLikeDTO.getBusId(),restaurantLikeDTO.getEmail());
 
 
 

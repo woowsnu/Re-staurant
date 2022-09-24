@@ -8,6 +8,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -43,11 +45,23 @@ public class Review implements Serializable {
     @JoinColumn(name = "restaurant_index",referencedColumnName = "restaurant_index")
     private Restaurant restaurant;
 
+
     @CreatedDate
     private LocalDateTime createDate;
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "review", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, orphanRemoval = true)
+//    private Set<ReviewImages> reviewImagesList = new HashSet();
+
+//    private List<ReviewPhoto> reviewImagesList = new ArrayList<>();
+//    public List<ReviewImagesDTO> reviewImagesList(Set<ReviewImages> reviewImagesList){
+//
+//        List<ReviewImagesDTO> reviewImagesDTOList = reviewImagesList.stream().map(ReviewImagesDTO::new).collect((Collectors.toList()));
+//
+//        return  reviewImagesDTOList;
+//    }
 
 
 
@@ -58,7 +72,6 @@ public class Review implements Serializable {
                 ", email : " + user.getEmail() + ", nickname : " +user.getNickname() +  "}" ;
 
     }
-
 
 
 }

@@ -1,9 +1,0 @@
-<changelist name="Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_28_[Changes]2" date="1663324137753" recycled="true" deleted="true">
-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_28_[Changes]2/shelved.patch" />
-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 2022-09-16 오후 7:28 [Changes]" />
-  <binary>
-    <option name="BEFORE_PATH" value="data_crawling/createRestaurantInfo.ipynb" />
-    <option name="AFTER_PATH" value="data_crawling/createRestaurantInfo.ipynb" />
-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_28_[Changes]2/createRestaurantInfo.ipynb" />
-  </binary>
-</changelist>
