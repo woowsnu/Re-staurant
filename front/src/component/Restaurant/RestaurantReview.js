@@ -138,23 +138,29 @@ const RestaurantReview = (props) => {
             </div>
           )}
           <div>
-          {ourReview.slice(offset, offset + limit).map((review, i) => (
-            <ReviewListItem key={i} review={review} />
-          ))}
-          <Pagination
-        total={ourReview.length}
-        limit={limit}
-        page={page}
-        setPage={setPage}
-      />
+            {ourReview.slice(offset, offset + limit).map((review, i) => (
+              <ReviewListItem key={i} review={review} />
+            ))}
+            <Pagination
+              total={ourReview.length}
+              limit={limit}
+              page={page}
+              setPage={setPage}
+            />
           </div>
         </div>
       )}
       {currentTab === 1 && (
         <div>
-          {otherReview.map((review, i) => (
+          {otherReview.slice(offset, offset + limit).map((review, i) => (
             <ReviewListItem key={i} review={review} />
           ))}
+          <Pagination
+            total={otherReview.length}
+            limit={limit}
+            page={page}
+            setPage={setPage}
+          />
         </div>
       )}
       {props.reviews?.length === 0 && (
