@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./MyEatketList.module.css";
 import { instance } from "../../api/axios";
+import ListCard from "../UI/ListCard";
 
 const MyEatketList = (props) => {
   const data = props.user.restaurantLikeList;
-  const [resarray, setResarray] = useState(false);
+  const [show, setShow] = useState(false);
+  const [resarray, setResarray] = useState([]);
 
   let resName = [];
   data.map((data) => {
@@ -24,27 +26,35 @@ const MyEatketList = (props) => {
   useEffect(() => {
     const dataFetch = async () => {
       await resDataFetch();
-      console.log(resarray);
       console.log(resInfo);
+
+      resInfo.map((info) => {
+        resarray.push(info);
+      });
+
+      setShow(true);
     };
+    
     dataFetch();
-  }, [resarray]);
+  
+  }, [setShow]);
+  
+  // console.log(resarray);
 
   return (
-    resarray && (
-      <div>
-        <div className={styles.listCount}>
-          저장한 먹킷리스트가 {resInfo.length}개 있어요
-        </div>
-        <ul className={styles.ul}>
-          {resInfo.map((data) => (
-            <li className={styles.list} key={data.busId}>
-              {data.restaurantName}
-            </li>
-          ))}
-        </ul>
+    show &&
+    <div>
+      <div className={styles.listCount}>
+        저장한 먹킷리스트가 {resarray.length}개 있어요
       </div>
-    )
+      <ul className={styles.ul}>
+        {resarray.map((data) => (
+          <li className={styles.list} key={data.busId}>
+            <ListCard data={data} />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
