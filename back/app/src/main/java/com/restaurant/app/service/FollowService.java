@@ -36,7 +36,7 @@ public class FollowService {
         }
 
         // followerList:authedUser / followingUser:followedUser에 각각 User 객체 저장.
-        Follow follow = new Follow(authedUser,followedUser);
+        Follow follow = new Follow(authedUser,followedUser,1);
 
         // 저장한 follow 인스턴스 Repository에 저장.
         Follow savedFollow = followRepository.save(follow);
@@ -64,12 +64,13 @@ public class FollowService {
             throw new RuntimeException("언팔로우할 상대가 없습니다.");
         }
 
+        currFollow.setRemoved(0);
+
         System.out.println("====== delete되는지 확인.");
         System.out.println("currFollow Idx: " + currFollow.getFollowIndex());
 
         // 현재 follow상태인 currFollow의 followIndex를 통해 currFollow객체 삭제. [언팔로우 기능]
-        followRepository.deleteFollowByFollowIndex(unFollowDTO.getFollowIndex());
-
+        followRepository.save(currFollow);
         System.out.println("deletedFollow");
 
         return null;

@@ -43,7 +43,7 @@ public class FollowController {
 
     @DeleteMapping("/auth/unFollowing")
     public ResponseEntity<?> unFollowing(@AuthenticationPrincipal User authedUser,
-             @RequestBody FollowDTO unFollowDTO) {
+                                         @RequestBody FollowDTO unFollowDTO) {
         try{
             followService.unFollowing(authedUser, unFollowDTO);
 

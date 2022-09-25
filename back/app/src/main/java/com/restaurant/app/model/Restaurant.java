@@ -116,7 +116,6 @@ public class Restaurant implements Serializable {
     }
 
 
-
     public List<RestaurantLikeDTO> restaurantLikeList(Set<RestaurantLike> restaurantLikeList){
 
         List<RestaurantLikeDTO> restaurantLikeDTOList = restaurantLikeList.stream().map(RestaurantLikeDTO::new).collect((Collectors.toList()));

@@ -64,7 +64,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain
-                        , Authentication authResult) throws IOException, ServletException {
+            , Authentication authResult) throws IOException, ServletException {
         System.out.println("SuccessfulAuthentication -> login_authorized");
 
         PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
