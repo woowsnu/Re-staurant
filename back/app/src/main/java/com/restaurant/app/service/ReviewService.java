@@ -27,8 +27,8 @@ public class ReviewService {
 
     @Transactional
     public List<Review> save(User authedUser, ReviewDTO reviewDTO, String busId) {
-        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
 
+        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
 
         Review review = Review.builder()
                 .user(authedUser)
@@ -84,10 +84,8 @@ public class ReviewService {
     }
 
 
-
     public Long delete(User authedUser, Long reviewIndex) {
         Review currReview = reviewRepository.findReviewByReviewIndex(reviewIndex);
-
 
         if (authedUser.getUserIndex() != currReview.getUser().getUserIndex()) {
             throw new RuntimeException("deleteReview denied. invalid userIndex");

@@ -47,18 +47,10 @@ public class ReviewDTO {
         this.reviewImage = review.getReviewImage();
         this.revisit = review.getRevisit();
         this.tag = review.getTag();
-
-
         this.busId = review.getRestaurant().getBusId();
-
         this.createDate = review.getCreateDate();
         this.modifiedDate = review.getModifiedDate();
-
         this.restaurantName = review.getRestaurant().getRestaurantName();
-
-
-
-
     }
 
 
