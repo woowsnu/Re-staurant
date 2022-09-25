@@ -6,6 +6,7 @@ import styles from './ReviewListItem.module.css';
 
 const ReviewListItem = (props) => {
   const [modalView, setModalView] = useState(false);
+  console.log(props)
 
   const modalViewHandler = () => {
     setModalView(!modalView);
@@ -46,6 +47,7 @@ const ReviewListItem = (props) => {
         </div>
       </Link>
       <div className={styles.reviewContent} onClick={modalViewHandler}>
+        <img src={props.review.reviewImage} style={{width : '100px', height : '100px', objectFit: 'cover'}}/>
         <ul className={styles.reviewImage}>
           {props.review.img === null && ''}
           {props.review.img?.length > 3 && (

@@ -25,6 +25,8 @@ public interface RestaurantLikeRepository extends JpaRepository<RestaurantLike, 
 
     List<RestaurantLike> findRestaurantsLikeByRestaurantBusId(String busId);
 
+    @Transactional
+    List<RestaurantLike> findRestaurantsLikeByRestaurantBusIdAndUserEmail(String busId, String email);
 
     RestaurantLike findRestaurantsLikeByRestaurantBusIdAndUserEmail(String busId, String email);
 }

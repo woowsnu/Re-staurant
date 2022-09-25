@@ -1,6 +1,10 @@
 package com.restaurant.app.service;
 import com.restaurant.app.DTO.RestaurantLikeDTO;
 import com.restaurant.app.model.*;
+import com.restaurant.app.DTO.RestaurantLikeDTO;
+import com.restaurant.app.model.Restaurant;
+import com.restaurant.app.model.RestaurantLike;
+import com.restaurant.app.model.User;
 import com.restaurant.app.repository.RestaurantLikeRepository;
 import com.restaurant.app.repository.RestaurantRepository;
 import com.restaurant.app.repository.UserRepository;
@@ -8,9 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-
 
 @Service
 @RequiredArgsConstructor
@@ -25,9 +27,9 @@ public class RestaurantLikeService {
     public RestaurantLike save(User authedUser, RestaurantLikeDTO restaurantLikeDTO) {
 
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(restaurantLikeDTO.getBusId());
-        RestaurantLike currLike = restaurantLikeRepository.findRestaurantsLikeByRestaurantBusIdAndUserEmail(restaurantLikeDTO.getBusId(), authedUser.getEmail());
+        List<RestaurantLike> restaurantLikeList = restaurantLikeRepository.findRestaurantsLikeByRestaurantBusIdAndUserEmail(restaurantLikeDTO.getBusId(),restaurantLikeDTO.getEmail());
 
-        if (currLike != null) {
+        if(!restaurantLikeList.isEmpty()) {
             throw new RuntimeException("이미 추가했습니다!");
         }
 
@@ -38,8 +40,7 @@ public class RestaurantLikeService {
                 .build();
 
         restaurantLikeRepository.save(restaurantLike);
-
-
+     
         return restaurantLikeRepository.findRestaurantsLikeByRestaurantBusIdAndUserEmail(restaurantLikeDTO.getBusId(), authedUser.getEmail());
 
 
