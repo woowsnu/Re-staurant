@@ -21,6 +21,7 @@ public class RestaurantLikeDTO {
 
     private String nickname;
 
+    private Integer removed;
     private Long restaurantIndex;
 
 

@@ -20,12 +20,15 @@ public class RestaurantLike implements Serializable {
     @Column(name = "restaurant_like_index")
     private Long likeIndex;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinColumn(name = "user_index",referencedColumnName = "user_index")
     private User user;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Restaurant.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Restaurant.class)
     @JoinColumn(name = "restaurant_index",referencedColumnName = "restaurant_index")
     private Restaurant restaurant;
+
+    @Column(name="removed")
+    private Integer removed;
 
     @Override
     public String toString() {

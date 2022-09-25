@@ -50,12 +50,12 @@ public class RestaurantLikeController {
 
     @DeleteMapping("/auth/deleteLike/{likeIndex}")
     public ResponseEntity<?> deleteLike(@AuthenticationPrincipal User authedUser,
-                                          @PathVariable Long likeIndex) {
+                                        @PathVariable Long likeIndex) {
 
         try{
-            Long deletedLikeIndex = restaurantLikeService.delete(authedUser,likeIndex);
+            restaurantLikeService.delete(authedUser,likeIndex);
 
-            return ResponseEntity.ok().body("likeIndex : " + deletedLikeIndex + "has deleted");
+            return ResponseEntity.ok().body(1);
         }
 
         catch(Exception e) {
