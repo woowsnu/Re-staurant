@@ -1,18 +1,13 @@
 .container {
+  position: relative;
   width: 80%;
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
   padding: 3rem 2rem;
 }
 
-.container h3 {
-  padding-top: 1.4rem;
-  padding-bottom: 1rem;
-  padding-left: 0;
-}
-
 .simpleProfile {
-  border: 1px solid #CCCCCC;
+  border: 1px solid #cccccc;
   padding: 1.5rem;
   margin-bottom: 1rem;
   display: flex;
@@ -31,31 +26,70 @@
   padding-top: 1.5rem;
 }
 
-.simpleProfileText h4{
+.simpleProfileText h4 {
   color: #000;
   font-size: 18px;
   font-weight: 600;
   padding-top: 0.6rem;
 }
 
-.comment {
+.container form {
   width: 100%;
 }
 
-.visitbtn {
-  max-width: 100%;
+.container form h3 {
+  padding-top: 1.4rem;
+  padding-bottom: 1rem;
+  padding-left: 0;
 }
 
-.visitbtn button {
+
+.btn {
   width: calc(100% / 2);
-  border: 0;
+  border: 1px solid #ccc;
   outline: 0;
   padding: 1rem 0;
-  border-radius: 0.6rem;
+  font-weight: 600;
+  border-radius: 0.4rem;
+  background-color: transparent;
+}
+
+.btnClicked {
+  width: calc(100% / 2);
+  border: 2px solid #51b059;
+  outline: 0;
+  padding: 1rem 0;
+  font-weight: 600;
+  border-radius: 0.4rem;
+  background-color: #d6f0df;
+}
+
+.content {
+  width: inherit;
+  height: 8em;
+  border: 1px solid #999;
+  border-radius: 0.4rem;
+  box-sizing:border-box;
+  resize: none; 
+  padding: 0.6em 0.5em;
+  font-family: inherit;  /* 폰트 상속 */
+  -webkit-appearance: none; /* 브라우저별 기본 스타일링 제거 */
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.content:focus{
+  border: 1px solid #51b059;
 }
 
 .prevImg {
   width: 150px;
   height: 150px;
   object-fit: cover;
+}
+
+.btns {
+  position: absolute;
+  bottom: 0;
+  right: 2rem;
 }
