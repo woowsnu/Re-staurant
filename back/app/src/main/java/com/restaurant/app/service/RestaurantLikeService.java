@@ -1,23 +1,19 @@
 package com.restaurant.app.service;
 
 
-import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.DTO.RestaurantLikeDTO;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.model.RestaurantLike;
-import com.restaurant.app.model.Review;
 import com.restaurant.app.model.User;
 import com.restaurant.app.repository.RestaurantLikeRepository;
 import com.restaurant.app.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -37,6 +33,8 @@ public class RestaurantLikeService {
     public List<RestaurantLike> createRestaurantLike(User authedUser, RestaurantLikeDTO restaurantLikeDTO ) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(restaurantLikeDTO.getBusId());
         List<RestaurantLike> restaurantLikeList = restaurantLikeRepository.findRestaurantsLikeByRestaurantBusIdAndUserEmail(restaurantLikeDTO.getBusId(),restaurantLikeDTO.getEmail());
+
+
         if(!restaurantLikeList.isEmpty()) {
             throw new RuntimeException("이미 추가했습니다!");
         }
