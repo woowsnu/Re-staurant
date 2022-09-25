@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import ChartBar from './Chart/ChartBar';
+import Bookmark from '../UI/BookMark';
 import { instance } from '../../api/axios';
 import styles from './RestaurantProfile.module.css';
-import { useNavigate, useParams } from 'react-router-dom';
 import ImageSlider from '../UI/ImageSlider';
 import {
   FaBookmark,
@@ -37,6 +38,9 @@ const RestaurantProfile = (props) => {
   const [bookmark, setBookmark] = useState([]);
   const [editMark, setEditMark] = useState(false);
 
+  const ourReview = props.reviews?.filter((el) => el.tag === 1);
+  const ourReviewRevisit = ourReview?.filter((el) => el.revisit === 1);
+
   useEffect(() => {
     const fetchBookmark = async () => {
       try {
@@ -65,17 +69,18 @@ const RestaurantProfile = (props) => {
 
   //북마크 추가
   const createBookmarkHandler = async () => {
-    if (!isLogin){
-      alert('로그인 후 이용 가능합니다.')
-      navigate('/login')
+    if (!isLogin) {
+      alert('로그인 후 이용 가능합니다.');
+      navigate('/login');
       return;
     }
     const bookmarkData = {
       busId: bizId,
-      email: userEmail
-    }
+      email: userEmail,
+    };
     const { data } = await instance.post(
-      `/restaurant/createLike/auth`, bookmarkData,
+      `/restaurant/createLike/auth`,
+      bookmarkData,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -87,6 +92,7 @@ const RestaurantProfile = (props) => {
     setEditMark(true);
   };
 
+  // 북마크 삭제
   const deleteBookmarkHandler = async () => {
     const res = await instance.delete(
       `/restaurant/${bookmark?.likeIndex}/auth/deleteLike`,
@@ -138,33 +144,30 @@ const RestaurantProfile = (props) => {
                 <FaRegBookmark />
               </label>
             )}
-            <input
-              type='checkbox'
-              checked={editMark}
-            />
-
-            <button>
+            <input type='checkbox' checked={editMark} />
+            {/* <div>
               <FaShareAlt className={styles.share} />
-            </button>
+            </div> */}
           </div>
         </div>
         <h1 className={styles.restaurantName}>
           {props.restaurant.restaurantName}
         </h1>
         <div className={styles.star}>
-          <FaStar style={{ color: '#f8d90f', fontSize: '20px', paddingRight: '4px' }} />
+          <FaStar
+            style={{ color: '#f8d90f', fontSize: '20px', paddingRight: '4px' }}
+          />
           <p>{props.restaurant.avgRating}</p>
         </div>
         <div className={styles.revisit}>
-          {props.reviews?.length >= 10 && (
+          {ourReview?.length >= 10 && (
             <div>
               <p>
-                <FaRunning /> 재방문하고 싶어요 ({props.reviews?.length}명의
-                리뷰)
+                <FaRunning /> 재방문하고 싶어요 ({ourReview?.length}명의 리뷰)
               </p>
               <ChartBar
-                reviews={props.reviews?.filter((el) => el.revisit === 1).length}
-                reviewCount={props.reviews?.length}
+                reviews={ourReviewRevisit.length}
+                reviewCount={ourReview.length}
               />
             </div>
           )}
