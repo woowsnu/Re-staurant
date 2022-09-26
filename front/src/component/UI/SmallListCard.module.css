@@ -1,54 +1,56 @@
-.wrapper {
-    width : 100%;
+.container {
+    width: 100%;
     height: 130px;
     margin: auto;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-}
-
-.description {
-    width: 75%;
-    line-height: 1.2rem;
-}
-
-.imgsection {
-    padding : 1rem 1.6rem 1rem 1rem;
-}
-
-.img {
+    padding: 0 3rem 0 1rem;
+  }
+  
+  .restaurantsection {
+    flex-basis: 70%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .img {
     width: 100px;
-    height: ss100px;
+    height: 100px;
     object-fit: cover;
     border-radius: 3px;
-}
-
-.firstline {
+  }
+  
+  .restaurantinfo {
+    padding-left: 1.4rem;
+  }
+  .firstline {
     display: flex;
     justify-content: space-between;
-}
-
-.bookmark {
+  }
+  
+  .bookmark {
     text-align: right;
-}
-
-.bookmarkImg {
+  }
+  
+  .bookmarkImg {
     cursor: pointer;
-}
-
-.restaurantName {
+  }
+  
+  .restaurantName {
     font-size: 1.2rem;
     padding-bottom: 0.8rem;
     font-weight: 600;
-}
-
-.detail {
+  }
+  
+  .detail {
     font-size: 0.8rem;
     padding-bottom: 0.8rem;
-}
-.revisit {
+  }
+  .revisit {
     padding-bottom: 0.8rem;
-}
-
-.detail2 {
+  }
+  
+  .detail2 {
     font-size: 0.8rem;
-}
+  }
