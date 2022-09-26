@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { instance } from "../api/axios";
@@ -56,4 +54,3 @@ const MyPage = () => {
 };
 
 export default MyPage;
->>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33

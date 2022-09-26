@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../component/Layout/Layout';
@@ -61,4 +59,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
->>>>>>> b48e3904361b2f450f0a8d0191fec223963c7e33

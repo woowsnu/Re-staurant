@@ -1,6 +1,7 @@
 package com.restaurant.app.DTO;
 
 import com.restaurant.app.model.Review;
+//import com.restaurant.app.model.ReviewPhoto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,6 +35,9 @@ public class ReviewDTO {
     private LocalDateTime modifiedDate;
 
 
+//    private List<ReviewPhoto> reviewImagesList;
+
+
 
     public ReviewDTO(Review review) {
         this.reviewIndex = review.getReviewIndex();
@@ -44,13 +48,19 @@ public class ReviewDTO {
         this.reviewTitle = review.getReviewTitle();
         this.reviewContent = review.getReviewContent();
         this.nickName = review.getUser().getNickname();
-        this.reviewImage = review.getReviewImage();
         this.revisit = review.getRevisit();
         this.tag = review.getTag();
+
+
         this.busId = review.getRestaurant().getBusId();
+
         this.createDate = review.getCreateDate();
         this.modifiedDate = review.getModifiedDate();
+
         this.restaurantName = review.getRestaurant().getRestaurantName();
+
+
+
     }
 
 

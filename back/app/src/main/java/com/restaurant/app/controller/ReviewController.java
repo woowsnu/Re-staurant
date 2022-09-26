@@ -1,7 +1,6 @@
 package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.ResponseDTO;
-import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.DTO.ReviewDTO;
 import com.restaurant.app.model.Review;
 import com.restaurant.app.model.User;
@@ -21,6 +20,7 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
+    // Create Review
     @PostMapping("/{busId}/auth/createReview")
     public ResponseEntity<?> createReview(@AuthenticationPrincipal User authedUser
             , @PathVariable String busId, @RequestBody ReviewDTO reviewDTO) {
