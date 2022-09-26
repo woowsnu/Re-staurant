@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
+;
 
 @Repository
 public interface RestaurantLikeRepository extends JpaRepository<RestaurantLike, Long> {
@@ -18,26 +18,24 @@ public interface RestaurantLikeRepository extends JpaRepository<RestaurantLike, 
 
     List<RestaurantLike> findRestaurantsLikeByUser(User authedUser);
 
-//    List<RestaurantLike> findRestaurantsLikeByUser(User user);
+    @Transactional
+    public Long deleteRestaurantLikeByLikeIndex(Long likeIndex);
+
+    List<RestaurantLike> findRestaurantsLikeByUserEmail(String email);
 
     @Transactional
     public Long deleteByLikeIndex(Long likeIndex);
 
-    //    public RestaurantLike findRestaurantsLikeByLikeIndex(Long likeIndex);
-    RestaurantLike findRestaurantsLikeByLikeIndex(Long likeIndex);
-    public RestaurantLike findByLikeIndex(Long likeIndex);
+    public RestaurantLike findRestaurantsLikeByLikeIndex(Long likeIndex);
 
 
-    @Transactional
-
-    List<RestaurantLike> findRestaurantsLikeByUserEmail(String email);
-
-    List<RestaurantLike> findRestaurantsLikeByRestaurantRestaurantIndex(Long restaurantIndex);
-
-    @Transactional
     List<RestaurantLike> findRestaurantsLikeByRestaurantBusId(String busId);
 
-    @Transactional
-    List<RestaurantLike> findRestaurantsLikeByRestaurantBusIdAndUserEmail(String busId, String email);
-}
 
+    //    @Transactional
+    @Transactional
+    RestaurantLike findRestaurantsLikeByRestaurantBusIdAndUserEmail(String busId, String email);
+
+
+    List<RestaurantLike> findRestaurantsLikeByRestaurantRestaurantIndexAndUserEmail(Long restaurantIndex, String email);
+}
