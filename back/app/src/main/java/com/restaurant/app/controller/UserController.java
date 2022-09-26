@@ -57,7 +57,7 @@ public class UserController {
 
 
         System.out.println("userController.ReadUserInfo() -> 로그인 중인 사용자: " + authedUser.getEmail());
-
+        
         try {
             User user = userService.findUserByEmail(userDTO.getEmail());
 
@@ -90,7 +90,7 @@ public class UserController {
         }
     }
 
-    //     Update User_Info : 유저 닉네임 수정
+//     Update User_Info : 유저 닉네임 수정
     @PutMapping("/auth/update/nickname")
     public ResponseEntity<?> updateUserNickname(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO updateUserDTO) {
 
@@ -150,4 +150,4 @@ public class UserController {
         }
     }
 
-}
+    }

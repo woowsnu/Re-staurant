@@ -42,10 +42,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
         try{
 
-            String userEmail = JWT.require(Algorithm.HMAC512("gun_secret")).build().verify(accessToken).getClaim("email").asString();
-            System.out.println(userEmail);
+        String userEmail = JWT.require(Algorithm.HMAC512("gun_secret")).build().verify(accessToken).getClaim("email").asString();
+        System.out.println(userEmail);
 
-            if (userEmail!=null) {
+        if (userEmail!=null) {
 
                 User userEntity = userRepository.findUserByEmail(userEmail);
 
@@ -100,5 +100,5 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             logger.error(e.getMessage());
             chain.doFilter(request,response);
         }
-    }
+        }
 }

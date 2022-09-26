@@ -1,64 +1,86 @@
 package com.restaurant.app.service;
-import com.restaurant.app.DTO.RestaurantLikeDTO;
-import com.restaurant.app.model.*;
+
+
 import com.restaurant.app.DTO.RestaurantLikeDTO;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.model.RestaurantLike;
 import com.restaurant.app.model.User;
 import com.restaurant.app.repository.RestaurantLikeRepository;
 import com.restaurant.app.repository.RestaurantRepository;
-import com.restaurant.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class RestaurantLikeService {
-    @Autowired
-    private final RestaurantLikeRepository restaurantLikeRepository;
     private final RestaurantRepository restaurantRepository;
 
-    private final UserRepository userRepository;
+    @Autowired
+    private final RestaurantLikeRepository restaurantLikeRepository;
 
     @Transactional
-    public RestaurantLike save(User authedUser, RestaurantLikeDTO restaurantLikeDTO) {
+    public List<RestaurantLike> findAll() {return restaurantLikeRepository.findAll(); }
 
+
+
+    @Transactional
+    public List<RestaurantLike> createRestaurantLike(User authedUser, RestaurantLikeDTO restaurantLikeDTO ) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(restaurantLikeDTO.getBusId());
         List<RestaurantLike> restaurantLikeList = restaurantLikeRepository.findRestaurantsLikeByRestaurantBusIdAndUserEmail(restaurantLikeDTO.getBusId(),restaurantLikeDTO.getEmail());
+
 
         if(!restaurantLikeList.isEmpty()) {
             throw new RuntimeException("이미 추가했습니다!");
         }
 
-        RestaurantLike restaurantLike = RestaurantLike.builder()
-                .user(authedUser)
-                .restaurant(restaurant)
-                .removed(1)
-                .build();
+            RestaurantLike restaurantLike = RestaurantLike.builder()
+                    .likeIndex(restaurantLikeDTO.getLikeIndex())
+                    .user(authedUser)
+                    .restaurant(restaurant)
+                    .build();
 
-        restaurantLikeRepository.save(restaurantLike);
-     
-        return restaurantLikeRepository.findRestaurantsLikeByRestaurantBusIdAndUserEmail(restaurantLikeDTO.getBusId(), authedUser.getEmail());
+            restaurantLike.setUser(authedUser);
+
+            restaurantLikeRepository.save(restaurantLike);
+//        System.out.println("savedrestaurantReview" + restaurantLike);
+
+            return restaurantLikeRepository.findRestaurantsLikeByRestaurantBusIdAndUserEmail(restaurantLikeDTO.getBusId(),restaurantLikeDTO.getEmail());
+
 
 
     }
+    @Transactional
+    public List<RestaurantLike> findByEmail(User authedUser,String email){
+        List<RestaurantLike> restaurantLike = restaurantLikeRepository.findRestaurantsLikeByUserEmail(email);
+        List<RestaurantLike> restaurantLikes = restaurantLikeRepository.findRestaurantsLikeByUser(authedUser);
+        return restaurantLike;
+    }
 
 
+    public List<RestaurantLike> findRestaurantLikeByUser(User authedUser,String busId){
+        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
+        List<RestaurantLike> restaurantLikes = restaurantLikeRepository.findRestaurantsLikeByUser(authedUser);
+        return restaurantLikes;
+    }
 
-    public void delete(User authedUser, Long likeIndex) {
-
+    @Transactional
+    public Long delete(User authedUser, Long likeIndex) {
         RestaurantLike currLike = restaurantLikeRepository.findRestaurantsLikeByLikeIndex(likeIndex);
 
         if (authedUser.getUserIndex() != currLike.getUser().getUserIndex()) {
-            throw new RuntimeException("deleteLike denied. invalid userIndex");
+            throw new RuntimeException("deleteReview denied. invalid userIndex");
         }
-        currLike.setRemoved(0);
 
-        restaurantLikeRepository.save(currLike);
+        return restaurantLikeRepository.deleteByLikeIndex(currLike.getLikeIndex());
 
     }
+
+
 
 }
