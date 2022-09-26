@@ -1,65 +1,95 @@
 .wrapper {
-    width : 90%;
-    height: auto;
-    padding: 1.3rem 0 1.8rem 0;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px dotted #dddd;
+  width: 90%;
+  height: auto;
+  padding: 1.3rem 0 1.8rem 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px dotted #dddd;
 }
 
 .wrapper:hover {
-    background-color: #f6f6f6;
+  background-color: #f6f6f6;
 }
 
 .description {
-    width: 75%;
-    line-height: 1.2rem;
+  width: 75%;
+  line-height: 1.2rem;
 }
 
 .imgsection {
-    padding : 1rem 1.6rem 1rem 1rem;
+  padding: 1rem 1.6rem 1rem 1rem;
 }
 
 .img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 3px;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 3px;
 }
 
 .firstline {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .bookmark {
-    text-align: right;
+  text-align: right;
 }
 
 .bookmarkImg {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .restaurantName {
-    font-size: 1.2rem;
-    padding-bottom: 0.8rem;
-    font-weight: 600;
+  font-size: 1.2rem;
+  padding-bottom: 0.8rem;
+  font-weight: 600;
 }
 
 .detail {
-    font-size: 0.8rem;
-    padding-bottom: 0.8rem;
-}
-.revisit {
-    padding-bottom: 0.8rem;
+  font-size: 0.8rem;
+  padding-bottom: 0.8rem;
 }
 
+.revisit {
+  font-size: 0.9rem;
+  padding-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+}
+
+.revisit span {
+  display: flex;
+  align-items: center;
+}
 .detail2 {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 .rating {
-    font-size: 12px;
-    font-weight: 500;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 680px) {
+  .wrapper {
+    width: 100vw;
+    margin: 0;
+    padding-left: 1rem;
+    height: auto;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px dotted #dddd;
+  }
+
+  .revisit {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .detail {
+    width: 90%;
+  }
 }
