@@ -47,7 +47,7 @@ public class FollowController {
         try{
             followService.unFollowing(authedUser, unFollowDTO);
 
-            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
+            ResponseDTO responseDTO = ResponseDTO.builder().result(0).build();
 
             return ResponseEntity.ok().body(responseDTO);
         }
