@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import AuthContext from "../../store/auth-context";
 import { Link } from "react-router-dom";
-import { useMediaQuery } from "react-responsive";
 import styles from "./Navbar.module.css";
 import { FaUserCircle } from "react-icons/fa";
 
@@ -9,7 +8,6 @@ import { FaUserCircle } from "react-icons/fa";
 const Navbar = () => {
   const ctx = useContext(AuthContext);
   const loginStatus = ctx.isLoggedIn;
-  const isMobile = useMediaQuery({ query: "(max-width: 680px)" });
 
   return (
     <div className={styles.container}>
@@ -23,7 +21,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className={styles.navIcons}>
-        {loginStatus && !isMobile ? (
+        {loginStatus ? (
           <Link to="/mypage">
               <FaUserCircle />
           </Link>
