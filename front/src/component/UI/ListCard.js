@@ -25,7 +25,7 @@ const ListCard = (props) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [])
+  }, []);
   
   const resLikeCompare = resLike.find(v => v.busId === props.data.busId);
   
