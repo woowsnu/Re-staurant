@@ -14,6 +14,7 @@ const RestaurantDetail = () => {
   const [reviews, setReviews] = useState([]);
   const busId = useParams().id;
 
+  //restaurant data fetch
   const fetchRestaurantData = async () => {
     try {
       const { data } = await instance.get(

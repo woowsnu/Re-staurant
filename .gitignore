@@ -2,3 +2,5 @@ chromedriver.exe
 .DS_STORE
 240Pro.xml
 chromedriver
+.idea
+

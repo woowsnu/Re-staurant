@@ -17,11 +17,12 @@ const ReviewWrite = (props) => {
   const [review, setReview] = useState('');
   const [revisit, setRevisit] = useState(1);
   const [uploadImg, setUploadImg] = useState([]);
-  const [imgUrl, setImgUrl] = useState('');
-  console.log('이미지 목록', imgUrl);
+  const [imgUrl, setImgUrl] = useState("");
+  console.log("이미지 목록",  imgUrl);
   // 재방문의사
   const revisitClickHandler = (value) => {
     setRevisit(value);
+    console.log(value);
   };
 
   // 한줄평
@@ -30,9 +31,9 @@ const ReviewWrite = (props) => {
   };
 
   // 이미지
-  // const imageChangeHandler = (e) => {
-  //   setImgUrl(e.target.value);
-  // };
+  const imageChangeHandler = (e) => {
+    setImgUrl(e.target.value);
+  };
 
   // 리뷰
   const reviewChangeHandler = (e) => {
@@ -77,13 +78,13 @@ const ReviewWrite = (props) => {
 
   const reviewSubmitHandler = async (e) => {
     e.preventDefault();
-
+   
     const newReview = {
       reviewTitle: comment,
       reviewContent: review,
       reviewImage: imgUrl,
       revisit,
-      tag: 1,
+      tag: 1
     };
 
     try {
@@ -114,18 +115,16 @@ const ReviewWrite = (props) => {
       <div className={styles.simpleProfile}>
         <img src={img} alt={name} />
         <div className={styles.simpleProfileText}>
-          <p>{category}</p>
           <p>
-            {siCode} {guCode}
+            {category} / {siCode} {guCode}
           </p>
           <h4>{name}</h4>
         </div>
       </div>
       <form onSubmit={reviewSubmitHandler}>
         <h3>{name}에 재방문 하시겠어요?</h3>
-        <div>
+        <div className={styles.visitbtn}>
           <button
-            className={revisit === 1 ? styles.btnClicked : styles.btn}
             type='button'
             name='revisit'
             value={revisit}
@@ -133,10 +132,9 @@ const ReviewWrite = (props) => {
               revisitClickHandler(1);
             }}
           >
-            재방문 할래요 😘
+            재방문 할래요
           </button>
           <button
-            className={revisit === 0 ? styles.btnClicked : styles.btn}
             type='button'
             name='revisit'
             value={revisit}
@@ -144,23 +142,35 @@ const ReviewWrite = (props) => {
               revisitClickHandler(0);
             }}
           >
-            재방문 안할래요 ☹️
+            재방문 안할래요
           </button>
         </div>
+
         <h3>한줄평</h3>
-        <Input
+        <input
           id='title'
-          style={{ width: '98%' }}
+          style={{ width: '100%' }}
           type='text'
           placeholder='한줄평을 작성해주세요'
           onChange={commentChangeHandler}
           value={comment}
         />
+        <h3>이미지 등록</h3>
+        <input
+          id='image'
+          name='image'
+          style={{ width: '100%' }}
+          type='text'
+          placeholder='한줄평을 작성해주세요'
+          onChange={imageChangeHandler}
+          value={imgUrl}
+        />
         <h3>상세리뷰</h3>
         <textarea
-          className={styles.content}
           id='comment'
+          className={styles.comment}
           placeholder='이 곳에서의 경험은 어떠셨나요? 맛, 위생, 주차 등 회원님의 경험을 들려주세요.'
+          cols={50}
           value={review}
           onChange={reviewChangeHandler}
         ></textarea>
@@ -168,21 +178,21 @@ const ReviewWrite = (props) => {
           <h3>사진첨부</h3>
           <p>사진은 최대 5장까지 등록 가능합니다.</p>
           <input type='file' multiple={true} onChange={saveImage} />
-          <Button onClick={sendToServer}>등록</Button>
+          <button onClick={sendToServer}>등록</button>
           <div>
-            {uploadImg?.map((img, i) => {
-              return <img className={styles.prevImg} src={img} key={i} />;
+            {uploadImg?.map((img, i)=>{
+              return <img className={styles.prevImg} src={img} key={i}/>
             })}
           </div>
         </div>
         {/* <ReviewImgUpload /> */}
-        <div className={styles.btns}>
-          <Button style={{marginRight: '8px'}} type='button' onClick={reviewCancelHandler}>
+        <div>
+          <button type='button' onClick={reviewCancelHandler}>
             작성취소
-          </Button>
-          <Button id='ok' type='submit' onClick={reviewSubmitHandler}>
+          </button>
+          <button id='ok' type='submit' onClick={reviewSubmitHandler}>
             작성완료
-          </Button>
+          </button>
         </div>
       </form>
     </div>

@@ -64,11 +64,14 @@ public class Review implements Serializable {
 //    }
 
 
+
+
     @Override
     public String toString() {
         return "{ reviewIndex :" + reviewIndex + ", reviewTitle : " + reviewTitle  + ", reviewContent : "+ reviewContent +
                 ", email : " + user.getEmail() + ", nickname : " +user.getNickname() +  "}" ;
 
     }
+
 
 }
