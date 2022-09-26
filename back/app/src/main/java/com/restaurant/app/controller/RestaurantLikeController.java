@@ -18,24 +18,21 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/restaurant")
+@RequestMapping("/restaurantlike")
 @CrossOrigin("*")
 @Slf4j
 public class RestaurantLikeController {
     @Autowired
     private final RestaurantLikeService restaurantLikeService;
 
+
     // 북마크 생성
-    @PostMapping("/createLike/auth")
+    @PostMapping("/auth/createLike")
     public ResponseEntity<?> save(@AuthenticationPrincipal User authedUser,@RequestBody RestaurantLikeDTO restaurantLikeDTO) {
 
         try {
 
-//            List<RestaurantLike> restaurantLikeList = restaurantLikeService.save(authedUser,restaurantLikeDTO);
-//            List<RestaurantLikeDTO> restaurantLikesDTO = restaurantLikeList.stream().map(RestaurantLikeDTO::new).collect(Collectors.toList());
-
-//            System.out.println("restaurantList : " +restaurantLikeList);
-            restaurantLikeService.createRestaurantLike(authedUser,restaurantLikeDTO);
+            restaurantLikeService.save(authedUser,restaurantLikeDTO);
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
             return ResponseEntity.ok().body(responseDTO);
 
@@ -48,43 +45,24 @@ public class RestaurantLikeController {
     }
 
 
-
-    //북마크 조회
-    @GetMapping("/{email}/auth/findUserView")
-    public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser,@PathVariable String email){
-        try{
-            List<RestaurantLike> restaurantLikeList = restaurantLikeService.findByEmail(authedUser,email);
-
-            List<RestaurantLikeDTO> restaurantLikeDTOS = restaurantLikeList.stream().map(RestaurantLikeDTO::new).collect((Collectors.toList()));
-
-
-            return ResponseEntity.ok().body(restaurantLikeDTOS);
-        }
-        catch(Exception e) {
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.badRequest().body(responseDTO);
-        }
-    }
-
-    //북마크 조회
-
+    // 북마크 조회
     @GetMapping("/auth/findUserView")
-    public ResponseEntity<?>findAll() {
+    public ResponseEntity<?>findAll(@AuthenticationPrincipal User authedUser) {
         List<RestaurantLike> restaurantLikes = restaurantLikeService.findAll();
         List<RestaurantLikeDTO> restaurantLikeDTO = restaurantLikes.stream().map(RestaurantLikeDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok(restaurantLikeDTO);
     }
 
-    //북마크 조회
 
-    @DeleteMapping("{likeIndex}/auth/deleteLike")
+    // 북마크 삭제
+    @DeleteMapping("/auth/deleteLike/{likeIndex}")
     public ResponseEntity<?> deleteLike(@AuthenticationPrincipal User authedUser,
                                         @PathVariable Long likeIndex) {
 
         try{
-            Long deletedLikeIndex = restaurantLikeService.delete(authedUser,likeIndex);
+            restaurantLikeService.delete(authedUser,likeIndex);
 
-            return ResponseEntity.ok().body("likeIndex : " + deletedLikeIndex  + "has deleted");
+            return ResponseEntity.ok().body(0);
         }
         catch(Exception e) {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
