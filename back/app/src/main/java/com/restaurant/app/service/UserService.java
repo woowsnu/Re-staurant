@@ -1,18 +1,25 @@
 package com.restaurant.app.service;
 
+import com.restaurant.app.DTO.FollowDTO;
 import com.restaurant.app.DTO.UserDTO;
 import com.restaurant.app.model.User;
 import com.restaurant.app.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    private final FollowService followService;
 
     // Create UserInfo
     public void save(UserDTO userDTO, BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -32,32 +39,54 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public UserDTO readProfile(UserDTO userDTO) {
+
+        User user = findUserByEmail(userDTO.getEmail());
+
+        List<FollowDTO> followingDTOList = followService.findFollowByFollowingUser(user);
+        List<FollowDTO> followedDTOList = followService.findFollowByFollowedUser(user);
+
+        UserDTO userResponseDTO = UserDTO.builder()
+                .userIndex(user.getUserIndex())
+                .email(user.getEmail())
+//                    .password(user.getPassword())
+                .nickname(user.getNickname())
+                .roles(user.getRoles())
+                .reviewList(user.reviewList(user.getReviewList()))
+                .restaurantLikeList(user.restaurantLikeList(user.getRestaurantLikeList()))
+                .followingList(followingDTOList)
+                .followerList(followedDTOList)
+                .build();
+
+        return userResponseDTO;
+    }
+
     // Update UserNickname
-    public User updateNickname(User authedUser, UserDTO updateUserDTO) {
+    public void updateNickname(User authedUser, UserDTO updateUserDTO) {
 
          authedUser.setNickname(updateUserDTO.getNickname());
 
-        return userRepository.save(authedUser);
+        userRepository.save(authedUser);
     }
 
     // Update UserPassword
-    public User updatePassword(User authedUser, UserDTO updateUserDTO,BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public void updatePassword(User authedUser, UserDTO updateUserDTO,BCryptPasswordEncoder bCryptPasswordEncoder) {
 
         authedUser.setPassword(bCryptPasswordEncoder.encode(updateUserDTO.getPassword()));
 
-        return userRepository.save(authedUser);
+        userRepository.save(authedUser);
     }
 
     // Delete UserInfo
-    public Long delete(User authedUser, UserDTO deleteUserDTO) {
+    public void delete(User authedUser, UserDTO deleteUserDTO) {
 
-        User deleteUser = userRepository.findUserByEmail(deleteUserDTO.getEmail());
+        User deleteUser = findUserByEmail(deleteUserDTO.getEmail());
 
         if (authedUser.getUserIndex() != deleteUser.getUserIndex()) {
             throw new RuntimeException("deleteUser denied. invalid user_index");
         }
 
-        return userRepository.deleteUserByUserIndex(deleteUser.getUserIndex());
+        userRepository.deleteUserByUserIndex(deleteUser.getUserIndex());
     }
 
     public User findUserByEmail(String email) {

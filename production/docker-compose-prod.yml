@@ -2,7 +2,7 @@ version: "3"
 services:
   springboot-app:
     container_name: springboot-app
-    image: springboot-app
+    image: springbooot-app
     restart: always
     build: .
     ports:
@@ -10,6 +10,7 @@ services:
     networks:
       - backend-network      
       - frontend-network
+      - db-network
     environment:
       MYSQL_HOST: mysqldb
       MYSQL_DATABASE: finalproject
@@ -22,7 +23,7 @@ services:
     container_name: mysqldb
     image: mysql
     volumes:
-      - ~/mysql_db/:/var/lib/mysql
+      - ~/mysql_database/:/var/lib/mysql
     ports:
       - 3307:3306
     environment:
@@ -33,13 +34,12 @@ services:
       - db-network
   react-app:
     container_name: react-app
-    build: ~/repos/front/.
+    build: ../front/.
     networks:
       - frontend-network
     ports:
       - 3000:3000
     restart: always
-
 networks:
   backend-network:
   frontend-network:

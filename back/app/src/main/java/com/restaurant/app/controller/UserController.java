@@ -25,8 +25,6 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
-    private final FollowService followService;
-
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     // Create User : [회원가입 -> 로그인 필요없는 메서드]
@@ -53,32 +51,13 @@ public class UserController {
 
     // 상대방 유저정보 조회
     @PostMapping("/auth/userInfo")
-    public ResponseEntity<?> readCounterProfile(@AuthenticationPrincipal User authedUser,@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> readProfile(@AuthenticationPrincipal User authedUser,@RequestBody UserDTO userDTO) {
 
 
         System.out.println("userController.ReadUserInfo() -> 로그인 중인 사용자: " + authedUser.getEmail());
         
         try {
-            User user = userService.findUserByEmail(userDTO.getEmail());
-
-            List<Follow> followingList = followService.findFollowByFollowingUser(user);
-            List<FollowDTO> followingDTOList = followingList.stream().map(FollowDTO::new).collect((Collectors.toList()));
-
-            List<Follow> followedList = followService.findFollowByFollowedUser(user);
-            List<FollowDTO> followedDTOList = followedList.stream().map(FollowDTO::new).collect((Collectors.toList()));
-
-
-            UserDTO userResponseDTO = UserDTO.builder()
-                    .userIndex(user.getUserIndex())
-                    .email(user.getEmail())
-//                    .password(user.getPassword())
-                    .nickname(user.getNickname())
-                    .roles(user.getRoles())
-                    .reviewList(user.reviewList(user.getReviewList()))
-                    .restaurantLikeList(user.restaurantLikeList(user.getRestaurantLikeList()))
-                    .followingList(followingDTOList)
-                    .followerList(followedDTOList)
-                    .build();
+            UserDTO userResponseDTO = userService.readProfile(userDTO);
 
             return ResponseEntity.ok().body(userResponseDTO);
         } catch (Exception e) {
@@ -91,14 +70,14 @@ public class UserController {
     }
 
 //     Update User_Info : 유저 닉네임 수정
-    @PutMapping("/auth/update/nickname")
+    @PutMapping("/auth/updateNickname")
     public ResponseEntity<?> updateUserNickname(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO updateUserDTO) {
 
         System.out.println("userController.UpdateUserInfo() -> 로그인 중인 사용자: " + authedUser.getEmail());
 
         try {
             // 로그인된 사용자의 userIndex와 post로 전송된 userIndex가 동일할 경우에만 닉네임 변경 진행.
-            User updatedUser = userService.updateNickname(authedUser,updateUserDTO);
+            userService.updateNickname(authedUser,updateUserDTO);
 
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
 
@@ -111,14 +90,14 @@ public class UserController {
     }
 
     //     Update User_Info : 유저 패스워드 수정
-    @PutMapping("/auth/update/password")
+    @PutMapping("/auth/updatePassword")
     public ResponseEntity<?> updateUserInfo(@AuthenticationPrincipal User authedUser, @RequestBody UserDTO updateUserDTO) {
 
         System.out.println("userController.UpdateUserInfo() -> 로그인 중인 사용자: " + authedUser.getEmail());
 
         try {
             // 로그인된 사용자의 userIndex와 post로 전송된 userIndex가 동일할 경우에만 개인정보 변경 진행.
-            User updatedUser = userService.updatePassword(authedUser,updateUserDTO, bCryptPasswordEncoder);
+            userService.updatePassword(authedUser,updateUserDTO, bCryptPasswordEncoder);
 
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
 

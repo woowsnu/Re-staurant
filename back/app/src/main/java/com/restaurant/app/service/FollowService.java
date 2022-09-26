@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class FollowService {
@@ -57,10 +59,15 @@ public class FollowService {
 
         return null;
     }
-    public List<Follow> findFollowByFollowingUser(User authedUser) {
-        return followRepository.findFollowByFollowingUser(authedUser);
+    public List<FollowDTO> findFollowByFollowingUser(User authedUser) {
+        List<Follow> followingList = followRepository.findFollowByFollowingUser(authedUser);
+
+        return followingList.stream().map(FollowDTO::new).collect((Collectors.toList()));
     }
-    public List<Follow> findFollowByFollowedUser(User authedUser) {
-        return followRepository.findFollowByFollowedUser(authedUser);
+    public List<FollowDTO> findFollowByFollowedUser(User authedUser) {
+        List<Follow> followedList = followRepository.findFollowByFollowedUser(authedUser);
+
+        return followedList.stream().map(FollowDTO::new).collect((Collectors.toList()));
+
     }
 }
