@@ -47,7 +47,7 @@ public class FollowController {
         try{
             followService.unFollowing(authedUser, unFollowDTO);
 
-            ResponseDTO responseDTO = ResponseDTO.builder().result(0).build();
+            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
 
             return ResponseEntity.ok().body(responseDTO);
         }
@@ -61,15 +61,16 @@ public class FollowController {
     @GetMapping("/auth/followingList")
     public ResponseEntity<?> getFollowingList(@AuthenticationPrincipal User authedUser) {
 
-        List<FollowDTO> followingDTOList = followService.findFollowByFollowingUser(authedUser);
+        List<Follow> followingList = followService.findFollowByFollowingUser(authedUser);
+        List<FollowDTO> followingDTOList = followingList.stream().map(FollowDTO::new).collect((Collectors.toList()));
 
         return ResponseEntity.ok().body(followingDTOList);
     }
 
     @GetMapping("/auth/followedList")
     public ResponseEntity<?> getFollowedList(@AuthenticationPrincipal User authedUser) {
-
-        List<FollowDTO> followedDTOList = followService.findFollowByFollowedUser(authedUser);
+        List<Follow> followedList = followService.findFollowByFollowedUser(authedUser);
+        List<FollowDTO> followedDTOList = followedList.stream().map(FollowDTO::new).collect((Collectors.toList()));
 
         return ResponseEntity.ok().body(followedDTOList);
     }
