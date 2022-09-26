@@ -1,0 +1,87 @@
+.pageTop {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 2rem 3rem 2rem;
+}
+
+.pageTitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.profileImage {
+  display: flex;
+  padding-left: 3rem;
+}
+
+.logoutButton {
+  align-items: right;
+  text-align: right;
+  font: inherit;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.mypageButtons {
+  padding: 1rem 2rem 1rem 1rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.mypageButtons button {
+  width: 70%;
+}
+
+.mypageButtons button:hover {
+  background-color: #51b059;
+  color: white;
+}
+
+.grayline {
+  font-size: 0.5rem;
+  background-color: #eeeeee;
+  margin-bottom: 1rem;
+}
+
+.userInfo {
+  padding: 1rem 0 1rem 2rem;
+}
+
+.followInfo {
+  padding-top: 1.5rem;
+  cursor: pointer;
+}
+
+.nickname {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 680px) {
+  .pageTop {
+    display: flex;
+    flex-direction: column;
+  }
+  .mypageButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .pageTitle {
+    font-size: 1.6rem;
+    font-weight: 700;
+    width: 400px;
+  }
+  .logoutButton {
+    border: #dddd solid;
+    text-align: center;
+    width: 100px;
+    margin-top: 1rem;
+    background-color: rgba(51, 51, 51, 0.05);
+    border-radius: 8px;
+    border-width: 0;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+  }
+}

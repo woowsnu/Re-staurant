@@ -1,0 +1,40 @@
+.wrapper {
+    min-height : 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.hideTabs {
+    position: absolute;
+    display: none;
+    visibility: hidden;
+}
+
+.tabs h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 1rem 1rem 1rem 1rem;
+    display: flex;
+}
+
+.nicknameEditTab {
+    padding: 1rem 1rem 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.passwordEditTab {
+    padding: 1rem 1rem 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+
+.withdrawTab {
+    padding: 1rem 1rem 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}

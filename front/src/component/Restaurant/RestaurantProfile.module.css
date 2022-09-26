@@ -1,0 +1,109 @@
+.container {
+  margin: 0 auto;
+  display: flex;
+  padding: 2rem;
+}
+
+.resImage {
+  width: 360px;
+  height: 360px;
+  object-fit: cover;
+}
+
+.wrap {
+  padding-left: 2rem;
+  flex-grow: 1;
+}
+
+.profileWrap {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  color: #888888;
+}
+
+.restaurantName {
+  font-size: 28px;
+  font-weight: 600;
+  color: #51b059;
+  padding-bottom: 1rem;
+}
+
+.bookmark {
+  font-size: 24px;
+  color: #51b059;
+}
+
+.share {
+  font-size: 24px;
+}
+
+.revisit {
+  padding: 1.2rem 0;
+}
+
+.star {
+  display: flex;
+  align-items: flex-end;
+}
+
+.description {
+  width: 100%;
+  font-size: 15px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  word-break: break-word;
+}
+
+.description h4 {
+  font-weight: 600;
+  padding-bottom: 0.6rem;
+}
+
+@media screen and (max-width: 680px) {
+  .container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .resImage {
+    width: 100vw;
+    height: 480px;
+    object-fit: cover;
+    margin: 0 auto;
+  }
+
+  .wrap {
+    padding: 1rem 0.4rem;
+  }
+
+  .profileWrap {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #888888;
+  }
+
+  .restaurantName {
+    font-size: 24px;
+    font-weight: 600;
+    color: #51b059;
+    padding-top: 0;
+  }
+
+  .description {
+    max-width: 96%;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    word-break: break-word;
+  }
+
+  .description h4 {
+    font-weight: 600;
+    padding-top: 1rem;
+  }
+}
