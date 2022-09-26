@@ -1,0 +1,16 @@
+.nav {
+  display: flex;
+  justify-content: center;
+}
+
+.nav button {
+  margin: 3rem 0.2rem 3rem 0.2rem;
+  padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+  border: none;
+  font: inherit;
+}
+
+.nav button[aria-current] {
+  background-color: #d6f0df;
+  font-weight: bold;
+}
