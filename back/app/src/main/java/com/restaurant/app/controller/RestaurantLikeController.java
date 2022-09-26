@@ -44,6 +44,23 @@ public class RestaurantLikeController {
 
     }
 
+    //북마크 조회
+    @GetMapping("/{email}/auth/findUserView")
+    public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser,@PathVariable String email){
+        try{
+            List<RestaurantLike> restaurantLikeList = restaurantLikeService.findByEmail(authedUser,email);
+
+            List<RestaurantLikeDTO> restaurantLikeDTOS = restaurantLikeList.stream().map(RestaurantLikeDTO::new).collect((Collectors.toList()));
+
+
+            return ResponseEntity.ok().body(restaurantLikeDTOS);
+        }
+        catch(Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
 
     // 북마크 조회
     @GetMapping("/auth/findUserView")
