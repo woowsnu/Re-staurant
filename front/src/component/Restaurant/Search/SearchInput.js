@@ -2,27 +2,27 @@ import React, { useState, useRef } from "react";
 import styles from "./SearchInput.module.css";
 import Input from "../../UI/Input";
 import { FaSearch } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
-const SearchInput = (props) => {
+const SearchInput = () => {
   const searchInput = useRef();
   const [search, setSearch] = useState("");
   const [searchWord, setSearchWord] = useState("");
   const [isUpdated, setIsUpdated] = useState(false);
 
-  let location = useLocation();
+  let navigate = useNavigate();
+  const name = useParams().id;
 
   const searchHandler = (e) => {
-    e.preventDefault();
     setSearch(e.target.value);
   };
   
   const searchSubmit = (e) => {
     e.preventDefault();
-    // props.searchAgain();
     setIsUpdated(true);
     setSearchWord(search);
-    props.resetKeywordHandler(search);
+    navigate(`/search/${search}`)
   };
 
   return (
@@ -31,7 +31,7 @@ const SearchInput = (props) => {
         {isUpdated ? (
           <span>{searchWord} 검색결과</span>
         ) : (
-          <span>{location.state.search} 검색결과</span>
+          <span>{name} 검색결과</span>
         )}
       </div>
       <form onSubmit={searchSubmit} className={styles.search}>

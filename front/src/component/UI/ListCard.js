@@ -5,7 +5,6 @@ import { FaRunning } from "react-icons/fa";
 import { FaBookmark, FaRegBookmark, FaStar } from "react-icons/fa";
 import NarrowChartBar from "../Restaurant/Chart/NarrowChartBar";
 import { instance } from "../../api/axios";
-import defaultImage from "../../assets/images/restaurant_default_img.jpg";
 
 const ListCard = (props) => {
   const [resLike, setResLike] = useState([]);
@@ -27,7 +26,7 @@ const ListCard = (props) => {
         console.log(error);
       });
   }, [])
-
+  console.log(props.data.reviewList[0].reviewImage)
   const resLikeCompare = resLike.find(v => v.busId === props.data.busId);
   
   return (
