@@ -86,4 +86,5 @@ public class FollowService {
 
         return followRepository.findFollowByFollowedUser(authedUser);
     }
+
 }
