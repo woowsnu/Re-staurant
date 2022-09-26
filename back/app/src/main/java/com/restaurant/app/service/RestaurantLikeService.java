@@ -1,6 +1,4 @@
 package com.restaurant.app.service;
-
-
 import com.restaurant.app.DTO.RestaurantLikeDTO;
 import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.model.RestaurantLike;
@@ -39,18 +37,18 @@ public class RestaurantLikeService {
             throw new RuntimeException("이미 추가했습니다!");
         }
 
-            RestaurantLike restaurantLike = RestaurantLike.builder()
-                    .likeIndex(restaurantLikeDTO.getLikeIndex())
-                    .user(authedUser)
-                    .restaurant(restaurant)
-                    .build();
+        RestaurantLike restaurantLike = RestaurantLike.builder()
+                .likeIndex(restaurantLikeDTO.getLikeIndex())
+                .user(authedUser)
+                .restaurant(restaurant)
+                .build();
 
-            restaurantLike.setUser(authedUser);
+        restaurantLike.setUser(authedUser);
 
-            restaurantLikeRepository.save(restaurantLike);
+        restaurantLikeRepository.save(restaurantLike);
 //        System.out.println("savedrestaurantReview" + restaurantLike);
 
-            return restaurantLikeRepository.findRestaurantsLikeByRestaurantBusIdAndUserEmail(restaurantLikeDTO.getBusId(),restaurantLikeDTO.getEmail());
+        return restaurantLikeRepository.findRestaurantsLikeByRestaurantBusIdAndUserEmail(restaurantLikeDTO.getBusId(),restaurantLikeDTO.getEmail());
 
 
 

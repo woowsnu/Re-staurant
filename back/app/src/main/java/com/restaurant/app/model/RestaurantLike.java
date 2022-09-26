@@ -1,6 +1,5 @@
 package com.restaurant.app.model;
 
-import com.restaurant.app.DTO.RestaurantLikeDTO;
 import lombok.*;
 
 import javax.persistence.*;

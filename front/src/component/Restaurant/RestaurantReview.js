@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import ReviewListItem from '../Restaurant/ReviewListItem';
 import { FaPen, FaQuestionCircle, FaRunning } from 'react-icons/fa';
 import Button from '../UI/Button';
@@ -27,6 +27,8 @@ const RestaurantReview = (props) => {
   const ourReview = props.reviews?.filter((el) => el.tag === 1);
   const ourReviewRevisit = ourReview?.filter((el) => el.revisit === 1);
   const otherReview = props.reviews?.filter((el) => el.tag === 0);
+
+  console.log(ourReview.sort());
 
   const [currentTab, setCurrentTab] = useState(0);
 
@@ -114,7 +116,7 @@ const RestaurantReview = (props) => {
       {currentTab === 0 && (
         <div className={styles.revisit}>
           <p>리스토랑 재방문율</p>
-          {ourReview?.length >= 10 ? (
+          {props.reviews?.length >= 10 ? (
             <div className={styles.chart}>
               <p>
                 <FaRunning /> 재방문하고 싶어요 ({props.reviews?.length}명의
@@ -136,29 +138,23 @@ const RestaurantReview = (props) => {
             </div>
           )}
           <div>
-            {ourReview.slice(offset, offset + limit).map((review, i) => (
-              <ReviewListItem key={i} review={review} />
-            ))}
-            <Pagination
-              total={ourReview.length}
-              limit={limit}
-              page={page}
-              setPage={setPage}
-            />
+          {ourReview.slice(offset, offset + limit).map((review, i) => (
+            <ReviewListItem key={i} review={review} />
+          ))}
+          <Pagination
+        total={ourReview.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
           </div>
         </div>
       )}
       {currentTab === 1 && (
         <div>
-          {otherReview.slice(offset, offset + limit).map((review, i) => (
+          {otherReview.map((review, i) => (
             <ReviewListItem key={i} review={review} />
           ))}
-          <Pagination
-            total={otherReview.length}
-            limit={limit}
-            page={page}
-            setPage={setPage}
-          />
         </div>
       )}
       {props.reviews?.length === 0 && (
