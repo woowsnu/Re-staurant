@@ -35,7 +35,7 @@ public class Options implements Serializable {
     @Column(name="icon_url")
     private String iconUrl;
 
-    @ManyToOne(fetch =FetchType.LAZY, targetEntity = Restaurant.class)
+    @ManyToOne(fetch =FetchType.EAGER, targetEntity = Restaurant.class)
     @JoinColumn(name = "restaurant_index",referencedColumnName = "restaurant_index")
     private Restaurant restaurant;
 
