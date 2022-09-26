@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { instance } from '../../api/axios';
 import RestaurantProfile from './RestaurantProfile';
 import RestaurantInfo from './RestaurantInfo';
 import RestaurantMenu from './RestaurantMenu';
 import RestaurantReview from './RestaurantReview';
 import RestaurantTab from './RestaurantTab';
+import restaurantAPI from '../../api/restaurantAPI';
 
 const RestaurantDetail = () => {
   const [restaurant, setRestaurant] = useState([]);
@@ -14,11 +14,10 @@ const RestaurantDetail = () => {
   const [reviews, setReviews] = useState([]);
   const busId = useParams().id;
 
+  //restaurant data fetch
   const fetchRestaurantData = async () => {
     try {
-      const { data } = await instance.get(
-        `/restaurant/restaurantDetail/${busId}`
-      );
+      const data = await restaurantAPI.getOneRestaurantInfo(busId)
       setRestaurant(data);
       setMenus(data.menusList);
       setOptions(data.optionsList);
