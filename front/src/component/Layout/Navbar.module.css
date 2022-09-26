@@ -1,0 +1,24 @@
+.container {
+  position: sticky;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem;
+}
+
+.navIcons {
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 0.6rem;
+  color: #51b059;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 680px) {
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 1rem;
+  }
+}
