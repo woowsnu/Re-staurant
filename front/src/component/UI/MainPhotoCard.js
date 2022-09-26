@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import BookMark from './BookMark';
+import { FaBookmark, FaRegBookmark, FaStar } from 'react-icons/fa';
 import styles from './PhotoCard.module.css';
-import { FaBookmark, FaRegBookmark, FaRunning, FaStar } from 'react-icons/fa';
 import colors from '../../styles/colors';
-import SmallChartBar from '../Restaurant/Chart/SmallChartBar';
 
-const PhotoCard = ({ resInfo }) => {
+const MainPhotoCard = (props) => {
   const {
     busId,
     restaurantName,
@@ -14,7 +14,13 @@ const PhotoCard = ({ resInfo }) => {
     guCode,
     avgRating,
     likeIndex,
-  } = resInfo;
+  } = props.data;
+
+  const [check, setCheck] = useState(props.editMark);
+
+  const checkOnClickHandler = () => {
+    setCheck(true);
+  };
 
   return (
     <div className={styles.container}>
@@ -40,7 +46,20 @@ const PhotoCard = ({ resInfo }) => {
           </Link>
         </div>
         <div className={styles.bookmark}>
-          <label htmlFor='bookmark' className={styles.bookmarkImg}>
+          {likeIndex !== null ? (
+            <BookMark
+              editMarked={check}
+              data={props.data}
+              onClick={checkOnClickHandler}
+            />
+          ) : (
+            <BookMark
+              editMarked={check}
+              data={props.data}
+              onClick={checkOnClickHandler}
+            />
+          )}
+          {/* <label htmlFor='bookmark' className={styles.bookmarkImg}>
             {likeIndex !== null ? (
               <FaBookmark
                 style={{ color: `${colors.primary1}`, fontSize: '24px' }}
@@ -51,17 +70,11 @@ const PhotoCard = ({ resInfo }) => {
               />
             )}
           </label>
-          <input id='bookmark' type='checkbox' />
+          <input id='bookmark' type='checkbox' /> */}
         </div>
       </div>
-      {/* <div className={styles.ChartBar}>
-        <FaRunning style={{paddingRight: '6px'}}/>
-        <SmallChartBar reviews={2} reviewCount={10}/>
-      </div> */}
     </div>
   );
 };
 
-export default PhotoCard;
-
-// background-image: url(${(props) => props.bgImg});
+export default MainPhotoCard;

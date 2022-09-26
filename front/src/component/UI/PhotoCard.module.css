@@ -9,7 +9,6 @@
 
 a:link,
 :visited,
-:hover,
 :active {
   text-decoration: none;
   color: inherit;
