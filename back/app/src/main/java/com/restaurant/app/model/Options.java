@@ -4,7 +4,6 @@ package com.restaurant.app.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Builder
@@ -13,7 +12,7 @@ import java.io.Serializable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Options implements Serializable {
+public class Options  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,12 +38,7 @@ public class Options implements Serializable {
     @JoinColumn(name = "restaurant_index",referencedColumnName = "restaurant_index")
     private Restaurant restaurant;
 
-//    @Override
-//    public String toString() {
-//        return "optionId : " + optionId  + "optionName : " + optionName
-//                + "iconUrl : " + iconUrl  + ", isCheck : "+ isCheck + ", orderCount : "+orderCount ;
-//
-//    }
+
 
 
 

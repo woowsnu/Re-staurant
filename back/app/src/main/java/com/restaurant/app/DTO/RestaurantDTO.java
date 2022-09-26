@@ -1,10 +1,7 @@
 package com.restaurant.app.DTO;
 
 import com.restaurant.app.model.Restaurant;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -12,6 +9,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class RestaurantDTO {
 
     private Long restaurantIndex;  //레스토랑 아이디

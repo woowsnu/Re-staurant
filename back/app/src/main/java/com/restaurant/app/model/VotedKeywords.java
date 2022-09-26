@@ -11,7 +11,7 @@ import java.io.Serializable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class VotedKeywords implements Serializable {
+public class VotedKeywords {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)

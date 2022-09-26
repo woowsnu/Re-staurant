@@ -1,10 +1,7 @@
 package com.restaurant.app.DTO;
 
 import com.restaurant.app.model.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -12,6 +9,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class UserDTO {
 
     private Long userIndex;
@@ -26,6 +24,7 @@ public class UserDTO {
 
     private List<RestaurantLikeDTO> restaurantLikeList;
 
+    private List<ReviewPhotoDTO> reviewPhotoList;
 
     public UserDTO(User user) {
         this.userIndex = user.getUserIndex();
@@ -37,5 +36,6 @@ public class UserDTO {
         this.restaurantLikeList = user.restaurantLikeList(user.getRestaurantLikeList());
 //        this.followingList = user.followerList(user.getFollowerList());
 //        this.followerList = user.followerList(user.getFollowerList());
+        this.reviewPhotoList = user.reviewPhotoList(user.getReviewPhotoList());
     }
 }

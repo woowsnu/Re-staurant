@@ -4,12 +4,16 @@ import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.DTO.ReviewDTO;
 import com.restaurant.app.model.Review;
+import com.restaurant.app.model.ReviewPhoto;
 import com.restaurant.app.model.User;
 import com.restaurant.app.service.ReviewService;
+import com.restaurant.app.util.MD5Generator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,10 +27,13 @@ public class ReviewController {
 
     // Create Review
     @PostMapping("/{busId}/auth/createReview")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> createReview(@AuthenticationPrincipal User authedUser
             , @PathVariable String busId, @RequestBody ReviewDTO reviewDTO) {
 
         try {
+//            String origFilename = ReviewPhoto.getOriginalFilename();
+//            String filename = new MD5Generator(origFilename).toString();
 
             reviewService.save(authedUser,reviewDTO,busId);
 
@@ -39,8 +46,8 @@ public class ReviewController {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
             return ResponseEntity.badRequest().body(responseDTO);
         }
-    }
 
+    }
     //read
     @GetMapping("/{email}/auth/findUserView")
     public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser,@PathVariable String email){

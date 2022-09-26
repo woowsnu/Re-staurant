@@ -5,29 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f141b506-fdf4-4a49-aff2-ab3531f8b631" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16__10_38__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16__7_28__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16__7_28__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16__7_28__Changes_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16__7_31__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오전_10_38_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_28_[Changes]/createRestaurantInfo.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_28_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_28_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_28_[Changes]2/createRestaurantInfo.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_28_[Changes]2/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_31_[Changes]/createRestaurantInfo.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022-09-16_오후_7_31_[Changes]/shelved.patch" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/util/MD5Generator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/FollowDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/FollowDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/MenusDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/MenusDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/RestaurantDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/RestaurantDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/RestaurantLikeDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/RestaurantLikeDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/ReviewDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/ReviewDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/ReviewImagesDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/ReviewPhotoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/ReviewImagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/ReviewPhotoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/ReviewPhotoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/ReviewPhotoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/VotedKeywordsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/DTO/VotedKeywordsDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/FollowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/FollowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/OptionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/OptionsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/RestaurantLikeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/RestaurantLikeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/ReviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/ReviewPhotoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/controller/ReviewPhotoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Follow.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Follow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Options.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Options.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Restaurant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/RestaurantLike.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/RestaurantLike.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/ReviewImages.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/ReviewPhoto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/ReviewPhoto.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/ReviewPhoto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/VotedKeywords.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/VotedKeywords.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/OptionsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/OptionsRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantLikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantLikeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/ReviewImagesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/ReviewPhotoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/RestaurantRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/ReviewPhotoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/repository/ReviewPhotoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/FollowService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/FollowService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/OptionsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/OptionsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/RestaurantLikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/RestaurantLikeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/ReviewImagesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/ReviewIPhotoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/ReviewIPhotoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/ReviewPhotoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/service/ReviewService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/back/app/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,8 +70,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -83,19 +94,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Leesumin/Documents/GitHub/Re-staurant&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/Leesumin/Documents/GitHub/Re-staurant",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.restaurant.app.service" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Leesumin\Documents\GitHub\Re-staurant\data_crawling" />
     </key>
@@ -155,6 +169,11 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/back/app/src/main/java/com/restaurant/app/model/Review.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

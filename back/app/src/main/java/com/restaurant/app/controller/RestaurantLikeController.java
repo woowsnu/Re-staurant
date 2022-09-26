@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/restaurant")
+@RequestMapping("/restaurantlike")
 @CrossOrigin("*")
 @Slf4j
 public class RestaurantLikeController {
@@ -26,16 +26,12 @@ public class RestaurantLikeController {
     private final RestaurantLikeService restaurantLikeService;
 
     // 북마크 생성
-    @PostMapping("/createLike/auth")
+    @PostMapping("/auth/createLike")
     public ResponseEntity<?> save(@AuthenticationPrincipal User authedUser,@RequestBody RestaurantLikeDTO restaurantLikeDTO) {
 
         try {
 
-//            List<RestaurantLike> restaurantLikeList = restaurantLikeService.save(authedUser,restaurantLikeDTO);
-//            List<RestaurantLikeDTO> restaurantLikesDTO = restaurantLikeList.stream().map(RestaurantLikeDTO::new).collect(Collectors.toList());
-
-//            System.out.println("restaurantList : " +restaurantLikeList);
-            restaurantLikeService.createRestaurantLike(authedUser,restaurantLikeDTO);
+            restaurantLikeService.save(authedUser,restaurantLikeDTO);
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
             return ResponseEntity.ok().body(responseDTO);
 
@@ -77,14 +73,14 @@ public class RestaurantLikeController {
 
     //북마크 조회
 
-    @DeleteMapping("{likeIndex}/auth/deleteLike")
+    @DeleteMapping("/auth/deleteLike/{likeIndex}")
     public ResponseEntity<?> deleteLike(@AuthenticationPrincipal User authedUser,
                                         @PathVariable Long likeIndex) {
 
         try{
-            Long deletedLikeIndex = restaurantLikeService.delete(authedUser,likeIndex);
+            restaurantLikeService.delete(authedUser,likeIndex);
 
-            return ResponseEntity.ok().body("likeIndex : " + deletedLikeIndex  + "has deleted");
+            return ResponseEntity.ok().body(0);
         }
         catch(Exception e) {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();

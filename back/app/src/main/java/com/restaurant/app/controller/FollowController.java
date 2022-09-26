@@ -48,12 +48,12 @@ public class FollowController {
             followService.unFollowing(authedUser, unFollowDTO);
 
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
+//            ResponseDTO responseDTO = ResponseDTO.builder().result(0).build();
 
             return ResponseEntity.ok().body(responseDTO);
         }
         catch(Exception e) {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-
             return ResponseEntity.badRequest().body(responseDTO);
         }
     }

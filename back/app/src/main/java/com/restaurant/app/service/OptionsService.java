@@ -85,26 +85,12 @@ public class OptionsService {
 
 //    @Override
     @Transactional
-    public void  delete(String busId) {
-//        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
-//        Options option = optionsRepository.findOptionsByRestaurantBusId(busId);
-//        Options option = optionsRepository.findByRestaurantOptionIndex(restaurantOptionIndex);
-//        optionsRepository.delete(option);
+    public Long  delete(Long optionIndex, String busId) {
 
         List<Options> option = optionsRepository.findOptionsByRestaurantBusId(busId);
-//                .orElseThrow(() ->
-//                new IllegalArgumentException("존재하지 않습니다. busId=" + busId));
-//        optionsRepository.delete(options);
 
-//        optionsRepository.deleteById(busId);
-//        Options option = findById(restaurantOptionIndex);
-//        if(option.belongsToResatuarna(busId)){
-//            optionsRepository.deleteById(restaurantOptionIndex);
-//        }
-//        Options optionDelete = optionsRepository.save(options);
-//        return optionsRepository.findOptionsByRestaurantBusId(busId);
-//        return optionsRepository.deleteOptionsByRestaurantBusId();
-//        return busId;
+        return optionsRepository.deleteByOptionIndex(optionIndex);
+
 
     }
 

@@ -4,7 +4,6 @@ import com.restaurant.app.DTO.*;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Restaurant implements Serializable {
+public class Restaurant  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

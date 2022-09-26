@@ -6,7 +6,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Review implements Serializable {
+public class Review  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,9 +37,12 @@ public class Review implements Serializable {
     @Column(name="revisit")
     private int revisit;
 
+
+
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "user_index",referencedColumnName = "user_index")
     private User user;
+
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Restaurant.class)
     @JoinColumn(name = "restaurant_index",referencedColumnName = "restaurant_index")
     private Restaurant restaurant;
@@ -55,6 +57,7 @@ public class Review implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "review", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, orphanRemoval = true)
 //    private Set<ReviewImages> reviewImagesList = new HashSet();
 
+    private  List<ReviewPhoto> photos = new ArrayList<>();
 //    private List<ReviewPhoto> reviewImagesList = new ArrayList<>();
 //    public List<ReviewImagesDTO> reviewImagesList(Set<ReviewImages> reviewImagesList){
 //
@@ -63,6 +66,12 @@ public class Review implements Serializable {
 //        return  reviewImagesDTOList;
 //    }
 
+
+//    public Review(User user, String reviewTitle, String reviewContent){
+//        this.user = user;
+//        this.reviewTitle = reviewTitle;
+//        this.reviewContent = reviewContent;
+//    }
 
 
 
@@ -73,5 +82,21 @@ public class Review implements Serializable {
 
     }
 
+//    public  void update(String reviewTitle, String reviewContent){
+//        this.reviewTitle = reviewTitle;
+//        this.reviewContent = reviewContent;
+//    }
+
+    @Builder
+    public Review(Long reviewIndex,String reviewTitle, String reviewContent, String reviewImage, int tag,int revisit,Long fileId,LocalDateTime createDate, LocalDateTime modifiedDate){
+        this.reviewIndex =reviewIndex;
+        this.reviewTitle = reviewTitle;
+        this.reviewContent =reviewContent;
+        this.reviewImage = reviewImage;
+        this.tag = tag;
+        this.revisit = revisit;
+        this.createDate=createDate;
+        this.modifiedDate = modifiedDate;
+    }
 
 }

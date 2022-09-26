@@ -4,6 +4,7 @@ package com.restaurant.app.model;
 import com.restaurant.app.DTO.FollowDTO;
 import com.restaurant.app.DTO.RestaurantLikeDTO;
 import com.restaurant.app.DTO.ReviewDTO;
+import com.restaurant.app.DTO.ReviewPhotoDTO;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -53,7 +54,12 @@ public class User {
     private Set<Follow> followerList = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<RestaurantLike> restaurantLikeList = new HashSet();
+    private Set<RestaurantLike> restaurantLikeList = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<ReviewPhoto> reviewPhotoList = new HashSet<>();
+
+
 
 
     @CreatedDate
@@ -93,6 +99,10 @@ public class User {
         return restaurantLikeDTOList;
     }
 
+    public List<ReviewPhotoDTO> reviewPhotoList (Set<ReviewPhoto> reviewPhoto){
+        List<ReviewPhotoDTO> reviewPhotoDTOList = reviewPhoto.stream().map(ReviewPhotoDTO::new).collect((Collectors.toList()));
+        return reviewPhotoDTOList;
+    }
 
 
 

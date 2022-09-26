@@ -40,6 +40,7 @@ public class ReviewService {
                 .tag(reviewDTO.getTag())
                 .createDate(LocalDateTime.now())
                 .modifiedDate(LocalDateTime.now())
+//                .fileId(reviewDTO.getFileId())
                 .build();
 
         review.setUser(authedUser);

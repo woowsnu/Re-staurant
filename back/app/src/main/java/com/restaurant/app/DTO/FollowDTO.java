@@ -1,15 +1,13 @@
 package com.restaurant.app.DTO;
 
 import com.restaurant.app.model.Follow;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class FollowDTO {
 
     private Long followIndex;

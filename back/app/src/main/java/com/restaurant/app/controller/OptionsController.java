@@ -78,19 +78,20 @@ public class OptionsController {
 
 
     //delete
-    @DeleteMapping("/delete/{busId}")
-    public ResponseEntity<?> delete(@PathVariable String busId){
+    @DeleteMapping("/delete/{optionIndex}")
+    public ResponseEntity<?> delete(@PathVariable Long optionIndex, String busId){
 
-//        try{
-        optionsService.delete(busId);
+        try{
+            Long deletedOptionIndex = optionsService.delete(optionIndex,busId);
+
 //            List<Options> optionsList = optionsService.deleteOption()
 
-            return ResponseEntity.ok().body(busId);
-//        }
-//        catch(Exception e) {
-//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-//            return ResponseEntity.ok().body(responseDTO);
-//        }
+        return ResponseEntity.ok().body("optionIndex : " + deletedOptionIndex + "optionIndex");
+    }
+        catch(Exception e) {
+        ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+        return ResponseEntity.ok().body(responseDTO);
+    }
 
     }
 

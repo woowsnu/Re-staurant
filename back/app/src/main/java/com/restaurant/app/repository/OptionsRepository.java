@@ -11,6 +11,7 @@ public interface OptionsRepository extends JpaRepository<Options, Long> {
     List<Options> findAll();
 
     List<Options> findOptionsByRestaurantBusId(String busId);
+    Long deleteByOptionIndex(Long optionIndex);
 
 
 }
