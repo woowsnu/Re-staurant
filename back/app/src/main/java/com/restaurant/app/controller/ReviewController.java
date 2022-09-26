@@ -1,7 +1,6 @@
 package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.ResponseDTO;
-import com.restaurant.app.DTO.RestaurantDTO;
 import com.restaurant.app.DTO.ReviewDTO;
 import com.restaurant.app.model.Review;
 import com.restaurant.app.model.User;
