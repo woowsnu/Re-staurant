@@ -11,7 +11,6 @@ const ImageSlider = ({ images }) => {
 
   const nextSlide = () => {
     setCurrentIndex(currentIndex + 1);
-    console.log(currentIndex);
     setStyle({
       transform: `translateX(-${currentIndex + 1}00%)`,
       transition: `all 0.4s ease-in-out`,
@@ -26,6 +25,14 @@ const ImageSlider = ({ images }) => {
     });
   };
 
+  const resetIndex = () => {
+    setCurrentIndex(0)
+    setStyle({
+      transform: `translateX(-${1}00%)`,
+      transition: `all 0.4s ease-in-out`,
+    });
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.imgwrap}>
@@ -38,10 +45,10 @@ const ImageSlider = ({ images }) => {
         })}
       </div>
       <div className={styles.btns}>
-        <button onClick={prevSlide}>
+        <button onClick={currentIndex < 0 ? resetIndex : prevSlide}>
           <FaAngleLeft />
         </button>
-        <button onClick={nextSlide}>
+        <button onClick={currentIndex > images.length ? resetIndex :nextSlide}>
           <FaAngleRight />
         </button>
       </div>
