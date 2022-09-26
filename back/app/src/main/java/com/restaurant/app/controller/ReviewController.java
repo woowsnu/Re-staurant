@@ -21,6 +21,7 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
+    // Create Review
     @PostMapping("/{busId}/auth/createReview")
     public ResponseEntity<?> createReview(@AuthenticationPrincipal User authedUser
             , @PathVariable String busId, @RequestBody ReviewDTO reviewDTO) {

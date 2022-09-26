@@ -25,7 +25,7 @@ public class Menus {
     @Column(name="menu_price")
     private String menuPrice;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Restaurant.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Restaurant.class)
     @JoinColumn(name = "restaurant_index",referencedColumnName = "restaurant_index")
     private Restaurant restaurant;
 
