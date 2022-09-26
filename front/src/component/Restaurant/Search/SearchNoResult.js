@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import styles from "./RestaurantSearchNoResult.module.css";
-import Tag from "../UI/Tag";
-import PhotoCard from "../UI/PhotoCard";
-import Footer from "../Layout/Footer";
+import styles from "./SearchNoResult.module.css";
+import Tag from "../../UI/Tag";
+import PhotoCard from "../../UI/PhotoCard";
 
-const RestaurantSearchNoResult = () => {
+const SearchNoResult = () => {
   const TAG = ["삼겹살", "우동", "카레", "까눌레", "중식"];
   const MANY_REVISIT = [1698767904, 1788964881, 1274871069, 37064850];
 
@@ -53,10 +52,9 @@ const RestaurantSearchNoResult = () => {
             />
           ))}
         </div>
-        <Footer />
       </div>
     </>
   );
 };
 
-export default RestaurantSearchNoResult;
+export default SearchNoResult;
