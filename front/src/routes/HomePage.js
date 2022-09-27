@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
 import Layout from '../component/Layout/Layout';
 import Navbar from '../component/Layout/Navbar';
 import Header from '../component/Layout/Header';
@@ -8,6 +7,7 @@ import MainPhotoCard from '../component/UI/MainPhotoCard';
 import styles from './HomePage.module.css';
 import ResContext from '../store/res-context';
 import SmallListCard from '../component/UI/SmallListCard';
+import CardSection from '../component/UI/CardSection';
 
 const HomePage = () => {
   const resCtx = useContext(ResContext);
@@ -28,9 +28,10 @@ const HomePage = () => {
         </div>
         <h3>맛 보장! 재방문 많은 맛집</h3>
         <div className={styles.section}>
-          {topList?.map((item) => (
+          <CardSection list={topList}/>
+          {/* {topList?.map((item) => (
             <MainPhotoCard key={item.restaurantIndex} data={item} editMark={!!item.likeIndex}/>
-          ))}
+          ))} */}
         </div>
         <h3>유저들의 최신 리뷰</h3>
         <div className={styles.section}>

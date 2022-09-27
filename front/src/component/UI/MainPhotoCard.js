@@ -6,6 +6,7 @@ import styles from './PhotoCard.module.css';
 import colors from '../../styles/colors';
 
 const MainPhotoCard = (props) => {
+  console.log(props.data)
   const {
     busId,
     restaurantName,
