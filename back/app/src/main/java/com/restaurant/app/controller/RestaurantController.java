@@ -51,8 +51,8 @@ public class RestaurantController {
 
         try{
             List<RestaurantDTO> restaurantList = restaurantService.findRestaurantByRegion(siCode,guCode,dongCode);
-//
-            return ResponseEntity.ok().body(null);
+
+            return ResponseEntity.ok().body(restaurantList);
         }
         catch(Exception e) {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();

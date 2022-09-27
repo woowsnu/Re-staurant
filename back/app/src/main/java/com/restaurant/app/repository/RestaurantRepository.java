@@ -13,12 +13,25 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     Restaurant findRestaurantByBusId(String busId);
     List<Restaurant> findRestaurantByRestaurantNameContainingIgnoreCase(String restaurantName);
 
-    Restaurant findRestaurantByRestaurantIndex(Long restaurantIndex);
-
+    // siCode 조회
     List<Restaurant> findRestaurantBySiCode(String siCode);
 
+    // guCode 조회
+    List<Restaurant> findRestaurantByGuCode(String guCode);
 
-    List<Restaurant> findRestaurantBySiCodeAndGuCode(String siCode, String guCode);
+    // dongCode 조회
+    List<Restaurant> findRestaurantByDongCode(String dongCode);
+
+    // siCode, guCode 조회
+    List<Restaurant> findRestaurantBySiCodeAndGuCode(String siCode,String guCode);
+
+    // siCode, dongCode 조회
+    List<Restaurant> findRestaurantBySiCodeAndDongCode(String siCode,String dongCode);
+
+    // guCode, dongCode 조회
+    List<Restaurant> findRestaurantByGuCodeAndDongCode(String guCode,String dongCode);
+
+    // siCode, guCode, dongCode 조회
     List<Restaurant> findRestaurantBySiCodeAndGuCodeAndDongCode(String siCode, String guCode, String dongCode);
 
 

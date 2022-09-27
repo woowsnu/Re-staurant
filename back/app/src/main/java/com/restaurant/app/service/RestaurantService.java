@@ -61,9 +61,56 @@ public class RestaurantService {
     }
 
     public List<RestaurantDTO> findRestaurantByRegion(String siCode,String guCode, String dongCode) {
+        List<Restaurant> restaurantList = new ArrayList<>();
 
+        if(siCode == null && guCode == null & dongCode == null) {
+            throw new RuntimeException("해당 식당이 없습니다.");
+        }
 
-      return null;
+        if(siCode == null) {
+            if(guCode == null) {
+                // dongCode로 조회
+                restaurantList = restaurantRepository.findRestaurantByDongCode(dongCode);
+            }
+            else{
+                if(dongCode == null) {
+                    // guCode로 조회
+                    restaurantList = restaurantRepository.findRestaurantByGuCode(guCode);
+                }
+                else {
+                    // guCode,dongCode로 조회
+                    restaurantList = restaurantRepository.findRestaurantByGuCodeAndDongCode(guCode,dongCode);
+                }
+            }
+        }
+        else {
+            if(guCode == null) {
+                if(dongCode == null) {
+                    // siCode로 조회
+                    restaurantList = restaurantRepository.findRestaurantBySiCode(siCode);
+                }
+                else {
+                    // siCode, dongCode로 조회
+                    restaurantList = restaurantRepository.findRestaurantBySiCodeAndDongCode(siCode,dongCode);
+                }
+            }
+            else {
+                if(dongCode == null) {
+                    // siCode, guCode로 조회
+                    restaurantList = restaurantRepository.findRestaurantBySiCodeAndGuCode(siCode,guCode);
+                }
+                else {
+                    // siCode, guCode, dongCode로 조회
+                    restaurantList = restaurantRepository.findRestaurantBySiCodeAndGuCodeAndDongCode(siCode,guCode,dongCode);
+                }
+            }
+        }
+
+        if(restaurantList.size() == 0) {
+            throw new RuntimeException("해당 식당이 없습니다.");
+        }
+
+        return restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
        }
 
 
