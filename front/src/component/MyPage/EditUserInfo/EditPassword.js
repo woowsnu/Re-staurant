@@ -5,15 +5,9 @@ import { instance } from "../../../api/axios";
 import Button from "../../UI/Button";
 
 const EditPassword = (props) => {
-  const [previousPassword, setPreviousPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordCheck, setNewPasswordCheck] = useState("");
   const [warning, setWarning] = useState("");
-
-  const previousPasswordInput = (e) => {
-    e.preventDefault();
-    setPreviousPassword(e.target.value);
-  };
 
   const newPasswordInput = (e) => {
     e.preventDefault();

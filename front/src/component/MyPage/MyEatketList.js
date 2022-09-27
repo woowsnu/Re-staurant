@@ -10,7 +10,7 @@ const MyEatketList = (props) => {
 
   let resName = [];
   data.map((data) => {
-    resName.push(data.restaurantName);
+    return resName.push(data.restaurantName);
   });
 
   let resInfo = [];
@@ -26,10 +26,9 @@ const MyEatketList = (props) => {
   useEffect(() => {
     const dataFetch = async () => {
       await resDataFetch();
-      console.log(resInfo);
 
       resInfo.map((info) => {
-        resarray.push(info);
+        return resarray.push(info);
       });
 
       setShow(true);
