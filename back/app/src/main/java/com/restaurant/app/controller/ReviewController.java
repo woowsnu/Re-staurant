@@ -16,76 +16,47 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/review")
+@RequestMapping("/api")
 public class ReviewController {
 
     private final ReviewService reviewService;
 
     // Create Review
-    @PostMapping("/{busId}/auth/createReview")
+    @PostMapping("/auth/createReview")
     public ResponseEntity<?> createReview(@AuthenticationPrincipal User authedUser
-            , @PathVariable String busId, @RequestBody ReviewDTO reviewDTO) {
+            , @RequestParam(value="busId") String busId, @RequestBody ReviewDTO reviewDTO) {
 
         try {
 
             reviewService.save(authedUser,reviewDTO,busId);
 
+            // 성공했을 경우 result:1로 설정하여 프론트로 전달.
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
             return ResponseEntity.ok().body(responseDTO);
-
         }
         catch (Exception e) {
-            System.out.println(e.getMessage());
+            // 실패했을 경우 예외사항 메세지 전달
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
             return ResponseEntity.badRequest().body(responseDTO);
         }
     }
-
-    //read
-    @GetMapping("/{email}/auth/findUserView")
-    public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser,@PathVariable String email){
-        try{
-            List<Review> reviewList = reviewService.findByEmail(authedUser,email);
-
-            List<ReviewDTO> reviewDTOs = reviewList.stream().map(ReviewDTO::new).collect((Collectors.toList()));
-
-
-            return ResponseEntity.ok().body(reviewDTOs);
-        }
-        catch(Exception e) {
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.badRequest().body(responseDTO);
-        }
-    }
-
-    @GetMapping("/reviewSearch")
-    public ResponseEntity<?> reviewSearch (@RequestBody ReviewDTO reviewDTO){
-        try{
-            List<Review> reviewList = reviewService.findReview(reviewDTO);
-            List<ReviewDTO> reviewDTOs = reviewList.stream().map(ReviewDTO::new).collect((Collectors.toList()));
-            return  ResponseEntity.ok().body(reviewDTOs);
-        }
-        catch(Exception e) {
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.badRequest().body(responseDTO);
-        }
-    }
-
 
     // Update Review
-    @PutMapping("{busId}/auth/updateReview")
+    @PutMapping("/auth/updateReview")
     public ResponseEntity<?> updateReview(@AuthenticationPrincipal User authedUser,
                                           @RequestBody ReviewDTO updateReviewDTO,
-                                          @PathVariable String busId ) {
+                                          @RequestParam(value="reviewIndex") String reviewIndex) {
+
         try{
 
-            reviewService.update(authedUser, updateReviewDTO,busId);
+            reviewService.update(authedUser, updateReviewDTO,Long.parseLong(reviewIndex));
 
+            // 성공했을 경우 result:1로 설정하여 프론트로 전달.
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
             return ResponseEntity.ok().body(responseDTO);
         }
         catch (Exception e) {
-            System.out.println(e.getMessage());
+            // 실패했을 경우 예외사항 메세지 전달
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
             return ResponseEntity.badRequest().body(responseDTO);
         }
@@ -93,12 +64,12 @@ public class ReviewController {
 
 
     // Delete Review
-    @DeleteMapping("{reviewIndex}/auth/deleteReview")
+    @DeleteMapping("/auth/deleteReview")
     public ResponseEntity<?> deleteReview(@AuthenticationPrincipal User authedUser,
-                                          @PathVariable Long reviewIndex) {
+                                          @RequestParam String reviewIndex) {
 
         try{
-            Long deletedReviewIndex = reviewService.delete(authedUser,reviewIndex);
+            Long deletedReviewIndex = reviewService.delete(authedUser,Long.parseLong(reviewIndex));
 
             return ResponseEntity.ok().body("reviewIndex : " + deletedReviewIndex + "has deleted");
         }
@@ -107,4 +78,34 @@ public class ReviewController {
             return ResponseEntity.ok().body(responseDTO);
         }
     }
+
+//    //read
+//    @GetMapping("/{email}/auth/findUserView")
+//    public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser,@PathVariable String email){
+//        try{
+//            List<Review> reviewList = reviewService.findByEmail(authedUser,email);
+//
+//            List<ReviewDTO> reviewDTOs = reviewList.stream().map(ReviewDTO::new).collect((Collectors.toList()));
+//
+//
+//            return ResponseEntity.ok().body(reviewDTOs);
+//        }
+//        catch(Exception e) {
+//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+//            return ResponseEntity.badRequest().body(responseDTO);
+//        }
+//    }
+//
+//    @GetMapping("/reviewSearch")
+//    public ResponseEntity<?> reviewSearch (@RequestBody ReviewDTO reviewDTO){
+//        try{
+//            List<Review> reviewList = reviewService.findReview(reviewDTO);
+//            List<ReviewDTO> reviewDTOs = reviewList.stream().map(ReviewDTO::new).collect((Collectors.toList()));
+//            return  ResponseEntity.ok().body(reviewDTOs);
+//        }
+//        catch(Exception e) {
+//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+//            return ResponseEntity.badRequest().body(responseDTO);
+//        }
+//    }
 }

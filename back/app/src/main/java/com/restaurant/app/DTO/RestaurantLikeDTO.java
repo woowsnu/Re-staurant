@@ -22,6 +22,7 @@ public class RestaurantLikeDTO {
 
     private Long restaurantIndex;
 
+    private Integer statusLike;
 
     public RestaurantLikeDTO(RestaurantLike restaurantLike){
         this.LikeIndex = restaurantLike.getLikeIndex();
@@ -30,7 +31,7 @@ public class RestaurantLikeDTO {
         this.email = restaurantLike.getUser().getEmail();
         this.nickname = restaurantLike.getUser().getNickname();
         this.restaurantIndex = restaurantLike.getRestaurant().getRestaurantIndex();
-
+        this.statusLike = restaurantLike.getStatusLike();
     }
 
 }

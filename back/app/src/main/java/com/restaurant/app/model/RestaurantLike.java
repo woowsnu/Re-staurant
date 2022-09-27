@@ -28,8 +28,8 @@ public class RestaurantLike {
     @JoinColumn(name = "restaurant_index",referencedColumnName = "restaurant_index")
     private Restaurant restaurant;
 
-    @Column(name="removed")
-    private Integer removed;
+    @Column(name="statusLike")
+    private Integer statusLike;
 
 
     @Override
