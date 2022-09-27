@@ -33,6 +33,7 @@ const ReviewEdit = (props) => {
       reviewTitle: editedTitle,
       reviewContent: editedContent,
       reviewIndex: props.reviewIndex,
+      reviewImage: props.reviewImage,
       revisit: editedRevisit,
     };
     instance

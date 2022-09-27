@@ -1,16 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styles from "./Withdraw.module.css";
 import Button from "../../UI/Button";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../../../store/auth-context";
-import { instance } from "../../../api/axios";
 
 const Withdraw = (props) => {
   const [withdrawDone, setWithdrawDone] = useState(false);
   const navigate = useNavigate();
-  const ctx = useContext(AuthContext);
   const email = props.email;
-  console.log(email);
 
   const exitWithdrawMode = () => {
     props.withdrawExit();
@@ -20,21 +16,7 @@ const Withdraw = (props) => {
     e.preventDefault();
     const token = localStorage.getItem("accessToken");
     const profile = { email : email };
-    // instance
-    //   .delete("/user/auth/deleteUserInfo", 
-    //   JSON.stringify(profile), {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: token,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
+    
     await fetch("http://spring-app:8080/user/auth/deleteUserInfo", {
       method: "DELETE",
       headers: {

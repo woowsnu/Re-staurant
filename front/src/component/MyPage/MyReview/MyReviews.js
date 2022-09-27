@@ -11,6 +11,7 @@ const MyReviews = (props) => {
   const [reviewIndex, setReviewIndex] = useState("");
   const [reviewTitle, setReviewTitle] = useState("");
   const [reviewContent, setReviewContent] = useState("");
+  const [reviewImage, setReviewImage] = useState("");
   const [revisit, setRevisit] = useState("");
   const [page, setPage] = useState(1);
   const offset = (page - 1) * 7;
@@ -34,7 +35,15 @@ const MyReviews = (props) => {
   };
 
   const review = props.user.reviewList;
-  const ourReview = props.user.reviewList?.filter((el) => el.tag === 1);
+  review.sort((a, b) => {
+    if (a.reviewIndex < b.reviewIndex) {
+      return -1;
+    }
+    if (a.reviewIndex > b.reviewIndex) {
+      return 1;
+    }
+    return 0;
+  });
 
   return (
     <>
@@ -43,7 +52,7 @@ const MyReviews = (props) => {
       </h3>
       <div className={styles.container}>
         {review.slice(offset, offset + 7).map((data) => (
-          <>
+          <li key={data.busId}>
             <div className={styles.reviewCard}>
               <span className={styles.editbuttons}>
                 <span className={styles.revisit}>
@@ -59,6 +68,7 @@ const MyReviews = (props) => {
                         setReviewTitle(data.reviewTitle);
                         setReviewContent(data.reviewContent);
                         setRevisit(data.revisit);
+                        setReviewImage(data.reviewImage);
                         reviewEditOpenHandler();
                       }}
                       style={{ marginRight: "6px" }}
@@ -80,13 +90,20 @@ const MyReviews = (props) => {
               </span>
               <div className={styles.resTitle}>
                 {data.restaurantName}
-                <span className={styles.date}>
-                  작성 : {data.createDate.slice(0, 10)}{" "}
-                  {data.createDate.slice(11, 16)}
-                </span>
+                {data.createDate === data.modifiedDate ? (
+                  <span className={styles.date}>
+                    작성 : {data.createDate.slice(0, 10)}{" "}
+                    {data.createDate.slice(11, 16)}
+                  </span>
+                ) : (
+                  <span className={styles.date}>
+                    작성 : {data.modifiedDate.slice(0, 10)}{" "}
+                    {data.modifiedDate.slice(11, 16)}
+                  </span>
+                )}
               </div>
               <div className={styles.reviews}>
-                { data.tag === 1 ? (
+                {data.tag === 1 ? (
                   <div className={styles.reviewTitle}>"{data.reviewTitle}"</div>
                 ) : (
                   ""
@@ -97,12 +114,16 @@ const MyReviews = (props) => {
                 ""
               ) : (
                 <div>
-                  <img src={data.reviewImage} className={styles.img} />
+                  <img
+                    alt={data.restaurantName}
+                    src={data.reviewImage}
+                    className={styles.img}
+                  />
                 </div>
               )}
             </div>
             <div className={styles.blank}>{""}</div>
-          </>
+          </li>
         ))}
         {review.length === 0 ? (
           ""
@@ -124,6 +145,7 @@ const MyReviews = (props) => {
             reviewTitle={reviewTitle}
             reviewContent={reviewContent}
             revisit={revisit}
+            reviewImage={reviewImage}
             updateHandler={updateHandler}
             reviewEditClose={reviewEditCloseHandler}
           />

@@ -6,6 +6,7 @@ import Pagination from "../../UI/Pagination";
 import styles from "./SearchResult.module.css";
 import { useParams } from "react-router-dom";
 import SearchNoResult from "./SearchNoResult";
+import Loader from "../../UI/Loader";
 
 const SearchResult = () => {
   const [resNameData, setResNameData] = useState("");
@@ -17,26 +18,38 @@ const SearchResult = () => {
 
   const searchWord = useParams().id;
 
-  const getResName = () => {
-    return instance.get(`restaurant/${searchWord}`);
-  };
-
-  const getCategory = () => {
-    return instance.get(`restaurant/search?restaurantCategory=${searchWord}`);
-  };
-
   useEffect(() => {
-    Promise.all([getResName(), getCategory()])
-      .then(([res1, res2]) => {
-        setDataFetch(true);
-        if (res1 === undefined && res2 === undefined) {
-          setSearchFail(true);
-        }
+    const getResName = () => {
+      return instance.get(`restaurant/${searchWord}`);
+    };
+    const getCategory = () => {
+      return instance.get(`restaurant/search?restaurantCategory=${searchWord}`);
+    };
+
+    Promise.all([getResName(), getCategory()]).then(([res1, res2]) => {
+      setDataFetch(true);
+      setResNameData("");
+      setCategoryData("");
+      if (res1 === undefined && res2 === undefined) {
+        setSearchFail(true);
+      } else if (res1 !== undefined && res2 === undefined) {
+        setSearchFail(false);
+        setResNameData(res1.data);
+      } else if (res1 === undefined && res2 !== undefined) {
+        setSearchFail(false);
+        setCategoryData(res2.data);
+      } else if (res1 !== undefined && res2 !== undefined) {
+        setSearchFail(false);
         setResNameData(res1.data);
         setCategoryData(res2.data);
-      })
+      }
+    });
   }, [searchWord]);
- 
+  // const profile = { reviewContent: searchWord };
+  // instance
+  //   .get("/review/reviewSearch", JSON.stringify(profile))
+  //   .then((res) => console.log(res));
+
   const resData = Object.assign(resNameData, categoryData);
   const objectToData = Object.values(resData);
 
@@ -76,7 +89,7 @@ const SearchResult = () => {
           )}
         </div>
       ) : (
-        ""
+        <Loader />
       )}
     </>
   );
