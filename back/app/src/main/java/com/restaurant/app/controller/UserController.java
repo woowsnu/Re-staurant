@@ -2,10 +2,13 @@ package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.FollowDTO;
 import com.restaurant.app.DTO.ResponseDTO;
+import com.restaurant.app.DTO.RestaurantLikeDTO;
 import com.restaurant.app.DTO.UserDTO;
 import com.restaurant.app.model.Follow;
+import com.restaurant.app.model.RestaurantLike;
 import com.restaurant.app.model.User;
 import com.restaurant.app.service.FollowService;
+import com.restaurant.app.service.RestaurantLikeService;
 import com.restaurant.app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api")
 public class UserController {
 
+    @Autowired
+    private final RestaurantLikeService restaurantLikeService;
     @Autowired
     private final UserService userService;
 
@@ -167,6 +172,23 @@ public class UserController {
         }
         catch (Exception e) {
             // 실패했을 경우 예외사항 메세지 전달
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
+    //북마크 조회
+    @GetMapping("/auth/findUserView")
+    public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser,@RequestBody String email){
+        try{
+            List<RestaurantLike> restaurantLikeList = restaurantLikeService.findByEmail(authedUser,email);
+
+            List<RestaurantLikeDTO> restaurantLikeDTOS = restaurantLikeList.stream().map(RestaurantLikeDTO::new).collect((Collectors.toList()));
+
+
+            return ResponseEntity.ok().body(restaurantLikeDTOS);
+        }
+        catch(Exception e) {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
             return ResponseEntity.badRequest().body(responseDTO);
         }

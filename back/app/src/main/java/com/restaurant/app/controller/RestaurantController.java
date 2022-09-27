@@ -3,13 +3,17 @@ package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.RestaurantDTO;
+import com.restaurant.app.DTO.RestaurantLikeDTO;
 import com.restaurant.app.model.Restaurant;
+import com.restaurant.app.model.User;
 import com.restaurant.app.repository.RestaurantRepository;
+import com.restaurant.app.service.RestaurantLikeService;
 import com.restaurant.app.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +24,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api")
 @Slf4j
 public class RestaurantController {
+    @Autowired
+    private final RestaurantLikeService restaurantLikeService;
 
     @Autowired
     RestaurantService restaurantService;
@@ -66,6 +72,44 @@ public class RestaurantController {
             return ResponseEntity.ok().body(restaurantResponseDTO);
         }
         catch (Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
+    // 북마크 생성
+    @PostMapping("/auth/createLike")
+    public ResponseEntity<?> createLike(@AuthenticationPrincipal User authedUser,
+                                  @RequestParam(value="busId") String busId) {
+
+        try {
+            restaurantLikeService.save(authedUser, busId);
+
+            // 성공했을 경우 result:1로 설정하여 프론트로 전달.
+            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
+            return ResponseEntity.ok().body(responseDTO);
+        }
+        catch (Exception e) {
+            // 실패했을 경우 예외사항 메세지 전달
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
+    // 북마크 삭제
+    @DeleteMapping("/auth/deleteLike")
+    public ResponseEntity<?> deleteLike(@AuthenticationPrincipal User authedUser,
+                                        @RequestParam(value="busId") String busId) {
+
+        try{
+            restaurantLikeService.delete(authedUser,busId);
+
+            // 성공했을 경우 result:1로 설정하여 프론트로 전달.
+            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
+            return ResponseEntity.ok().body(responseDTO);
+        }
+        catch (Exception e) {
+            // 실패했을 경우 예외사항 메세지 전달
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
             return ResponseEntity.badRequest().body(responseDTO);
         }

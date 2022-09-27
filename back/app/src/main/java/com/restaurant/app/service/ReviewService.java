@@ -26,9 +26,8 @@ public class ReviewService {
     private final UserRepository userRepository;
 
     @Transactional
-    public List<Review> save(User authedUser, ReviewDTO reviewDTO, String busId) {
+    public void save(User authedUser, ReviewDTO reviewDTO, String busId) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
-
 
         Review review = Review.builder()
                 .user(authedUser)
@@ -42,39 +41,20 @@ public class ReviewService {
                 .modifiedDate(LocalDateTime.now())
                 .build();
 
-        review.setUser(authedUser);
-
-        Review savedReview = reviewRepository.save(review);
-        System.out.println("savedReview" + savedReview);
-
-        return reviewRepository.findReviewByRestaurantBusId(busId);
+        reviewRepository.save(review);
     }
 
-    @Transactional
-    public List<Review> findByEmail( User authedUser,String email){
-        List<Review> review = reviewRepository.findOptionsByUserEmail(email);
-        List<Review> reviews = reviewRepository.findReviewByUser(authedUser);
-        return review;
-    }
+    public void update(User authedUser , ReviewDTO updateReviewDTO, Long reviewIndex ) {
 
-    public  List<Review> findReview (ReviewDTO reviewDTO){
-        List<Review> reviewList = reviewRepository.findReviewByReviewTitleContainingIgnoreCaseOrReviewContentContainingIgnoreCase(reviewDTO.getReviewTitle(),reviewDTO.getReviewContent());
+        Review currReview = reviewRepository.findReviewByReviewIndex(reviewIndex);
 
-        if (reviewList.size() == 0) {
-            throw new RuntimeException("리뷰가 존재하지 않습니다.");
+
+        if (authedUser.getUserIndex() != currReview.getUser().getUserIndex()) {
+            throw new RuntimeException("타인의 게시물은 수정 불가 합니다.");
         }
 
-        return reviewList;
-    }
-
-    public void update(User authedUser , ReviewDTO updateReviewDTO, String busId ) {
-        // 기존 review 로드
-
-        Review currReview = reviewRepository.findReviewByReviewIndex(updateReviewDTO.getReviewIndex());
-//
-
-        currReview.setReviewContent(updateReviewDTO.getReviewContent());
         currReview.setReviewTitle(updateReviewDTO.getReviewTitle());
+        currReview.setReviewContent(updateReviewDTO.getReviewContent());
         currReview.setReviewImage(updateReviewDTO.getReviewImage());
         currReview.setRevisit(updateReviewDTO.getRevisit());
         currReview.setModifiedDate(updateReviewDTO.getModifiedDate());
@@ -88,14 +68,28 @@ public class ReviewService {
     public Long delete(User authedUser, Long reviewIndex) {
         Review currReview = reviewRepository.findReviewByReviewIndex(reviewIndex);
 
-
         if (authedUser.getUserIndex() != currReview.getUser().getUserIndex()) {
-            throw new RuntimeException("deleteReview denied. invalid userIndex");
+            throw new RuntimeException("타인의 게시물은 삭제 불가 합니다.");
         }
 
         return reviewRepository.deleteByReviewIndex(currReview.getReviewIndex());
 
     }
 
-
+//    @Transactional
+//    public List<Review> findByEmail( User authedUser,String email){
+//        List<Review> review = reviewRepository.findOptionsByUserEmail(email);
+//        List<Review> reviews = reviewRepository.findReviewByUser(authedUser);
+//        return review;
+//    }
+//
+//    public  List<Review> findReview (ReviewDTO reviewDTO){
+//        List<Review> reviewList = reviewRepository.findReviewByReviewTitleContainingIgnoreCaseOrReviewContentContainingIgnoreCase(reviewDTO.getReviewTitle(),reviewDTO.getReviewContent());
+//
+//        if (reviewList.size() == 0) {
+//            throw new RuntimeException("리뷰가 존재하지 않습니다.");
+//        }
+//
+//        return reviewList;
+//    }
 }
