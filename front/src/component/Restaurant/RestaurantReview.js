@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReviewListItem from '../Restaurant/ReviewListItem';
+import AuthContext from "../../store/auth-context";
 import { FaPen, FaQuestionCircle, FaRunning } from 'react-icons/fa';
 import Button from '../UI/Button';
 import ChartBar from './Chart/ChartBar';
@@ -9,6 +10,7 @@ import defaultImg from '../../assets/images/restaurant_default_img.jpg';
 import Pagination from '../UI/Pagination';
 
 const RestaurantReview = (props) => {
+  const ctx = useContext(AuthContext);
   const isLogin = localStorage.getItem('isLoggedIn');
   const {
     restaurantName,
@@ -24,9 +26,9 @@ const RestaurantReview = (props) => {
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
 
-  const ourReview = props.reviews?.filter((el) => el.tag === 1);
+  const ourReview = props.reviews?.filter((el) => el.tag === 1).sort(function(a,b) {return b.reviewIndex - a.reviewIndex});
   const ourReviewRevisit = ourReview?.filter((el) => el.revisit === 1);
-  const otherReview = props.reviews?.filter((el) => el.tag === 0);
+  const otherReview = props.reviews?.filter((el) => el.tag === 0).sort(function(a,b) {return b.reviewIndex - a.reviewIndex});
 
   const [currentTab, setCurrentTab] = useState(0);
 
@@ -53,7 +55,7 @@ const RestaurantReview = (props) => {
     <div id='res-reviews' className={styles.container}>
       <div className={styles.titleAndButton}>
         <h3>리뷰</h3>
-        {!!isLogin ? (
+        {ctx.isLoggedIn ? (
           <Link to={`/review/${busId}`} state={simpleRestaurantProfile}>
             <Button style={{ backgroundColor: '#51B059', color: '#fff' }}>
               <FaPen style={{ fontSize: '12px' }} /> 리뷰쓰기
@@ -102,13 +104,13 @@ const RestaurantReview = (props) => {
           onClick={() => tabHandler(0)}
           className={currentTab === 0 ? styles.tabsClicked : styles.tab}
         >
-          RE:STAURANT 리뷰 ({props.reviews.length})
+          RE:STAURANT 리뷰 ({ourReview.length})
         </li>
         <li
           onClick={() => tabHandler(1)}
           className={currentTab === 1 ? styles.tabsClicked : styles.tab}
         >
-          타사 리뷰
+          타사 리뷰 ({otherReview.length})
         </li>
       </ul>
       {currentTab === 0 && (
