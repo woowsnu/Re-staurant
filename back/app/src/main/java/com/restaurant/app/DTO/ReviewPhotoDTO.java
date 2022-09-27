@@ -24,15 +24,15 @@ public class ReviewPhotoDTO {
 
 
 //
-//    public ReviewPhoto toEntity(){
-//        ReviewPhoto build = ReviewPhoto.builder()
-//                .imgIndex(imgIndex)
-//                .originImageName(originImageName)
-//                .imageName(imageName)
-//                .imagePath(imagePath)
-//                .build();
-//        return build;
-//    }
+    public ReviewPhoto toEntity(){
+        ReviewPhoto build = ReviewPhoto.builder()
+                .imgIndex(imgIndex)
+                .originImageName(originImageName)
+                .imageName(imageName)
+                .imageUlr(imageUlr)
+                .build();
+        return build;
+    }
 
 //    public ReviewPhotoDTO(Long imgIndex,String originImageName, String imageName, String imageUlr){
 //        this.imgIndex = imgIndex;

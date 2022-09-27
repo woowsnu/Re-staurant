@@ -3,6 +3,7 @@ package com.restaurant.app.controller;
 
 import com.restaurant.app.DTO.ResponseDTO;
 import com.restaurant.app.DTO.ReviewPhotoDTO;
+import com.restaurant.app.model.ReviewPhoto;
 import com.restaurant.app.model.User;
 import com.restaurant.app.service.ReviewPhotoService;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,7 +23,6 @@ public class ReviewPhotoController {
     @Autowired
     private final ReviewPhotoService reviewIPhotoService;
 
-//    @CrossOrigin(origins = {"http://localhost:3000"})
 
     @GetMapping("/test")
     public String test() {
@@ -32,18 +30,12 @@ public class ReviewPhotoController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadeImg(@AuthenticationPrincipal User authedUser, ReviewPhotoDTO reviewPhotoDTO, @RequestParam () MultipartFile file, Long reviewIndex) throws IOException {
+    public ResponseEntity<?> uploadeImg(@AuthenticationPrincipal User authedUser, ReviewPhotoDTO reviewPhotoDTO, @RequestPart MultipartFile image, Long reviewIndex) throws IOException {
 
-//        URI uriLocation = new ("/reviewImages/" + reviewImages.getReviewImages());
-//        return ResponseEntity.created(uriLocation).body("{}");
+
         try {
-            if(!file.isEmpty()){
-                String fullPath = "C:\\Users\\" + file.getOriginalFilename();
-                file.transferTo(new File(fullPath));
-            }
 
-            reviewIPhotoService.imgUpload(authedUser, reviewPhotoDTO, file, reviewIndex);
-
+            reviewIPhotoService.imgUpload(authedUser, reviewPhotoDTO, image, reviewIndex);
             ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
             return ResponseEntity.ok().body(responseDTO);
 
@@ -52,5 +44,6 @@ public class ReviewPhotoController {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
             return ResponseEntity.badRequest().body(responseDTO);
         }
+
     }
 }
