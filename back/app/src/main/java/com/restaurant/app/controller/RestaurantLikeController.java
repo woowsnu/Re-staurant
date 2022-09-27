@@ -46,10 +46,10 @@ public class RestaurantLikeController {
 
 
     //북마크 조회
-    @GetMapping("/{email}/auth/findUserView")
-    public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser,@PathVariable String email){
+    @GetMapping("/auth/findUserView/{userIndex}")
+    public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser,@PathVariable Long userIndex){
         try{
-            List<RestaurantLike> restaurantLikeList = restaurantLikeService.findByEmail(authedUser,email);
+            List<RestaurantLike> restaurantLikeList = restaurantLikeService.findByUserIndex(authedUser,userIndex);
 
             List<RestaurantLikeDTO> restaurantLikeDTOS = restaurantLikeList.stream().map(RestaurantLikeDTO::new).collect((Collectors.toList()));
 
