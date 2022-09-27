@@ -40,9 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/auth/**").authenticated()
                 .antMatchers("/review/{\\d+}/auth/**").authenticated()
-                .antMatchers("/user/auth/**").authenticated()
-                .antMatchers("/follow/auth/**").authenticated()
-                .antMatchers("/restaurant/admin/**").access("hasRole('ROLE_ADMIN')")
+//                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().permitAll();
 
     }

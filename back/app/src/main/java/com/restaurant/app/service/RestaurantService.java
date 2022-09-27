@@ -5,10 +5,13 @@ import com.restaurant.app.model.Restaurant;
 import com.restaurant.app.repository.RestaurantRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -57,8 +60,15 @@ public class RestaurantService {
         return restaurantList;
     }
 
+    public List<RestaurantDTO> findRestaurantByRegion(String siCode,String guCode, String dongCode) {
 
-    @Transactional
+
+      return null;
+       }
+
+
+
+//    @Transactional
     public Restaurant findRestaurantByBusId(String busId) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
 
@@ -68,41 +78,40 @@ public class RestaurantService {
 
         return restaurant;
     }
-
-
-    public List<Restaurant>  findRestaurantBySiCode(String siCode){
-        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBySiCode(siCode);
-
-        if (restaurantList.size() == 0) {
-            throw new RuntimeException("식당이 없습니다.");
-        }
-
-        return restaurantList;
-    }
-
-    public List<Restaurant>  findRestaurantBySiCodeAndGuCode(String siCode ,String guCode){
-        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBySiCodeAndGuCode(siCode, guCode);
-
-
-        if (restaurantList.size() == 0) {
-            throw new RuntimeException("식당이 없습니다.");
-        }
-
-        return restaurantList;
-    }
-
-    public List<Restaurant>  findRestaurantBySiCodeAndGuCodeAndDongCode(String siCode ,String guCode,String dongCode){
-        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBySiCodeAndGuCodeAndDongCode(siCode, guCode, dongCode);
-
-
-        if (restaurantList.size() == 0) {
-            throw new RuntimeException("식당이 없습니다.");
-        }
-
-        return restaurantList;
-    }
-
-
+//
+//
+//    public List<Restaurant>  findRestaurantBySiCode(String siCode){
+//
+//        if (restaurantList.size() == 0) {
+//            throw new RuntimeException("식당이 없습니다.");
+//        }
+//
+//        return restaurantList;
+//    }
+//
+//    public List<Restaurant>  findRestaurantBySiCodeAndGuCode(String siCode ,String guCode){
+//        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBySiCodeAndGuCode(siCode, guCode);
+//
+//
+//        if (restaurantList.size() == 0) {
+//            throw new RuntimeException("식당이 없습니다.");
+//        }
+//
+//        return restaurantList;
+//    }
+//
+//    public List<Restaurant>  findRestaurantBySiCodeAndGuCodeAndDongCode(String siCode ,String guCode,String dongCode){
+//        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBySiCodeAndGuCodeAndDongCode(siCode, guCode, dongCode);
+//
+//
+//        if (restaurantList.size() == 0) {
+//            throw new RuntimeException("식당이 없습니다.");
+//        }
+//
+//        return restaurantList;
+//    }
+//
+//
     public List<Restaurant> findRestaurantByRestaurantCategory(String restaurantCategory){
         List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByRestaurantCategoryContainingIgnoreCase(restaurantCategory);
 
@@ -113,7 +122,7 @@ public class RestaurantService {
 
         return restaurantList;
     }
-
+//
     public List<Restaurant> findRestaurant(RestaurantDTO restaurantDTO){
         List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByRestaurantCategoryContainingIgnoreCaseOrRestaurantNameContainingIgnoreCase(restaurantDTO.getRestaurantCategory(), restaurantDTO.getRestaurantCategory());
 
@@ -135,8 +144,8 @@ public class RestaurantService {
 
         return restaurantList;
     }
-
-
+//
+//
 
 
 

@@ -21,43 +21,6 @@ public class OptionsController {
 
     private final OptionsService optionsService;
 
-    //전체조회
-    @GetMapping
-    public ResponseEntity<?> findAll() {
-        List<Options> options = optionsService.findAll();
-        List<OptionsDTO> optionsDTO = options.stream().map(OptionsDTO::new).collect(Collectors.toList());
-        return ResponseEntity.ok(optionsDTO);
-    }
-    
-    //    create
-    @PostMapping("/createOptions")
-    public ResponseEntity<?> save(@RequestBody OptionsDTO optionsDTO) {
-
-        try {
-
-            optionsService.save(optionsDTO);
-
-            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
-            return ResponseEntity.ok().body(responseDTO);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-            return ResponseEntity.badRequest().body(responseDTO);
-        }
-
-    }
-
-    //read
-    //가게 이름으로 조회
-//    @GetMapping("/findName/{restaurantName}")
-//    public ResponseEntity<?> findByRestaurant(@RequestBody OptionsDTO optionsDTO, @PathVariable String busId) {
-//
-//        List<Options> options = optionsService.findByRestaurant(optionsDTO,busId);
-//
-//        return optionsService.findByRestaurant(optionsDTO, busId);
-//    }
-
     //update
     @PutMapping("/update/{busId}")
     public ResponseEntity<?> update(@RequestBody OptionsDTO optionsDTO,@PathVariable String busId) {
