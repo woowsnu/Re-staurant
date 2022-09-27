@@ -2,8 +2,8 @@ import axios from 'axios';
 
 // 테스트용 주석
 export const instance = axios.create({
- // baseURL: 'http://localhost:8080',
- baseURL: 'http://43.200.202.164:8080',
+ baseURL: 'http://localhost:8080',
+//  baseURL: 'http://43.200.202.164:8080',
 });
 
 instance.interceptors.response.use(
