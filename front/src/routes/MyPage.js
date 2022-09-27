@@ -7,6 +7,7 @@ import AuthContext from "../store/auth-context";
 import Tabs from "../component/MyPage/Tabs";
 
 import styles from "./MyPage.module.css";
+import Loader from "../component/UI/Loader";
 
 const MyPage = () => {
   const [user, setUser] = useState("");
@@ -29,7 +30,6 @@ const MyPage = () => {
         headers: { "Content-Type": "application/json", Authorization: token, },
       })
       .then((response) => {
-        console.log(response);
         const data = response.data;
         setUser(data);
         setDatafetch(true);
@@ -41,15 +41,15 @@ const MyPage = () => {
         console.log(error);
       });
   }, [isUpdated]);
-
+  console.log(user)
 
   return (
-    datafetch && (
+    datafetch ? (
       <div className={styles.wrapper}>
         <Profile user={user} updateHandler={() => setIsUpdated(!isUpdated)} />
         <Tabs user={user} updateHandler={updateHandler} />
       </div>
-    )
+    ) : <Loader />
   );
 };
 

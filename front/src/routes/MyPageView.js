@@ -3,9 +3,8 @@ import { useLocation } from "react-router-dom";
 import { instance } from "../api/axios";
 
 import FollowProfile from "../component/MyPage/Follow/FollowProfile";
-import AuthContext from "../store/auth-context";
 import Tabs from "../component/MyPage/Tabs";
-import LogIn from "../component/Auth/LogIn";
+import Loader from "../component/UI/Loader";
 import styles from "./MyPage.module.css";
 
 const MyPage = () => {
@@ -14,8 +13,6 @@ const MyPage = () => {
   const [isUpdated, setIsUpdated] = useState(false);
 
   const userEmail = useLocation().state;
-
-  let ctx = useContext(AuthContext);
 
   const updateHandler = () => {
     setIsUpdated(!isUpdated);
@@ -39,12 +36,12 @@ const MyPage = () => {
   }, [isUpdated]);
 
   return (
-    datafetch && ctx.isLoggedIn ? (
+    datafetch ? (
       <div className={styles.wrapper}>
         <FollowProfile user={user} followEmail={userEmail.email} updateHandler={updateHandler} />
         <Tabs user={user} updateHandler={updateHandler} />
       </div>
-    ) : <LogIn />
+    ) : <Loader />
   );
 };
 
