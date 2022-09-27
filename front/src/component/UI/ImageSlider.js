@@ -63,9 +63,9 @@ const ImageSlider = ({ images }) => {
   return (
     <div className={styles.container}>
       <div ref={ref} className={styles.imgwrap}>
-        {imageList.map((image) => {
+        {imageList.map((image, i) => {
           return (
-            <div key={image.id} style={style}>
+            <div key={i} style={style}>
               <img className={styles.imgbox} src={image.url} alt={image.id} />
             </div>
           );

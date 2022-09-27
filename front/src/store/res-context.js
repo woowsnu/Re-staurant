@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { instance } from '../api/axios';
+import React, { useContext, useEffect, useState } from 'react';
+import resInfoAPI from '../api/resInfoAPI';
+import AuthContext from './auth-context';
 
 const ResContext = React.createContext({
   topRevisit: [],
@@ -9,28 +10,19 @@ const ResContext = React.createContext({
 });
 
 export const ResContextProvider = (props) => {
-  const userEmail = localStorage.getItem('email');
-  const token = localStorage.getItem('accessToken');
+  const ctx = useContext(AuthContext);
   const [bookmark, setBookmark] = useState([]);
 
   useEffect(() => {
     const fetchBookMark = async () => {
-      const res = await instance.get(
-        `/restaurant/${userEmail}/auth/findUserView`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: token,
-          },
-        }
-      );
-      setBookmark(res.data);
+      const data = await resInfoAPI.getUserBookMark()
+      setBookmark(data);
     };
 
-    if (!!userEmail) {
+    if (ctx.isLoggedIn) {
       fetchBookMark();
     }
-  }, [userEmail, token]);
+  }, [ctx]);
 
   let topList = [
     {
@@ -147,28 +139,6 @@ export const ResContextProvider = (props) => {
       }
     }
   }
-
-  // let restaurantInfo = [];
-  // let endpoints = [
-  //   'http://localhost:8080/restaurant/restaurantDetail/859857359',
-  //   'http://localhost:8080/restaurant/restaurantDetail/34393996',
-  //   'http://localhost:8080/restaurant/restaurantDetail/31583220',
-  //   'http://localhost:8080/restaurant/restaurantDetail/1508260607',
-  // ];
-
-  // useEffect(() => {
-  //   const fetchRestaurantInfo = async () => {
-  //     axios
-  //       .all(endpoints.map((endpoint) => axios.get(endpoint)))
-  //       .then(axios.spread((res1, res2, res3, res4) => {
-  //           restaurantInfo.push(res1)
-  //           restaurantInfo.push(res2)
-  //           restaurantInfo.push(res3)
-  //           restaurantInfo.push(res4)
-  //       }));
-  //   };
-  //   fetchRestaurantInfo();
-  // }, [endpoints]);
 
   return (
     <ResContext.Provider

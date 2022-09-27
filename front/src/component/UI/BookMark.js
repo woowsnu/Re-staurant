@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { instance } from '../../api/axios';
 import styles from './BookMark.module.css';
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa';
+import resInfoAPI from '../../api/resInfoAPI';
+import AuthContext from '../../store/auth-context';
 
 const BookMark = (props) => {
+  const ctx = useContext(AuthContext)
   const userEmail = localStorage.getItem('email');
   const token = localStorage.getItem('accessToken');
   const isLogin = !!token;
-//   const bizId = useParams().id;
   const navigate = useNavigate();
-  const [bookmark, setBookmark] = useState('');
+  const [likeIndex, setLikeIndex] = useState('');
   const [editMark, setEditMark] = useState(props.editMark);
+  const [busId, setBusId] = useState(props.data.busId);
 
   useEffect(() => {
     const fetchBookmark = async () => {
       try {
-        const res = await instance.get(
-          `/restaurant/${userEmail}/auth/findUserView`,
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        );
-        const bookmarkArray = res.data;
+        const data = await resInfoAPI.getUserBookMark();
+        const bookmarkArray = data;
         const filterByBusId = bookmarkArray.filter((el) => el.busId === props.data?.busId);
         if (filterByBusId.length > 0) {
-          setBookmark(filterByBusId[0]);
+          setLikeIndex(filterByBusId[0].likeIndex);
+          console.log(filterByBusId[0].likeIndex)
           setEditMark(true);
         } else if (filterByBusId.length === 0) {
           setEditMark(false);
@@ -37,46 +34,29 @@ const BookMark = (props) => {
       }
     };
     fetchBookmark();
-  }, [editMark]);
+  }, []);
 
   //북마크 추가
   const createBookmarkHandler = async () => {
-    if (!isLogin) {
+    if (!ctx.isLoggedIn) {
       alert('로그인 후 이용 가능합니다.');
       navigate('/login');
       return;
     }
     const bookmarkData = {
-      busId: props.data.busId,
-      email: userEmail,
+      busId: busId,
     };
-    const { data } = await instance.post(
-      `/restaurant/createLike/auth`,
-      bookmarkData,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token,
-        },
-      }
-    );
-    console.log(data);
+    const data = await resInfoAPI.createUserBookMark(bookmarkData);
+    console.log(data)
     setEditMark(true);
   };
 
   // 북마크 삭제
   const deleteBookmarkHandler = async () => {
-    const res = await instance.delete(
-      `/restaurant/${bookmark}/auth/deleteLike`,
-      {
-        headers: {
-          Authorization: token,
-        },
-      }
-    );
-    setBookmark('');
+    const data = await resInfoAPI.deleteUserBookMark(likeIndex);
+    console.log(data);
+    setLikeIndex('');
     setEditMark(false);
-    console.log(res);
   };
   return (
     <>
