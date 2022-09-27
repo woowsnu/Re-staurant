@@ -26,10 +26,10 @@ public class FollowController {
                                        @RequestBody FollowDTO followDTO) {
 
         try{
+
             User follower = followService.following(authedUser, followDTO);
 
             FollowDTO followResponseDTO = FollowDTO.builder()
-//                    .followingList(follower.getFollowingList())
                     .build();
 
             return ResponseEntity.ok().body(followResponseDTO);
@@ -47,8 +47,7 @@ public class FollowController {
         try{
             followService.unFollowing(authedUser, unFollowDTO);
 
-            ResponseDTO responseDTO = ResponseDTO.builder().result(1).build();
-//            ResponseDTO responseDTO = ResponseDTO.builder().result(0).build();
+            ResponseDTO responseDTO = ResponseDTO.builder().result(0).build();
 
             return ResponseEntity.ok().body(responseDTO);
         }
