@@ -5,7 +5,7 @@ const resInfoAPI = {
   getOneRestaurantInfo: async (busId) => {
     try {
       const { data } = await instance.get(
-        `/restaurant/restaurantDetail/${busId}`
+        `/api/restaurantDetail/${busId}`
       );
       return data;
     } catch (error) {
@@ -19,9 +19,9 @@ const resInfoAPI = {
     );
     return data;
   },
-  createUserBookMark: async (bookmarkData) => {
+  createUserBookMark: async (bizId) => {
     const { data } = await instance.post(
-      `/restaurantlike/auth/createLike/`, bookmarkData
+      `/api/auth/createLike?busId=${bizId}`
     );
     return data;
   },

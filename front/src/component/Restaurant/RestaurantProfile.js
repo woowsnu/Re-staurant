@@ -70,7 +70,7 @@ const RestaurantProfile = (props) => {
     const bookmarkData = {
       busId: bizId,
     };
-    const data = await resInfoAPI.createUserBookMark(bookmarkData);
+    const data = await resInfoAPI.createUserBookMark(bizId);
     console.log(data)
     setEditMark(true);
   };
