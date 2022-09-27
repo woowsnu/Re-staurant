@@ -4,7 +4,7 @@
 
 ## 💡 팀 소개
 
-| [<img src="https://avatars.githubusercontent.com/u/105709187?v=4" width="140px" /> ](https://github.com/woowsnu) |[<img src="https://avatars.githubusercontent.com/u/102015738?v=4" width="140px" /> ](https://github.com/deeun)  |[<img src="https://avatars.githubusercontent.com/u/67572011?v=4" width="140px" /> ](https://github.com/gun-0208)  | [<img src="https://avatars.githubusercontent.com/u/66675699?v=4" width="140px" /> ](https://github.com/vsuminv)|[<img src="https://avatars.githubusercontent.com/u/99165573?v=4" width="140px" /> ](https://github.com/nikeisme) |
+| [<img src="https://avatars.githubusercontent.com/u/105709187?v=4" width="140px" /> ](https://github.com/woowsnu) |[<img src="https://avatars.githubusercontent.com/u/102015738?v=4" width="140px" /> ](https://github.com/deeun)  |[<img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/i6ix8tEeNCh8/v0/-1x-1.jpg" width="140px" /> ](https://github.com/gun-0208)  | [<img src="https://image.bugsm.co.kr/album/images/200/40741/4074162.jpg?version=20220415014400.0" width="140px" /> ](https://github.com/vsuminv)|[<img src="https://ca.slack-edge.com/T032WHU0K1C-U0333C3JCKY-0eacb53555e9-512" width="140px" /> ](https://github.com/nikeisme) |
 |--|--|--|--|--|
 | **문선화**  |**최지원**  |**강건** |**이수민** |**황유정** |
 | 프론트엔드  |프론트엔드  |백엔드, 배포 <br>데이터 크롤링  |백엔드 |백엔드 |
