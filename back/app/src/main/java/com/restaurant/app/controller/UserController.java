@@ -178,15 +178,12 @@ public class UserController {
     }
 
     //북마크 조회
-    @GetMapping("/auth/findUserView")
-    public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser,@RequestBody String email){
+    @GetMapping("/auth/findUserLike")
+    public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser) {
         try{
-            List<RestaurantLike> restaurantLikeList = restaurantLikeService.findByEmail(authedUser,email);
+            List<RestaurantLikeDTO> restaurantLikeDTOList = restaurantLikeService.findByUserIndex(authedUser);
 
-            List<RestaurantLikeDTO> restaurantLikeDTOS = restaurantLikeList.stream().map(RestaurantLikeDTO::new).collect((Collectors.toList()));
-
-
-            return ResponseEntity.ok().body(restaurantLikeDTOS);
+            return ResponseEntity.ok().body(restaurantLikeDTOList);
         }
         catch(Exception e) {
             ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();

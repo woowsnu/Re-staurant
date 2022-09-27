@@ -96,6 +96,21 @@ public class RestaurantController {
         }
     }
 
+
+    //북마크 조회
+    @GetMapping("/auth/findUserView")
+    public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser){
+        try{
+            List<RestaurantLikeDTO> restaurantLikeDTOList = restaurantLikeService.findByUserIndex(authedUser);
+
+            return ResponseEntity.ok().body(restaurantLikeDTOList);
+        }
+        catch(Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+    }
+
     // 북마크 삭제
     @DeleteMapping("/auth/deleteLike")
     public ResponseEntity<?> deleteLike(@AuthenticationPrincipal User authedUser,

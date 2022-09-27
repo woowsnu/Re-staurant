@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -55,19 +56,11 @@ public class RestaurantLikeService {
         restaurantLikeRepository.save(restaurantLike);
     }
 
-    public List<RestaurantLike> findByEmail(User authedUser,String email){
-        List<RestaurantLike> restaurantLike = restaurantLikeRepository.findRestaurantsLikeByUserEmail(email);
-        List<RestaurantLike> restaurantLikes = restaurantLikeRepository.findRestaurantsLikeByUser(authedUser);
-        return restaurantLike;
+    public List<RestaurantLikeDTO> findByUserIndex(User authedUser){
+        List<RestaurantLike> restaurantLikeList = restaurantLikeRepository.findRestaurantsLikeByUserUserIndex(authedUser.getUserIndex());
+
+        return restaurantLikeList.stream().map(RestaurantLikeDTO::new).collect((Collectors.toList()));
     }
-
-
-    public List<RestaurantLike> findRestaurantLikeByUser(User authedUser,String busId){
-        Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
-        List<RestaurantLike> restaurantLikes = restaurantLikeRepository.findRestaurantsLikeByUser(authedUser);
-        return restaurantLikes;
-    }
-
 
     public void delete(User authedUser, String busId) {
 
