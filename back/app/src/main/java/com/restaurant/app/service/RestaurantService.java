@@ -19,9 +19,8 @@ public class RestaurantService {
 
     @Autowired
     private RestaurantRepository restaurantRepository;
-//    public List<Restaurant> findAll() {
-//        return restaurantRepository.findAll();}
 
+    // 레스토랑 등록 [admin 계정만 가능]
     public Restaurant createPlaceInfo(RestaurantDTO restaurantDTO) {
 
         if(restaurantRepository.findRestaurantByBusId(restaurantDTO.getBusId()) != null) {
@@ -49,20 +48,31 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
-//
-    public List<Restaurant> findRestaurantByName(String restaurantName){
-        List<Restaurant> restaurantList = restaurantRepository.findRestaurantByRestaurantNameContainingIgnoreCase(restaurantName);
+    // 식당 이름으로 검색하는 경우 or 음식 카테고리로 검색하는 경우
+    public List<RestaurantDTO> findRestaurantByRestaurantCategoryOrRestaurantName(String restaurantCategory,String restaurantName){
 
+        // 두가지 쿼리스트링으로 한번에 요청할 경우 예외처리
+        if (restaurantCategory != null && restaurantName !=null) {
+            throw new RuntimeException("카테고리, 음식점 이름 중 한가지만 적어주시기 바랍니다.");
+        }
+
+        // 검색된 레스토랑 리스트 저장
+        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByRestaurantCategoryContainingIgnoreCaseOrRestaurantNameContainingIgnoreCase(restaurantCategory,restaurantName);
+
+        // 레스토랑 리스트 내용 없으면 예외처리
         if (restaurantList.size() == 0) {
             throw new RuntimeException("식당이 없습니다.");
         }
 
-        return restaurantList;
+        // 레스토랑 리스트 내용 있으면 DTO로 변환하여 리스트 반환
+        return restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
     }
 
+    // 지역별 레스토랑 조회
     public List<RestaurantDTO> findRestaurantByRegion(String siCode,String guCode, String dongCode) {
-        List<Restaurant> restaurantList = new ArrayList<>();
+        List<Restaurant> restaurantList;
 
+        // 지역 code가 모두 null이면 추가 연산없이 예외처리 반환
         if(siCode == null && guCode == null & dongCode == null) {
             throw new RuntimeException("해당 식당이 없습니다.");
         }
@@ -106,96 +116,23 @@ public class RestaurantService {
             }
         }
 
+        // 해당 검색어로 조회가 안됐을 경우 예외처리
         if(restaurantList.size() == 0) {
             throw new RuntimeException("해당 식당이 없습니다.");
         }
 
+        // 리스트에 담긴 데이터가 있다면 DTO로 변환하여 리스트 반환
         return restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
        }
 
-
-
-//    @Transactional
-    public Restaurant findRestaurantByBusId(String busId) {
+       // busId로 레스토랑 조회
+    public RestaurantDTO findRestaurantByBusId(String busId) {
         Restaurant restaurant = restaurantRepository.findRestaurantByBusId(busId);
 
         if (restaurant == null) {
             throw new RuntimeException("해당 식당이 없습니다.");
         }
 
-        return restaurant;
+        return new RestaurantDTO(restaurant);
     }
-//
-//
-//    public List<Restaurant>  findRestaurantBySiCode(String siCode){
-//
-//        if (restaurantList.size() == 0) {
-//            throw new RuntimeException("식당이 없습니다.");
-//        }
-//
-//        return restaurantList;
-//    }
-//
-//    public List<Restaurant>  findRestaurantBySiCodeAndGuCode(String siCode ,String guCode){
-//        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBySiCodeAndGuCode(siCode, guCode);
-//
-//
-//        if (restaurantList.size() == 0) {
-//            throw new RuntimeException("식당이 없습니다.");
-//        }
-//
-//        return restaurantList;
-//    }
-//
-//    public List<Restaurant>  findRestaurantBySiCodeAndGuCodeAndDongCode(String siCode ,String guCode,String dongCode){
-//        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantBySiCodeAndGuCodeAndDongCode(siCode, guCode, dongCode);
-//
-//
-//        if (restaurantList.size() == 0) {
-//            throw new RuntimeException("식당이 없습니다.");
-//        }
-//
-//        return restaurantList;
-//    }
-//
-//
-    public List<Restaurant> findRestaurantByRestaurantCategory(String restaurantCategory){
-        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByRestaurantCategoryContainingIgnoreCase(restaurantCategory);
-
-
-        if (restaurantList.size() == 0) {
-            throw new RuntimeException("식당이 없습니다.");
-        }
-
-        return restaurantList;
-    }
-//
-    public List<Restaurant> findRestaurant(RestaurantDTO restaurantDTO){
-        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByRestaurantCategoryContainingIgnoreCaseOrRestaurantNameContainingIgnoreCase(restaurantDTO.getRestaurantCategory(), restaurantDTO.getRestaurantCategory());
-
-
-        if (restaurantList.size() == 0) {
-            throw new RuntimeException("식당이 없습니다.");
-        }
-
-        return restaurantList;
-    }
-
-    public List<Restaurant> findRestaurantByRestaurantCategoryOrRestaurantName(String restaurantCategory,String restaurantName){
-        List<Restaurant> restaurantList  = restaurantRepository.findRestaurantByRestaurantCategoryContainingIgnoreCaseOrRestaurantNameContainingIgnoreCase(restaurantCategory,restaurantName);
-
-
-        if (restaurantList.size() == 0) {
-            throw new RuntimeException("식당이 없습니다.");
-        }
-
-        return restaurantList;
-    }
-//
-//
-
-
-
-
-
 }
