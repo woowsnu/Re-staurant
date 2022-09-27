@@ -21,7 +21,7 @@ public interface RestaurantLikeRepository extends JpaRepository<RestaurantLike, 
     @Transactional
     public Long deleteRestaurantLikeByLikeIndex(Long likeIndex);
 
-    List<RestaurantLike> findRestaurantsLikeByUserUserIndex(Long userIndex);
+    List<RestaurantLike> findRestaurantsLikeByUserEmail(String email);
     @Transactional
     public Long deleteByLikeIndex(Long likeIndex);
 

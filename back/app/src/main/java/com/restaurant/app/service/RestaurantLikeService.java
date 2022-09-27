@@ -57,8 +57,8 @@ public class RestaurantLikeService {
 
     }
     @Transactional
-    public List<RestaurantLike> findByUserIndex(User authedUser,Long userIndex){
-        List<RestaurantLike> restaurantLike = restaurantLikeRepository.findRestaurantsLikeByUserUserIndex(userIndex);
+    public List<RestaurantLike> findByEmail(User authedUser,String email){
+        List<RestaurantLike> restaurantLike = restaurantLikeRepository.findRestaurantsLikeByUserEmail(email);
         List<RestaurantLike> restaurantLikes = restaurantLikeRepository.findRestaurantsLikeByUser(authedUser);
         return restaurantLike;
     }
