@@ -14,10 +14,13 @@ import RestaurantDetailPage from "./routes/RestaurantDetailPage";
 import ReviewWritePage from "./routes/ReviewWritePage";
 import Admin from "./routes/Admin";
 import RestaurantSearch from "./routes/RestaurantSearch";
+import HomePage from "./routes/HomePage";
+import { ResContextProvider } from "./store/res-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <AuthContextProvider>
+    <ResContextProvider>
     <BrowserRouter>
       <Routes>
         <Route path="*" element={<App />} />
@@ -35,5 +38,6 @@ root.render(
         </Route>
       </Routes>
       </BrowserRouter>
+      </ResContextProvider>
     </AuthContextProvider>
 );

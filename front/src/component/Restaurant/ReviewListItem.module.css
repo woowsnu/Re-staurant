@@ -84,6 +84,13 @@
   background: rgba(0, 0, 0, 0.6);
 }
 
+.img {
+  padding-top: 1rem;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
 @media screen and (max-width: 680px) {
   .container {
     max-width: 100%;
