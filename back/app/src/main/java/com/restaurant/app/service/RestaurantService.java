@@ -48,6 +48,11 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
+    public  List<Restaurant> findRestaurantByAuthorCount()
+    {
+        return   restaurantRepository.findTop10AllByOrderByAuthorCountDesc();
+    }
+
     // 식당 이름으로 검색하는 경우 or 음식 카테고리로 검색하는 경우
     public List<RestaurantDTO> findRestaurantByRestaurantCategoryOrRestaurantName(String restaurantCategory,
                                                                                   String restaurantName){

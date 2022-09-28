@@ -44,6 +44,25 @@ public class RestaurantController {
             return ResponseEntity.badRequest().body(responseDTO);
         }
     }
+    // 가게 작성자 많은 순 상위 10개 정렬
+    @GetMapping("/restaurantRank")
+    public  ResponseEntity<?> findRestaurantByRestaurantIndex( ) {
+
+
+        try{
+            List<Restaurant> restaurantList = restaurantService.findRestaurantByAuthorCount();
+
+            List<RestaurantDTO> restaurantsDTO = restaurantList.stream().map(RestaurantDTO::new).collect((Collectors.toList()));
+
+            return ResponseEntity.ok().body(restaurantsDTO);
+        }
+        catch(Exception e) {
+            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            return ResponseEntity.badRequest().body(responseDTO);
+        }
+
+    }
+
 
     // 지역별로 조회(siCode/guCode/dongCode 등으로 판별)
     @GetMapping("/region")
