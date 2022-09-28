@@ -25,7 +25,7 @@ const MyPage = () => {
     const profile = { email: localStorage.getItem("email") };
     authAPI.getLoginUserInfo(profile).then((res) => {
       console.log(res);
-      if (res === undefined) {
+      if (localStorage.getItem("accessToken") === "invalid Token") {
         ctx.onLogout();
         alert("로그인 세션이 만료되었습니다.");
         navigate("/login");

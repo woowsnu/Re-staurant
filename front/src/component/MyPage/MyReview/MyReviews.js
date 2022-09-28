@@ -58,7 +58,7 @@ const MyReviews = (props) => {
                 <span className={styles.revisit}>
                   {data.revisit === 1
                     ? "재방문 할래요 😘"
-                    : "재방문 안할래요 ☹️"}
+                    : "재방문 안할래요 😥"}
                 </span>
                 {props.user.email === localStorage.getItem("email") ? (
                   <div className={styles.editbutton}>

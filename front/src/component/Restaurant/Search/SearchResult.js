@@ -25,7 +25,7 @@ const SearchResult = () => {
     const getCategory = () => {
       return instance.get(`/api/search?restaurantCategory=${searchWord}`);
     };
-
+    
     Promise.all([getResName(), getCategory()]).then(([res1, res2]) => {
       setDataFetch(true);
       setResNameData("");
@@ -45,10 +45,10 @@ const SearchResult = () => {
       }
     });
   }, [searchWord]);
- 
+  
   const resData = Object.assign(resNameData, categoryData);
   const objectToData = Object.values(resData);
-
+  
   return (
     <>
       {dataFetch ? (
