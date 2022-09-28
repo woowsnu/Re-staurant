@@ -1,5 +1,5 @@
 # ERD
-![Re-staurant](https://user-images.githubusercontent.com/99165573/192754649-5f2a4463-6345-4c57-99ff-1c3f7632c997.png)
+![Re-staurant (2)](https://user-images.githubusercontent.com/99165573/192788518-253c808e-393e-468d-97db-d3b5254c4de9.png)
 - 링크 : https://www.erdcloud.com/d/cgGQJj8g4hhMfWDwF
 
 
@@ -123,5 +123,7 @@
 - <h3>Model<h3>
 ![image](https://user-images.githubusercontent.com/99165573/192781838-31655fc1-5b12-4dcb-af50-0352c07f22f7.png) <br>
 
-
+# 주요 메서드 (Method) 정리
+ 
+ 
 
