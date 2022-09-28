@@ -16,10 +16,12 @@ public class FollowDTO {
 
     private String followedEmail;
 
+    private Integer removed;
     public FollowDTO(Follow follow) {
         this.followIndex = follow.getFollowIndex();
         this.followingEmail = follow.getFollowingUser().getEmail();
         this.followedEmail = follow.getFollowedUser().getEmail();
+        this.removed = follow.getRemoved();
     }
 
 

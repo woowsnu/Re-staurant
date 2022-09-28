@@ -159,7 +159,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/auth/unFollowing")
+    @PutMapping("/auth/unFollowing")
     public ResponseEntity<?> unFollowing(@AuthenticationPrincipal User authedUser,
                                          @RequestBody FollowDTO unFollowDTO) {
         try{
