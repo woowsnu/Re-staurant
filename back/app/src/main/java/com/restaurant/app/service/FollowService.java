@@ -7,6 +7,7 @@ import com.restaurant.app.repository.FollowRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,14 +22,24 @@ public class FollowService {
     @Autowired
     private final FollowRepository followRepository;
 
+
+    @Transactional
     public void following(User authedUser, FollowDTO followDTO) {
 
         // 팔로우 되는 사람[상대방] 조회하여 followedUser 객체에 저장.
         User followedUser = userService.findUserByEmail(followDTO.getFollowingEmail());
 
+        Follow currFollow = followRepository.findFollowByFollowingUserAndFollowedUser(authedUser,followedUser);
+
         // 현재 로그인 중인 authedUser가 상대방을 이미 follow하고 있는지 확인.
-        if(followRepository.findFollowByFollowingUserAndFollowedUser(authedUser,followedUser) != null) {
-            throw new RuntimeException("이미 상대방을 팔로우 하고 있습니다.");
+          if (currFollow != null && currFollow.getRemoved() !=0) {
+              throw new RuntimeException("이미 상대방을 팔로우 하고 있습니다");
+          }
+
+        // unfollow한 상대방을 다시 follow
+        if (currFollow != null && currFollow.getRemoved() == 0) {
+            currFollow.setRemoved(1);
+            return;
         }
 
         // 본인[authedUser]이 본인[authedUser]을 follow하려고하는지 확인.
@@ -56,6 +67,12 @@ public class FollowService {
 
         // authedUser와 unFollowedUser의 Follow 객체 조회.
         Follow currFollow = followRepository.findFollowByFollowingUserAndFollowedUser(authedUser,unFollowedUser);
+
+
+        if(currFollow != null &&currFollow.getRemoved() != 1) {
+            throw new RuntimeException("이미 언팔로우 상태입니다.");
+        }
+
 
         // 현재 로그인 중인 authedUser가 상대방을 follow하고 있는 상태인지 확인.
         if(currFollow == null) {
