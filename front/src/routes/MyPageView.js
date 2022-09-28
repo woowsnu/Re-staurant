@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { instance } from "../api/axios";
-
+import authAPI from "../api/authAPI";
 import FollowProfile from "../component/MyPage/Follow/FollowProfile";
 import Tabs from "../component/MyPage/Tabs";
 import Loader from "../component/UI/Loader";
@@ -19,20 +18,11 @@ const MyPage = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
     const profile = { "email" : userEmail.email }
-    instance
-      .post("/user/auth/userInfo", JSON.stringify(profile), {
-        headers: { "Content-Type": "application/json", Authorization: token },
-      })
-      .then((response) => {
-        const data = response.data;
-        setUser(data);
-        setDatafetch(true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    authAPI.getLoginUserInfo(profile).then((res) => {
+      setUser(res.data);
+      setDatafetch(true);
+    })
   }, [isUpdated]);
 
   return (

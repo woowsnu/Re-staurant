@@ -19,20 +19,23 @@ const EditNickname = (props) => {
   const token = localStorage.getItem("accessToken");
   const nicknameChangeSubmit = (e) => {
     e.preventDefault();
-    const profile = { nickname: nickname };
+    const profile = {
+      email: localStorage.getItem("email"),
+      nickname: nickname,
+    };
     instance
-      .put("/user/auth/update/nickname", JSON.stringify(profile), {
+      .put("/api/auth/updateNickname", JSON.stringify(profile), {
         headers: {
-          "Content-Type": "application/json",
           Authorization: token,
+          "Content-Type": "application/json",
         },
       })
-      .then(function (response) {
+      .then((response) => {
         console.log(response);
         setNickname("");
         props.stateManage();
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -55,7 +58,11 @@ const EditNickname = (props) => {
           />
         </form>
         <div className={styles.buttonArea}>
-          <Button type="submit" onClick={nicknameChangeSubmit} style={{"marginRight" : "6px"}}>
+          <Button
+            type="submit"
+            onClick={nicknameChangeSubmit}
+            style={{ marginRight: "6px" }}
+          >
             저장하기
           </Button>
           <Button

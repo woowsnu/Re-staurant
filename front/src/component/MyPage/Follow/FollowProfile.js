@@ -32,12 +32,12 @@ const FollowProfile = (props) => {
     const token = localStorage.getItem("accessToken");
     const profile = { followingEmail: props.followEmail };
     instance
-      .post("/follow/auth/following", JSON.stringify(profile), {
+      .post("/api/auth/following", JSON.stringify(profile), {
         headers: { "Content-Type": "application/json", Authorization: token },
       })
       .then((res) => {
         updateHandler();
-        console.log(res);
+        alert("팔로우 완료!")
       })
       .catch((err) => {
         console.log(err);
