@@ -29,7 +29,7 @@ const DUMMY_IMAGE = [
 ];
 
 const RestaurantProfile = (props) => {
-  const ctx = useContext(AuthContext)
+  const ctx = useContext(AuthContext);
   const busId = useParams().id;
   const navigate = useNavigate();
   const [images, setImages] = useState(DUMMY_IMAGE);
@@ -38,11 +38,12 @@ const RestaurantProfile = (props) => {
   const ourReview = props.reviews?.filter((el) => el.tag === 1);
   const ourReviewRevisit = ourReview?.filter((el) => el.revisit === 1);
 
-  const fetchBookmark = () => {
+  const fetchBookmark = async () => {
     try {
-      const data = resInfoAPI.getUserBookMark()
-      const filterByBusID = data.filter((el)=>el.busId === busId);
-      console.log(filterByBusID)
+      const data = await resInfoAPI.getUserBookMark();
+      console.log("프로필에서", data)
+      const filterByBusID = data?.filter((el) => el.busId === busId);
+      console.log(filterByBusID[0].statusLike);
       if (filterByBusID[0].statusLike === 1) {
         setEditMark(true);
       } else if (filterByBusID[0].statusLike === 0) {
@@ -54,7 +55,7 @@ const RestaurantProfile = (props) => {
   };
 
   useEffect(() => {
-      fetchBookmark();
+    fetchBookmark();
   }, [editMark]);
 
   //북마크 추가
@@ -65,14 +66,13 @@ const RestaurantProfile = (props) => {
       return;
     }
     const data = await resInfoAPI.createUserBookMark(busId);
-    console.log(data)
     setEditMark(true);
   };
 
   // 북마크 삭제
   const deleteBookmarkHandler = async () => {
     const response = await resInfoAPI.deleteUserBookMark(busId);
-    if(response.status === 200){
+    if (response.status === 200) {
       setEditMark(false);
     }
   };
@@ -101,6 +101,8 @@ const RestaurantProfile = (props) => {
           <div>
             {editMark ? (
               <label
+                value={editMark}
+                htmlFor='bookmark'
                 className={styles.bookmark}
                 onClick={deleteBookmarkHandler}
               >
@@ -108,13 +110,15 @@ const RestaurantProfile = (props) => {
               </label>
             ) : (
               <label
+                value={editMark}
+                htmlFor='bookmark'
                 className={styles.bookmark}
                 onClick={createBookmarkHandler}
               >
                 <FaRegBookmark />
               </label>
             )}
-            <input type='checkbox' checked={editMark} readOnly/>
+            <input id='bookmark' type='checkbox' checked={editMark} />
           </div>
         </div>
         <h1 className={styles.restaurantName}>

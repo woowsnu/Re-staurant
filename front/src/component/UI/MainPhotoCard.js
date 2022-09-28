@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import BookMark from './BookMark';
+// import BookMark from './BookMark';
 import { FaStar } from 'react-icons/fa';
-import styles from './PhotoCard.module.css';
+import styles from './MainPhotoCard.module.css';
 
 const MainPhotoCard = (props) => {
   const {
