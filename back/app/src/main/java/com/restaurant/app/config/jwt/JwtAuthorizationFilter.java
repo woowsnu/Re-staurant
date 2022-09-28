@@ -89,12 +89,11 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
                 // refreshedAccessToken 반환
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Bearer " + refreshedAccessToken);
-
             } catch (TokenExpiredException re) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "refresh/accessToken이 모두 만료되었습니다. 재 로그인해주세요.");
             } catch (Exception ex) {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "invalid Token");
-            }
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "invalid Token");}
+
         }
         catch (Exception e) {
             logger.error(e.getMessage());

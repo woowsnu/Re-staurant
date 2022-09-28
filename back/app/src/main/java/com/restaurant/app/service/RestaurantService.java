@@ -49,7 +49,8 @@ public class RestaurantService {
     }
 
     // 식당 이름으로 검색하는 경우 or 음식 카테고리로 검색하는 경우
-    public List<RestaurantDTO> findRestaurantByRestaurantCategoryOrRestaurantName(String restaurantCategory,String restaurantName){
+    public List<RestaurantDTO> findRestaurantByRestaurantCategoryOrRestaurantName(String restaurantCategory,
+                                                                                  String restaurantName){
 
         // 두가지 쿼리스트링으로 한번에 요청할 경우 예외처리
         if (restaurantCategory != null && restaurantName !=null) {
