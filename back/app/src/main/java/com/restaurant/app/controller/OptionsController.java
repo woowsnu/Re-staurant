@@ -38,23 +38,4 @@ public class OptionsController {
             return ResponseEntity.badRequest().body(responseDTO);
         }
     }
-
-
-    //delete
-    @DeleteMapping("/delete/{busId}")
-    public ResponseEntity<?> delete(@PathVariable String busId){
-
-//        try{
-        optionsService.delete(busId);
-//            List<Options> optionsList = optionsService.deleteOption()
-
-            return ResponseEntity.ok().body(busId);
-//        }
-//        catch(Exception e) {
-//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-//            return ResponseEntity.ok().body(responseDTO);
-//        }
-
-    }
-
 }

@@ -78,34 +78,4 @@ public class ReviewController {
             return ResponseEntity.ok().body(responseDTO);
         }
     }
-
-//    //read
-//    @GetMapping("/{email}/auth/findUserView")
-//    public ResponseEntity<?> findUserView(@AuthenticationPrincipal User authedUser,@PathVariable String email){
-//        try{
-//            List<Review> reviewList = reviewService.findByEmail(authedUser,email);
-//
-//            List<ReviewDTO> reviewDTOs = reviewList.stream().map(ReviewDTO::new).collect((Collectors.toList()));
-//
-//
-//            return ResponseEntity.ok().body(reviewDTOs);
-//        }
-//        catch(Exception e) {
-//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-//            return ResponseEntity.badRequest().body(responseDTO);
-//        }
-//    }
-//
-//    @GetMapping("/reviewSearch")
-//    public ResponseEntity<?> reviewSearch (@RequestBody ReviewDTO reviewDTO){
-//        try{
-//            List<Review> reviewList = reviewService.findReview(reviewDTO);
-//            List<ReviewDTO> reviewDTOs = reviewList.stream().map(ReviewDTO::new).collect((Collectors.toList()));
-//            return  ResponseEntity.ok().body(reviewDTOs);
-//        }
-//        catch(Exception e) {
-//            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
-//            return ResponseEntity.badRequest().body(responseDTO);
-//        }
-//    }
 }
