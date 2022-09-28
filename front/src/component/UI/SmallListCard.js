@@ -7,7 +7,7 @@ const ListCard = (props) => {
 
   return (
     <div className={styles.container}>
-      <Link to={`/detail/${props.data?.busId}`}>
+      <Link to={`/detail/${props.data?.busId}`} state={{state: reviewArr}}>
         <div className={styles.restaurantsection}>
           <img
             src={reviewArr[0].reviewImage}

@@ -66,7 +66,7 @@ const ImageSlider = ({ images }) => {
         {imageList.map((image, i) => {
           return (
             <div key={i} style={style}>
-              <img className={styles.imgbox} src={image.url} alt={image.id} />
+              <img className={styles.imgbox} src={image} alt="식당 이미지" />
             </div>
           );
         })}

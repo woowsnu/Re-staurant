@@ -6,6 +6,7 @@ import Button from '../UI/Button';
 import Input from '../UI/Input';
 import styles from './ReviewWrite.module.css';
 import ReviewImgUpload from './ReviewImgUpload';
+import resInfoAPI from '../../api/resInfoAPI';
 
 const ReviewWrite = (props) => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const ReviewWrite = (props) => {
   const [revisit, setRevisit] = useState(1);
   const [uploadImg, setUploadImg] = useState([]);
   const [imgUrl, setImgUrl] = useState('');
-  console.log('이미지 목록', imgUrl);
+  
   // 재방문의사
   const revisitClickHandler = (value) => {
     setRevisit(value);
@@ -28,11 +29,6 @@ const ReviewWrite = (props) => {
   const commentChangeHandler = (e) => {
     setComment(e.target.value);
   };
-
-  // 이미지
-  // const imageChangeHandler = (e) => {
-  //   setImgUrl(e.target.value);
-  // };
 
   // 리뷰
   const reviewChangeHandler = (e) => {
@@ -87,23 +83,11 @@ const ReviewWrite = (props) => {
     };
 
     try {
-      const token = localStorage.getItem('accessToken');
-      await instance
-        .post(`/review/${busId}/auth/createReview`, newReview, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: token,
-          },
-        })
-        .then((response) => {
-          return response;
-        })
-        .then((data) => {
-          if (data.status === 200) {
-            alert('작성이 완료되었습니다.');
-            navigate(-1);
-          }
-        });
+      const res = await resInfoAPI.createReview(busId, newReview);
+      if (res.status === 200) {
+        alert('작성이 완료되었습니다.');
+        navigate(-1);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -177,7 +161,11 @@ const ReviewWrite = (props) => {
         </div>
         {/* <ReviewImgUpload /> */}
         <div className={styles.btns}>
-          <Button style={{marginRight: '8px'}} type='button' onClick={reviewCancelHandler}>
+          <Button
+            style={{ marginRight: '8px' }}
+            type='button'
+            onClick={reviewCancelHandler}
+          >
             작성취소
           </Button>
           <Button id='ok' type='submit' onClick={reviewSubmitHandler}>
