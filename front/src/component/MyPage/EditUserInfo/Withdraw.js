@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./Withdraw.module.css";
 import Button from "../../UI/Button";
 import { useNavigate } from "react-router-dom";
+import { instance } from "../../../api/axios";
 
 const Withdraw = (props) => {
   const [withdrawDone, setWithdrawDone] = useState(false);
@@ -15,24 +16,32 @@ const Withdraw = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("accessToken");
-    const profile = { email : email };
-    
-    await fetch("http://spring-app:8080/user/auth/deleteUserInfo", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-        credentials : "same-origin"
-      },
-      body: JSON.stringify(profile),
-    })
-      .then((res) => {
-        console.log(res);
-        setWithdrawDone(true);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const profile = { email: email };
+
+    await instance
+      .delete("/api/auth/deleteUserInfo", JSON.stringify(profile), 
+      // {
+      //   headers: { Authorization: token, "Content-Type": "application/json" },
+      // }
+      )
+      .then((res) => console.log(res));
+
+    // await fetch("http://localhost:8080/api/auth/deleteUserInfo", {
+    //   method: "DELETE",
+    //   headers: {
+    //     Authorization: token,
+    //     "Content-Type": "application/json",
+    //     // credentials : "same-origin"
+    //   },
+    //   body: JSON.stringify(profile),
+    // })
+    //   .then((res) => {
+    //     console.log(res);
+    //     // setWithdrawDone(true);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (
@@ -52,7 +61,8 @@ const Withdraw = (props) => {
         <Button onClick={exitWithdrawMode}>취소</Button>
       </div>
       <div className={withdrawDone ? styles.buttonArea : styles.offscreen}>
-        <Button style={{ width : "100%"}}
+        <Button
+          style={{ width: "100%" }}
           onClick={() => {
             navigate("/");
           }}

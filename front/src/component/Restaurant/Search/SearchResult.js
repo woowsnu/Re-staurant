@@ -20,10 +20,10 @@ const SearchResult = () => {
 
   useEffect(() => {
     const getResName = () => {
-      return instance.get(`restaurant/${searchWord}`);
+      return instance.get(`/api/search?restaurantName=${searchWord}`);
     };
     const getCategory = () => {
-      return instance.get(`restaurant/search?restaurantCategory=${searchWord}`);
+      return instance.get(`/api/search?restaurantCategory=${searchWord}`);
     };
 
     Promise.all([getResName(), getCategory()]).then(([res1, res2]) => {
@@ -45,11 +45,7 @@ const SearchResult = () => {
       }
     });
   }, [searchWord]);
-  // const profile = { reviewContent: searchWord };
-  // instance
-  //   .get("/review/reviewSearch", JSON.stringify(profile))
-  //   .then((res) => console.log(res));
-
+ 
   const resData = Object.assign(resNameData, categoryData);
   const objectToData = Object.values(resData);
 

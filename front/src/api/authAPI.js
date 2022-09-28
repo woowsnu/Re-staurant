@@ -1,13 +1,29 @@
-import { instance } from './axios';
+import { instance } from "./axios";
 
 const authAPI = {
-  getLoginUserInfo: async () => {
-    const profile = { email : local}
+  createUser: async (profile) => {
     try {
-      const { data } = await instance.get(
-        `/restaurant/restaurantDetail/${busId}`
+      const response = await instance.post("/api/join", profile);
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  loginUser: async (profile) => {
+    try {
+      const response = await instance.post("/login", JSON.stringify(profile));
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  getLoginUserInfo: async (profile) => {
+    try {
+      const response = await instance.post(
+        "/api/auth/userInfo",
+        JSON.stringify(profile)
       );
-      return data;
+      return response;
     } catch (error) {
       console.error(error);
     }

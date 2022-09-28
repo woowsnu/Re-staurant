@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState, useContext } from "react";
-import { instance } from "../../api/axios";
 import AuthContext from "../../store/auth-context";
 import styles from "./SignUp.module.css";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
 import Logobar from "../Layout/Logobar";
+import authAPI from "../../api/authAPI";
 
 const LogIn = () => {
   let navigate = useNavigate();
@@ -28,25 +28,17 @@ const LogIn = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    await instance
-      .post("/login", JSON.stringify({ email, password }), {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((response) => {
-        console.log(response);
-        const accessToken = response.data.jwtToken;
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("email", email);
-        ctx.onLogin(email, password);
-        navigate(-1);
-      })
-      .catch((err) => {
-        console.log(err);
-        // const errCode = err.response.status;
-        // if (errCode === 401) {
-          setErr("이메일 혹은 비밀번호를 확인해주세요");
-        // }
-      });
+    const profile = { email, password };
+    const response = await authAPI.loginUser(profile);
+    if (response === undefined) {
+      setErr("이메일 혹은 비밀번호를 확인해주세요");
+    }
+    else if (response.status === 200) {
+    const accessToken = response.data.jwtToken;
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("email", email);
+    ctx.onLogin(email, password);
+    navigate(-1);}
   };
 
   return (
@@ -61,7 +53,7 @@ const LogIn = () => {
             </div>
             <br />
             <form className={styles.form} onSubmit={submitHandler}>
-              <label htmlFor="email">아이디</label>
+              <label htmlFor="email">이메일</label>
               <Input
                 type="text"
                 id="email"
@@ -88,10 +80,6 @@ const LogIn = () => {
             <div className={styles.loginInfo}>
               아직 회원이 아니신가요? &nbsp;&nbsp;
               <a href="/members">회원가입 하러가기</a>
-              <br />
-              <br />
-              이메일/비밀번호를 잃어버리셨나요? &nbsp;&nbsp;
-              <a href="/find">계정정보 찾기</a>
             </div>
           </div>
         </div>

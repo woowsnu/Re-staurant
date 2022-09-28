@@ -26,20 +26,21 @@ const EditPassword = (props) => {
   const token = localStorage.getItem("accessToken");
   const handleSubmit = (e) => {
     e.preventDefault();
-    const profile = { password: newPassword };
+    const profile = { email: localStorage.getItem("email"), password: newPassword };
     if (newPassword === newPasswordCheck) {
       instance
-        .put("/user/auth/update/password", JSON.stringify(profile), {
+        .put("/api/auth/updatePassword", JSON.stringify(profile), {
           headers: {
             "Content-Type": "application/json",
             Authorization: token,
           },
         })
         .then((response) => {
-          console.log(response);
-          setNewPassword("");
-          setNewPasswordCheck("");
-          setWarning("비밀번호 변경 완료!");
+          if(response.status === 200) {
+            setNewPassword("");
+            setNewPasswordCheck("");
+            setWarning("비밀번호 변경 완료!");
+          }
         })
         .catch((err) => {
           console.log(err);

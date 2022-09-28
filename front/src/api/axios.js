@@ -7,9 +7,10 @@ export const instance = axios.create({
 //  baseURL: 'http://43.200.202.164:8080',
 headers: token
 ? {
-    Authorization: token
+    Authorization: token,
+    "Content-Type" : "application/json"
   }
-: {},
+: { "Content-Type" : "application/json" },
 });
 
 instance.interceptors.response.use(
