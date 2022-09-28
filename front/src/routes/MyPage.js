@@ -24,6 +24,7 @@ const MyPage = () => {
   useEffect(() => {
     const profile = { email: localStorage.getItem("email") };
     authAPI.getLoginUserInfo(profile).then((res) => {
+      console.log(res);
       if (res === undefined) {
         ctx.onLogout();
         alert("로그인 세션이 만료되었습니다.");

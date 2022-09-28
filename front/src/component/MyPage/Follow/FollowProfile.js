@@ -27,17 +27,32 @@ const FollowProfile = (props) => {
     props.updateHandler();
   };
 
+  const token = localStorage.getItem("accessToken");
+  const profile = { followingEmail: props.followEmail };
+
   const followSubmit = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("accessToken");
-    const profile = { followingEmail: props.followEmail };
     instance
       .post("/api/auth/following", JSON.stringify(profile), {
         headers: { "Content-Type": "application/json", Authorization: token },
       })
       .then((res) => {
         updateHandler();
-        alert("팔로우 완료!")
+        alert("팔로우 완료!");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const unfollowSubmit = (e) => {
+    e.preventDefault();
+    instance
+      .delete("/api/auth/unFollowing", JSON.stringify(profile), {
+        headers: { "Content-Type": "application/json", Authorization: token },
+      })
+      .then((res) => {
+        updateHandler();
       })
       .catch((err) => {
         console.log(err);
@@ -53,13 +68,19 @@ const FollowProfile = (props) => {
           <div className={styles.userInfo}>
             <div className={styles.nickname}>
               {props.user.nickname}
-              <span
-                className={followCheck !== undefined ? styles.followed : styles.notFollowed}
-              >
-                <Button onClick={followSubmit}>
-                  <FaHeart />
-                </Button>
-              </span>
+              {followCheck !== undefined ? (
+                <span className={styles.followed}>
+                  <Button onClick={unfollowSubmit}>
+                    <FaHeart />
+                  </Button>
+                </span>
+              ) : (
+                <span className={styles.notFollowed}>
+                  <Button onClick={followSubmit}>
+                    <FaHeart />
+                  </Button>
+                </span>
+              )}
             </div>
             ({props.user.email})
             <div className={styles.followInfo} onClick={showFollowList}>

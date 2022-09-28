@@ -1,16 +1,10 @@
 import axios from 'axios';
 
-const token = localStorage.getItem('accessToken')
+const token = localStorage.getItem('accessToken');
 
 export const instance = axios.create({
- baseURL: 'http://localhost:8080',
-//  baseURL: 'http://43.200.202.164:8080',
-headers: token
-? {
-    Authorization: token,
-    "Content-Type" : "application/json"
-  }
-: { "Content-Type" : "application/json" },
+   baseURL: 'http://localhost:8080',
+  // baseURL: 'http://43.200.202.164:8080',
 });
 
 instance.interceptors.response.use(
@@ -18,11 +12,13 @@ instance.interceptors.response.use(
     return res;
   },
   async (error) => {
+    console.log(error);
     try {
       const errResponseStatus = error.response.status;
       const prevRequest = error.config;
       if (errResponseStatus === 401) {
         const refreshedToken = error.response.data.message;
+        console.log(refreshedToken)
         prevRequest.headers.Authorization = refreshedToken;
         localStorage.setItem('accessToken', refreshedToken);
         return await axios(prevRequest);
