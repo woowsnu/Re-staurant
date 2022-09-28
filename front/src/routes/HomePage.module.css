@@ -29,22 +29,23 @@ h3 {
 .ranking {
   display: flex;
   align-items: center;
-  border: 1px solid #EEE;
+  border: 1px solid #eee;
   border-radius: 1rem;
   margin-bottom: 0.6rem;
 }
 
 .ranking:hover {
   height: 135px;
-  box-shadow: 3px 3px 5px #CCC;
+  box-shadow: 3px 3px 5px #ccc;
 }
 
-.ranking span{
+.ranking span {
+  width: 4%;
   font-size: 36px;
   font-style: italic;
   padding-left: 1rem;
   padding-right: 1rem;
-  color: #51B059;
+  color: #51b059;
 }
 
 @media screen and (max-width: 680px) {

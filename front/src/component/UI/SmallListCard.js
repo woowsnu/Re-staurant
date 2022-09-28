@@ -1,22 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './SmallListCard.module.css';
-import defualtImage from '../../assets/images/restaurant_default_img.jpg';
-import BookMark from './BookMark';
 
 const ListCard = (props) => {
-  const [check, setCheck] = useState(props.editMark);
-
-  const checkOnClickHandler = () => {
-    setCheck(true);
-  };
+  const reviewArr = props.data?.reviewList.filter((el)=> el.tag === 0)
 
   return (
     <div className={styles.container}>
-      <Link to={`/detail/${props.data?.busId}`}>
+      <Link to={`/detail/${props.data?.busId}`} state={{state: reviewArr}}>
         <div className={styles.restaurantsection}>
           <img
-            src={defualtImage}
+            src={reviewArr[0].reviewImage}
             alt='search_result_img'
             className={styles.img}
           />
@@ -31,19 +25,6 @@ const ListCard = (props) => {
         <div className={styles.detail2}></div>
       </Link>
       <div className={styles.bookMark}>
-        {/* {props.data?.likeIndex !== null ? (
-          <BookMark
-            editMarked={check}
-            data={props.data}
-            onClick={checkOnClickHandler}
-          />
-        ) : (
-          <BookMark
-            editMarked={check}
-            data={props.data}
-            onClick={checkOnClickHandler}
-          />
-        )} */}
       </div>
     </div>
   );
