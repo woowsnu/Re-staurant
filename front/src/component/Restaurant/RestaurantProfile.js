@@ -54,10 +54,8 @@ const RestaurantProfile = (props) => {
   };
 
   useEffect(() => {
-    if (ctx.isLoggedIn === 1 && localStorage.getItem("accessToken") !== undefined) {
       fetchBookmark();
-    }
-  }, []);
+  }, [editMark]);
 
   //북마크 추가
   const createBookmarkHandler = async () => {
@@ -116,10 +114,7 @@ const RestaurantProfile = (props) => {
                 <FaRegBookmark />
               </label>
             )}
-            <input type='checkbox' checked={editMark} />
-            {/* <div>
-              <FaShareAlt className={styles.share} />
-            </div> */}
+            <input type='checkbox' checked={editMark} readOnly/>
           </div>
         </div>
         <h1 className={styles.restaurantName}>
