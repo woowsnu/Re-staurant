@@ -11,7 +11,7 @@ const FollowProfile = (props) => {
   const [profileimg, setProfileimg] = useState(
     <img alt="img" src={basicimage} width="130px" />
   );
-
+  console.log(props);
   const [showFollow, setShowFollow] = useState(false);
 
   const showFollowList = () => {
@@ -38,7 +38,6 @@ const FollowProfile = (props) => {
       })
       .then((res) => {
         updateHandler();
-        alert("팔로우 완료!");
       })
       .catch((err) => {
         console.log(err);
@@ -48,22 +47,20 @@ const FollowProfile = (props) => {
   const unfollowSubmit = (e) => {
     e.preventDefault();
     instance
-      .put("/api/auth/unFollowing", 
-      JSON.stringify(profile)
-      , {
+      .put("/api/auth/unFollowing", JSON.stringify(profile), {
         headers: { "Content-Type": "application/json", Authorization: token },
       })
       .then((res) => {
-        console.log(res)
+        console.log(res);
         updateHandler();
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  
+
   const follower = props.user.followerList?.filter((f) => f.removed === 1);
-  const following =  props.user.followingList?.filter((f) => f.removed === 1);
+  const following = props.user.followingList?.filter((f) => f.removed === 1);
 
   return (
     <div>
@@ -90,8 +87,7 @@ const FollowProfile = (props) => {
             </div>
             ({props.user.email})
             <div className={styles.followInfo} onClick={showFollowList}>
-              팔로워 {follower.length} &nbsp; &nbsp; 팔로잉{" "}
-              {following.length}
+              팔로워 {follower.length} &nbsp; &nbsp; 팔로잉 {following.length}
             </div>
           </div>
         </div>
