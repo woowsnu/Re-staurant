@@ -32,7 +32,7 @@ const HomePage = () => {
             <MainPhotoCard key={item.restaurantIndex} data={item} editMark={item.statusLike}/>
           ))}
         </div>
-        <h3>유저들의 최신 리뷰</h3>
+        <h3>가장 많은 리뷰 맛집</h3>
         <div className={styles.section}>
           {topList?.map((item) => (
             <MainPhotoCard key={item.restaurantIndex} data={item} editMark={item.statusLike}/>

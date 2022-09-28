@@ -6,7 +6,7 @@ import RestaurantInfo from './RestaurantInfo';
 import RestaurantMenu from './RestaurantMenu';
 import RestaurantReview from './RestaurantReview';
 import RestaurantTab from './RestaurantTab';
-import Loading from '../UI/Loading';
+import Loader from '../UI/Loader';
 
 const RestaurantDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +37,7 @@ const RestaurantDetail = () => {
   return (
     <div>
       {isLoading ? (
-        <Loading type='res'/>
+        <Loader />
       ) : (
         <>
           <RestaurantProfile restaurant={restaurant} reviews={reviews} />
