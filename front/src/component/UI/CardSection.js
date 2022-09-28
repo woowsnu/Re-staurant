@@ -5,7 +5,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const CardSection = (props) => {
-  console.log(props.list)
   const settings = {
     lazyLoad: true,
     dots: false,
@@ -20,7 +19,9 @@ const CardSection = (props) => {
 
   return (
     <Slider style={{ width: '100%' }} {...settings}>
-      {props.list.map((item, i)=>{<MainPhotoCard key={i} data={item} editMark={!!item.likeIndex}/>})}
+      
+      {props.list.map((item, i)=>{<div><MainPhotoCard key={i} data={item} editMark={!!item.likeIndex}/></div>})}
+      
     </Slider>
   );
 };

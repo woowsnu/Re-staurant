@@ -16,6 +16,7 @@ const resInfoAPI = {
     const { data } = await instance.get(
       `/api/auth/findUserLike`
     );
+    console.log("api에서", data)
     return data;
   },
   createUserBookMark: async (busId) => {
@@ -25,10 +26,10 @@ const resInfoAPI = {
     return data;
   },
   deleteUserBookMark: async (busId) => {
-    const { data } = await instance.delete(
+    const response = await instance.delete(
       `/api/auth/deleteLike?busId=${busId}`
     );
-    return data;
+    return response;
   },
 };
 

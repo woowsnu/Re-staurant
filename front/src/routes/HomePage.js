@@ -28,15 +28,14 @@ const HomePage = () => {
         </div>
         <h3>맛 보장! 재방문 많은 맛집</h3>
         <div className={styles.section}>
-          <CardSection list={topList}/>
-          {/* {topList?.map((item) => (
-            <MainPhotoCard key={item.restaurantIndex} data={item} editMark={!!item.likeIndex}/>
-          ))} */}
+          {topList?.map((item) => (
+            <MainPhotoCard key={item.restaurantIndex} data={item} editMark={item.statusLike}/>
+          ))}
         </div>
         <h3>유저들의 최신 리뷰</h3>
         <div className={styles.section}>
           {topList?.map((item) => (
-            <MainPhotoCard key={item.restaurantIndex} data={item} editMark={!!item.likeIndex}/>
+            <MainPhotoCard key={item.restaurantIndex} data={item} editMark={item.statusLike}/>
           ))}
         </div>
         <h3>합정지역 별점 Top 5</h3>

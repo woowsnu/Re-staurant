@@ -30,25 +30,22 @@ const DUMMY_IMAGE = [
 
 const RestaurantProfile = (props) => {
   const ctx = useContext(AuthContext)
-  const bizId = useParams().id;
+  const busId = useParams().id;
   const navigate = useNavigate();
   const [images, setImages] = useState(DUMMY_IMAGE);
-  const [likeIndex, setLikeIndex] = useState('');
   const [editMark, setEditMark] = useState(false);
 
   const ourReview = props.reviews?.filter((el) => el.tag === 1);
   const ourReviewRevisit = ourReview?.filter((el) => el.revisit === 1);
 
-  const fetchBookmark = async () => {
+  const fetchBookmark = () => {
     try {
-      const data = await resInfoAPI.getUserBookMark()
-      const bookmarkArray = data;
-      const filterByBusId = bookmarkArray.filter((el) => el.busId === bizId);
-      console.log(filterByBusId);
-      if (filterByBusId.length > 0) {
-        setLikeIndex(filterByBusId[0].likeIndex);
+      const data = resInfoAPI.getUserBookMark()
+      const filterByBusID = data.filter((el)=>el.busId === busId);
+      console.log(filterByBusID)
+      if (filterByBusID[0].statusLike === 1) {
         setEditMark(true);
-      } else if (filterByBusId.length === 0) {
+      } else if (filterByBusID[0].statusLike === 0) {
         setEditMark(false);
       }
     } catch (error) {
@@ -57,8 +54,10 @@ const RestaurantProfile = (props) => {
   };
 
   useEffect(() => {
-    fetchBookmark();
-  }, [editMark]);
+    if (ctx.isLoggedIn === 1 && localStorage.getItem("accessToken") !== undefined) {
+      fetchBookmark();
+    }
+  }, []);
 
   //북마크 추가
   const createBookmarkHandler = async () => {
@@ -67,20 +66,17 @@ const RestaurantProfile = (props) => {
       navigate('/login');
       return;
     }
-    const bookmarkData = {
-      busId: bizId,
-    };
-    const data = await resInfoAPI.createUserBookMark(bizId);
+    const data = await resInfoAPI.createUserBookMark(busId);
     console.log(data)
     setEditMark(true);
   };
 
   // 북마크 삭제
   const deleteBookmarkHandler = async () => {
-    const data = await resInfoAPI.deleteUserBookMark(likeIndex);
-    console.log(data);
-    setLikeIndex('');
-    setEditMark(false);
+    const response = await resInfoAPI.deleteUserBookMark(busId);
+    if(response.status === 200){
+      setEditMark(false);
+    }
   };
 
   return (

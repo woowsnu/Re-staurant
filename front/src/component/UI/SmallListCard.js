@@ -31,7 +31,7 @@ const ListCard = (props) => {
         <div className={styles.detail2}></div>
       </Link>
       <div className={styles.bookMark}>
-        {props.data?.likeIndex !== null ? (
+        {/* {props.data?.likeIndex !== null ? (
           <BookMark
             editMarked={check}
             data={props.data}
@@ -43,7 +43,7 @@ const ListCard = (props) => {
             data={props.data}
             onClick={checkOnClickHandler}
           />
-        )}
+        )} */}
       </div>
     </div>
   );

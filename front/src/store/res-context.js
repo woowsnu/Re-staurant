@@ -19,7 +19,7 @@ export const ResContextProvider = (props) => {
       setBookmark(data);
     };
 
-    if (ctx.isLoggedIn) {
+    if (ctx.isLoggedIn === 1 && localStorage.getItem("accessToken") !== undefined) {
       fetchBookMark();
     }
   }, [ctx]);
@@ -35,13 +35,13 @@ export const ResContextProvider = (props) => {
       avgRating: 4.39,
     },
     {
-      restaurantIndex: 7,
-      busId: '34393996',
-      restaurantCategory: '일식 > 우동,소바',
-      restaurantName: '우동 카덴',
+      restaurantIndex: 4,
+      busId: '1476397400',
+      restaurantCategory: '음식점 > 이탈리아음식',
+      restaurantName: '아우룸',
       siCode: '서울특별시',
       guCode: '마포구',
-      avgRating: 4.23,
+      avgRating: 4.73,
     },
     {
       restaurantIndex: 8,
@@ -120,22 +120,22 @@ export const ResContextProvider = (props) => {
     { name: '카페', icon: '☕' },
   ];
 
-  topList = topList.map((item) => ({ ...item, likeIndex: null }));
+  topList = topList.map((item) => ({ ...item, statusLike: null }));
 
   for (let i = 0; i < bookmark.length; i++) {
     for (let j = 0; j < topList.length; j++) {
       if (bookmark[i].busId === topList[j].busId) {
-        topList[j].likeIndex = bookmark[i].likeIndex;
+        topList[j].statusLike = bookmark[i].statusLike;
       }
     }
   }
 
-  ranking = ranking.map((item) => ({ ...item, likeIndex: null }));
+  ranking = ranking.map((item) => ({ ...item, statusLike: null }));
   
   for (let i = 0; i < bookmark.length; i++) {
     for (let j = 0; j < ranking.length; j++) {
       if (bookmark[i].busId === ranking[j].busId) {
-        ranking[j].likeIndex = bookmark[i].likeIndex;
+        ranking[j].statusLike = bookmark[i].statusLike;
       }
     }
   }
@@ -146,7 +146,6 @@ export const ResContextProvider = (props) => {
         topRevisit: topList,
         topRanking: ranking,
         tags: tagList,
-        bookmark: bookmark,
       }}
     >
       {props.children}
