@@ -104,6 +104,10 @@
 ![image](https://user-images.githubusercontent.com/99165573/192733254-8a470f33-e722-47bb-b317-1b9e89d93567.png)
 
 # 주요 어노테이션 (Annotation) 정리
+
+- <h3>Config<h3>
+![image](https://user-images.githubusercontent.com/99165573/192782693-9b242e5e-4442-4779-8781-bd6e2ad483e4.png)
+
 - <h3>Controller<h3>
 ![image](https://user-images.githubusercontent.com/99165573/192778451-daabca26-290b-4f79-84af-ea1200d17da3.png) <br>
 
