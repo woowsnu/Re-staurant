@@ -40,4 +40,8 @@
         border-radius: 0.8rem;
         border: 0;
     }
+
+    .btn h6 {
+        font-size: 24px;
+    }
   }

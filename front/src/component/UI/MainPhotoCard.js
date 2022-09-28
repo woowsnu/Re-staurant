@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import BookMark from './BookMark';
-import { FaBookmark, FaRegBookmark, FaStar } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
 import styles from './PhotoCard.module.css';
-import colors from '../../styles/colors';
 
 const MainPhotoCard = (props) => {
-  console.log(props.data)
   const {
     busId,
     restaurantName,
@@ -14,10 +12,10 @@ const MainPhotoCard = (props) => {
     siCode,
     guCode,
     avgRating,
-    likeIndex,
+    statusLike,
   } = props.data;
 
-  const [check, setCheck] = useState(props.editMark);
+  const [check, setCheck] = useState(Boolean(statusLike));
 
   const checkOnClickHandler = () => {
     setCheck(true);
@@ -46,33 +44,19 @@ const MainPhotoCard = (props) => {
             </p>
           </Link>
         </div>
-        <div className={styles.bookmark}>
-          {likeIndex !== null ? (
+        {/* <div className={styles.bookmark}>
+          {statusLike === 1 ? (
             <BookMark
               editMarked={check}
               data={props.data}
               onClick={checkOnClickHandler}
-            />
-          ) : (
-            <BookMark
-              editMarked={check}
-              data={props.data}
-              onClick={checkOnClickHandler}
-            />
-          )}
-          {/* <label htmlFor='bookmark' className={styles.bookmarkImg}>
-            {likeIndex !== null ? (
-              <FaBookmark
-                style={{ color: `${colors.primary1}`, fontSize: '24px' }}
-              />
-            ) : (
-              <FaRegBookmark
-                style={{ color: `${colors.gray4}`, fontSize: '24px' }}
-              />
-            )}
-          </label>
-          <input id='bookmark' type='checkbox' /> */}
-        </div>
+            />) :(
+              <BookMark
+                editMarked={check}
+                data={props.data}
+                onClick={checkOnClickHandler}
+              />) }
+        </div> */}
       </div>
     </div>
   );
