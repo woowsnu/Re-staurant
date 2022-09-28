@@ -1,5 +1,5 @@
 # ERD
-![Re-staurant (2)](https://user-images.githubusercontent.com/99165573/192788518-253c808e-393e-468d-97db-d3b5254c4de9.png)
+![image](https://user-images.githubusercontent.com/99165573/192792845-1fa2439c-e2e5-4c22-bdc0-5646bb013399.png)
 - 링크 : https://www.erdcloud.com/d/cgGQJj8g4hhMfWDwF
 
 
