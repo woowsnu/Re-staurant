@@ -25,7 +25,6 @@ const FollowPage = (props) => {
       <div className={styles.wrapper}>
         <div className={styles.title}>
           <BiArrowBack onClick={closeModal} />
-          <div className={styles.nickname}>팔로우 정보</div>
         </div>
         <div className={styles.tabbar}>
           <div className={tabselect ? styles.tab : styles.tabactive}>

@@ -3,7 +3,9 @@ import { instance } from "./axios";
 const authAPI = {
   createUser: async (profile) => {
     try {
-      const response = await instance.post("/api/join", profile);
+      const response = await instance.post("/api/join", profile, {
+        headers: { "Content-Type": "application/json" },
+      });
       return response;
     } catch (error) {
       console.error(error);
@@ -21,7 +23,13 @@ const authAPI = {
     try {
       const response = await instance.post(
         "/api/auth/userInfo",
-        JSON.stringify(profile)
+        JSON.stringify(profile),
+        {
+          headers: {
+            Authorization: localStorage.getItem("accessToken"),
+            "Content-Type": "application/json",
+          },
+        }
       );
       return response;
     } catch (error) {

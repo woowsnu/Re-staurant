@@ -9,7 +9,7 @@ const ReviewEdit = (props) => {
   const [editedTitle, setEditedTitle] = useState(props.reviewTitle);
   const [editedContent, setEditedContent] = useState(props.reviewContent);
   const [editedRevisit, setEditedRevisit] = useState(props.revisit);
-  
+  console.log(props)
   const reviewEditClose = () => {
     props.reviewEditClose();
   };
@@ -30,15 +30,17 @@ const ReviewEdit = (props) => {
     e.preventDefault();
     const token = localStorage.getItem("accessToken");
     const profile = {
+      email : localStorage.getItem("email"),
       reviewTitle: editedTitle,
       reviewContent: editedContent,
       reviewIndex: props.reviewIndex,
       reviewImage: props.reviewImage,
       revisit: editedRevisit,
+
     };
     instance
       .put(
-        `/review/${props.reviewIndex}/auth/updateReview`,
+        `/api/auth/updateReview?reviewIndex=${props.reviewIndex}`,
         JSON.stringify(profile),
         {
           headers: { "Content-Type": "application/json", Authorization: token },

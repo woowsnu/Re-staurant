@@ -1,3 +1,5 @@
+
+
 import React, { useState } from "react";
 import styles from "./Withdraw.module.css";
 import Button from "../../UI/Button";
@@ -17,31 +19,15 @@ const Withdraw = (props) => {
     e.preventDefault();
     const token = localStorage.getItem("accessToken");
     const profile = { email: email };
-
     await instance
-      .delete("/api/auth/deleteUserInfo", JSON.stringify(profile), 
-      // {
-      //   headers: { Authorization: token, "Content-Type": "application/json" },
-      // }
+      .delete(
+        "/api/auth/deleteUserInfo",
+        { data: { email : email} },
+        {
+          headers: { Authorization: token, "Content-Type": "application/json" },
+        }
       )
       .then((res) => console.log(res));
-
-    // await fetch("http://localhost:8080/api/auth/deleteUserInfo", {
-    //   method: "DELETE",
-    //   headers: {
-    //     Authorization: token,
-    //     "Content-Type": "application/json",
-    //     // credentials : "same-origin"
-    //   },
-    //   body: JSON.stringify(profile),
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //     // setWithdrawDone(true);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
 
   return (

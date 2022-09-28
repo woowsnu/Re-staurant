@@ -62,7 +62,6 @@ const SignUp = () => {
     e.preventDefault();
     const profile = { nickname, email, password };
     const response = await authAPI.createUser(JSON.stringify(profile));
-    console.log(response);
     if (response === undefined) {
       setErr("이미 존재하는 계정입니다.");
     }
