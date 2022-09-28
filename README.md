@@ -103,4 +103,21 @@
 
 ![image](https://user-images.githubusercontent.com/99165573/192733254-8a470f33-e722-47bb-b317-1b9e89d93567.png)
 
+# 주요 어노테이션 (Annotation) 정리
+- <h3>Controller<h3>
+![image](https://user-images.githubusercontent.com/99165573/192778451-daabca26-290b-4f79-84af-ea1200d17da3.png) <br>
+
+- <h3>Service<h3>
+![image](https://user-images.githubusercontent.com/99165573/192778643-53a521a1-9313-4b4f-8e9f-f4859738e7fd.png) <br>
+
+- <h3>Repository<h3>
+![image](https://user-images.githubusercontent.com/99165573/192778787-38ad5948-b354-4aec-91ee-2b1bb27ffb32.png) <br>
+
+- <h3>DTO<h3>
+![image](https://user-images.githubusercontent.com/99165573/192779527-5a4df524-8001-4da3-8502-b0e65fdd9bd7.png) <br>
+
+- <h3>Model<h3>
+![image](https://user-images.githubusercontent.com/99165573/192781838-31655fc1-5b12-4dcb-af50-0352c07f22f7.png) <br>
+
+
 
