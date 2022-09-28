@@ -57,7 +57,7 @@ const SearchResult = () => {
             <SearchNoResult />
           ) : (
             <>
-              <div className={styles.reviewRecommend}>
+              {/* <div className={styles.reviewRecommend}>
                 {searchWord} 관련 베스트 리뷰 ✨
               </div>
               <div className={styles.photocards}>
@@ -66,7 +66,7 @@ const SearchResult = () => {
                 <PhotoCard />
                 <PhotoCard />
               </div>
-              <br />
+              <br /> */}
               <div className={styles.reviewRecommend}>검색 결과 🔎</div>
               <div>
                 {objectToData.slice(offset, offset + 7).map((data) => (
