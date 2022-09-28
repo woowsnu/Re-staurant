@@ -1,5 +1,5 @@
 # ERD
-![image](https://user-images.githubusercontent.com/99165573/192792845-1fa2439c-e2e5-4c22-bdc0-5646bb013399.png)
+![image](https://user-images.githubusercontent.com/99165573/192798794-8dbd87b9-d50d-4419-87d7-b931c3971431.png)
 - 링크 : https://www.erdcloud.com/d/cgGQJj8g4hhMfWDwF
 
 
@@ -123,7 +123,16 @@
 - <h3>Model<h3>
 ![image](https://user-images.githubusercontent.com/99165573/192781838-31655fc1-5b12-4dcb-af50-0352c07f22f7.png) <br>
 
-# 주요 메서드 (Method) 정리
+
+ # 주요 메서드 (Method) 정리
  
- 
+| 메소드 명 | 설명                       |
+| ----------------------------------- | -------------------------- |
+| **save()** |새 엔티티를 추가 또는 업데이트하는 메서드|
+| **findAll()** | 전체 데이터 조회|
+| **findById()** |특정 데이터 조회|
+| **deleteById()** |조건에 해당하는 데이터 삭제|
+| **findTop10AllByOrderByAuthorCountDesc()** |상위 10개 내림차순 정렬|
+| **findRestaurantByRestaurantCategoryContainingOrRestaurantNameContaining()** |특정 단어 검색 시 관련 식당 조회 가능(sql like 명령어와 유사)|
+
 
