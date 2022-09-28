@@ -13,6 +13,7 @@ const MainPhotoCard = (props) => {
     guCode,
     avgRating,
     statusLike,
+    imgUrl,
   } = props.data;
 
   const [check, setCheck] = useState(Boolean(statusLike));
@@ -24,7 +25,7 @@ const MainPhotoCard = (props) => {
   return (
     <div className={styles.container}>
       <Link to={`/detail/${busId}`}>
-        <div className={styles.imgwrapper}>
+        <div className={styles.imgwrapper} style={{backgroundImage: `url(${imgUrl})`, backgroundSize: 'cover'}}>
           <div className={styles.bggradient}></div>
         </div>
       </Link>

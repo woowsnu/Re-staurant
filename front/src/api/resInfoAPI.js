@@ -10,6 +10,14 @@ const resInfoAPI = {
       console.error(error);
     }
   },
+  getRestaurantRank: async () => {
+    try {
+      const { data } = await instance.get(`/api/restaurantRank`);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  },
   getUserBookMark: async () => {
     const token = localStorage.getItem('accessToken');
     const {data} = await instance.get(`/api/auth/findUserLike`, {

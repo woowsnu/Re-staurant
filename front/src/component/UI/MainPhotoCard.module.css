@@ -22,7 +22,6 @@
     position: relative;
     height: 200px;
     padding: 0.7rem;
-    background-image: url('https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20180124_9%2F1516772458748vjMWa_JPEG%2FQ5SNtPm-CjeOJtPhGeSXlMYT.jpg');
     color: #fff;
     border-radius: 8px;
     display: flex;
@@ -50,9 +49,9 @@
     bottom: 0;
     background: linear-gradient(
       180deg,
-      rgba(39, 63, 40, 0) 0%,
-      rgba(89, 89, 89, 0.558824) 15.62%,
-      #000000 70.83%
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 15.62%,
+      rgba(0, 0, 0, 0.6) 80%
     );
     border-radius: 0px 0px 8px 8px;
   }

@@ -6,23 +6,21 @@ const ResContext = React.createContext({
   topRevisit: [],
   topRanking: [],
   tags: [],
-  bookmark: [],
+  topManyReview: [],
 });
 
 export const ResContextProvider = (props) => {
-  const ctx = useContext(AuthContext);
-  const [bookmark, setBookmark] = useState([]);
+  const [reviewRanking, setReviewRanking] = useState([]);
 
   useEffect(() => {
-    const fetchBookMark = async () => {
-      const data = await resInfoAPI.getUserBookMark()
-      setBookmark(data);
-    };
-
-    if (ctx.isLoggedIn === 1 && localStorage.getItem("accessToken") !== undefined) {
-      fetchBookMark();
+    const fetchRank = async () => {
+      const data = await resInfoAPI.getRestaurantRank()
+      setReviewRanking(data)
     }
-  }, [ctx]);
+    fetchRank();
+  }, []);
+
+
 
   let topList = [
     {
@@ -33,6 +31,7 @@ export const ResContextProvider = (props) => {
       siCode: '서울특별시',
       guCode: '마포구',
       avgRating: 4.39,
+      imgUrl: "https://ldb-phinf.pstatic.net/20220415_104/1649996725771tTgeK_JPEG/1.jpg"
     },
     {
       restaurantIndex: 4,
@@ -42,6 +41,7 @@ export const ResContextProvider = (props) => {
       siCode: '서울특별시',
       guCode: '마포구',
       avgRating: 4.73,
+      imgUrl: "https://ldb-phinf.pstatic.net/20210722_171/1626948896203Jtozc_JPEG/lWej6LJP4rGfa9tQtieLcvfI.JPG.jpg"
     },
     {
       restaurantIndex: 8,
@@ -51,6 +51,7 @@ export const ResContextProvider = (props) => {
       siCode: '서울특별시',
       guCode: '마포구',
       avgRating: 4.78,
+      imgUrl: "https://ldb-phinf.pstatic.net/20220222_95/1645509078854x7pfW_JPEG/5.jpg"
     },
     {
       restaurantIndex: 9,
@@ -60,8 +61,10 @@ export const ResContextProvider = (props) => {
       siCode: '서울특별시',
       guCode: '마포구',
       avgRating: 4.58,
+      imgUrl: "https://pup-review-phinf.pstatic.net/MjAyMjA5MjZfMjA0/MDAxNjY0MTY0Mjc2NDAx.L05QFJRZAZDiyhS_pJuZ926a-kSidkkwKV-lCTcoVwgg.o9MBy_9pfTh17pd8vrgsz6RHowog3mPb5scYk6aUiBgg.JPEG/D56F7399-CE56-4FDE-A4C4-2C42B2EBB2C7.jpeg"
     },
   ];
+
 
   let ranking = [
     {
@@ -72,6 +75,7 @@ export const ResContextProvider = (props) => {
       siCode: '서울특별시',
       guCode: '마포구',
       avgRating: 4.91,
+      imgUrl: "https://pup-review-phinf.pstatic.net/MjAyMjA5MjdfNCAg/MDAxNjY0MjY4NjY5NzQ4.P9rU3eJcFkftpEuQUMX42pku441zHa93xAAXA_7ndEEg.BY_4jpCIT5nxzfNrUoKQ7BYxBNkuauR4AkS9gvLcGIcg.JPEG/Screenshot_20220927-174914_KakaoTalk.jpg"
     },
     {
       restaurantIndex: 54,
@@ -81,6 +85,7 @@ export const ResContextProvider = (props) => {
       siCode: '서울특별시',
       guCode: '마포구',
       avgRating: 4.89,
+      imgUrl: "https://ldb-phinf.pstatic.net/20220909_87/1662702276980oBvon_JPEG/BE0B6C2C-53C8-4DE3-A9C0-8FE0F3449548.jpeg"
     },
     {
       restaurantIndex: 7,
@@ -90,6 +95,7 @@ export const ResContextProvider = (props) => {
       siCode: '서울특별시',
       guCode: '마포구',
       avgRating: 4.86,
+      imgUrl: "https://pup-review-phinf.pstatic.net/MjAyMjA5MjdfMjkg/MDAxNjY0MjQyMjg2NDI5.6qALwMqGMo5l1t8VyMefCb8Q9-izZ2iQuVo05P_Etr4g.FHJ4aGup-fS17jbQqMnhdxSm5Ofa_wqCfbPOKZUeeW8g.JPEG/4ADD715C-E1A9-4B26-99CD-65DF4E370251.jpeg"
     },
     {
       restaurantIndex: 24,
@@ -99,15 +105,7 @@ export const ResContextProvider = (props) => {
       siCode: '서울특별시',
       guCode: '마포구',
       avgRating: 4.86,
-    },
-    {
-      restaurantIndex: 92,
-      busId: '1891825973',
-      restaurantCategory: '한식 > 곱창,막창,양',
-      restaurantName: '형제한우곱창 합정직영점',
-      siCode: '서울특별시',
-      guCode: '마포구',
-      avgRating: 4.8,
+      imgUrl: "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMjA5MjdfMTU3%2FMDAxNjY0MjYwNDgwMTk4.zVhbL1-kA7cIdvhDl4Ya0b-Hvn1LqrTgfyLnXVFaydcg.azyrqbGZD4wVxQy0s5kEQMuZERQfMUExdH81kmU5XlMg.JPEG%2FD14D1DCF-D6DA-4AB8-BB6A-9218DF913C1D.jpeg"
     },
   ];
 
@@ -120,31 +118,12 @@ export const ResContextProvider = (props) => {
     { name: '카페', icon: '☕' },
   ];
 
-  topList = topList.map((item) => ({ ...item, statusLike: null }));
-
-  for (let i = 0; i < bookmark.length; i++) {
-    for (let j = 0; j < topList.length; j++) {
-      if (bookmark[i].busId === topList[j].busId) {
-        topList[j].statusLike = bookmark[i].statusLike;
-      }
-    }
-  }
-
-  ranking = ranking.map((item) => ({ ...item, statusLike: null }));
-  
-  for (let i = 0; i < bookmark.length; i++) {
-    for (let j = 0; j < ranking.length; j++) {
-      if (bookmark[i].busId === ranking[j].busId) {
-        ranking[j].statusLike = bookmark[i].statusLike;
-      }
-    }
-  }
-
   return (
     <ResContext.Provider
       value={{
         topRevisit: topList,
         topRanking: ranking,
+        topManyReview: reviewRanking,
         tags: tagList,
       }}
     >
