@@ -71,14 +71,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String accessToken = JWT.create()
                 .withSubject(principalDetails.getUser().getEmail())
-                .withExpiresAt(new Date(System.currentTimeMillis() + (60000 * 1)))
+                .withExpiresAt(new Date(System.currentTimeMillis() + (60000 * 400)))
                 .withClaim("userIndex",principalDetails.getUser().getUserIndex())
                 .withClaim("email",principalDetails.getUser().getEmail())
                 .sign(Algorithm.HMAC512("gun_secret"));
 
         String refreshToken = JWT.create()
                 .withSubject(principalDetails.getUser().getEmail())
-                .withExpiresAt(new Date(System.currentTimeMillis() + (60000 * 300)))
+                .withExpiresAt(new Date(System.currentTimeMillis() + (60000 * 500)))
                 .withClaim("userIndex",principalDetails.getUser().getUserIndex())
                 .withClaim("email",principalDetails.getUser().getEmail())
                 .sign(Algorithm.HMAC512("gun_secret"));
