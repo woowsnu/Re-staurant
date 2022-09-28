@@ -41,6 +41,9 @@ const Profile = (props) => {
     props.updateHandler();
   };
 
+  const follower = props.user.followerList?.filter((f) => f.removed === 1);
+  const following =  props.user.followingList?.filter((f) => f.removed === 1);
+
   return (
     <div>
       <Logobar />
@@ -56,8 +59,8 @@ const Profile = (props) => {
           <div className={styles.nickname}>{props.user.nickname}</div>(
           {props.user.email})
           <div className={styles.followInfo} onClick={showFollowList}>
-            팔로워 {props.user.followerList.length} &nbsp; &nbsp; 팔로잉{" "}
-            {props.user.followingList.length}
+            팔로워 {follower.length} &nbsp; &nbsp; 팔로잉{" "}
+            {following.length}
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { FaRunning } from "react-icons/fa";
 import { FaBookmark, FaRegBookmark, FaStar } from "react-icons/fa";
 import NarrowChartBar from "../Restaurant/Chart/NarrowChartBar";
 import { instance } from "../../api/axios";
+import authAPI from "../../api/authAPI";
 
 const ListCard = (props) => {
   const [resLike, setResLike] = useState([]);
@@ -13,12 +14,8 @@ const ListCard = (props) => {
   const ourReviewRevisit = ourReview?.filter((el) => el.revisit === 1);
 
   useEffect(()=>{
-    const user = localStorage.getItem("email");
-    const token = localStorage.getItem("accessToken");
-    instance
-      .post("/user/auth/userInfo", JSON.stringify({ email : user}), {
-        headers: { "Content-Type": "application/json", Authorization: token, },
-      })
+    const profile = { email : localStorage.getItem("email") };
+    authAPI.getLoginUserInfo(profile)
       .then((response) => {
         setResLike(response.data.restaurantLikeList);
       })

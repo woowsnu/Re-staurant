@@ -3,21 +3,33 @@ import styles from "./FollowList.module.css";
 
 const FollowList = (props) => {
   const tab = props.tab;
-  
+  const following = [];
+  const follower = [];
+  props.user.followingList.map((f) => {
+    if (f.removed === 1) {
+      following.push(f);
+    }
+  });
+  props.user.followerList.map((f) => {
+    if (f.removed === 1) {
+      follower.push(f);
+    }
+  });
+
   return (
     <>
       {tab ? (
         <div className={styles.list}>
-          {props.user.followingList.map((user) => (
+          {following.map((user) => (
             <li>{user.followedEmail}</li>
           ))}
         </div>
       ) : (
         <div className={styles.list}>
-          {props.user.followerList.map((user) => (
-            <li>{user.followingEmail}</li>
-          ))}
-        </div>
+        {follower.map((user) => (
+          <li>{user.followingEmail}</li>
+        ))}
+      </div>
       )}
     </>
   );

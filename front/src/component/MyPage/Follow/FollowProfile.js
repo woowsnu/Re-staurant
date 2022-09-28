@@ -20,7 +20,7 @@ const FollowProfile = (props) => {
 
   const followerList = props.user.followerList;
   let followCheck = followerList.find(
-    (e) => e.followingEmail === localStorage.getItem("email")
+    (e) => e.followingEmail === localStorage.getItem("email") && e.removed === 1
   );
 
   const updateHandler = () => {
@@ -48,16 +48,22 @@ const FollowProfile = (props) => {
   const unfollowSubmit = (e) => {
     e.preventDefault();
     instance
-      .delete("/api/auth/unFollowing", JSON.stringify(profile), {
+      .put("/api/auth/unFollowing", 
+      JSON.stringify(profile)
+      , {
         headers: { "Content-Type": "application/json", Authorization: token },
       })
       .then((res) => {
+        console.log(res)
         updateHandler();
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  
+  const follower = props.user.followerList?.filter((f) => f.removed === 1);
+  const following =  props.user.followingList?.filter((f) => f.removed === 1);
 
   return (
     <div>
@@ -84,8 +90,8 @@ const FollowProfile = (props) => {
             </div>
             ({props.user.email})
             <div className={styles.followInfo} onClick={showFollowList}>
-              팔로워 {props.user.followerList.length} &nbsp; &nbsp; 팔로잉{" "}
-              {props.user.followingList.length}
+              팔로워 {follower.length} &nbsp; &nbsp; 팔로잉{" "}
+              {following.length}
             </div>
           </div>
         </div>

@@ -9,15 +9,18 @@ const MyEatketList = (props) => {
   const [resarray, setResarray] = useState([]);
 
   let resName = [];
+
   data.map((data) => {
-    return resName.push(data.restaurantName);
+    if (data.statusLike === 1) {
+      return resName.push(data.restaurantName);
+    }
   });
 
   let resInfo = [];
 
   const resDataFetch = async () => {
     const promises = resName.map(async (res, index) => {
-      const { data } = await instance.get(`restaurant/${res}`);
+      const { data } = await instance.get(`/api/search?restaurantName=${res}`);
       resInfo.push(data[0]);
     });
     await Promise.all(promises);
@@ -33,25 +36,25 @@ const MyEatketList = (props) => {
 
       setShow(true);
     };
-    
+
     dataFetch();
-  
   }, [setShow]);
 
   return (
-    show &&
-    <div>
-      <div className={styles.listCount}>
-        저장한 먹킷리스트가 {resarray.length}개 있어요
+    show && (
+      <div>
+        <div className={styles.listCount}>
+          저장한 먹킷리스트가 {resarray.length}개 있어요
+        </div>
+        <ul className={styles.ul}>
+          {resarray.map((data) => (
+            <li className={styles.list} key={data.busId}>
+              <ListCard data={data} />
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className={styles.ul}>
-        {resarray.map((data) => (
-          <li className={styles.list} key={data.busId}>
-            <ListCard data={data} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    )
   );
 };
 
