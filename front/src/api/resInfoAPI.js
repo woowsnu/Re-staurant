@@ -5,7 +5,7 @@ const resInfoAPI = {
   getOneRestaurantInfo: async (busId) => {
     try {
       const { data } = await instance.get(
-        `/restaurant/restaurantDetail/${busId}`
+        `/api/restaurantDetail/${busId}`
       );
       return data;
     } catch (error) {
