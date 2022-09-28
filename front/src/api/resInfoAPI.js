@@ -13,21 +13,20 @@ const resInfoAPI = {
     }
   },
   getUserBookMark: async () => {
-    const userEmail = localStorage.getItem('email');
     const { data } = await instance.get(
-      `/restaurantlike/${userEmail}/auth/findUserView`
+      `/api/auth/findUserLike`
     );
     return data;
   },
-  createUserBookMark: async (bizId) => {
+  createUserBookMark: async (busId) => {
     const { data } = await instance.post(
-      `/api/auth/createLike?busId=${bizId}`
+      `/api/auth/createLike?busId=${busId}`
     );
     return data;
   },
-  deleteUserBookMark: async (likeIndex) => {
+  deleteUserBookMark: async (busId) => {
     const { data } = await instance.delete(
-      `/restaurantlike/auth/deleteLike/${likeIndex}`
+      `/api/auth/deleteLike?busId=${busId}`
     );
     return data;
   },
