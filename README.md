@@ -16,12 +16,20 @@
 https://foam-tendency-a06.notion.site/RE-STAURANT-ee29783ffaba4b6593e290616239fc21
 
 ## ⭐ 배포 링크
-
-<br />
-<br />
----
+http://43.200.202.164:3000/
 
 ## 📚 기술스택
+프론트엔드<br/>
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+<br/>
+백엔드<br/>
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
+<br/>
+인프라<br/>
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+<br />
+협업툴 <br/>
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white)![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
 
 ## 프론트엔드
 
@@ -145,7 +153,7 @@ async (error) => {
 - 링크 : https://www.erdcloud.com/d/cgGQJj8g4hhMfWDwF
 
 
-###디렉터리 폴더 구조
+###  📁 폴더 구조
 ```bash
 📦back
  ┣ 📂app
@@ -278,4 +286,10 @@ async (error) => {
 | **findRestaurantByRestaurantCategoryContainingOrRestaurantNameContaining()** |특정 단어 검색 시 관련 식당 조회 가능(sql like 명령어와 유사)|
 
 
-
+---
+	
+## 트러블슈팅
+	
+### 프론트엔드
+	
+### 백엔드
